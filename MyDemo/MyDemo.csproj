@@ -57,9 +57,11 @@
     </ApplicationDefinition>
     <Compile Include="MyFPSView.xaml.cs">
       <DependentUpon>MyFPSView.xaml</DependentUpon>
-    </Compile>    <Compile Include="MyPathAnimationView.xaml.cs">
+    </Compile>
+    <Compile Include="MyPathAnimationView.xaml.cs">
       <DependentUpon>MyPathAnimationView.xaml</DependentUpon>
-    </Compile>    <Compile Include="VisualCanvas.cs" />
+    </Compile>
+    <Compile Include="VisualCanvas.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,10 +77,12 @@
     <Page Include="MyFPSView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>    <Page Include="MyPathAnimationView.xaml">
+    </Page>
+    <Page Include="MyPathAnimationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>    <Page Include="MyPathView.xaml">
+    </Page>
+    <Page Include="MyPathView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
