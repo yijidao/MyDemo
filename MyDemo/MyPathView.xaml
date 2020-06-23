@@ -64,5 +64,96 @@
                 </PathGeometry>
             </Path.Data>
         </Path>
+
+        <Path x:Name="dashLine1" Stroke="MediumSlateBlue" Data="M 10,50 L 400,50" StrokeDashArray="10,10" StrokeDashOffset="10" />
+
+        <Path x:Name="dashLine2" Stroke="MediumSlateBlue" StrokeDashArray="10,10" StrokeDashOffset="10">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="10,10" >
+                        <BezierSegment Point1="130,-20" Point2="150,150" Point3="150,150" />
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+
+        <Path Stroke="Blue" Fill="LightBlue">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="40,10" IsClosed="True">
+                        <LineSegment Point="70,10" />
+                        <LineSegment Point="90, 100" />
+                        <LineSegment Point="20, 100" />
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+        <Path Stroke="Blue">
+            <Path.Data>
+                <RectangleGeometry Rect="20,10 40,10">
+                    <RectangleGeometry.Transform>
+                        <RotateTransform Angle="30" CenterX="25" CenterY="30" />
+                    </RectangleGeometry.Transform>
+                </RectangleGeometry>
+            </Path.Data>
+        </Path>
+
+        <Path  Fill="LightBlue" >
+            <Path.Data>
+                <CombinedGeometry GeometryCombineMode="Exclude">
+                    <CombinedGeometry.Geometry1>
+                        <PathGeometry>
+                            <PathFigure StartPoint="20,10" IsClosed="True">
+                                <LineSegment Point="50,10" />
+                                <LineSegment Point="70, 100" />
+                                <LineSegment Point="0, 100" />
+                            </PathFigure>
+                        </PathGeometry>
+                    </CombinedGeometry.Geometry1>
+                    <CombinedGeometry.Geometry2>
+                        <CombinedGeometry>
+                            <CombinedGeometry.Geometry1>
+                                <CombinedGeometry>
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry Rect="0,30 70,5">
+                                            <RectangleGeometry.Transform>
+                                                <RotateTransform Angle="20" CenterX="35" CenterY="32.5" />
+                                            </RectangleGeometry.Transform>
+                                        </RectangleGeometry>
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <RectangleGeometry Rect="0,30 70,5">
+                                            <RectangleGeometry.Transform>
+                                                <RotateTransform Angle="-20" CenterX="35" CenterY="32.5" />
+                                            </RectangleGeometry.Transform>
+                                        </RectangleGeometry>
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
+                            </CombinedGeometry.Geometry1>
+                            <CombinedGeometry.Geometry2>
+                                <CombinedGeometry>
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry Rect="0,60 70,5">
+                                            <RectangleGeometry.Transform>
+                                                <RotateTransform Angle="20" CenterX="35" CenterY="62.5" />
+                                            </RectangleGeometry.Transform>
+                                        </RectangleGeometry>
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <RectangleGeometry Rect="0,60 70,5">
+                                            <RectangleGeometry.Transform>
+                                                <RotateTransform Angle="-20" CenterX="35" CenterY="62.5" />
+                                            </RectangleGeometry.Transform>
+                                        </RectangleGeometry>
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
+                            </CombinedGeometry.Geometry2>
+
+                        </CombinedGeometry>
+                    </CombinedGeometry.Geometry2>
+                </CombinedGeometry>
+            </Path.Data>
+        </Path>
+
     </WrapPanel>
 </UserControl>

@@ -23,6 +23,20 @@ namespace MyDemo
         public MyPathView()
         {
             InitializeComponent();
+            RunDashLine();
+        }
+
+        private async void RunDashLine()
+        {
+            while (true)
+            {
+                await Task.Delay(48);
+                Dispatcher.Invoke(() =>
+                {
+                    dashLine1.StrokeDashOffset -= 5;
+                    dashLine2.StrokeDashOffset -= 5;
+                });
+            }
         }
     }
 }

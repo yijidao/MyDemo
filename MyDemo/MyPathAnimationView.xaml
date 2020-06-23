@@ -40,11 +40,18 @@
                             <GeometryDrawing.Pen>
                                 <Pen Thickness="1" Brush="Black" />
                             </GeometryDrawing.Pen>
-                            <GeometryDrawing.Geometry>
-                                <GeometryGroup>
-                                    <EllipseGeometry Center="10,10" RadiusX="9" RadiusY="4" />
-                                    <EllipseGeometry Center="10,10" RadiusX="4" RadiusY="9" />
-                                </GeometryGroup>
+                            <GeometryDrawing.Geometry >
+                                <CombinedGeometry >
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry Rect="0,0 28,10" />
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <GeometryGroup>
+                                            <EllipseGeometry Center="7,10" RadiusX="3" RadiusY="3" />
+                                            <EllipseGeometry Center="21,10" RadiusX="3" RadiusY="3" />
+                                        </GeometryGroup>
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
                             </GeometryDrawing.Geometry>
                         </GeometryDrawing>
                     </DrawingImage.Drawing>
