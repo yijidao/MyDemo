@@ -57,8 +57,9 @@
     </ApplicationDefinition>
     <Compile Include="MyDynamicView.xaml.cs">
       <DependentUpon>MyDynamicView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MyFPSView.xaml.cs">
+    </Compile>    <Compile Include="MyBrushView.xaml.cs">
+      <DependentUpon>MyBrushView.xaml</DependentUpon>
+    </Compile>    <Compile Include="MyFPSView.xaml.cs">
       <DependentUpon>MyFPSView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyPathAnimationView.xaml.cs">
@@ -80,8 +81,10 @@
     <Page Include="MyDynamicView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MyFPSView.xaml">
+    </Page>    <Page Include="MyBrushView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>    <Page Include="MyFPSView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

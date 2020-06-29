@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyDemo"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
     <WrapPanel>
         <Path Stroke="LightBlue"  Fill="Red"   >
             <Path.Data>
@@ -65,7 +65,7 @@
             </Path.Data>
         </Path>
 
-        <Path x:Name="dashLine1" Stroke="MediumSlateBlue" Data="M 10,50 L 400,50" StrokeDashArray="10,10" StrokeDashOffset="10" />
+        <Path x:Name="dashLine1" Stroke="MediumSlateBlue" Data="M 10,50 L 400,50" StrokeDashArray="20 5" StrokeDashOffset="10" />
 
         <Path x:Name="dashLine2" Stroke="MediumSlateBlue" StrokeDashArray="10,10" StrokeDashOffset="10">
             <Path.Data>
@@ -155,5 +155,62 @@
             </Path.Data>
         </Path>
 
+        <Path Stroke="LightBlue" >
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="10,50">
+                        <QuadraticBezierSegment Point1="50,40" Point2="100,100" />
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+
+        <Button Width="100" Height="50"  HorizontalContentAlignment="Right" >
+            <Button.Clip>
+                <RectangleGeometry Rect="5,5 60,40">
+                </RectangleGeometry>
+            </Button.Clip>
+            一个被裁剪的按钮
+        </Button>
+
+        <Path Stroke="Red" Fill="LightBlue" Data="M 0,0 A 2,5 45 0 1 10,20 Z M 10,20 L 10,25 L 30,45 Z M 20,30 C 40,20 60,60 60,60 S 30,60 40,80 Z"/>
+
+        <Button Height="70">
+            <Image>
+                <Image.Source>
+                    <DrawingImage>
+                        <DrawingImage.Drawing>
+                            <GeometryDrawing>
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="Red" Thickness="1" />
+                                </GeometryDrawing.Pen>
+                                
+                                <GeometryDrawing.Geometry>
+                                    <PathGeometry>
+                                        <PathFigure StartPoint="0,0" IsClosed="True">
+                                            <LineSegment Point="5,0" />
+                                            <LineSegment Point="5,5" />
+                                            <LineSegment Point="0,5" />
+                                        </PathFigure>
+                                    </PathGeometry>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingImage.Drawing>
+                    </DrawingImage>
+                </Image.Source>
+            </Image>
+        </Button>
+
+        <Button Height="30" Width="100" Content="1233333">
+            <Button.Effect>
+                <BlurEffect Radius="3" KernelType="Gaussian"/>
+            </Button.Effect>
+        </Button>
+
+        <Button Height="30" Width="100" Content="1233333">
+            <Button.Effect>
+                <DropShadowEffect   />
+            </Button.Effect>
+        </Button>
     </WrapPanel>
 </UserControl>

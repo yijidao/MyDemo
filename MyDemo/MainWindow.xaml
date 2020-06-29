@@ -26,6 +26,7 @@
             <Button Content="MyFPSView" Click="Button_Click" />
             <Button Content="MyPathAnimationView" Click="Button_Click" />
             <Button Content="MyDynamicView" Click="Button_Click" />
+            <Button Content="MyBrushView" Click="Button_Click" />
         </WrapPanel>
         <ContentControl Margin="5,20,5,5" Grid.Row="1" x:Name="controlContainer" />
     </Grid>
