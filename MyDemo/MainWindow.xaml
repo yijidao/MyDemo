@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <WrapPanel>
+        <WrapPanel Margin="5">
             <WrapPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="5,0"/>
@@ -27,6 +27,8 @@
             <Button Content="MyPathAnimationView" Click="Button_Click" />
             <Button Content="MyDynamicView" Click="Button_Click" />
             <Button Content="MyBrushView" Click="Button_Click" />
+            <Button Content="MyTemplateBrower" Click="Button_Click" />
+            <Button Content="MyColorPickerView" Click="Button_Click" />
         </WrapPanel>
         <ContentControl Margin="5,20,5,5" Grid.Row="1" x:Name="controlContainer" />
     </Grid>

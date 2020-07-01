@@ -55,15 +55,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MyColorPicker1.xaml.cs">
+      <DependentUpon>MyColorPicker1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyColorPicker2.cs" />
+    <Compile Include="MyColorPickerView.xaml.cs">
+      <DependentUpon>MyColorPickerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyDynamicView.xaml.cs">
       <DependentUpon>MyDynamicView.xaml</DependentUpon>
-    </Compile>    <Compile Include="MyBrushView.xaml.cs">
+    </Compile>
+    <Compile Include="MyBrushView.xaml.cs">
       <DependentUpon>MyBrushView.xaml</DependentUpon>
-    </Compile>    <Compile Include="MyFPSView.xaml.cs">
+    </Compile>
+    <Compile Include="MyFPSView.xaml.cs">
       <DependentUpon>MyFPSView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyPathAnimationView.xaml.cs">
       <DependentUpon>MyPathAnimationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyTemplateBrower.xaml.cs">
+      <DependentUpon>MyTemplateBrower.xaml</DependentUpon>
     </Compile>
     <Compile Include="VisualCanvas.cs" />
     <Page Include="MainWindow.xaml">
@@ -78,13 +90,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MyColorPicker1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyColorPickerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyDynamicView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>    <Page Include="MyBrushView.xaml">
+    </Page>
+    <Page Include="MyBrushView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>    <Page Include="MyFPSView.xaml">
+    </Page>
+    <Page Include="MyFPSView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -96,7 +118,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyTemplateBrower.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyVisualView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\MyListBoxItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\MyColorPicker2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,5 +183,6 @@
       <Version>4.3.1</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
