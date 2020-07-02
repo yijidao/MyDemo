@@ -3,5 +3,6 @@
                     xmlns:local="clr-namespace:MyDemo.Themes">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/MyDemo;component/Themes/MyColorPicker2.xaml" />
+        <ResourceDictionary Source="/MyDemo;component/Themes/MyFlipPanel.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

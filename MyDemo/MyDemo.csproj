@@ -71,6 +71,10 @@
     <Compile Include="MyBrushView.xaml.cs">
       <DependentUpon>MyBrushView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyFlipPanel.cs" />
+    <Compile Include="MyFlipPanelView.xaml.cs">
+      <DependentUpon>MyFlipPanelView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyFPSView.xaml.cs">
       <DependentUpon>MyFPSView.xaml</DependentUpon>
     </Compile>
@@ -113,6 +117,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyFlipPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyFPSView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\MyColorPicker2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\MyFlipPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -11,6 +11,10 @@ using System.Windows.Media;
 
 namespace MyDemo
 {
+    [TemplatePart(Name = "PART_sdRed", Type = typeof(RangeBase))]
+    [TemplatePart(Name = "PART_sdGreen", Type = typeof(RangeBase))]
+    [TemplatePart(Name = "PART_sdBlue", Type = typeof(RangeBase))]
+    [TemplatePart(Name = "PART_PreviewBrush", Type = typeof(SolidColorBrush))]
     class MyColorPicker2 : Control
     {
         static MyColorPicker2()

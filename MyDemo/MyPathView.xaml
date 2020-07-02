@@ -212,5 +212,7 @@
                 <DropShadowEffect   />
             </Button.Effect>
         </Button>
+
+        <ToggleButton Width="200" />
     </WrapPanel>
 </UserControl>
