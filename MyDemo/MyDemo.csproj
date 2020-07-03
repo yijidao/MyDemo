@@ -84,6 +84,10 @@
     <Compile Include="MyTemplateBrower.xaml.cs">
       <DependentUpon>MyTemplateBrower.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyWrapPanel.cs" />
+    <Compile Include="MyWrapPanelView.xaml.cs">
+      <DependentUpon>MyWrapPanelView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VisualCanvas.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -138,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyVisualView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyWrapPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

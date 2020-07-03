@@ -31,6 +31,8 @@
             <Button Content="MyColorPickerView" Click="Button_Click" />
             <Button Content="MyColorPickerView2" Click="Button_Click" />
             <Button Content="MyFlipPanelView" Click="Button_Click" />
+            <Button Content="MyWrapPanelView" Click="Button_Click" />
+            
         </WrapPanel>
         <ContentControl Margin="5,20,5,5" Grid.Row="1" x:Name="controlContainer" />
     </Grid>
