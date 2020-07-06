@@ -84,6 +84,7 @@
     <Compile Include="MyTemplateBrower.xaml.cs">
       <DependentUpon>MyTemplateBrower.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyVisualElement.cs" />
     <Compile Include="MyWrapPanel.cs" />
     <Compile Include="MyWrapPanelView.xaml.cs">
       <DependentUpon>MyWrapPanelView.xaml</DependentUpon>
