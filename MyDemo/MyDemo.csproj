@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -85,6 +86,9 @@
       <DependentUpon>MyTemplateBrower.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyVisualElement.cs" />
+    <Compile Include="MyWin32View.xaml.cs">
+      <DependentUpon>MyWin32View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyWrapPanel.cs" />
     <Compile Include="MyWrapPanelView.xaml.cs">
       <DependentUpon>MyWrapPanelView.xaml</DependentUpon>
@@ -143,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyVisualView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyWin32View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
