@@ -11,7 +11,7 @@
             
         </TextBlock>
         <TextBlock x:Name="HexColor" Text="色号" ></TextBlock>
-        <Image Width="2,2">
+        <Image Width="30" Height="30" Margin="5,0">
             <Image.Source>
                 <DrawingImage>
                     <DrawingImage.Drawing>
@@ -20,7 +20,7 @@
                                 <SolidColorBrush x:Name="ColorBrush" /> 
                             </GeometryDrawing.Brush>
                             <GeometryDrawing.Geometry>
-                                <RectangleGeometry Rect="0,0 2,2" />
+                                <RectangleGeometry Rect="0,0 30,30" />
                             </GeometryDrawing.Geometry>
                         </GeometryDrawing>
                     </DrawingImage.Drawing>

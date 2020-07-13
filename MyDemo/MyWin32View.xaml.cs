@@ -75,7 +75,6 @@ namespace MyDemo
                 gsrc.ReleaseHdc();
             }
             return screenPixel.GetPixel(0, 0);
-
         }
 
     }
