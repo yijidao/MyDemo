@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Schedules>
+  <Item>
+    <Title>WPF研究</Title>
+    <Tag>学习</Tag>
+    <StartDate>2020/7/1</StartDate>
+    <EndDate>2020/7/31</EndDate>
+    <WorkingHour>100</WorkingHour>
+    <Content>WPF 宝典和 demo</Content>
+  </Item>
+
+  <Item>
+    <Title>Win32研究</Title>
+    <Tag>学习</Tag>
+    <StartDate>2020/8/1</StartDate>
+    <EndDate>2020/8/30</EndDate>
+    <WorkingHour>100</WorkingHour>
+    <Content>Windows 程序开发和 demo</Content>
+  </Item>
+
+  <Item>
+    <Title>大屏系统开发</Title>
+    <Tag>工作</Tag>
+    <StartDate>2020/7/1</StartDate>
+    <EndDate>2020/7/31</EndDate>
+    <WorkingHour>120</WorkingHour>
+    <Content></Content>
+  </Item>
+</Schedules>

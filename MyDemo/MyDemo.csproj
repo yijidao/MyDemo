@@ -79,6 +79,9 @@
     <Compile Include="MyFPSView.xaml.cs">
       <DependentUpon>MyFPSView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyItemsView.xaml.cs">
+      <DependentUpon>MyItemsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyPathAnimationView.xaml.cs">
       <DependentUpon>MyPathAnimationView.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyFPSView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyItemsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,6 +226,8 @@
       <Version>4.3.1</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\MyDatas.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
