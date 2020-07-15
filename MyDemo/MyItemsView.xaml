@@ -8,11 +8,160 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <XmlDataProvider x:Key="SchedulesProvider" Source="Resources/MyDatas.xml" XPath="/Schedules" />
+
+        <Style x:Key="RadioButtonListStyle" TargetType="ListBox" >
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Margin" Value="2" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <RadioButton IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected, Mode=TwoWay}" Focusable="False">
+                                        <ContentPresenter  />
+                                    </RadioButton>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CheckBoxButtonListStyle" TargetType="ListBox" >
+            <Setter Property="SelectionMode" Value="Multiple" />
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Margin" Value="2" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <Border BorderThickness="{TemplateBinding Border.BorderThickness}" Padding="{TemplateBinding Control.Padding}" BorderBrush="{TemplateBinding Border.BorderBrush}" Background="{TemplateBinding Panel.Background}" SnapsToDevicePixels="True">
+                                        <CheckBox IsChecked="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsSelected, Mode=TwoWay}" Focusable="False">
+                                            <ContentPresenter  />
+                                        </CheckBox>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="LightBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DefaultStyle" TargetType="ListBoxItem">
+            <Setter Property="BorderBrush" Value="LightSeaGreen"/>
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+
+        <Style x:Key="HighlightStyle" TargetType="ListBoxItem">
+            <Setter Property="BorderBrush" Value="Red" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+
+        <Image x:Key="BlueImage" RenderTransformOrigin="0.5,0.5" Width="15" Height="15">
+            <Image.Source>
+                <DrawingImage >
+                    <DrawingImage.Drawing>
+                        <GeometryDrawing>
+                            <GeometryDrawing.Brush>
+                                <RadialGradientBrush Center="0.5,0.5" RadiusX="1" RadiusY="1" >
+                                    <GradientStop Color="Blue" Offset="0.2" />
+                                    <GradientStop Color="White" Offset="0.8" />
+                                </RadialGradientBrush>
+                            </GeometryDrawing.Brush>
+                            <GeometryDrawing.Geometry >
+                                <RectangleGeometry Rect="0,0 15,15" RadiusX="4" RadiusY="4"></RectangleGeometry>
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingImage.Drawing>
+                </DrawingImage>
+            </Image.Source>
+        </Image>
+
+        <Image x:Key="RedImage" RenderTransformOrigin="0.5,0.5" Width="15" Height="15">
+            <Image.Source>
+                <DrawingImage >
+                    <DrawingImage.Drawing>
+                        <GeometryDrawing>
+                            <GeometryDrawing.Brush>
+                                <RadialGradientBrush Center="0.5,0.5" RadiusX="1" RadiusY="1" >
+                                    <GradientStop Color="Red" Offset="0.2" />
+                                    <GradientStop Color="White" Offset="0.8" />
+                                </RadialGradientBrush>
+                            </GeometryDrawing.Brush>
+                            <GeometryDrawing.Geometry >
+                                <RectangleGeometry Rect="0,0 15,15" RadiusX="4" RadiusY="4"></RectangleGeometry>
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingImage.Drawing>
+                </DrawingImage>
+            </Image.Source>
+        </Image>
+
+        <Image x:Key="GreenImage" RenderTransformOrigin="0.5,0.5" Width="15" Height="15">
+            <Image.Source>
+                <DrawingImage >
+                    <DrawingImage.Drawing>
+                        <GeometryDrawing>
+                            <GeometryDrawing.Brush>
+                                <RadialGradientBrush Center="0.5,0.5" RadiusX="1" RadiusY="1" >
+                                    <GradientStop Color="Green" Offset="0.2" />
+                                    <GradientStop Color="White" Offset="0.8" />
+                                </RadialGradientBrush>
+                            </GeometryDrawing.Brush>
+                            <GeometryDrawing.Geometry >
+                                <RectangleGeometry Rect="0,0 15,15" RadiusX="4" RadiusY="4"></RectangleGeometry>
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingImage.Drawing>
+                </DrawingImage>
+            </Image.Source>
+        </Image>
+
+        <Image x:Key="YellowImage" RenderTransformOrigin="0.5,0.5" Width="15" Height="15">
+            <Image.Source>
+                <DrawingImage >
+                    <DrawingImage.Drawing>
+                        <GeometryDrawing>
+                            <GeometryDrawing.Brush>
+                                <RadialGradientBrush Center="0.5,0.5" RadiusX="1" RadiusY="1" >
+                                    <GradientStop Color="Yellow" Offset="0.2" />
+                                    <GradientStop Color="White" Offset="0.8" />
+                                </RadialGradientBrush>
+                            </GeometryDrawing.Brush>
+                            <GeometryDrawing.Geometry >
+                                <RectangleGeometry Rect="0,0 15,15" RadiusX="4" RadiusY="4"></RectangleGeometry>
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingImage.Drawing>
+                </DrawingImage>
+            </Image.Source>
+        </Image>
+
     </UserControl.Resources>
 
     <WrapPanel>
-        <ListBox Height="200" Width="400" ItemsSource="{Binding XPath=Item, Source={StaticResource SchedulesProvider}}" DisplayMemberPath="Title" ItemStringFormat="名称:{0:G}" >
-
+        <ListBox Height="200" Width="150" ItemsSource="{Binding XPath=Item, Source={StaticResource SchedulesProvider}}" DisplayMemberPath="Title" ItemStringFormat="名称:{0:G}" >
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="5" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="BorderThickness" Value="5"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
         </ListBox>
 
         <StackPanel>
@@ -21,5 +170,35 @@
             <Calendar x:Name="cldInput"  />
             <TextBlock Text="{Binding SelectedDate, ElementName=cldInput, UpdateSourceTrigger=PropertyChanged, StringFormat=日期{0:G}}" Width="200" Height="30" Background="LightGray"  />
         </StackPanel>
+
+        <ListBox Height="200" Width="150" ItemsSource="{Binding XPath=Item, Source={StaticResource SchedulesProvider}}" Style="{StaticResource RadioButtonListStyle}" 
+                  DisplayMemberPath="Title" >
+        </ListBox>
+
+        <ListBox Height="200" Width="150" ItemsSource="{Binding XPath=Item, Source={StaticResource SchedulesProvider}}" Style="{StaticResource CheckBoxButtonListStyle}" 
+                  DisplayMemberPath="Title" AlternationCount="2" >
+            
+        </ListBox>
+
+        <ListBox Height="200" Width="150" ItemsSource="{Binding XPath=Item, Source={StaticResource SchedulesProvider}}" DisplayMemberPath="Title">
+            <ListBox.ItemContainerStyleSelector>
+                <local:SingleCriteriaHighlightStyleSelector DefaultStyle="{StaticResource DefaultStyle}" HighlightStyle="{StaticResource HighlightStyle}"
+                                                            PropertyToEvaluate="Tag" PropertyToHighlight="工作">
+                </local:SingleCriteriaHighlightStyleSelector>
+            </ListBox.ItemContainerStyleSelector>
+        </ListBox>
+
+        <ListBox VerticalAlignment="Top" Width="80" Height="80" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBoxItem  Content="{StaticResource BlueImage}"/>
+            <ListBoxItem  Content="{StaticResource RedImage}"/>
+            <ListBoxItem  Content="{StaticResource GreenImage}"/>
+            <ListBoxItem  Content="{StaticResource YellowImage}"/>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        
     </WrapPanel>
 </UserControl>
