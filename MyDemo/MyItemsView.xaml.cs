@@ -26,14 +26,14 @@ namespace MyDemo
         {
             InitializeComponent();
 
-            //var list = new List<Schedule>{
+            var list = new List<Schedule>{
 
-            //new Schedule { Title = "WPF研究", Tag = "学习" },
-            //new Schedule { Title = "Win32研究", Tag = "学习" },
-            //new Schedule { Title = "大屏系统开发", Tag = "工作" },
-            //};
+            new Schedule { Title = "WPF研究", Tag = "学习" },
+            new Schedule { Title = "Win32研究", Tag = "学习" },
+            new Schedule { Title = "大屏系统开发", Tag = "工作" },
+            };
 
-            //RadioListBox.ItemsSource = list;
+            ComboBox1.ItemsSource = list;
 
         }
     }
