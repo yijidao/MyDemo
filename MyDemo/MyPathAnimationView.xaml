@@ -10,13 +10,25 @@
         <PathGeometry x:Key="path">
             <PathGeometry.Figures>
                 <PathFigure IsClosed="True">
-                    <ArcSegment Point="100,200" Size="15,10" SweepDirection="Clockwise" />
-                    <ArcSegment Point="400,50" Size="5,5"/>
+                    <ArcSegment Point="50,100" Size="3,2" SweepDirection="Clockwise" />
+                    <ArcSegment Point="200,50" Size="1,1"/>
+                </PathFigure>
+            </PathGeometry.Figures>
+        </PathGeometry>
+
+        <PathGeometry x:Key="path1" >
+            <PathGeometry.Figures>
+                <PathFigure StartPoint="0,0" >
+                    <LineSegment Point="100,0" />
+                    <LineSegment Point="100,50" />
+                    <LineSegment Point="150,50" />
+                    <LineSegment Point="150,0" />
+                    <LineSegment Point="200,0" />
                 </PathFigure>
             </PathGeometry.Figures>
         </PathGeometry>
     </UserControl.Resources>
-    <Canvas>
+    <Canvas x:Name="canvas1">
         <Path Data="{StaticResource path}" Stroke="Red" StrokeThickness="1" Canvas.Top="10" Canvas.Left="10"/>
         <Image x:Name="image">
             <Image.Triggers>
@@ -58,5 +70,15 @@
                 </DrawingImage>
             </Image.Source>
         </Image>
+
+        <Path MouseLeftButtonDown="Path_MouseLeftButtonDown"  Data="{StaticResource path1}" Stroke="Green" StrokeThickness="4" Canvas.Top="200" Canvas.Left="10">
+
+        </Path>
+        <Path x:Name="path2" Stroke="DarkRed" StrokeThickness="1" Fill="GreenYellow" Canvas.Top="200" Canvas.Left="10">
+            <Path.Data>
+                <EllipseGeometry x:Name="ellipse1" Center="0,0" RadiusX="5" RadiusY="5" />
+            </Path.Data>
+
+        </Path>
     </Canvas>
 </UserControl>
