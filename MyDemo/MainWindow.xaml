@@ -34,6 +34,7 @@
             <Button Content="MyWrapPanelView" Click="Button_Click" />
             <Button Content="MyWin32View" Click="Button_Click" />
             <Button Content="MyItemsView" Click="Button_Click" />
+            <Button Content="My3DView" Click="Button_Click" />
             
         </WrapPanel>
         <ContentControl Margin="5,20,5,5" Grid.Row="1" x:Name="controlContainer" />
