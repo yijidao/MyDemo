@@ -218,5 +218,6 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        
     </WrapPanel>
 </UserControl>

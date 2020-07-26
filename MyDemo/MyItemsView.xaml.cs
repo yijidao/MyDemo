@@ -34,7 +34,6 @@ namespace MyDemo
             };
 
             ComboBox1.ItemsSource = list;
-
         }
     }
 
