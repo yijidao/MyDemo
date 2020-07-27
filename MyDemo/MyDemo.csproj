@@ -69,6 +69,9 @@
     <Compile Include="MyColorPickerView2.xaml.cs">
       <DependentUpon>MyColorPickerView2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyDataViewView.xaml.cs">
+      <DependentUpon>MyDataViewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyDynamicView.xaml.cs">
       <DependentUpon>MyDynamicView.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyColorPickerView2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyDataViewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

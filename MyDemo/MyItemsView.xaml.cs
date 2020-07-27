@@ -50,6 +50,34 @@ namespace MyDemo
         public int WorkingHour { get; set; }
 
         public string Content { get; set; }
+
+        public Schedule()
+        {
+
+        }
+
+        public Schedule(string title, string tag, DateTime startDate, DateTime endDate, int workingHour, string content = "")
+        {
+            Title = title;
+            Tag = tag;
+            StartDate = startDate;
+            EndDate = endDate;
+            WorkingHour = workingHour;
+            Content = content;
+        }
+
+        public static Schedule[] Generate()
+        {
+            var models = new List<Schedule>();
+
+            models.Add(new Schedule("WPF研究", "学习", new DateTime(2020, 7, 1), DateTime.Today, 100, "笔记同步进行"));
+            models.Add(new Schedule("Win32研究", "学习", new DateTime(2020, 7, 15), DateTime.Today, 150, "笔记同步进行"));
+            models.Add(new Schedule("大屏开发", "工作", new DateTime(2020, 7, 1), new DateTime(2020, 7, 5), 40, "可配置开发"));
+            models.Add(new Schedule("框架开发", "工作", new DateTime(2020, 7, 27), DateTime.Today, 200, "架构设计"));
+
+            return models.ToArray();
+        }
+
     }
 
     public class SingleCriteriaHighlightStyleSelector : StyleSelector
@@ -69,7 +97,7 @@ namespace MyDemo
 
             var evaluate = element[PropertyToEvaluate].InnerText;
 
-            if(evaluate == PropertyToHighlight)
+            if (evaluate == PropertyToHighlight)
             {
                 return HighlightStyle;
             }
