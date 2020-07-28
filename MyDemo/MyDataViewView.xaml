@@ -7,11 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <WrapPanel>
-        <ListBox x:Name="listBox1" >
+        <ListBox x:Name="listBox1" VirtualizingPanel.IsVirtualizingWhenGrouping="True" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
@@ -20,11 +21,31 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        
-                        
+
+                        <TextBlock Text="{Binding Title}"></TextBlock>
+                        <TextBlock Text="{Binding Tag}" Grid.Column="1"></TextBlock>
+                        <TextBlock Grid.Row="1" Grid.ColumnSpan="3">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0:yyyy-MM-dd} 至 {1:yyyy-MM-dd}  工时{2}">
+                                    <Binding Path="StartDate" />
+                                    <Binding Path="EndDate" />
+                                    <Binding Path="WorkingHour" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Text="{Binding Content}" Grid.Row="2" Grid.ColumnSpan="3" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock  Text="{Binding Name}" FontWeight="Bold" Foreground="Gray"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListBox.GroupStyle>
         </ListBox>
     </WrapPanel>
 </UserControl>
