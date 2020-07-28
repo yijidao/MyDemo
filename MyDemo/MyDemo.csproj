@@ -88,12 +88,16 @@
     <Compile Include="MyItemsView.xaml.cs">
       <DependentUpon>MyItemsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyListViewView.xaml.cs">
+      <DependentUpon>MyListViewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyPathAnimationView.xaml.cs">
       <DependentUpon>MyPathAnimationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyTemplateBrower.xaml.cs">
       <DependentUpon>MyTemplateBrower.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyTileView.cs" />
     <Compile Include="MyVisualElement.cs" />
     <Compile Include="MyWin32View.xaml.cs">
       <DependentUpon>MyWin32View.xaml</DependentUpon>
@@ -155,6 +159,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MyListViewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MyPathAnimationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -196,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\MyFlipPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\MyTileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -51,6 +51,8 @@ namespace MyDemo
 
         public string Content { get; set; }
 
+        public Schedule[] Details { get; set; }
+
         public Schedule()
         {
 
@@ -66,6 +68,15 @@ namespace MyDemo
             Content = content;
         }
 
+        public Schedule(string title, Schedule[] details)
+        {
+            Title = title;
+            Details = details;
+            StartDate = details.Select(x => x.StartDate).Min();
+            EndDate = details.Select(x => x.EndDate).Max();
+            WorkingHour = details.Select(x => x.WorkingHour).Sum();
+        }
+
         public static Schedule[] Generate()
         {
             var models = new List<Schedule>();
@@ -74,6 +85,23 @@ namespace MyDemo
             models.Add(new Schedule("Win32研究", "学习", new DateTime(2020, 7, 15), DateTime.Today, 150, "笔记同步进行"));
             models.Add(new Schedule("大屏开发", "工作", new DateTime(2020, 7, 1), new DateTime(2020, 7, 5), 40, "可配置开发"));
             models.Add(new Schedule("框架开发", "工作", new DateTime(2020, 7, 27), DateTime.Today, 200, "架构设计"));
+
+            return models.ToArray();
+        }
+
+        public static Schedule[] GenerateHierarchical()
+        {
+            var models1 = new List<Schedule>();
+            models1.Add(new Schedule("WPF研究", "学习", new DateTime(2020, 7, 1), DateTime.Today, 100, "笔记同步进行"));
+            models1.Add(new Schedule("Win32研究", "学习", new DateTime(2020, 7, 15), DateTime.Today, 150, "笔记同步进行"));
+
+            var models2 = new List<Schedule>();
+            models2.Add(new Schedule("大屏开发", "工作", new DateTime(2020, 7, 1), new DateTime(2020, 7, 5), 40, "可配置开发"));
+            models2.Add(new Schedule("框架开发", "工作", new DateTime(2020, 7, 27), DateTime.Today, 200, "架构设计"));
+
+            var models = new List<Schedule>();
+            models.Add(new Schedule("项目内", models1.ToArray()));
+            models.Add(new Schedule("项目外", models2.ToArray()));
 
             return models.ToArray();
         }
