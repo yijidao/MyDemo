@@ -47,7 +47,6 @@ namespace MyDemo
                 if (schedule.Tag == "学习") return false;
                 else return true;
             };
-
         }
     }
 
