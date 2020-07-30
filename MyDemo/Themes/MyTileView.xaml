@@ -4,7 +4,7 @@
 
     <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource {x:Type ListBox}}"
            x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type local:MyTileView}, ResourceId=TileView}">
-        <Setter Property="BorderBrush"  Value="Black" />
+        <Setter Property="BorderBrush"  Value="Red" />
         <Setter Property="BorderThickness" Value=".5" />
         <Setter Property="Grid.IsSharedSizeScope" Value="True" />
 

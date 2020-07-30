@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="MyDemo.MyDataGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyDemo"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!--<ObjectDataProvider x:Key="datas" ObjectType="{x:Type local:Schedule}" MethodName="Generate">
+            
+        </ObjectDataProvider>-->
+    </UserControl.Resources>
+
+    <WrapPanel>
+        <DataGrid FrozenColumnCount="1" x:Name="DataGrid1"  Width="400" Height="200" AutoGenerateColumns="False" CanUserAddRows="False" LoadingRow="DataGrid1_LoadingRow" 
+                  SelectionMode="Extended"  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Title}" Header="标题" />
+                <DataGridTextColumn Binding="{Binding Tag}" Header="标签">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="Red"></Setter>
+                            <Setter Property="FontWeight" Value="Bold"></Setter>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                    <DataGridTextColumn.EditingElementStyle>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Background" Value="DarkRed"></Setter>
+                        </Style>
+                    </DataGridTextColumn.EditingElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding StartDate, StringFormat={}{0:yyyy-MM-dd}}" Header="开始时间" >
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding EndDate, StringFormat={}{0:yyyy-MM-dd}}" Header="结束时间"/>
+                <DataGridTextColumn Binding="{Binding WorkingHour}" Header="工时"/>
+
+                <DataGridTemplateColumn Header="开始时间">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding StartDate, StringFormat={}{0:yyyy-MM-dd}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding StartDate, StringFormat={}{0:yyyy-MM-dd}}"></DatePicker>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Content}" Foreground="Red"/>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+    </WrapPanel>
+</UserControl>
