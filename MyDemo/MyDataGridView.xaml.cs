@@ -25,7 +25,7 @@ namespace MyDemo
         {
             InitializeComponent();
 
-            DataGrid1.ItemsSource = new ObservableCollection<Schedule>(Schedule.Generate()); 
+            DataGrid1.ItemsSource = new ObservableCollection<Schedule>(Schedule.Generate());
         }
 
         private void DataGrid1_LoadingRow(object sender, DataGridRowEventArgs e)
