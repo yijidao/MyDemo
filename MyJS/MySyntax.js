@@ -16,5 +16,6 @@ function test1() {
 // alert(v4 == undefined); // true
 // alert(v4 === undefined); // false
 // alert(0.1 + 0.2)
-alert(Number.parseInt("1b"));
-alert(Number("1b"));
+// alert(Number.parseInt("1b"));
+// alert(Number("1b"));
+alert( NaN > 'A');
