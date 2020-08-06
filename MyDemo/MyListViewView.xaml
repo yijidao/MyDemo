@@ -75,7 +75,7 @@
         </ListView>
         <Button Height="20" Width="100" Content="切换view" Click="Button_Click"></Button>
 
-        <TreeView ItemsSource="{Binding Source={StaticResource Schedules2}}">
+        <TreeView ItemsSource="{Binding Source={StaticResource Schedules2}}" >
             <TreeView.ItemTemplate >
                 <HierarchicalDataTemplate ItemsSource="{Binding Details}">
                     <TextBlock Text="{Binding Title}" />

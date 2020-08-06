@@ -85,6 +85,9 @@
     <Compile Include="MyFlipPanelView.xaml.cs">
       <DependentUpon>MyFlipPanelView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyFlowDocumentView.xaml.cs">
+      <DependentUpon>MyFlowDocumentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyFPSView.xaml.cs">
       <DependentUpon>MyFPSView.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyFlipPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyFlowDocumentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

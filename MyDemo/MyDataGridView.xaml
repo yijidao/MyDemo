@@ -16,6 +16,13 @@
     <WrapPanel>
         <DataGrid FrozenColumnCount="1" x:Name="DataGrid1"  Width="400" Height="200" AutoGenerateColumns="False" CanUserAddRows="False" LoadingRow="DataGrid1_LoadingRow" 
                   SelectionMode="Extended"  >
+
+            <!--<DataGrid.RowHeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding  }" />
+                </DataTemplate>
+            </DataGrid.RowHeaderTemplate>-->
+            
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Title}" Header="标题" />
                 <DataGridTextColumn Binding="{Binding Tag}" Header="标签">
@@ -57,5 +64,8 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
+
+      
+        
     </WrapPanel>
 </UserControl>

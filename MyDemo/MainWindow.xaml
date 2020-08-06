@@ -38,6 +38,7 @@
             <Button Content="MyDataViewView" Click="Button_Click" />
             <Button Content="MyListViewView" Click="Button_Click" />
             <Button Content="MyDataGridView" Click="Button_Click" />
+            <Button Content="MyFlowDocumentView" Click="Button_Click" />
             
         </WrapPanel>
         <ContentControl Margin="5,20,5,5" Grid.Row="1" x:Name="controlContainer" />
