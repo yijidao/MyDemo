@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="MyWPFControl.PCICarousel1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyWPFControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Width="400" Height="200">
+
+    <UserControl.Resources>
+        <Style TargetType="RadioButton">
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border CornerRadius="2" SnapsToDevicePixels="true" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value=".9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value=".6"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="RoyalBlue"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Width="400" Height="200">
+        <Grid Width="400" Height="200" ClipToBounds="True">
+            <StackPanel x:Name="ContentPanel" Orientation="Horizontal" Margin="0,0,0,0" >
+                <!--<Rectangle Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"  Fill="Yellow" ></Rectangle>
+            <Rectangle Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"   Fill="Blue" ></Rectangle>
+            <Rectangle Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"   Fill="Red" ></Rectangle>
+            <Rectangle Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"   Fill="Green" ></Rectangle>-->
+            </StackPanel>
+        </Grid>
+        <StackPanel MouseLeftButtonDown="ButtonPanel_MouseLeftButtonDown" x:Name="ButtonPanel" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20">
+            <Border x:Name="PrevPage" Mouse.MouseDown="Border_MouseDown" Background="#838383" Opacity="0" Height="60" Width="25" BorderThickness="1" BorderBrush="Transparent" CornerRadius="4">
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard >
+                                <DoubleAnimation Storyboard.TargetName="PrevPage" Storyboard.TargetProperty="Opacity" Duration="0" To="0.5" />
+                                <DoubleAnimation Storyboard.TargetName="NextPage" Storyboard.TargetProperty="Opacity" Duration="0" To="0.5" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard >
+                                <DoubleAnimation Storyboard.TargetName="PrevPage" Storyboard.TargetProperty="Opacity" Duration="0" />
+                                <DoubleAnimation Storyboard.TargetName="NextPage" Storyboard.TargetProperty="Opacity" Duration="0" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Border.Triggers>
+
+                <Path Stroke="White" StrokeThickness="2" Data="M 16,20 7,30 16,40" />
+            </Border>
+
+            <StackPanel x:Name="radioPanel" Orientation="Horizontal">
+                <RadioButton  GroupName="pageButtonGroup" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <RadioButton GroupName="pageButtonGroup" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <RadioButton GroupName="pageButtonGroup" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <RadioButton GroupName="pageButtonGroup" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </StackPanel>
+            <Border x:Name="NextPage" Mouse.MouseDown="Border_MouseDown_1" Background="#838383" Opacity="0" Height="60" Width="25" BorderThickness="1" BorderBrush="Transparent" CornerRadius="4">
+                <Path Stroke="White" StrokeThickness="2" Data="M 7,20 16,30 7,40" />
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard >
+                                <DoubleAnimation Storyboard.TargetName="PrevPage" Storyboard.TargetProperty="Opacity" Duration="0" To="0.5" />
+                                <DoubleAnimation Storyboard.TargetName="NextPage" Storyboard.TargetProperty="Opacity" Duration="0" To="0.5" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard >
+                                <DoubleAnimation Storyboard.TargetName="PrevPage" Storyboard.TargetProperty="Opacity" Duration="0" />
+                                <DoubleAnimation Storyboard.TargetName="NextPage" Storyboard.TargetProperty="Opacity" Duration="0" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Border.Triggers>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>
