@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyWPFControl"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Width="400" Height="200">
+             d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
         <Style TargetType="RadioButton">
@@ -41,10 +40,6 @@
     <Grid Width="400" Height="200">
         <Grid Width="400" Height="200" ClipToBounds="True">
             <StackPanel x:Name="ContentPanel" Orientation="Horizontal" Margin="0,0,0,0" >
-                <!--<Rectangle Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"  Fill="Yellow" ></Rectangle>
-            <Rectangle Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"   Fill="Blue" ></Rectangle>
-            <Rectangle Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"   Fill="Red" ></Rectangle>
-            <Rectangle Width="{Binding Path=Width, RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}}"   Fill="Green" ></Rectangle>-->
             </StackPanel>
         </Grid>
         <StackPanel MouseLeftButtonDown="ButtonPanel_MouseLeftButtonDown" x:Name="ButtonPanel" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20">
@@ -72,10 +67,6 @@
             </Border>
 
             <StackPanel x:Name="radioPanel" Orientation="Horizontal">
-                <RadioButton  GroupName="pageButtonGroup" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <RadioButton GroupName="pageButtonGroup" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <RadioButton GroupName="pageButtonGroup" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <RadioButton GroupName="pageButtonGroup" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </StackPanel>
             <Border x:Name="NextPage" Mouse.MouseDown="Border_MouseDown_1" Background="#838383" Opacity="0" Height="60" Width="25" BorderThickness="1" BorderBrush="Transparent" CornerRadius="4">
                 <Path Stroke="White" StrokeThickness="2" Data="M 7,20 16,30 7,40" />
