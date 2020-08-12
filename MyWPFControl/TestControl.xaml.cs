@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,19 @@ namespace MyWPFControl
         public TestControl()
         {
             InitializeComponent();
+
+            Carouse.ItemsSource = new ObservableCollection<object>
+            {
+                new TClass{ Text1 = "11", Text2 = "22" },
+                new TClass{ Text1 = "33", Text2 = "44" },
+            };
         }
+    }
+
+    public class TClass
+    {
+        public string Text1 { get; set; }
+
+        public string Text2 { get; set; }
     }
 }

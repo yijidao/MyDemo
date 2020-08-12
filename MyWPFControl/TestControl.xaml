@@ -10,12 +10,29 @@
              Width="700" Height="400">
     <StackPanel>
         <TextBlock Text="55" />
-        <local:PCICarousel1 Width="400" Height="200" >
+        <!--<local:PCICarousel1 Width="400" Height="200" >
             <Rectangle Width="400" Height="100"  Fill="Yellow" ></Rectangle>
             <Rectangle Width="500"   Fill="Blue" ></Rectangle>
             <Rectangle Width="200"   Fill="Red" ></Rectangle>
             <Rectangle Width="100"   Fill="Green" ></Rectangle>
-        </local:PCICarousel1>
+        </local:PCICarousel1>-->
+
+        <local:PCICarouse Width="400" Height="200" x:Name="Carouse">
+            <local:PCICarouse.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Text1}" FontWeight="Bold"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Text2}"/>
+                    </Grid>
+                </DataTemplate>
+            </local:PCICarouse.ItemTemplate>
+            
+        </local:PCICarouse>
+        
     </StackPanel>
     <!--<hc:Carousel Margin="32" IsCenter="True" AutoRun="True" Width="600" Height="330" VerticalAlignment="Center">
             <hc:Carousel.PageButtonStyle>

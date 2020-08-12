@@ -55,25 +55,6 @@ namespace MyWPFControl
             };
         }
 
-
-
-        //public ObservableCollection<FrameworkElement> Source
-        //{
-        //    get { return (ObservableCollection<FrameworkElement>)GetValue(SourceProperty); }
-        //    set { SetValue(SourceProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for Source.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SourceProperty =
-        //    DependencyProperty.Register("Source", typeof(ObservableCollection<FrameworkElement>), typeof(ownerclass), new PropertyMetadata(0));
-
-
-
-
-
-        public IEnumerable<RadioButton> RadioButtonList { get; set; }
-
-
         public ObservableCollection<FrameworkElement> Items { get; private set; }
 
 
