@@ -7,77 +7,48 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Width="700" Height="400">
+             Width="700" Height="400" Loaded="UserControl_Loaded">
+
+    <UserControl.DataContext>
+        <local:CarouseData />
+    </UserControl.DataContext>
+
     <StackPanel>
         <TextBlock Text="55" />
-        <!--<local:PCICarousel1 Width="400" Height="200" >
-            <Rectangle Width="400" Height="100"  Fill="Yellow" ></Rectangle>
-            <Rectangle Width="500"   Fill="Blue" ></Rectangle>
-            <Rectangle Width="200"   Fill="Red" ></Rectangle>
-            <Rectangle Width="100"   Fill="Green" ></Rectangle>
-        </local:PCICarousel1>-->
 
-        <local:PCICarouse Width="400" Height="200" x:Name="Carouse">
+
+        <local:PCICarouse Width="200" Height="200" x:Name="Carouse" ItemsSource="{Binding Datas}" SelectedItem="{Binding SelectedData}">
             <local:PCICarouse.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="{Binding Text1}" FontWeight="Bold"/>
-                        <TextBlock Grid.Row="1" Text="{Binding Text2}"/>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Text1}" />
+                            <TextBlock Text="{Binding Text2}"/>
+                            <Grid Height="100" Width="100" Background="LightBlue"></Grid>
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </local:PCICarouse.ItemTemplate>
-            
         </local:PCICarouse>
-        
+
+        <ContentControl x:Name="C1" >
+
+            <StackPanel>
+                <TextBlock Text="{Binding T1.Text1}" />
+                <TextBlock  Text="22" />
+            </StackPanel>
+            <!--<ContentControl.ContentTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                    <TextBlock Text="{Binding T1.Text1}" />
+                    <TextBlock  Text="22" />
+                    </StackPanel>
+                </DataTemplate>
+            </ContentControl.ContentTemplate>-->
+        </ContentControl>
+        <Button Click="Button_Click" Content="点击"></Button>
+        <TextBlock Text="{Binding SelectedData.Text1}" />
     </StackPanel>
-    <!--<hc:Carousel Margin="32" IsCenter="True" AutoRun="True" Width="600" Height="330" VerticalAlignment="Center">
-            <hc:Carousel.PageButtonStyle>
-            <Style TargetType="RadioButton">
-                <Setter Property="Margin" Value="5,0"/>
-                <Setter Property="Width" Value="10"/>
-                <Setter Property="Height" Value="10"/>
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ToggleButton">
-                            <Border CornerRadius="1" SnapsToDevicePixels="true" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"/>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Opacity" Value=".9"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Opacity" Value=".6"/>
-                                </Trigger>
-                                <Trigger Property="IsChecked" Value="True">
-                                    <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            
-        </hc:Carousel.PageButtonStyle>
-            
-            <Grid Background="Red" Width="600" Height="330">
-                <TextBlock Text="1" />
-            </Grid>
-            <Grid Background="Green"  Width="600" Height="330">
-                <TextBlock Text="2" />
-            </Grid>
-            <Grid Background="Blue"  Width="600" Height="330">
-                <TextBlock Text="3" />
-            </Grid>
-            <Grid Background="Yellow"  Width="600" Height="330">
-                <TextBlock Text="4" />
-            </Grid>
-        </hc:Carousel>-->
+   
 
 </UserControl>

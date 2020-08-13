@@ -21,106 +21,86 @@ namespace MyWPFControl
     /// <summary>
     /// PCICarouse.xaml 的交互逻辑
     /// </summary>
-    public partial class PCICarouse : UserControl
+    public partial class PCICarouse : Selector
     {
         public PCICarouse()
         {
             InitializeComponent();
-
         }
 
-        public ObservableCollection<object> ItemsSource
+        public override void OnApplyTemplate()
         {
-            get { return (ObservableCollection<object>)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
+            base.OnApplyTemplate();
+
+            ContentPanel = GetTemplateChild("ContentPanel") as StackPanel;
+            RadioPanel = GetTemplateChild("radioPanel") as StackPanel;
+            ButtonPanel = GetTemplateChild("ButtonPanel") as StackPanel;
+            ButtonPanel.MouseLeftButtonDown += ButtonPanel_MouseLeftButtonDown;
+
+            var prevPage = GetTemplateChild("PrevPage") as Border;
+
+            prevPage.MouseLeftButtonDown += Border_MouseDown;
+
+            var NextPage = GetTemplateChild("NextPage") as Border;
+            NextPage.MouseLeftButtonDown += Border_MouseDown_1;
+
+            if(ItemsSource != null)
+            {
+                GenerateItems(ItemsSource);
+                PageIndex = 0;
+            }
         }
 
-        // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(ObservableCollection<object>), typeof(PCICarouse), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-                (d, e) =>
+        protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
+        {
+            base.OnItemsSourceChanged(oldValue, newValue);
+
+            if (ItemsSource != null && ContentPanel!=null)
+            {
+                GenerateItems(ItemsSource);
+                PageIndex = 0;
+            }
+        }
+
+        private void GenerateItems(IEnumerable list)
+        {
+            foreach (var item in list)
+            {
+                var c = new ContentControl();
+                c.ContentTemplate = ItemTemplate;
+                c.Content = item;
+                var itemPanel = new Grid();
+                itemPanel.Children.Add(c);
+                itemPanel.Width = Width;
+                itemPanel.Height = Height;
+                ContentPanel.Children.Add(itemPanel);
+
+                var pageButton = new RadioButton();
+                pageButton.Click += (s, e) =>
                 {
-                    if (e.NewValue is ObservableCollection<object> list)
-                    {
-                        var ctl = (PCICarouse)d;
+                    var index = RadioPanel.Children.IndexOf(e.OriginalSource as RadioButton);
+                    PageIndex = index;
 
-
-                        foreach (var item in list)
-                        {
-                            //var panel = new Grid { Width = ctl.Width };
-                            //panel.Children.Add((FrameworkElement)item);
-                            var contentControl = new ContentControl();
-                            contentControl.DataContext = item;
-                            if(ctl.ItemTemplate != null)
-                            {
-                                contentControl.ContentTemplate = ctl.ItemTemplate;
-                            }
-                            ctl.ContentPanel.Children.Add(contentControl);
-                        }
-
-                        //list.CollectionChanged += ctl.ItemsSourceCollectionChanged;
-
-                        var pageButton = new RadioButton();
-                        pageButton.Click += (s, e) =>
-                        {
-                            var index = ctl.radioPanel.Children.IndexOf(e.OriginalSource as RadioButton);
-                            ctl.PageIndex = index;
-
-                        };
-                        ctl.radioPanel.Children.Add(pageButton);
-                        ctl.PageIndex = 0;
-                    }
-                }));
-
-
-        //private void ItemsSourceCollectionChanged(object s, NotifyCollectionChangedEventArgs e)
-        //{
-        //    if (e.NewItems?.Count > 0)
-        //    {
-        //        foreach (var item in e.NewItems)
-        //        {
-
-        //            //var panel = new Grid { Width = this.Width };
-        //            //panel.Children.Add((FrameworkElement)item);
-        //            var contentControl = new ContentControl();
-        //            contentControl.DataContext = item;
-
-        //            ContentPanel.Children.Add(contentControl);
-
-        //            var pageButton = new RadioButton();
-        //            pageButton.Click += (s, e) =>
-        //            {
-        //                var index = radioPanel.Children.IndexOf(e.OriginalSource as RadioButton);
-        //                PageIndex = index;
-
-        //            };
-        //            radioPanel.Children.Add(pageButton);
-        //        }
-                
-        //    }
-        //}
-
-        public DataTemplate ItemTemplate
-        {
-            get { return (DataTemplate)GetValue(ItemTemplateProperty); }
-            set { SetValue(ItemTemplateProperty, value); }
+                };
+                RadioPanel.Children.Add(pageButton);
+            }
         }
 
-        // Using a DependencyProperty as the backing store for ItemTemplate.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ItemTemplateProperty =
-            DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(PCICarouse), new PropertyMetadata(null));
+        private StackPanel ContentPanel { get; set; }
+        private StackPanel RadioPanel { get; set; }
+        private StackPanel ButtonPanel { get; set; }
 
-
-
-        public object CurrentItem
+        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
-            get { return (object)GetValue(CurrentItemProperty); }
-            set { SetValue(CurrentItemProperty, value); }
+            if (e.NewItems?.Count > 0)
+            {
+                GenerateItems(e.NewItems);
+                if (PageIndex == -1)
+                {
+                    PageIndex = 0;
+                }
+            }
         }
-
-        // Using a DependencyProperty as the backing store for CurrentItem.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CurrentItemProperty =
-            DependencyProperty.Register("CurrentItem", typeof(object), typeof(PCICarouse), new PropertyMetadata(null));
 
         private int _PageIndex = -1;
 
@@ -130,14 +110,14 @@ namespace MyWPFControl
             set
             {
                 _PageIndex = value;
-                if (radioPanel?.Children.Count > value)
+                if (RadioPanel?.Children.Count > value)
                 {
-                    (radioPanel.Children[value] as RadioButton).IsChecked = true;
+                    (RadioPanel.Children[value] as RadioButton).IsChecked = true;
                 }
                 ContentPanel.Margin = new Thickness(-ContentPanel.Children.Cast<Grid>().Take(value).Sum(x => x.DesiredSize.Width), 0, 0, 0);
-                if (ItemsSource?.Count > value)
+                if (Items?.Count > value)
                 {
-                    CurrentItem = ItemsSource[value];
+                    SelectedItem = Items[value];
                 }
             }
         }
@@ -146,7 +126,7 @@ namespace MyWPFControl
         {
             if (PageIndex == 0)
             {
-                PageIndex = ItemsSource.Count - 1;
+                PageIndex = Items.Count - 1;
             }
             else
             {
@@ -156,7 +136,7 @@ namespace MyWPFControl
 
         private void Border_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
-            if (PageIndex == ItemsSource.Count - 1)
+            if (PageIndex == Items.Count - 1)
             {
                 PageIndex = 0;
             }
