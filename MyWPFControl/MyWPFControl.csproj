@@ -61,6 +61,9 @@
     <Compile Include="PCICarouse.xaml.cs">
       <DependentUpon>PCICarouse.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PCICarouse2.xaml.cs">
+      <DependentUpon>PCICarouse2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PCICarousel1.xaml.cs">
       <DependentUpon>PCICarousel1.xaml</DependentUpon>
     </Compile>
@@ -80,6 +83,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PCICarouse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PCICarouse2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,6 +136,12 @@
     <Resource Include="Resource\7.jpg" />
     <Resource Include="Resource\8.jpg" />
     <Resource Include="Resource\9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HandyControl\src\Net_GE45\HandyControl_Net_GE45\HandyControl_Net_GE45.csproj">
+      <Project>{7f3ca28f-950d-4519-9439-059e9b8d93b7}</Project>
+      <Name>HandyControl_Net_GE45</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
