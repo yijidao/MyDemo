@@ -75,6 +75,9 @@
     <Compile Include="MyDataViewView.xaml.cs">
       <DependentUpon>MyDataViewView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyDrawAndDropView.xaml.cs">
+      <DependentUpon>MyDrawAndDropView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyDynamicView.xaml.cs">
       <DependentUpon>MyDynamicView.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyDataViewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyDrawAndDropView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
