@@ -97,6 +97,9 @@
     <Compile Include="MyItemsView.xaml.cs">
       <DependentUpon>MyItemsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyLineView.xaml.cs">
+      <DependentUpon>MyLineView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyListViewView.xaml.cs">
       <DependentUpon>MyListViewView.xaml</DependentUpon>
     </Compile>
@@ -177,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyItemsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyLineView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
