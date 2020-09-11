@@ -41,7 +41,8 @@
             <Button Content="MyFlowDocumentView" Click="Button_Click" />
             <Button Content="MyDrawAndDropView" Click="Button_Click" />
             <Button Content="MyLineView" Click="Button_Click" />
-            
+            <Button Content="TestView" Click="Button_Click" />
+           <local:MyColorPickerView2 />
         </WrapPanel>
         <ContentControl Margin="5,20,5,5" Grid.Row="1" x:Name="controlContainer" />
     </Grid>

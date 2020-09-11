@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace MyTool
 {
@@ -23,6 +24,10 @@ namespace MyTool
         public MainWindow()
         {
             InitializeComponent();
+
+            //var root = XElement.Load("");
+            //var a = root.Elements("").FirstOrDefault(x => x.Attribute(XName.Get("")).Value == "");
+
         }
     }
 }

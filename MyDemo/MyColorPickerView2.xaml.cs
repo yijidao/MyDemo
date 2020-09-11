@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,5 +25,20 @@ namespace MyDemo
         {
             InitializeComponent();
         }
+
+
+        [Browsable(true)]
+        //[Description("测试属性面板属性"), Category("自定义"), DefaultValue(false)]
+        public bool TestProperty
+        {
+            get { return (bool)GetValue(TestPropertyProperty); }
+            set { SetValue(TestPropertyProperty, value); }
+        }
+
+
+        public static readonly DependencyProperty TestPropertyProperty =
+            DependencyProperty.Register("TestProperty", typeof(bool), typeof(MyColorPicker2), new PropertyMetadata(false));
+
+
     }
 }

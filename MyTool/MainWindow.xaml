@@ -12,10 +12,31 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBox x:Name="DataTextBox" Width="500"/>
-        <Grid Grid.Row="1" Margin="5">
-            <Path  Data="{Binding ElementName=DataTextBox, Path=Text}" Stroke="Black" StrokeThickness="1" HorizontalAlignment="Center" >
+        <StackPanel Grid.Row="1" Margin="5">
+            <Viewbox Height="32" Width="32">
+                <Path Data="{Binding ElementName=DataTextBox, Path=Text, UpdateSourceTrigger=PropertyChanged}" Stroke="Black" StrokeThickness="2" HorizontalAlignment="Center" Fill="Black"></Path>
+            </Viewbox>
 
-            </Path>
-        </Grid>
+            <Image Width="32" Height="32">
+                <Image.Source>
+                    <DrawingImage>
+                        <DrawingImage.Drawing>
+                            <GeometryDrawing >
+                                <GeometryDrawing.Geometry>
+                                    <PathGeometry Figures="{Binding ElementName=DataTextBox, Path=Text, UpdateSourceTrigger=PropertyChanged}">
+                                    </PathGeometry>
+                                </GeometryDrawing.Geometry>
+                                <!--<GeometryDrawing.Pen>
+                                    <Pen Thickness="2" Brush="Black"/>
+                                </GeometryDrawing.Pen>-->
+                                <GeometryDrawing.Brush>
+                                    <SolidColorBrush Color="Black"/>
+                                </GeometryDrawing.Brush>
+                            </GeometryDrawing>
+                        </DrawingImage.Drawing>
+                    </DrawingImage>
+                </Image.Source>
+            </Image>
+        </StackPanel>
     </Grid>
 </Window>

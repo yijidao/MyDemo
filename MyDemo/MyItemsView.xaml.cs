@@ -53,6 +53,8 @@ namespace MyDemo
 
         public Schedule[] Details { get; set; }
 
+        public bool IsComplete { get; set; }
+
         public Schedule()
         {
 
