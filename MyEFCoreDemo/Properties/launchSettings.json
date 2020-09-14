@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MyEFCoreDemo": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\CSharpCode\\MyDemo\\MyEFCoreDemo"
+    }
+  }
+}
