@@ -14,6 +14,16 @@
         <ObjectDataProvider x:Key="Schedules2"  ObjectType="{x:Type local:Schedule}" MethodName="GenerateHierarchical">
         </ObjectDataProvider>
 
+        <ObjectDataProvider x:Key="MasterDetails" ObjectType="{x:Type local:MasterModel}" MethodName="GetMasterHasDetail"></ObjectDataProvider>
+
+        <HierarchicalDataTemplate DataType="{x:Type local:MasterModel}" ItemsSource="{Binding Details}">
+            <TextBlock Text="{Binding DisplayName}"></TextBlock>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate DataType="{x:Type local:MasterDetailModel}" ItemsSource="{Binding Details}">
+            <TextBlock Text="{Binding DisplayName}"></TextBlock>
+        </HierarchicalDataTemplate>
+
         <local:MyTileView x:Key="TileView1">
             <local:MyTileView.ItemTemplate>
                 <DataTemplate>
@@ -52,7 +62,7 @@
             </local:MyTileView.ItemTemplate>
         </local:MyTileView>
     </UserControl.Resources>
-    
+
     <WrapPanel>
         <ListView ItemsSource="{Binding Source={StaticResource Schedules}}" x:Name="ListView1" >
             <ListView.View>
@@ -110,6 +120,31 @@
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
+        </TreeView>
+
+        <TreeView ItemsSource="{Binding Source={StaticResource MasterDetails }}">
+            <!--<TreeView.ItemTemplate>
+                --><!--<TextBlock Text="{Binding DisplayName}"></TextBlock>--><!--
+                <HierarchicalDataTemplate ItemsSource="{Binding Details}">
+                    <TextBlock Text="{Binding DisplayName}"></TextBlock>
+                --><!--<HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate DataType="local:MasterDetailModel">
+                            -->
+                <!--<TreeView ItemsSource="{Binding Details}">
+                                <TextBlock Text="{Binding DisplayName}"></TextBlock>
+                                <TreeView.ItemTemplate>
+                                    <HierarchicalDataTemplate ItemsSource="{Binding Details}">
+                                        <TextBlock Text="{Binding DisplayName}"></TextBlock>
+                                        
+                                    </HierarchicalDataTemplate>
+                                </TreeView.ItemTemplate>
+
+                            </TreeView>-->
+                <!--
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>--><!--
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>-->
         </TreeView>
     </WrapPanel>
 </UserControl>

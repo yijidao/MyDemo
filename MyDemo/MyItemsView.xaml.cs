@@ -139,4 +139,52 @@ namespace MyDemo
 
     }
 
+    public class MasterModel
+    {
+        public string DisplayName { get; set; }
+
+        public List<MasterDetailModel> Details { get; set; } = new List<MasterDetailModel>();
+
+
+        public static MasterModel[] GetMasterHasDetail()
+        {
+            MasterModel masterModel = new MasterModel { DisplayName = "父" };
+            masterModel.Details.Add(
+                new MasterDetailModel("子1",
+               new List<MasterDetailModel> {
+                   new MasterDetailModel("子1-1",
+                       new List<MasterDetailModel>{
+                           new MasterDetailModel("子1-1-1",
+                               new List<MasterDetailModel>()) }) }));
+            masterModel.Details.Add(new MasterDetailModel("子2",
+                new List<MasterDetailModel> { new MasterDetailModel("子2-1", new List<MasterDetailModel>()) }));
+            return new MasterModel[] { masterModel
+};
+        }
+    }
+
+    public class MasterDetailModel
+    {
+        public MasterDetailModel()
+        {
+
+        }
+        public MasterDetailModel(string displayName, List<MasterDetailModel> details)
+        {
+            DisplayName = displayName;
+            Details = details;
+        }
+
+        public string DisplayName { get; set; }
+
+        public List<MasterDetailModel> Details { get; set; }
+
+
+
+    }
+
+
+
+
+
 }

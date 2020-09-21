@@ -222,5 +222,28 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+
+        <Path Stroke="CornflowerBlue">
+            <Path.Data>
+                <PathGeometry >
+                    <PathFigure StartPoint="30,30" IsClosed="True">
+                        <PolyLineSegment Points="30,20 20,20 20,30" ></PolyLineSegment>
+
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+        <Path Stroke="CornflowerBlue">
+            <Path.Data>
+                <PathGeometry >
+                    <PathFigure StartPoint="30,30" IsClosed="True">
+                        <PolyLineSegment Points="30,40 40,40 40,30" ></PolyLineSegment>
+
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+
+        <!--<Rectangle Width="-10" Height="-10" ></Rectangle>-->
     </WrapPanel>
 </UserControl>
