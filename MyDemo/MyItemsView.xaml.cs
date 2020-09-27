@@ -148,7 +148,7 @@ namespace MyDemo
 
         public static MasterModel[] GetMasterHasDetail()
         {
-            MasterModel masterModel = new MasterModel { DisplayName = "父" };
+            var masterModel = new MasterModel { DisplayName = "父" };
             masterModel.Details.Add(
                 new MasterDetailModel("子1",
                new List<MasterDetailModel> {

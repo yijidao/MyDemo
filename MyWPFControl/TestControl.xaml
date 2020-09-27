@@ -49,7 +49,7 @@
         <Button Click="Button_Click" Content="点击"></Button>
         <TextBlock Text="{Binding SelectedData.Text1}" />
 
-        <hc:Carousel Width="200" ItemsSource="{Binding Datas}" IsCenter="True">
+        <!--<hc:Carousel Width="200" ItemsSource="{Binding Datas}" IsCenter="True">
             <hc:Carousel.ItemTemplate>
                 <DataTemplate>
                     <Grid >
@@ -62,7 +62,7 @@
                     </Grid>
                 </DataTemplate>
             </hc:Carousel.ItemTemplate>
-        </hc:Carousel>
+        </hc:Carousel>-->
 
         <!--<hc:Carousel Width="200" Height="200">
             <TextBlock  Text="{Binding SelectedData.Text1}" />

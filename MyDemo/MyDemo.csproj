@@ -38,6 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -50,6 +51,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -113,6 +115,9 @@
     <Compile Include="MyVisualElement.cs" />
     <Compile Include="MyWin32View.xaml.cs">
       <DependentUpon>MyWin32View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyWinformEmbedWPFView.xaml.cs">
+      <DependentUpon>MyWinformEmbedWPFView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyWrapPanel.cs" />
     <Compile Include="MyWrapPanelView.xaml.cs">
@@ -211,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyWin32View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyWinformEmbedWPFView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

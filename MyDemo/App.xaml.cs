@@ -13,5 +13,11 @@ namespace MyDemo
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            // 对Winfrom控件启用系统自带得现代化样式
+            System.Windows.Forms.Application.EnableVisualStyles();
+        }
     }
 }

@@ -137,11 +137,5 @@
     <Resource Include="Resource\8.jpg" />
     <Resource Include="Resource\9.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\HandyControl\src\Net_GE45\HandyControl_Net_GE45\HandyControl_Net_GE45.csproj">
-      <Project>{7f3ca28f-950d-4519-9439-059e9b8d93b7}</Project>
-      <Name>HandyControl_Net_GE45</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
