@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using CefSharp;
+using CefSharp.WinForms;
 
 namespace MyDemo
 {
@@ -18,6 +20,16 @@ namespace MyDemo
             base.OnStartup(e);
             // 对Winfrom控件启用系统自带得现代化样式
             System.Windows.Forms.Application.EnableVisualStyles();
+
+            InitCefsharp();
+        }
+
+        private void InitCefsharp()
+        {
+            //Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CefSharp\\Cache"
+            var settings = new CefSettings();
+            settings.BrowserSubprocessPath = System.IO.Path.GetFullPath(@"x86\CefSharp.BrowserSubprocess.exe");
+            Cef.Initialize(settings, performDependencyCheck: false, browserProcessHandler: null);
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CefSharp.WinForms;
 
 namespace MyDemo
 {
@@ -23,11 +24,13 @@ namespace MyDemo
         public MyWinformEmbedWPFView()
         {
             InitializeComponent();
+
+            cefHost.Child = new ChromiumWebBrowser("www.google.com");
+
         }
 
         private void Control_OnClick(object sender, EventArgs e)
         {
-
         }
     }
 }

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
              xmlns:local="clr-namespace:MyDemo"
+             xmlns:cefWinforms="clr-namespace:CefSharp.WinForms;assembly=CefSharp.WinForms"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -16,7 +17,9 @@
         <WindowsFormsHost Width="80" Height="25" Padding="5">
             <wf:Button Text="WF按钮" Click="Control_OnClick"  />
         </WindowsFormsHost>
-
+        <WindowsFormsHost Grid.Row="1" x:Name="cefHost">
+            
+        </WindowsFormsHost>
 
     </Grid>
 </UserControl> 
