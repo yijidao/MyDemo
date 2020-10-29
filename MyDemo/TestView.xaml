@@ -6,7 +6,12 @@
              xmlns:local="clr-namespace:MyDemo"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <!--<Grid>
         <Button Height="30" Width="80" x:Name="Button1"></Button>
-    </Grid>
+    </Grid>-->
+
+        <ScrollViewer>
+            <Canvas Width="1960" Height="1080"></Canvas>
+        </ScrollViewer>
+
 </UserControl>

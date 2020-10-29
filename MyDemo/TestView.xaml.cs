@@ -23,15 +23,15 @@ namespace MyDemo
 
 
 
-        public int MyProperty
-        {
-            get { return (int)GetValue(MyPropertyProperty); }
-            set { SetValue(MyPropertyProperty, value); }
-        }
+        //public int MyProperty
+        //{
+        //    get { return (int)GetValue(MyPropertyProperty); }
+        //    set { SetValue(MyPropertyProperty, value); }
+        //}
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.Register("MyProperty", typeof(int), typeof(TestView), new FrameworkPropertyMetadata(0));
+        //// Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty MyPropertyProperty =
+        //    DependencyProperty.Register("MyProperty", typeof(int), typeof(TestView), new FrameworkPropertyMetadata(0));
 
 
 
@@ -51,7 +51,7 @@ namespace MyDemo
             //BindingOperations.SetBinding(Button1, Button.IsDefaultedProperty, binding1);
 
 
-            var isAllow = (Button.IsDefaultedProperty.DefaultMetadata as FrameworkPropertyMetadata).IsDataBindingAllowed;
+            //var isAllow = (Button.IsDefaultedProperty.DefaultMetadata as FrameworkPropertyMetadata).IsDataBindingAllowed;
 
         }
     }

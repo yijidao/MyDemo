@@ -139,6 +139,9 @@
     <Compile Include="MyWrapPanelView.xaml.cs">
       <DependentUpon>MyWrapPanelView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyXamlWriterView.xaml.cs">
+      <DependentUpon>MyXamlWriterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
@@ -240,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyWrapPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyXamlWriterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

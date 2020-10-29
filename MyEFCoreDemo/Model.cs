@@ -12,7 +12,7 @@ namespace MyEFCoreDemo
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Data Source = blogging.db");
+            optionsBuilder.UseSqlite($"Data Source = blogging.db"); 
         }
     }
 
@@ -21,6 +21,8 @@ namespace MyEFCoreDemo
         public int BlogId { get; set; }
 
         public string Url { get; set; }
+
+        public DateTime CreatedTimestamp { get; set; }
 
         public List<Post> Posts { get; set; } = new List<Post>();
     }
