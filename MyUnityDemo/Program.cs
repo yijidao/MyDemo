@@ -17,6 +17,9 @@ namespace MyUnityDemo
             Log(MultipleRegistration);
             Log(RegisterNamedType);
             Log(RegisterInstance);
+            Log(MultipleParameters);
+            Log(MultipleConstructors);
+            Log(PrimitiveTypeParameter);
         }
 
         static void Log(Action action)
@@ -67,8 +70,34 @@ namespace MyUnityDemo
 
         static void MultipleParameters()
         {
-            var container = new UnityContainer();
+            var container = new UnityContainer(); // 构造函数有多个参数，默认选能满足最多参数的构造函数
+            container.RegisterType<ICar, Audi>();
+            container.RegisterType<ICarKey, AudiKey>();
+            container.Resolve<Driver>().RunCar();
         }
 
+        static void MultipleConstructors()
+        {
+            var container = new UnityContainer();
+            container.RegisterType<ICar, Audi>();
+            container.RegisterType<ICarKey, AudiKey>();
+
+            // 当类有多个构造函数，可以在构造函数上使用特性 [InjectionConstructor] 标记来指定使用某个构造函数进行初始化
+            // 也可以在注册时使用 new InjectionConstructor(container.Resolve<ICar>()) 手动进行配置，指定某个构造函数进行初始化
+            container.RegisterType<Driver>(new InjectionConstructor(container.Resolve<ICar>()));
+            container.Resolve<Driver>().RunCar();
+        }
+
+        /// <summary>
+        /// 构造函数的参数是简单类型的
+        /// </summary>
+        static void PrimitiveTypeParameter()
+        {
+            var container = new UnityContainer();
+            container.RegisterType<ICar, Ford>();
+            // 手动使用 InjectionConstructor 进行配置，给构造函数传简单类型的参数
+            container.RegisterType<Driver>(new InjectionConstructor(new object[] { container.Resolve<ICar>(), "Jonathon" }));
+            container.Resolve<Driver>().RunCar();
+        }
     }
 }
