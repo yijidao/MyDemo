@@ -2,3 +2,4 @@ Debug
 obj
 .vs
 *.user
+netcoreapp3.1

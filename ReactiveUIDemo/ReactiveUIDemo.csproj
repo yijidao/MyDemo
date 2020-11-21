@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HandyControl" Version="2.5.0.2" />
     <PackageReference Include="NuGet.Protocol" Version="5.7.0" />
     <PackageReference Include="ReactiveUI.WPF" Version="12.1.5" />
   </ItemGroup>

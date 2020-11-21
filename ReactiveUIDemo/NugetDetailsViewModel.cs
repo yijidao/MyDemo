@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reactive;
-using System.Security.Policy;
-using System.Text;
-using NuGet.Packaging;
 using NuGet.Protocol.Core.Types;
 using ReactiveUI;
 

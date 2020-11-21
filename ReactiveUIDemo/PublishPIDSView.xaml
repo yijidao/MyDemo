@@ -1,0 +1,102 @@
+﻿<rui:ReactiveUserControl x:Class="ReactiveUIDemo.PublishPIDSView"
+                         x:TypeArguments="local:PublishPIDSViewModel"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                         xmlns:local="clr-namespace:ReactiveUIDemo"
+                         xmlns:rui="http://reactiveui.net"
+                         mc:Ignorable="d" 
+                         d:DesignHeight="450" d:DesignWidth="800"
+>
+
+    <!--<UserControl.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type local:StationDetailViewModel}" >
+            <CheckBox IsChecked="{Binding Selected}" Content="{Binding Name}"></CheckBox>
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>-->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Text="发布范围" FontWeight="Bold" FontSize="30"></TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="线路选择" FontWeight="Bold" FontSize="26"></TextBlock>
+                <CheckBox Content="所有线路" x:Name="selectedAll"></CheckBox>
+            </StackPanel>
+            <ItemsControl Grid.Row="1" x:Name="lines" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:LineDetailViewModel}">
+                        <CheckBox HorizontalAlignment="Left" IsChecked="{Binding Selected}" Content="{Binding Name}"></CheckBox>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <TextBlock Text="车站选择" FontWeight="Bold" FontSize="26"></TextBlock>
+                <CheckBox Content="所有车站" x:Name="selectedAllStation"></CheckBox>
+            </StackPanel>
+            <TreeView x:Name="stations" Grid.Row="1" Grid.Column="1" >
+                <!--<TextBlock Text="{Binding Name}"></TextBlock>-->
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type local:LineDetailViewModel}" ItemsSource="{Binding Stations}">
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:StationDetailViewModel}">
+                                <CheckBox IsChecked="{Binding Selected}" Content="{Binding Name}"></CheckBox>
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <TextBlock Text="具体区域" FontWeight="Bold" FontSize="26"/>
+                <CheckBox Content="所有区域" x:Name="selectedAllRegion"></CheckBox>
+                <Button Content="选择具体设备" x:Name="operateDevices"></Button>
+            </StackPanel>
+            <TreeView x:Name="regions" Grid.Row="1" Grid.Column="2">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type local:StationDetailViewModel}" ItemsSource="{Binding Regions}">
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:RegionDetailViewModel}">
+                                <CheckBox IsChecked="{Binding Selected}" Content="{Binding Name}"></CheckBox>
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Grid>
+        <DataGrid Grid.Row="2" x:Name="targets" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="线路" Binding="{Binding Region.Station.Line.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="车站" Binding="{Binding Region.Station.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="区域" Binding="{Binding Region.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="设备" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="操作">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type local:DeviceViewModel}">
+                            <Button Content="删除" Command="{Binding DeleteCommand}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</rui:ReactiveUserControl>
