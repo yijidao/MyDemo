@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HandyControl" Version="2.5.0.2" />
+    <PackageReference Include="MarkdownSharp" Version="2.0.5" />
+    <PackageReference Include="ReactiveUI.Events.WPF" Version="12.1.5" />
+    <PackageReference Include="ReactiveUI.WPF" Version="12.1.5" />
+  </ItemGroup>
+
+</Project>

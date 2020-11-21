@@ -1,0 +1,18 @@
+﻿<Window x:Class="MarkdownDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MarkdownDemo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="writer" Text="***Header***" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" TextChanged="Writer_OnTextChanged" AcceptsReturn="True" AcceptsTab="True"></TextBox>
+        <!--<FlowDocumentReader Grid.Column="1" x:Name="reader"></FlowDocumentReader>-->
+        <WebBrowser  x:Name="reader" Grid.Column="1" ></WebBrowser>
+    </Grid>
+</Window>
