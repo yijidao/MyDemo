@@ -102,8 +102,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="HandyControl">
+      <Version>2.5.0.2</Version>
+    </PackageReference>
     <PackageReference Include="LiveCharts.Wpf">
       <Version>0.9.7</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>9.0.1</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI.Events.WPF">
       <Version>12.1.5</Version>

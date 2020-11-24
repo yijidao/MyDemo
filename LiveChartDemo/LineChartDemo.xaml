@@ -8,7 +8,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <lvchart:CartesianChart x:Name="lineChart" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock FontSize="18" Text="客流量" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <lvchart:CartesianChart x:Name="lineChart" Grid.Row="1">
+            <lvchart:CartesianChart.Resources>
+                <Style TargetType="Path">
+                    <Setter Property="Stretch" Value="None"></Setter>
+                </Style>
+            </lvchart:CartesianChart.Resources>
             <lvchart:CartesianChart.AxisX>
                 <lvchart:Axis x:Name="axisX"></lvchart:Axis>
             </lvchart:CartesianChart.AxisX>
@@ -17,4 +27,16 @@
             </lvchart:CartesianChart.AxisY>
         </lvchart:CartesianChart>
     </Grid>
+
+    <!--<Canvas Height="800" Width="1600" Background="AliceBlue">
+        <lvchart:CartesianChart x:Name="lineChart" Width="800" Height="400" Canvas.Top="200" Canvas.Left="400">
+            --><!--<lvchart:CartesianChart.AxisX>
+                <lvchart:Axis x:Name="axisX"></lvchart:Axis>
+            </lvchart:CartesianChart.AxisX>
+            <lvchart:CartesianChart.AxisY>
+                <lvchart:Axis x:Name="axisY"></lvchart:Axis>
+            </lvchart:CartesianChart.AxisY>--><!--
+        </lvchart:CartesianChart>
+    </Canvas>-->
+
 </UserControl>

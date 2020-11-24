@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,6 +17,7 @@ using DynamicData;
 using LiveCharts;
 using LiveCharts.Configurations;
 using LiveCharts.Wpf;
+using Newtonsoft.Json;
 
 namespace LiveChartDemo
 {
@@ -30,66 +32,91 @@ namespace LiveChartDemo
         {
             InitializeComponent();
 
-            var chartValues1 = new ChartValues<DateValueModel>();
-            var chartValues2 = new ChartValues<DateValueModel>();
-            var chartValues3 = new ChartValues<DateValueModel>();
 
-            Series.Add(new LineSeries
-            {
-                Title = "一号线",
-                Values = chartValues1
-            });
 
-            Series.Add(new LineSeries
-            {
-                Title = "二号线",
-                Values = chartValues2
-            });
 
-            Series.Add(new LineSeries
-            {
-                Title = "三号线",
-                Values = chartValues3
-            });
+            //var chartValues1 = new ChartValues<DateValueModel>();
+            //var chartValues2 = new ChartValues<DateValueModel>();
+            //var chartValues3 = new ChartValues<DateValueModel>();
 
-            lineChart.Series = Series;
+            //Series.Add(new LineSeries
+            //{
+            //    Title = "一号线",
+            //    Values = chartValues1
+            //});
 
-            axisX.LabelFormatter = d => new DateTime((long)d).Hour.ToString();
-            axisX.Title = "时间";
-            axisY.LabelFormatter = d => $"{d}万";
-            axisY.Title = "人次";
+            //Series.Add(new LineSeries
+            //{
+            //    Title = "二号线",
+            //    Values = chartValues2
+            //});
+
+            //Series.Add(new LineSeries
+            //{
+            //    Title = "三号线",
+            //    Values = chartValues3
+            //});
+
+            //lineChart.Series = Series;
+
+            //axisX.LabelFormatter = d => new DateTime((long)d).Hour.ToString();
+            //axisX.Title = "时间";
+            //axisY.LabelFormatter = d => $"{d}万";
+            //axisY.Title = "人次";
 
 
             Charting.For<DateValueModel>(
                 Mappers.Xy<DateValueModel>()
                              .X(model => model.Date.Ticks)
                              .Y(model => model.Value));
-            axisX.MinValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 6, 0, 0).Ticks;
-            axisX.MaxValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 0, 0).Ticks;
+            //axisX.MinValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 6, 0, 0).Ticks;
+            //axisX.MaxValue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 0, 0).Ticks;
 
-            var random = new Random();
+            //var random = new Random();
 
-            Task.Run(async () =>
-            {
-                var current = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 6, 0, 0);
+            //Task.Run(async () =>
+            //{
+            //    var current = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 6, 0, 0);
 
-                while (true)
-                {
-                    await Task.Delay(1000);
+            //    while (true)
+            //    {
+            //        await Task.Delay(1000);
 
-                    Dispatcher.Invoke(() =>
-                    {
+            //        Dispatcher.Invoke(() =>
+            //        {
 
-                        chartValues1.Add(new DateValueModel(current, random.Next(1, 10)));
-                        chartValues2.Add(new DateValueModel(current, random.Next(1, 10)));
-                        chartValues3.Add(new DateValueModel(current, random.Next(1, 10)));
-                    });
-                    current = current.AddHours(1);
-                }
+            //            chartValues1.Add(new DateValueModel(current, random.Next(1, 10)));
+            //            chartValues2.Add(new DateValueModel(current, random.Next(1, 10)));
+            //            chartValues3.Add(new DateValueModel(current, random.Next(1, 10)));
+            //        });
+            //        current = current.AddHours(1);
+            //    }
 
-            });
+            //});
+            SetData();
 
         }
+
+        private async void SetData()
+        {
+            var client = new HttpClient();
+            var response = await client.GetAsync("https://localhost:5001/efficientdesignapi/GetPassengerFlow");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                var chartDates = JsonConvert.DeserializeObject<List<LineChartData>>(result);
+                var series = new SeriesCollection();
+                series.AddRange(chartDates.Select(data => new LineSeries
+                {
+                    Title = data.Name,
+                    Values = new ChartValues<DateValueModel>(data.Dates)
+                }));
+                lineChart.Series = series;
+            }
+            
+        }
+
     }
 
 
@@ -103,5 +130,12 @@ namespace LiveChartDemo
             Date = date;
             Value = value;
         }
+    }
+
+    public class LineChartData
+    {
+        public string Name { get; set; }
+
+        public IEnumerable<DateValueModel> Dates { get; set; }
     }
 }
