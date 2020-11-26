@@ -110,7 +110,7 @@ namespace LiveChartDemo
                 series.AddRange(chartDates.Select(data => new LineSeries
                 {
                     Title = data.Name,
-                    Values = new ChartValues<DateValueModel>(data.Dates)
+                    Values = new ChartValues<DateValueModel>(data.DataModels)
                 }));
                 lineChart.Series = series;
             }
@@ -136,6 +136,6 @@ namespace LiveChartDemo
     {
         public string Name { get; set; }
 
-        public IEnumerable<DateValueModel> Dates { get; set; }
+        public IEnumerable<DateValueModel> DataModels { get; set; }
     }
 }

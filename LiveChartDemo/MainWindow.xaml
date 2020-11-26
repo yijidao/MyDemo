@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
         <local:LineChartDemo></local:LineChartDemo>
+        <local:ColumnChart Grid.Column="1"></local:ColumnChart>
     </Grid>
 </Window>
