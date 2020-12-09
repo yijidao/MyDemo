@@ -74,6 +74,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CheckBoxDemo.xaml.cs">
+      <DependentUpon>CheckBoxDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="My3DView.xaml.cs">
       <DependentUpon>My3DView.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,10 @@
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="VisualCanvas.cs" />
+    <Page Include="CheckBoxDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
