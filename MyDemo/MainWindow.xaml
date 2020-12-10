@@ -45,6 +45,7 @@
             <Button Content="MyWinformEmbedWPFView" Click="Button_Click" />
             <Button Content="MyXamlWriterView" Click="Button_Click" />
             <Button Content="CheckBoxDemo" Click="Button_Click" />
+            <Button Content="RadioButtonDemo" Click="Button_Click" />
             <local:MyColorPickerView2 />
         </WrapPanel>
         <ContentControl Margin="5,20,5,5" Grid.Row="1" x:Name="controlContainer" />

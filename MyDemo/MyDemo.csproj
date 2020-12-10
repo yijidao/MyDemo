@@ -145,6 +145,9 @@
     <Compile Include="MyXamlWriterView.xaml.cs">
       <DependentUpon>MyXamlWriterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RadioButtonDemo.xaml.cs">
+      <DependentUpon>RadioButtonDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
@@ -254,6 +257,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyXamlWriterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RadioButtonDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
