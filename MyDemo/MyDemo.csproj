@@ -157,6 +157,9 @@
     <Compile Include="TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextBoxDemo.xaml.cs">
+      <DependentUpon>TextBoxDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VisualCanvas.cs" />
     <Page Include="ButtonDemo.xaml">
       <SubType>Designer</SubType>
@@ -287,6 +290,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextBoxDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

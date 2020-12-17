@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="MyDemo.TextBoxDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyDemo"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+
+        <local:TextBoxWatermarkConverter x:Key="TextBoxWatermarkConverter"></local:TextBoxWatermarkConverter>
+
+        
+        <LinearGradientBrush x:Key="CommonBackground" StartPoint="0.5,0" EndPoint="0.5 1">
+            <GradientStop Color="#00085987" Offset="0"></GradientStop>
+            <GradientStop Color="#0A476B" Offset="1"></GradientStop>
+        </LinearGradientBrush>
+
+        <!-- 这种方式也不错，可以通过触发器直接修改背景颜色来实现水印 -->
+        <VisualBrush x:Key="WaterMark"  AlignmentX="Left" AlignmentY="Center" Stretch="Uniform" >
+            <VisualBrush.Visual>
+                <!--<Grid Background="Beige"></Grid>-->
+                <Grid  Background="{StaticResource CommonBackground}">
+                <Label Content="请输入" Foreground="#ffffff" FontSize="14"></Label>
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
+
+        <Style x:Key="tb2" TargetType="TextBox">
+            
+            <Setter Property="SnapsToDevicePixels"
+                    Value="True" />
+            <!--<Setter Property="OverridesDefaultStyle"
+                    Value="True" />-->
+            <Setter Property="KeyboardNavigation.TabNavigation"
+                    Value="None" />
+            <Setter Property="FocusVisualStyle"
+                    Value="{x:Null}" />
+            <Setter Property="MinWidth"
+                    Value="120" />
+            <Setter Property="MinHeight"
+                    Value="32" />
+            <Setter Property="AllowDrop"
+                    Value="true" />
+            <Setter Property="Foreground" Value="#ffffff"></Setter>
+            <Setter Property="BorderBrush" Value="#2FA7BA"></Setter>
+            <Setter Property="CaretBrush" Value="#ffffff"></Setter>
+            <Setter Property="Padding" Value="8"></Setter>
+            <Setter Property="Background" Value="{StaticResource CommonBackground}"></Setter>
+            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        
+                        <Border Name="tbBorder"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0 1"
+                                Background="{TemplateBinding Background}">
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value=".65"></EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="ReadOnly">
+                                        
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Grid>
+                                <Line X1="0" Y1="0" X2="0" Y2="8" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1"  ></Line>
+                                <Border x:Name="tlBorder" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Height="8" Width="1" VerticalAlignment="Top" HorizontalAlignment="Left"></Border>
+                                <Border x:Name="trBorder" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Height="8" Width="1"  VerticalAlignment="Top" HorizontalAlignment="Right"></Border>
+                                <Border x:Name="blBorder" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Height="8" Width="1"  VerticalAlignment="Bottom" HorizontalAlignment="Left"></Border>
+                                <Border x:Name="brBorder" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Height="8" Width="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right"></Border>
+                                <ScrollViewer Margin="0"
+                        x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}" />
+                                <TextBlock Text="请输入" Opacity=".4"   FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}" Margin="{TemplateBinding Padding}">
+                                    <TextBlock.Visibility>
+                                        <MultiBinding Converter="{StaticResource TextBoxWatermarkConverter}">
+                                            <Binding  Path="Text" RelativeSource="{RelativeSource Mode=TemplatedParent}"></Binding>
+                                            <Binding Path="IsKeyboardFocused"  RelativeSource="{RelativeSource Mode=TemplatedParent}"></Binding>
+                                        </MultiBinding>
+                                    </TextBlock.Visibility>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter TargetName="tbBorder" Property="BorderBrush" Value="#97D3DC" />
+                                <Setter TargetName="tlBorder" Property="BorderBrush" Value="#97D3DC" />
+                                <Setter TargetName="trBorder" Property="BorderBrush" Value="#97D3DC" />
+                                <Setter TargetName="blBorder" Property="BorderBrush" Value="#97D3DC" />
+                                <Setter TargetName="brBorder" Property="BorderBrush" Value="#97D3DC" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+    </UserControl.Resources>
+
+
+
+    <Canvas Background="#061932">
+       
+        <TextBox Width="200"  Canvas.Top="20" Canvas.Left="300" Style="{StaticResource tb2}" IsEnabled="False">
+          
+        </TextBox>
+        <TextBox Style="{DynamicResource tb2}" Canvas.Top="60" Canvas.Left="20" Width="100"></TextBox>
+        <TextBox Style="{DynamicResource tb2}" Canvas.Top="120" Canvas.Left="20" Width="100" Height="100"></TextBox>
+    </Canvas>
+</UserControl>
