@@ -49,6 +49,7 @@
             <Button Content="DataPickerDemo" Click="Button_Click" />
             <Button Content="ButtonDemo" Click="Button_Click" />
             <Button Content="TextBoxDemo" Click="Button_Click" />
+            <Button Content="ListBoxDemo" Click="Button_Click"></Button>
         </WrapPanel>
         <ContentControl Margin="5,20,5,5" Grid.Row="1" x:Name="controlContainer" />
     </Grid>

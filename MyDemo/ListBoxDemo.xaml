@@ -1,0 +1,528 @@
+﻿<UserControl x:Class="MyDemo.ListBoxDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyDemo"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+
+        <ObjectDataProvider x:Key="Datas" ObjectType="local:Schedule" MethodName="Generate"></ObjectDataProvider>
+        <local:IsLastItemInContainerConverter x:Key="IsLastItemInContainerConverter"></local:IsLastItemInContainerConverter>
+
+        <!--滚动条的厚度-->
+        <system:Double x:Key="ScrollBarWidth">4</system:Double>
+        <CornerRadius x:Key="ScrollBarCornerRadius">2</CornerRadius>
+
+        <!--自定义边框的颜色-->
+        <SolidColorBrush x:Key="Custom.Border.Color" Color="#14B1CC"/>
+
+        <!--角标的颜色-->
+        <SolidColorBrush x:Key="Custom.Cornor.Color" Color="#30FFFF" />
+
+        <!-- ScrollViewer 滑块 -->
+        <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border Background="{StaticResource Custom.Border.Color}" CornerRadius="{StaticResource ScrollBarCornerRadius}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--水平滑块左右按钮-->
+        <Style x:Key="HorizontalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <!--滑块的线的颜色-->
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Opacity" Value="1"/>
+            <Setter Property="Height" Value="{StaticResource ScrollBarWidth}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Rectangle Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--垂直滑块上下按钮-->
+        <Style x:Key="VerticalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <!--滑块的线的颜色-->
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Opacity" Value="1"/>
+            <Setter Property="Width" Value="{StaticResource ScrollBarWidth}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Rectangle Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--滚动条两侧按钮-->
+        <Style x:Key="ScrollBarSidesButton" TargetType="{x:Type RepeatButton}">
+            <Setter Property="OverridesDefaultStyle"  Value="true"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Opacity"  Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Rectangle Fill="Transparent" Width="{StaticResource ScrollBarWidth}" Height="{StaticResource ScrollBarWidth}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--定义ScrollBar样式-->
+        <Style x:Key="CustomScrollBarStyle" TargetType="{x:Type ScrollBar}">
+            <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="0,1,0,1"/>
+            <Setter Property="Width"  Value="{StaticResource ScrollBarWidth}"/>
+            <Setter Property="MinWidth"  Value="{StaticResource ScrollBarWidth}"/>
+            <Setter Property="Opacity"   Value="0.2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="Bg" SnapsToDevicePixels="True">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="4"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="4"/>
+                            </Grid.RowDefinitions>
+                            <RepeatButton  Grid.Row="0" Style="{StaticResource ScrollBarSidesButton}" Command="{x:Static ScrollBar.PageUpCommand}"/>
+                            <Track x:Name="PART_Track"  Grid.Row="1" IsEnabled="{TemplateBinding IsMouseOver}" IsDirectionReversed="true">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource VerticalScrollBarPageButton}" Command="{x:Static ScrollBar.PageUpCommand}"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource VerticalScrollBarPageButton}" Command="{x:Static ScrollBar.PageDownCommand}"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollBarThumb}"/>
+                                </Track.Thumb>
+                            </Track>
+                            <RepeatButton Grid.Row="2" Style="{StaticResource ScrollBarSidesButton}" Command="{x:Static ScrollBar.PageDownCommand}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="Background"  Value="Transparent"/>
+                    <Setter Property="Margin" Value="1,0,1,0"/>
+                    <Setter Property="Height"   Value="{StaticResource ScrollBarWidth}"/>
+                    <Setter Property="MinHeight"  Value="{StaticResource  ScrollBarWidth}"/>
+                    <Setter Property="Width"    Value="Auto"/>
+                    <Setter Property="Opacity" Value="0.2"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                <Grid x:Name="Bg" SnapsToDevicePixels="True">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="4"/>
+                                    </Grid.ColumnDefinitions>
+                                    <RepeatButton  Grid.Column="0" Style="{StaticResource ScrollBarSidesButton}" Command="{x:Static ScrollBar.PageLeftCommand}"/>
+                                    <Track x:Name="PART_Track" Grid.Column="1" IsEnabled="{TemplateBinding IsMouseOver}">
+                                        <Track.DecreaseRepeatButton>
+                                            <RepeatButton Style="{StaticResource HorizontalScrollBarPageButton}"  Command="{x:Static ScrollBar.PageLeftCommand}"/>
+                                        </Track.DecreaseRepeatButton>
+                                        <Track.IncreaseRepeatButton>
+                                            <RepeatButton Style="{StaticResource HorizontalScrollBarPageButton}"  Command="{x:Static ScrollBar.PageRightCommand}"/>
+                                        </Track.IncreaseRepeatButton>
+                                        <Track.Thumb>
+                                            <Thumb Style="{StaticResource ScrollBarThumb}"/>
+                                        </Track.Thumb>
+                                    </Track>
+                                    <RepeatButton Grid.Column="2" Style="{StaticResource ScrollBarSidesButton}" Command="{x:Static ScrollBar.PageRightCommand}"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="CustomScrollViewerStyle"
+           TargetType="{x:Type ScrollViewer}">
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                            <Grid Background="{TemplateBinding Background}">
+                                <ScrollContentPresenter  Cursor="{TemplateBinding Cursor}" Margin="{TemplateBinding Padding}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                <ScrollBar x:Name="PART_VerticalScrollBar"
+                                       HorizontalAlignment="Right"
+                                       Maximum="{TemplateBinding ScrollableHeight}"
+                                       Orientation="Vertical"
+                                       Style="{StaticResource CustomScrollBarStyle}"
+                                       ViewportSize="{TemplateBinding ViewportHeight}"
+                                       Value="{TemplateBinding VerticalOffset}"
+                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                                <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                       Maximum="{TemplateBinding ScrollableWidth}"
+                                       Orientation="Horizontal"
+                                       Style="{StaticResource CustomScrollBarStyle}"
+                                       VerticalAlignment="Bottom"
+                                       Value="{TemplateBinding HorizontalOffset}"
+                                       ViewportSize="{TemplateBinding ViewportWidth}"
+                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="ScrollChanged" >
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.2"/>
+                                        <DoubleAnimation
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="0.2"
+                                        Duration="0:0:0.5"
+                                        BeginTime="0:0:0.2"/>
+                                        <DoubleAnimation
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.2"/>
+                                        <DoubleAnimation
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="0.2"
+                                        Duration="0:0:0.5"
+                                        BeginTime="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseEnter"
+                                      SourceName="PART_VerticalScrollBar">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave"
+                                      SourceName="PART_VerticalScrollBar">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                        Storyboard.TargetName="PART_VerticalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="0.2"
+                                        Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseEnter"
+                                      SourceName="PART_HorizontalScrollBar">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="1"
+                                        Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave"
+                                      SourceName="PART_HorizontalScrollBar">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                        Storyboard.TargetName="PART_HorizontalScrollBar"
+                                        Storyboard.TargetProperty="Opacity"
+                                        To="0.2"
+                                        Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ListBoxItem1"
+       TargetType="ListBoxItem">
+            <Setter Property="SnapsToDevicePixels"
+          Value="true" />
+            <Setter Property="OverridesDefaultStyle"
+          Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Border"
+                Padding="2"
+                SnapsToDevicePixels="true">
+                            <Border.Background>
+                                <SolidColorBrush Color="Transparent" />
+                            </Border.Background>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).
+                    (SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                         Value="{StaticResource SelectedBackgroundColor}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).
+                    (SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                         Value="{StaticResource SelectedUnfocusedColor}" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ListBoxItem2" TargetType="ListBoxItem">
+            <Setter Property="SnapsToDevicePixels" Value="True"></Setter>
+            <Setter Property="Foreground" Value="#ffffff"></Setter>
+            <Setter Property="Width" Value="66"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+
+                        <Border x:Name="Border1" SnapsToDevicePixels="True" Background="Transparent" >
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="unSelectedCar" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="selectedCar" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="carBorder" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#0FA5BE"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#13FFF5"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused"></VisualState>
+                                </VisualStateGroup>
+
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Border x:Name="carBorder" SnapsToDevicePixels="true" Height="32" Width="32" Background="Transparent" BorderThickness="1" BorderBrush="#14CCC4"  CornerRadius="16" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <Path x:Name="unSelectedCar" Data="M12.9163158,14.7931762 L4.28091337,14.7931762 L3.44263158,16.0505263 L2.53105263,15.5242105 L4.11,12.7894737 L5.02157895,13.3157895 L4.68789474,13.8936842 L12.3384211,13.8936842 L12.0047368,13.3157895 L12.9163158,12.7894737 L14.4952632,15.5242105 L13.5836842,16.0505263 L12.9163158,14.7931762 Z M5.02631579,0.842105263 L11.8157895,0.842105263 C13.1965013,0.842105263 14.3157895,1.96139339 14.3157895,3.34210526 L14.3157895,8.18148395 L14.3157895,8.18148395 C14.3157895,9.53526059 13.5928,10.7915584 12.4082526,11.4966264 L12.2617684,11.583466 C11.1098154,12.2689346 9.7865778,12.6315789 8.43726316,12.6315789 C7.08789145,12.6315789 5.76444158,12.2699872 4.61128421,11.5863415 L4.45035789,11.4908755 C3.25571586,10.7826599 2.52631579,9.51768647 2.52631579,8.15387933 L2.52631579,3.34210526 C2.52631579,1.96139339 3.64560391,0.842105263 5.02631579,0.842105263 Z M3.36842105,3.68421053 L3.36842105,8.24589474 L3.36842105,8.24589474 C3.36842105,9.27048321 3.9196709,10.2208385 4.82263158,10.7529187 L4.99505263,10.8545837 C6.03290138,11.4660954 7.2240021,11.7894737 8.43842105,11.7894737 C9.65204507,11.7894737 10.8422104,11.4652464 11.8783158,10.8524402 L12.0352632,10.7599617 C12.9286564,10.2315494 13.4736842,9.29004859 13.4736842,8.27529187 L13.4736842,3.68421053 C13.4736842,2.57964103 12.5782537,1.68421053 11.4736842,1.68421053 L5.36842105,1.68421053 C4.26385155,1.68421053 3.36842105,2.57964103 3.36842105,3.68421053 Z M6.35526316,2.57894737 L10.6710526,2.57894737 C11.2233374,2.57894737 11.6710526,3.02666262 11.6710526,3.57894737 L11.6710526,5.336 L11.6710526,5.336 C11.6710526,7.63157895 9.51796897,7.63157895 9.47001304,7.63157895 L8.01966407,7.63157895 C7.02735576,7.63139297 5.35550242,7.42320729 5.35526316,5.33162105 L5.35526316,3.57894737 C5.35526316,3.02666262 5.80297841,2.57894737 6.35526316,2.57894737 Z M6.19267496,4.21052632 L6.19267496,5.51975267 L6.19267496,5.51975267 C6.19267496,6.89135723 7.425574,6.89135723 7.7726291,6.89135723 L9.16995261,6.89135723 C9.36310995,6.89135723 10.8227314,6.89135723 10.8227314,5.52600831 L10.8227314,4.21052632 C10.8227314,3.65824157 10.3750162,3.21052632 9.82273144,3.21052632 L7.19267496,3.21052632 C6.64039021,3.21052632 6.19267496,3.65824157 6.19267496,4.21052632 Z M7.15210526,9.95473684 C6.94684211,10.1602632 6.44684211,9.99368421 6.03578947,9.58263158 C5.62473684,9.17157895 5.45815789,8.67184211 5.66368421,8.46631579 C5.86894737,8.26078947 6.36894737,8.42736842 6.78,8.83842105 C7.19105263,9.24947368 7.35763158,9.74921053 7.15210526,9.95473684 L7.15210526,9.95473684 Z M9.87421053,9.95473684 C9.66868421,9.74947368 9.83526316,9.24947368 10.2463158,8.83842105 C10.6573684,8.42736842 11.1571053,8.26078947 11.3626316,8.46631579 C11.5681579,8.67157895 11.4015789,9.17157895 10.9905263,9.58263158 C10.5794737,9.99368421 10.0797368,10.1602632 9.87421053,9.95473684 Z"
+                                          Fill="#13FFF5"
+                                          Visibility="Collapsed"
+                                          VerticalAlignment="Center"
+                                          SnapsToDevicePixels="true"
+                                          HorizontalAlignment="Center"
+                                          Margin="-2 0 0 0 "></Path>
+                                <Path x:Name="selectedCar" Data="M12.9163158,14.7931762 L4.28091337,14.7931762 L3.44263158,16.0505263 L2.53105263,15.5242105 L4.11,12.7894737 L5.02157895,13.3157895 L4.68789474,13.8936842 L12.3384211,13.8936842 L12.0047368,13.3157895 L12.9163158,12.7894737 L14.4952632,15.5242105 L13.5836842,16.0505263 L12.9163158,14.7931762 Z M11.8157895,0.842105263 C13.1965013,0.842105263 14.3157895,1.96139339 14.3157895,3.34210526 L14.3157895,8.18148395 C14.3157895,9.53526059 13.5928,10.7915584 12.4082526,11.4966264 L12.2617684,11.583466 C11.1098154,12.2689346 9.7865778,12.6315789 8.43726316,12.6315789 C7.08789145,12.6315789 5.76444158,12.2699872 4.61128421,11.5863415 L4.45035789,11.4908755 C3.25571586,10.7826599 2.52631579,9.51768647 2.52631579,8.15387933 L2.52631579,3.34210526 C2.52631579,1.96139339 3.64560391,0.842105263 5.02631579,0.842105263 L11.8157895,0.842105263 Z M6.52564524,8.90352438 C6.05643498,8.43431413 5.48569267,8.24416682 5.25138794,8.47877195 C5.01678281,8.71337708 5.20693012,9.28381899 5.67614037,9.75302925 C6.14535062,10.2222395 6.71609293,10.4123868 6.95039767,10.1777817 C7.1850028,9.94317655 6.99485549,9.37273464 6.52564524,8.90352438 Z M11.5856764,8.47877195 C11.3510713,8.24416682 10.7806294,8.43431413 10.3114191,8.90352438 C9.84220886,9.37273464 9.65206156,9.94347694 9.88666669,10.1777817 C10.1212718,10.4123868 10.6917137,10.2222395 11.160924,9.75302925 C11.6301342,9.28381899 11.8202815,8.71307669 11.5856764,8.47877195 Z M10.9704892,2.57894737 L6.11501094,2.57894737 C5.56272619,2.57894737 5.11501094,3.02666262 5.11501094,3.57894737 L5.11501094,3.57894737 L5.11501094,5.33162105 C5.1152502,7.42320729 7.02735576,7.63139297 8.01966407,7.63157895 L8.01966407,7.63157895 L9.48199734,7.63150189 C9.67364403,7.62919021 11.9704892,7.55752801 11.9704892,5.336 L11.9704892,5.336 L11.9704892,3.57894737 C11.9704892,3.02666262 11.522774,2.57894737 10.9704892,2.57894737 L10.9704892,2.57894737 Z"
+                                          Fill="#ffffff"
+                                          Visibility="Collapsed"
+                                          SnapsToDevicePixels="true"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          Margin="-2 0 0 0 "></Path>
+                                <Line Visibility="Visible"  x:Name="line1"  X1="0" Y1="16" X2="13" Y2="16" Stroke="#14CCC4" StrokeThickness="1" StrokeDashArray="3 4 6 4" ></Line>
+                                <Line X1="48" Y1="16" X2="66" Y2="16" Stroke="#14CCC4" StrokeThickness="1" StrokeDashArray="0 4 6 4 6"  ></Line>
+
+                                <ContentPresenter Grid.Row="1" HorizontalAlignment="Center" Margin="0 6 0 0"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex"
+                                     Value="0">
+                                <Setter TargetName="line1"
+                                        Property="Visibility" Value="Collapsed">
+
+                                </Setter>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DeviceListBoxItem" TargetType="ListBoxItem">
+            <Setter Property="SnapsToDevicePixels" Value="True"></Setter>
+            <Setter Property="Foreground" Value="#ffffff"></Setter>
+            <Setter Property="Width" Value="66"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+
+                        <Border x:Name="Border1" SnapsToDevicePixels="True" Background="Transparent" >
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="unSelectedCar" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="selectedCar" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="carBorder" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#0FA5BE"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#13FFF5"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused"></VisualState>
+                                </VisualStateGroup>
+
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Border x:Name="carBorder" SnapsToDevicePixels="true" Height="32" Width="32" Background="Transparent" BorderThickness="1" BorderBrush="#14CCC4"  CornerRadius="16" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <Path x:Name="unSelectedCar" Data="M13.754386,0.421052632 L3.08190112,0.421052632 C2.71761829,0.421052632 2.42105263,0.681981925 2.42105263,1.00279001 L2.42105263,15.7512344 C2.42105263,16.0721233 2.71761829,16.3329718 3.08190112,16.3329718 L13.754386,16.3329718 C14.1186688,16.3329718 14.4149113,16.0720425 14.4149113,15.7512344 L14.4149113,1.00279001 C14.4150728,0.681901116 14.1186688,0.421052632 13.754386,0.421052632 Z M13.0936183,15.1694971 L3.74242637,15.1694971 L3.74242637,4.97515364 L13.0936183,4.97515364 L13.0936183,15.1694971 Z M11.606992,11.9289314 C11.9955981,11.9289314 12.3104264,12.1999617 12.3104264,12.534992 C12.3104264,12.8697799 11.9956789,13.1410526 11.606992,13.1410526 L11.606992,13.1410526 L5.22937586,13.1410526 C4.8407698,13.1410526 4.52594152,12.8697799 4.52594152,12.534992 C4.52594152,12.1999617 4.8407698,11.9289314 5.22937586,11.9289314 L5.22937586,11.9289314 Z M11.606992,9.26226475 C11.9955981,9.26226475 12.3104264,9.53329506 12.3104264,9.86832536 C12.3104264,10.2031132 11.9956789,10.474386 11.606992,10.474386 L11.606992,10.474386 L5.22937586,10.474386 C4.8407698,10.474386 4.52594152,10.2031132 4.52594152,9.86832536 C4.52594152,9.53329506 4.8407698,9.26226475 5.22937586,9.26226475 L5.22937586,9.26226475 Z M10.9232749,6.16456778 C11.3844717,6.16456778 11.7583456,6.53844167 11.7583456,6.99963849 C11.7583456,7.46083531 11.3844717,7.8347092 10.9232749,7.8347092 C10.462078,7.8347092 10.0882041,7.46083531 10.0882041,6.99963849 C10.0882041,6.53844167 10.462078,6.16456778 10.9232749,6.16456778 Z M13.0936183,1.58452738 L13.0936183,3.82711324 L3.74242637,3.82711324 L3.74242637,1.58452738 L13.0936183,1.58452738 Z"
+                                          Fill="#13FFF5"
+                                          Visibility="Collapsed"
+                                          VerticalAlignment="Center"
+                                          SnapsToDevicePixels="true"
+                                          HorizontalAlignment="Center"
+                                          Margin="-2 0 0 0 "></Path>
+                                <Path x:Name="selectedCar" Data="M13.754386,0.421052632 L3.08190112,0.421052632 C2.71761829,0.421052632 2.42105263,0.681981925 2.42105263,1.00279001 L2.42105263,15.7512344 C2.42105263,16.0721233 2.71761829,16.3329718 3.08190112,16.3329718 L13.754386,16.3329718 C14.1186688,16.3329718 14.4149113,16.0720425 14.4149113,15.7512344 L14.4149113,1.00279001 C14.4150728,0.681901116 14.1186688,0.421052632 13.754386,0.421052632 Z M11.606992,11.9289314 C11.9955981,11.9289314 12.3104264,12.1999617 12.3104264,12.534992 C12.3104264,12.8697799 11.9956789,13.1410526 11.606992,13.1410526 L11.606992,13.1410526 L5.22937586,13.1410526 C4.8407698,13.1410526 4.52594152,12.8697799 4.52594152,12.534992 C4.52594152,12.1999617 4.8407698,11.9289314 5.22937586,11.9289314 L5.22937586,11.9289314 Z M11.606992,9.26226475 C11.9955981,9.26226475 12.3104264,9.53329506 12.3104264,9.86832536 C12.3104264,10.2031132 11.9956789,10.474386 11.606992,10.474386 L11.606992,10.474386 L5.22937586,10.474386 C4.8407698,10.474386 4.52594152,10.2031132 4.52594152,9.86832536 C4.52594152,9.53329506 4.8407698,9.26226475 5.22937586,9.26226475 L5.22937586,9.26226475 Z M11.0382041,5.83822823 C11.5628747,5.83822823 11.9882041,6.26355771 11.9882041,6.78822823 C11.9882041,7.31289874 11.5628747,7.73822823 11.0382041,7.73822823 C10.5135336,7.73822823 10.0882041,7.31289874 10.0882041,6.78822823 C10.0882041,6.26355771 10.5135336,5.83822823 11.0382041,5.83822823 Z M13.0936183,1.58452738 L13.0936183,3.82711324 L3.74242637,3.82711324 L3.74242637,1.58452738 L13.0936183,1.58452738 Z"
+                                          Fill="#ffffff"
+                                          Visibility="Collapsed"
+                                          SnapsToDevicePixels="true"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          Margin="-2 0 0 0 "></Path>
+                                <Line  X1="0" Y1="16" X2="13" Y2="16" Stroke="#14CCC4" StrokeThickness="1" StrokeDashArray="3 4 6 4" ></Line>
+                                <Line  x:Name="line1" X1="48" Y1="16" X2="66" Y2="16" Stroke="#14CCC4" StrokeThickness="1" StrokeDashArray="0 4 6 4 6"  ></Line>
+
+                                <ContentPresenter Grid.Row="1" HorizontalAlignment="Center" Margin="0 6 0 0"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <DataTrigger  Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource IsLastItemInContainerConverter}}" Value="True">
+                                <Setter TargetName="line1" Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ListBox" x:Key="DeviceListBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="AlternationCount" Value="2147483647" />
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate >
+                        <StackPanel Orientation="Horizontal" ></StackPanel>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate >
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"   Style="{StaticResource CustomScrollViewerStyle}" >
+                            <ItemsPresenter SnapsToDevicePixels="True" Width="{TemplateBinding Width}"/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource DeviceListBoxItem}" />
+
+        </Style>
+
+        <Style TargetType="ListBox" x:Key="StationListBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="AlternationCount" Value="2147483647" />
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate >
+                        <StackPanel Orientation="Horizontal" ></StackPanel>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate >
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"   Style="{StaticResource CustomScrollViewerStyle}" >
+                            <ItemsPresenter SnapsToDevicePixels="True" Width="{TemplateBinding Width}"/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource ListBoxItem2}" />
+
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#061932"   >
+
+        <ListBox  ItemsSource="{Binding Source={StaticResource Datas}}"  
+                  DisplayMemberPath="Title" 
+                  Style="{StaticResource DeviceListBox}" 
+                  Margin="20">
+
+        </ListBox>
+    </Grid>
+</UserControl>

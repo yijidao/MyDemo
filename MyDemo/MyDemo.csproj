@@ -83,6 +83,9 @@
     <Compile Include="DataPickerDemo.xaml.cs">
       <DependentUpon>DataPickerDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListBoxDemo.xaml.cs">
+      <DependentUpon>ListBoxDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="My3DView.xaml.cs">
       <DependentUpon>My3DView.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataPickerDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListBoxDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
