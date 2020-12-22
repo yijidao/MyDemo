@@ -80,6 +80,9 @@
     <Compile Include="CheckBoxDemo.xaml.cs">
       <DependentUpon>CheckBoxDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ComboBoxDemo.xaml.cs">
+      <DependentUpon>ComboBoxDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataPickerDemo.xaml.cs">
       <DependentUpon>DataPickerDemo.xaml</DependentUpon>
     </Compile>
@@ -169,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CheckBoxDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComboBoxDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

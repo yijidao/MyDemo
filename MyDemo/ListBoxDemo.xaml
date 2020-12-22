@@ -351,7 +351,20 @@
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
-                                    <VisualState x:Name="SelectedUnfocused"></VisualState>
+                                    <VisualState x:Name="SelectedUnfocused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="selectedCar" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="carBorder" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#0FA5BE"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#13FFF5"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
                                 </VisualStateGroup>
 
                             </VisualStateManager.VisualStateGroups>
@@ -429,7 +442,20 @@
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
-                                    <VisualState x:Name="SelectedUnfocused"></VisualState>
+                                    <VisualState x:Name="SelectedUnfocused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="selectedCar" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="carBorder" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#0FA5BE"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#13FFF5"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
                                 </VisualStateGroup>
 
                             </VisualStateManager.VisualStateGroups>
@@ -514,9 +540,82 @@
             <Setter Property="ItemContainerStyle" Value="{StaticResource ListBoxItem2}" />
 
         </Style>
+
+        <Style TargetType="ListBoxItem" x:Key="ButtonListBoxItem">
+            <Setter Property="SnapsToDevicePixels" Value="True"></Setter>
+            <Setter Property="Foreground" Value="#13F1FF"></Setter>
+            <Setter Property="Background" Value="#004D68"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Height" Value="28"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Padding" Value="12 0"></Setter>
+            <Setter Property="Margin" Value="0 0 2 0"></Setter>
+            <Setter Property="MinWidth" Value="100"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="border1" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                TextBlock.FontSize="{TemplateBinding FontSize}" TextBlock.Foreground="{TemplateBinding Foreground}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected"/>
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#00B2E1"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#ffffff"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#00B2E1"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#ffffff"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" Margin="{TemplateBinding Padding}"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ListBox" x:Key="ButtonListBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate >
+                        <StackPanel Orientation="Horizontal" ></StackPanel>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate >
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"   Style="{StaticResource CustomScrollViewerStyle}" >
+                            <ItemsPresenter SnapsToDevicePixels="True" Width="{TemplateBinding Width}"/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource ButtonListBoxItem}" />
+
+        </Style>
+
+
     </UserControl.Resources>
 
-    <Grid Background="#061932"   >
+    <StackPanel Background="#061932"   >
 
         <ListBox  ItemsSource="{Binding Source={StaticResource Datas}}"  
                   DisplayMemberPath="Title" 
@@ -524,5 +623,17 @@
                   Margin="20">
 
         </ListBox>
-    </Grid>
+
+        <ListBox  ItemsSource="{Binding Source={StaticResource Datas}}"  
+                  DisplayMemberPath="Title" 
+                  Style="{StaticResource StationListBox}" 
+                  Margin="20">
+
+        </ListBox>
+
+        <ListBox ItemsSource="{Binding Source={StaticResource Datas}}"
+                 DisplayMemberPath="Title"
+                 Style="{StaticResource ButtonListBox}"
+                 Margin="20"></ListBox>
+    </StackPanel>
 </UserControl>
