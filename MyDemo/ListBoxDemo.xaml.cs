@@ -30,6 +30,25 @@ namespace MyDemo
         {
             return new string[] { "虹猫", "蓝兔", "莎丽", "大奔", "逗逗", "跳跳", "达达" };
         }
+
+
+
+        public Schedule SelectedsSchedule
+        {
+            get { return (Schedule)GetValue(SelectedsScheduleProperty); }
+            set { SetValue(SelectedsScheduleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedsSchedule.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedsScheduleProperty =
+            DependencyProperty.Register("SelectedsSchedule", typeof(Schedule), typeof(ListBoxDemo), new PropertyMetadata(null,
+                (o, args) =>
+                {
+                    var value = args.NewValue;
+
+                }));
+
+
     }
 
     public class IsLastItemInContainerConverter : IValueConverter

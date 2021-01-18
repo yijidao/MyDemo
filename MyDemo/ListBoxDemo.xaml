@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:MyDemo"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="ListBoxDemoView">
 
     <UserControl.Resources>
 
@@ -635,5 +636,16 @@
                  DisplayMemberPath="Title"
                  Style="{StaticResource ButtonListBox}"
                  Margin="20"></ListBox>
+
+
+        <ListBox ItemsSource="{Binding Source={StaticResource Datas}}"
+                 SelectedItem="{Binding ElementName=ListBoxDemoView, Path=SelectedsSchedule}"
+                 Margin="20" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton Content="{Binding Title}" GroupName="tt" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </StackPanel>
 </UserControl>

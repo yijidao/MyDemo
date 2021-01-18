@@ -374,10 +374,81 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <ControlTemplate x:Key="LineComboBoxToggleButton" TargetType="ToggleButton">
+            <Border Height="32" Width="32" CornerRadius="16" Background="Transparent">
+                <Path Fill="#F8E71C" Data="M15.3242057,18.5304206 L15.3242057,11.3798751 C15.3381836,10.6372966 14.9500219,9.94506502 14.3091585,9.56968199 C13.6682951,9.19429896 12.8746617,9.19429896 12.2337983,9.56968199 C11.592935,9.94506502 11.2047732,10.6372966 11.2187512,11.3798751 L11.2187512,22.8046024 C11.2187512,23.4838751 10.3387512,23.7522387 9.95911479,23.1886024 L8.11693298,20.4467842 C7.90505648,20.131279 7.98906415,19.7037516 8.30456936,19.4918751 C8.62007456,19.2799986 9.04760192,19.3640063 9.25947843,19.6795115 L9.84202388,20.5471478 L9.84202388,11.3798751 C9.86932309,9.505313 11.3967175,8 13.2714784,8 C15.1462393,8 16.6736338,9.505313 16.700933,11.3798751 L16.700933,20.5195115 C16.6869551,21.26209 17.0751168,21.9543216 17.7159802,22.3297046 C18.3568435,22.7050876 19.150477,22.7050876 19.7913403,22.3297046 C20.4322037,21.9543216 20.8203654,21.26209 20.8063875,20.5195115 L20.8063875,9.09551148 C20.8063875,8.41332966 21.6922057,8.14714784 22.068933,8.71587512 L23.8812966,11.4576933 C24.0169276,11.6628287 24.0328174,11.9247399 23.9229804,12.1447675 C23.8131435,12.3647951 23.5942666,12.5095117 23.3487986,12.5244039 C23.1033306,12.5392961 22.868564,12.4221014 22.732933,12.216966 L22.1831148,11.384966 L22.1831148,20.5202387 C22.1831148,21.7453349 21.5295338,22.8773705 20.4685694,23.4899186 C19.4076049,24.1024667 18.1004428,24.1024667 17.0394784,23.4899186 C15.978514,22.8773705 15.324933,21.7453349 15.324933,20.5202387 L15.324933,18.5304206 L15.3242057,18.5304206 Z"></Path>
+            </Border>
+        </ControlTemplate>
+
+        <Style TargetType="ComboBox" x:Key="LineComboBox">
+            <Setter Property="SnapsToDevicePixels"
+                    Value="true" />
+            <Setter Property="OverridesDefaultStyle"
+                    Value="true" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="ScrollViewer.CanContentScroll"
+                    Value="true" />
+            <!--<Setter Property="MinWidth"
+                    Value="120" />
+            <Setter Property="MinHeight"
+                    Value="60" />-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <ToggleButton x:Name="ToggleButton" Template="{StaticResource LineComboBoxToggleButton}"></ToggleButton>
+                            <TextBox Grid.Row="1" x:Name="PART_EditableTextBox"></TextBox>
+                            <Popup x:Name="PART_Popup"></Popup>
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver" />
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="EditStates">
+                                    <VisualState x:Name="Editable">
+                                        <!--<Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                 Storyboard.TargetName="PART_EditableTextBox">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{x:Static Visibility.Visible}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames
+                      Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                 Storyboard.TargetName="ContentSite">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{x:Static Visibility.Hidden}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>-->
+                                    </VisualState>
+                                    <VisualState x:Name="Uneditable" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
     </UserControl.Resources>
 
     <StackPanel Background="#061932"  >
-        <ComboBox Margin="20" Width="120" ItemsSource="{Binding Source={StaticResource Datas}}" DisplayMemberPath="Title"></ComboBox>
+        <ComboBox Margin="20" Width="120" ItemsSource="{Binding Source={StaticResource Datas}}" DisplayMemberPath="Title">
             
+
+
+        </ComboBox>
+
     </StackPanel>
 </UserControl>

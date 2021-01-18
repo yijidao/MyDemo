@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MyDemo"
         mc:Ignorable="d"
         x:Name="MainWindow1"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="900" Width="1600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -51,6 +51,8 @@
             <Button Content="TextBoxDemo" Click="Button_Click" />
             <Button Content="ListBoxDemo" Click="Button_Click"></Button>
             <Button Content="ComboBoxDemo" Click="Button_Click"></Button>
+            <Button Content="TreeViewDemo" Click="Button_Click"></Button>
+            <Button Content="GridDemo" Click="Button_Click"></Button>
         </WrapPanel>
         <ContentControl Margin="5,20,5,5" Grid.Row="1" x:Name="controlContainer" />
     </Grid>

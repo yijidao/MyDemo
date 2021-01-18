@@ -86,6 +86,9 @@
     <Compile Include="DataPickerDemo.xaml.cs">
       <DependentUpon>DataPickerDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GridDemo.xaml.cs">
+      <DependentUpon>GridDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListBoxDemo.xaml.cs">
       <DependentUpon>ListBoxDemo.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,9 @@
     <Compile Include="TextBoxDemo.xaml.cs">
       <DependentUpon>TextBoxDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TreeViewDemo.xaml.cs">
+      <DependentUpon>TreeViewDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VisualCanvas.cs" />
     <Page Include="ButtonDemo.xaml">
       <SubType>Designer</SubType>
@@ -180,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataPickerDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GridDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -303,6 +313,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\ScrollViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -324,6 +338,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\MyTileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TreeViewDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
