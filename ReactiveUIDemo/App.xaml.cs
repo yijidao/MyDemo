@@ -19,6 +19,7 @@ namespace ReactiveUIDemo
         public App()
         {
             Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
+            this.StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);
         }
     }
 }

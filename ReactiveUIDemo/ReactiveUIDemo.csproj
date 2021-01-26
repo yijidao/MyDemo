@@ -9,7 +9,9 @@
   <ItemGroup>
     <PackageReference Include="HandyControl" Version="2.5.0.2" />
     <PackageReference Include="NuGet.Protocol" Version="5.7.0" />
-    <PackageReference Include="ReactiveUI.WPF" Version="12.1.5" />
+    <PackageReference Include="ReactiveUI.Events.WPF" Version="13.0.38" />
+    <PackageReference Include="ReactiveUI.Fody" Version="13.0.38" />
+    <PackageReference Include="ReactiveUI.WPF" Version="13.0.38" />
   </ItemGroup>
 
 </Project>
