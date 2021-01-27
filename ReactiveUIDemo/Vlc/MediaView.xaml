@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ReactiveUIDemo.Vlc"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="#01000000">
     <UserControl.Resources>
         <Style TargetType="Button" x:Key="ButtonStyle">
             <Setter Property="Width" Value="50" />
@@ -14,9 +15,10 @@
             <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
         <Button Content="PLAY" x:Name="playButton" Style="{StaticResource ButtonStyle}"></Button>
         <Button Content="STOP" x:Name="stopButton" Style="{StaticResource ButtonStyle}"></Button>
         <Button Content="PAUSE" x:Name="pauseButton" Style="{StaticResource ButtonStyle}"></Button>
+        <Button Content="FULL" x:Name="fullButton" Style="{StaticResource ButtonStyle}"></Button>
     </StackPanel>
 </UserControl>

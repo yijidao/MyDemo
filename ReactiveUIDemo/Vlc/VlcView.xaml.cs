@@ -34,5 +34,10 @@ namespace ReactiveUIDemo.Vlc
         {
             videoView.Dispose();
         }
+
+        private void VideoView_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
     }
 }

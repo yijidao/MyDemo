@@ -8,7 +8,30 @@
 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="vlc:VideoView" x:Key="VideoViewStyle">
+            <!--<Setter Property="BorderThickness" Value="2"></Setter>
+            <Style.Triggers>
+                --><!--<Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="LightCoral" />
+                </Trigger>--><!--
+                <EventTrigger RoutedEvent="MouseLeftButtonDown" >
+                    <BeginStoryboard >
+                        <Storyboard TargetProperty="BorderBrush">
+                            <ColorAnimationUsingKeyFrames>
+                                <EasingColorKeyFrame KeyTime="0" Value="LightCoral" ></EasingColorKeyFrame>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>-->
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
-            <vlc:VideoView x:Name="videoView" />
+        <vlc:VideoView x:Name="videoView" Style="{StaticResource VideoViewStyle}" MouseLeftButtonDown="VideoView_OnMouseLeftButtonDown">
+
+        </vlc:VideoView>
     </Grid>
 </UserControl>

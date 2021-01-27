@@ -45,7 +45,19 @@ namespace ReactiveUIDemo.Vlc
             playButton.Click += PlayButtonOnClick;
             stopButton.Click += StopButtonOnClick;
             pauseButton.Click += PauseButtonOnClick;
+            fullButton.Click += FullButtonOnClick;
             Unloaded += OnUnloaded;
+            
+        }
+
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+        }
+
+        private void FullButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            MediaPlayerElement.ToggleFullscreen();
         }
 
         private void PauseButtonOnClick(object sender, RoutedEventArgs e)
@@ -139,6 +151,7 @@ namespace ReactiveUIDemo.Vlc
             MediaPlayerElement = new MediaPlayer(LibVlcInstance);
             ParentView.videoView.MediaPlayer = MediaPlayerElement;
 
+            MediaPlayerElement.EnableMouseInput = true;
         }
 
         private MediaPlayer CreateMediaPlayer(LibVLC libVlc)
@@ -153,6 +166,11 @@ namespace ReactiveUIDemo.Vlc
             player.Stop();
             ParentView.videoView.MediaPlayer = null;
             player.Dispose();
+        }
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
         }
     }
 }
