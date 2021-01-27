@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using LibVLCSharp.Shared;
 using ReactiveUI;
 using Splat;
 
@@ -20,6 +21,8 @@ namespace ReactiveUIDemo
         {
             Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
             this.StartupUri = new Uri("MainWindow.xaml", UriKind.Relative);
+
+            Core.Initialize();
         }
     }
 }

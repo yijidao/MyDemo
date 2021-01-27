@@ -5,9 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReactiveUIDemo"
         xmlns:rui="http://reactiveui.net"
+        xmlns:vlcv="clr-namespace:ReactiveUIDemo.Vlc"
         mc:Ignorable="d"
         Title="NuGet Browser" Height="800" Width="1600">
     <Grid Margin="12">
-        <local:CommandView></local:CommandView>
+        <!--<local:CommandView></local:CommandView>-->
+
+        <vlcv:MonitorView></vlcv:MonitorView>
+        
     </Grid>
+    <!--<StackPanel Orientation="Horizontal">
+        <Button Height=""></Button>
+    </StackPanel>-->
 </Window>
