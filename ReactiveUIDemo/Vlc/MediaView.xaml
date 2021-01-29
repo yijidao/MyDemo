@@ -15,10 +15,25 @@
             <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
-        <Button Content="PLAY" x:Name="playButton" Style="{StaticResource ButtonStyle}"></Button>
-        <Button Content="STOP" x:Name="stopButton" Style="{StaticResource ButtonStyle}"></Button>
-        <Button Content="PAUSE" x:Name="pauseButton" Style="{StaticResource ButtonStyle}"></Button>
-        <Button Content="FULL" x:Name="fullButton" Style="{StaticResource ButtonStyle}"></Button>
-    </StackPanel>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="盖盖盖" Foreground="LightCoral" FontSize="16" Margin="5"></TextBlock>
+        <TextBlock Grid.Column="1" Text="透明盖盖" Foreground="Black" Opacity="0.3" FontSize="20" Margin="10"></TextBlock>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
+            <Button Content="PLAY" x:Name="playButton" Style="{StaticResource ButtonStyle}"></Button>
+            <Button Content="STOP" x:Name="stopButton" Style="{StaticResource ButtonStyle}"></Button>
+            <Button Content="PAUSE" x:Name="pauseButton" Style="{StaticResource ButtonStyle}"></Button>
+            <Button Content="FULL" x:Name="fullButton" Style="{StaticResource ButtonStyle}"></Button>
+            <Button Content="SPLIT" x:Name="splitButton" Style="{StaticResource ButtonStyle}"></Button>
+        </StackPanel>
+    </Grid>
 </UserControl>

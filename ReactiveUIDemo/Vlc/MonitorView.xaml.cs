@@ -24,13 +24,19 @@ namespace ReactiveUIDemo.Vlc
         {
             InitializeComponent();
 
-            sourceListBox.ItemsSource = new []
+            sourceListBox.ItemsSource = new[]
             {
                 "rtmp://58.200.131.2:1935/livetv/gxtv",
                 "rtmp://58.200.131.2:1935/livetv/hunantv",
                 "http://1011.hlsplay.aodianyun.com/demo/game.flv"
             };
             sourceListBox.SelectionChanged += SourceListBoxOnSelectionChanged;
+
+
+            AddHandler(VlcView.SplitEvent, new RoutedEventHandler((sender, e) =>
+            {
+
+            }));
         }
 
         private void SourceListBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -43,7 +49,6 @@ namespace ReactiveUIDemo.Vlc
                     mediaView.Play(sourceListBox.SelectedItem.ToString());
                 }
             }
-            
         }
     }
 }

@@ -99,13 +99,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\BusinessViewModel.cs" />
-    <Compile Include="ViewModels\DesignViewModel.cs" />
-    <Compile Include="Views\BusinessView.xaml.cs">
-      <DependentUpon>BusinessView.xaml</DependentUpon>
+    <Compile Include="ViewModels\DetailRegionViewModel.cs" />
+    <Compile Include="ViewModels\MainRegionViewModel.cs" />
+    <Compile Include="Views\DetailRegionView.xaml.cs">
+      <DependentUpon>DetailRegionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DesignView.xaml.cs">
-      <DependentUpon>DesignView.xaml</DependentUpon>
+    <Compile Include="Views\MainRegionView.xaml.cs">
+      <DependentUpon>MainRegionView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -119,11 +119,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\BusinessView.xaml">
+    <Page Include="Views\DetailRegionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DesignView.xaml">
+    <Page Include="Views\MainRegionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,6 +164,12 @@
     <PackageReference Include="Prism.Wpf">
       <Version>8.0.0.1909</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VlcPrismModule\VlcPrismModule.csproj">
+      <Project>{7b961e21-ee39-4f9d-b3c0-072b8147a376}</Project>
+      <Name>VlcPrismModule</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

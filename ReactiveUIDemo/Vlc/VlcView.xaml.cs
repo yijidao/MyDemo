@@ -28,6 +28,17 @@ namespace ReactiveUIDemo.Vlc
             MediaPlayerElement = new MediaView(this);
             videoView.Content = MediaPlayerElement;
             Unloaded += OnUnloaded;
+
+            MediaPlayerElement.Split += (sender, args) => RaiseEvent(new RoutedEventArgs(VlcView.SplitEvent));
+        }
+
+        public static readonly RoutedEvent SplitEvent = EventManager.RegisterRoutedEvent("Split",
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(VlcView));
+
+        public event RoutedEventHandler Split
+        {
+            add => AddHandler(SplitEvent, value);
+            remove => RemoveHandler(SplitEvent, value);
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -37,7 +48,7 @@ namespace ReactiveUIDemo.Vlc
 
         private void VideoView_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
+
         }
     }
 }

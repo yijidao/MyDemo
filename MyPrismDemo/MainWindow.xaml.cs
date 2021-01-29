@@ -12,6 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MyPrismDemo.Views;
+using Prism.Ioc;
+using Prism.Regions;
+using Prism.Unity;
+using VlcPrismModule.Views;
 
 namespace MyPrismDemo
 {
@@ -24,6 +29,13 @@ namespace MyPrismDemo
         {
             InitializeComponent();
 
+            var manager = (Application.Current as PrismApplication)?.Container.Resolve<IRegionManager>();
+            var contentRegion = "ContentRegion";
+            regionButton1.Click += (sender, args) => manager?.RequestNavigate(contentRegion, nameof(MainRegionView));
+            regionButton2.Click += (sender, args) => manager?.RequestNavigate(contentRegion, nameof(DetailRegionView));
+            vlcRegion.Click += (sender, args) => manager?.RequestNavigate(contentRegion, nameof(MediaPlayerView));
+            monitorRegion.Click += (sender, args) => manager.RequestNavigate(contentRegion, nameof(MonitorView));
         }
+
     }
 }

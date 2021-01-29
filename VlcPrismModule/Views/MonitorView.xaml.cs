@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,15 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyPrismDemo.Views
+namespace VlcPrismModule.Views
 {
     /// <summary>
-    /// BusinessView.xaml 的交互逻辑
+    /// MonitorView.xaml 的交互逻辑
     /// </summary>
-    [DisplayName("业务控件1"), Description("用来拖拽的简单的业务控件")]
-    public partial class BusinessView : UserControl
+    public partial class MonitorView : UserControl
     {
-        public BusinessView()
+        public MonitorView()
         {
             InitializeComponent();
         }

@@ -23,6 +23,13 @@ namespace ReactiveUIDemo.Vlc
     /// </summary>
     public partial class MediaView : UserControl
     {
+        public static readonly RoutedEvent SplitEvent = EventManager.RegisterRoutedEvent("Split",
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MediaView));
+        public event RoutedEventHandler Split
+        {
+            add => AddHandler(SplitEvent, value);
+            remove => RemoveHandler(SplitEvent, value);
+        }
 
         public VlcView ParentView { get; }
 
@@ -47,12 +54,17 @@ namespace ReactiveUIDemo.Vlc
             pauseButton.Click += PauseButtonOnClick;
             fullButton.Click += FullButtonOnClick;
             Unloaded += OnUnloaded;
-            
-        }
+            splitButton.Click += (_, __) =>
+            {
+                RaiseEvent(new RoutedEventArgs(MediaView.SplitEvent));
+            };
 
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
-        {
-            base.OnMouseLeftButtonDown(e);
+            AllowDrop = true;
+
+            MouseMove += (sender, args) =>
+            {
+                if (args.LeftButton != MouseButtonState.Pressed) return;
+            };
         }
 
         private void FullButtonOnClick(object sender, RoutedEventArgs e)
@@ -170,7 +182,7 @@ namespace ReactiveUIDemo.Vlc
 
         private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
+
         }
     }
 }

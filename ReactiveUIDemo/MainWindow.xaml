@@ -12,6 +12,7 @@
         <!--<local:CommandView></local:CommandView>-->
 
         <vlcv:MonitorView></vlcv:MonitorView>
+        <!--<vlcv:MonitorView2></vlcv:MonitorView2>-->
         
     </Grid>
     <!--<StackPanel Orientation="Horizontal">
