@@ -319,35 +319,28 @@
 
             <Style x:Key="VisualTreeViewExpandToggle" TargetType="ToggleButton">
                 <Setter Property="Focusable" Value="False" />
-                <Setter Property="Foreground" Value="#ffffff"></Setter>
+                <Setter Property="Foreground" Value="#20ADC4"></Setter>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ToggleButton">
-                            <Grid  Background="Transparent" >
+                            <Grid  Background="Transparent" Height="12" Width="12">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="CheckStates">
-                                        <VisualState x:Name="Checked">
+                                        <VisualState x:Name="Checked"/>
+                                        <VisualState x:Name="Unchecked" >
                                             <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-                                                                               Storyboard.TargetName="Collapsed">
-                                                    <DiscreteObjectKeyFrame KeyTime="0"
-                                                                            Value="{x:Static Visibility.Hidden}" />
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-                                                                               Storyboard.TargetName="Expanded">
-                                                    <DiscreteObjectKeyFrame KeyTime="0"
-                                                                            Value="{x:Static Visibility.Visible}" />
-                                                </ObjectAnimationUsingKeyFrames>
-                                               
+                                                <DoubleAnimation Storyboard.TargetName="transfrom" Storyboard.TargetProperty="Angle" To="90" Duration="0"></DoubleAnimation>
                                             </Storyboard>
                                         </VisualState>
-                                        <VisualState x:Name="Unchecked" />
                                         <VisualState x:Name="Indeterminate" />
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
 
-                                <Path x:Name="Collapsed" Data="M0,0 L5,6 10,0" Stroke="{TemplateBinding Foreground}"></Path>
-                                <Path x:Name="Expanded" Data="M0,6 L5,0 10,6" Stroke="{TemplateBinding Foreground}" Visibility="Hidden"></Path>
+                                <Path x:Name="Expanded" Data="M3,0 L9,6 3,12" Stroke="{TemplateBinding Foreground}" RenderTransformOrigin=".5 .5" StrokeThickness="1.5" >
+                                    <Path.RenderTransform>
+                                        <RotateTransform x:Name="transfrom" Angle="0" CenterX=".5" CenterY=".5"></RotateTransform>
+                                    </Path.RenderTransform>
+                                </Path>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
@@ -393,11 +386,11 @@
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="SelectionStates">
                                         <VisualState x:Name="Selected">
-                                            <Storyboard>
+                                            <!--<Storyboard>
                                                 <ColorAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" >
                                                     <EasingColorKeyFrame KeyTime="0" Value="#20ADC4" />
                                                 </ColorAnimationUsingKeyFrames>
-                                            </Storyboard>
+                                            </Storyboard>-->
                                         </VisualState>
                                         <VisualState x:Name="Unselected" />
                                         <VisualState x:Name="SelectedInactive" />
@@ -467,7 +460,7 @@
                                             Value="Hidden" />
                                     <Setter Property="Margin" Value="0"></Setter>
                                 </Trigger>
-                                
+
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition Property="HasHeader"
@@ -489,6 +482,14 @@
                                     <Setter TargetName="PART_Header"
                                             Property="MinHeight"
                                             Value="19" />
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="HasItems" Value="False" />
+                                        <Condition Property="IsSelected" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="Bd" Property="Background" Value="#20ADC4"></Setter>
+
                                 </MultiTrigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -529,7 +530,7 @@
                         <TextBlock Text="{Binding Title}"></TextBlock>
                         <HierarchicalDataTemplate.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Title}"></TextBlock>
+                                <TextBlock Text="{Binding Title}" />
                             </DataTemplate>
                         </HierarchicalDataTemplate.ItemTemplate>
                     </HierarchicalDataTemplate>
@@ -537,13 +538,26 @@
             </TreeView>
         </Border>
 
+        <TreeView x:Name="dynamicTreeView" ItemsSource="{Binding Source={StaticResource Schedules2}}" Style="{StaticResource VisualTreeView}">
+            <TreeView.ItemTemplate >
+                <HierarchicalDataTemplate ItemsSource="{Binding Details}">
+                    <TextBlock Text="{Binding Title}"></TextBlock>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}" />
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
         <TreeView ItemsSource="{Binding Source={StaticResource Schedules2}}" Margin="20" ItemContainerStyle="{StaticResource TreeViewItem1}">
             <TreeView.ItemTemplate >
                 <HierarchicalDataTemplate ItemsSource="{Binding Details}" >
                     <TextBlock Text="{Binding Title}" VerticalAlignment="Center"></TextBlock>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Title}" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding Title}" VerticalAlignment="Center" />
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>
