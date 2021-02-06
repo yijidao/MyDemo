@@ -92,6 +92,7 @@
     <Compile Include="ListBoxDemo.xaml.cs">
       <DependentUpon>ListBoxDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListBoxWithImage.cs" />
     <Compile Include="My3DView.xaml.cs">
       <DependentUpon>My3DView.xaml</DependentUpon>
     </Compile>

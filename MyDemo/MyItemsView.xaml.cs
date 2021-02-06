@@ -39,6 +39,8 @@ namespace MyDemo
 
     public class Schedule
     {
+        public DrawingImage ImageSource { get; set; }
+
         public string Title { get; set; }
 
         public string Tag { get; set; }

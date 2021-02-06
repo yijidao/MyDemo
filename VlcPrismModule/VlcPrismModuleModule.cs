@@ -10,13 +10,14 @@ namespace VlcPrismModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            Core.Initialize();
+            //Core.Initialize();
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<MediaPlayerView>();
             containerRegistry.RegisterForNavigation<MonitorView>();
+            containerRegistry.RegisterForNavigation<MonitorView2>();
         }
     }
 }

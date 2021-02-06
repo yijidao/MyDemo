@@ -27,13 +27,35 @@ namespace MyDemo
         public MainWindow()
         {
             InitializeComponent();
+
         }
+
+        public Window ContentHost { get; set; }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var name = (sender as ContentControl).Content.ToString();
             var content = (UserControl)Activator.CreateInstance(Type.GetType($"MyDemo.{name}"));
-            controlContainer.Content = content;
+            //controlContainer.Content = content;
+            if (ContentHost == null)
+            {
+                ContentHost = new Window
+                {
+                    Height = 800,
+                    Width = 1600
+                };
+                ContentHost.Owner = this;
+                ContentHost.Closing += (o, args) =>
+                {
+                    args.Cancel = true;
+                    ContentHost.Hide();
+                };
+            }
+
+            ContentHost.Content = content;
+            ContentHost.Show();
         }
+
+        
     }
 }

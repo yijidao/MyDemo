@@ -65,6 +65,15 @@ namespace ReactiveUIDemo.Vlc
             {
                 if (args.LeftButton != MouseButtonState.Pressed) return;
             };
+
+            playButton.IsVisibleChanged += (sender, args) =>
+            {
+
+            };
+            IsVisibleChanged += (sender, args) =>
+            {
+
+            };
         }
 
         private void FullButtonOnClick(object sender, RoutedEventArgs e)

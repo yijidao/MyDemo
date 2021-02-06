@@ -8,10 +8,12 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LibVLCSharp.Shared;
+using MediaPlayer = LibVLCSharp.Shared.MediaPlayer;
 
 namespace VlcPrismModule.Views
 {
@@ -20,6 +22,12 @@ namespace VlcPrismModule.Views
     /// </summary>
     public partial class MediaPlayerView : UserControl
     {
+
+        static MediaPlayerView()
+        {
+            Core.Initialize();
+        }
+
         public MediaPlayerView()
         {
             InitializeComponent();
@@ -35,6 +43,8 @@ namespace VlcPrismModule.Views
             var libVlc = new LibVLC(enableDebugLogs: true);
             videoView.MediaPlayer = new MediaPlayer(libVlc);
 
+            Background = Brushes.LightBlue;
+
             playButton.Click += (sender, args) =>
             {
                 ValidateIndex();
@@ -44,6 +54,25 @@ namespace VlcPrismModule.Views
                 }
             };
             stopButton.Click += (sender, args) => videoView.MediaPlayer.Stop();
+
+            IsVisibleChanged += (sender, args) =>
+            {
+                if (args.NewValue is bool visible && visible)
+                {
+                    if (videoView != null)
+                    {
+
+                    }
+                }
+            };
+
+            playButton.IsVisibleChanged += (sender, args) =>
+            {
+                if (videoView != null)
+                {
+
+                }
+            };
 
             void ValidateIndex() => index = index >= source.Length ? 0 : index;
 

@@ -34,7 +34,7 @@ namespace MyPrismDemo
             regionButton1.Click += (sender, args) => manager?.RequestNavigate(contentRegion, nameof(MainRegionView));
             regionButton2.Click += (sender, args) => manager?.RequestNavigate(contentRegion, nameof(DetailRegionView));
             vlcRegion.Click += (sender, args) => manager?.RequestNavigate(contentRegion, nameof(MediaPlayerView));
-            monitorRegion.Click += (sender, args) => manager.RequestNavigate(contentRegion, nameof(MonitorView));
+            monitorRegion.Click += (sender, args) => manager?.RequestNavigate(contentRegion, nameof(MonitorView));
         }
 
     }

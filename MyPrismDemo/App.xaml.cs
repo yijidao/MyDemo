@@ -25,7 +25,7 @@ namespace MyPrismDemo
             containerRegistry.RegisterForNavigation<DetailRegionView>();
         }
 
-        protected override Window CreateShell() => new MainWindow();
+        protected override Window CreateShell() => new MainWindow2(); //new MainWindow();
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {

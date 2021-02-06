@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LibVLCSharp.WPF, Version=3.4.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Share\LibVLCSharp.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -54,6 +58,9 @@
     </Compile>
     <Compile Include="Views\MonitorView.xaml.cs">
       <DependentUpon>MonitorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MonitorView2.xaml.cs">
+      <DependentUpon>MonitorView2.xaml</DependentUpon>
     </Compile>
     <Compile Include="VlcPrismModuleModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -93,13 +100,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MonitorView2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ViewA.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="LibVLCSharp.WPF">
+    <PackageReference Include="LibVLCSharp">
       <Version>3.4.9</Version>
     </PackageReference>
     <PackageReference Include="Prism.Unity">

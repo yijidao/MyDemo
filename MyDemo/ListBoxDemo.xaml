@@ -613,7 +613,210 @@
 
         </Style>
 
+        <Style TargetType="ListBoxItem" x:Key="CctvListBoxItem">
+            <Setter Property="SnapsToDevicePixels" Value="True"></Setter>
+            <!--<Setter Property="Foreground" Value="#13F1FF"></Setter>-->
+            <!--<Setter Property="Background" Value="#004D68"></Setter>-->
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Height" Value="48"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Foreground" Value="#ffffff"></Setter>
+            <!--<Setter Property="Width" Value="256"></Setter>-->
 
+            <!--<Setter Property="Padding" Value="12 0"></Setter>-->
+            <!--<Setter Property="Margin" Value="0 0 2 0"></Setter>-->
+            <!--<Setter Property="MinWidth" Value="100"></Setter>-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem" >
+                        <Grid  Margin="5" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="SelectedUnfocused" >
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backBorder" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mark" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backBorder" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mark" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.ColumnSpan="2" x:Name="backBorder" Visibility="Hidden">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop  Color="#7313FFF5" Offset=".3"/>
+                                        <GradientStop Color="#4A13FFF5" Offset=".7"/>
+                                        <GradientStop Color="#2613FFF5" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Grid Margin="0 0 4 0" Height="28" x:Name="mark" Visibility="Hidden">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Path Height="3" Width="3" Data="M 0,0 L0,3 3,3 Z" Fill="#13FFF5"></Path>
+                                <Border Grid.Row="1" Width="3"  Background="#13FFF5"></Border>
+                                <Path Grid.Row="2" Height="3" Width="3" Data="M0,0 L0,3 3,0 Z" Fill="#13FFF5"></Path>
+                            </Grid>
+                            <ContentPresenter Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" Margin="{TemplateBinding Padding}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ListBox" x:Key="CctvListBox">
+            <Setter Property="Background" Value="Transparent" />
+            <!--<Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate >
+                        <StackPanel Orientation="Horizontal" ></StackPanel>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate >
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"   Style="{StaticResource CustomScrollViewerStyle}" >
+                            <ItemsPresenter SnapsToDevicePixels="True" Width="{TemplateBinding Width}"/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource CctvListBoxItem}" />
+
+        </Style>
+
+        <Path x:Key="HomePath" Data="M717.063966 257.317333V63.481941h176.717566v193.835392H717.063966z m0 243.999023V314.420083h176.717566v186.896273H717.063966z m176.717566 230.310762H717.063966V558.62908h176.717566v172.998038z m0 234.620214H717.063966V788.579887h176.717566v177.667445zM341.921592 501.316356V63.481941h321.839142v437.834415H341.921592z m321.839142 464.930976H341.921592V558.62908h321.839142v407.618252zM118.949899 257.317333V63.481941h165.608975v193.835392H118.949899z m0 243.999023V314.420083h165.608975v186.896273H118.949899z m165.598977 230.310762H118.949899V558.62908h165.608975v172.998038zM118.949899 966.247332V788.579887h165.608975v177.667445H118.949899zM872.994171 0.129983H142.666888C69.056233 0.129983 57.047758 4.419439 57.047758 78.030094v867.08992c0 73.610655 12.008475 78.879986 85.61913 78.879986h730.337281c73.610655 0 80.769746-5.269331 80.769746-78.879986V78.030094c0-73.610655-7.16909-77.90011-80.779744-77.900111z"></Path>
+        <Path x:Key="CategoryPath" Data="M839.47 330.74c26.6 0 28.93 2.15 29.13 24.9l0.02 5.63c0 26.04-0.96 27.86-23.54 27.99l-199.93 0.01c-28.65 0-31.31 0.03-31.31-28 0-28.65 3.27-30.53 31.31-30.53h194.32z m-449.48 0c28.65 0 28.19 2.49 28.19 30.53 0 26.04 0.4 27.86-22.48 27.99l-199.21 0.01c-26.74 0-27.61 0.03-27.6-22.76v-5.24c0-28.65-0.44-30.53 27.6-30.53h193.5zM868.6 625.71l0.02 5.58c0 26.04-0.96 29.09-23.54 29.4l-199.93 0.03c-28.65 0-31.31-1.39-31.31-29.43 0-24.56 2.4-27.34 20.74-27.64l204.89-0.03c26.6 0 28.93-0.32 29.13 22.09z m-450.42 5.58c0 26.04 0.4 29.09-22.48 29.4l-199.21 0.03c-26.6 0-27.6-1.2-27.6-23.82v-5.61c0-24.83-0.33-27.4 17.83-27.65l203.27-0.02c28.65 0 28.19-0.37 28.19 27.67z m182.86-512.61l-45.1 20.11c-12.8 5.49-26.21 8.53-39.62 8.53-14.02 0-28.04-3.05-40.84-9.14l-35.35-16.46C387.1 97.34 327.98 84.54 269.46 84.54H64.77v791.94h221.14c76.19 0 152.99 17.07 221.87 49.37l8.53 4.27 13.41-5.49c74.97-32.3 154.21-48.15 235.28-48.15h196.59V83.94M269.45 20.55c73.08 0 145.28 16.02 211.5 46.93l35.35 16.46 45.1-20.11c64-28.65 133.49-43.28 203.58-43.28h210.29c26.82 0 48.76 21.94 48.76 48.76v827.73c0 26.82-21.94 48.76-48.76 48.76h-210.9c-67.66 0-134.7 14.02-196.88 40.23l-33.52 14.02c-6.1 2.44-12.19 3.66-18.9 3.66-7.31 0-14.02-1.83-20.72-4.88l-28.65-13.41c-56.08-26.21-118.25-40.23-180.42-40.23H48.81c-26.82 0-48.76-21.94-48.76-48.76V69.31c0-26.82 21.94-48.76 48.76-48.76h220.64z"></Path>
+        <Path x:Key="PlayPath" Data="M403.33 635.83V372.11L621.66 504 403.39 635.83h-0.06z m-15.05-345.45a31.2 31.2 0 0 0-31.19-0.42 31.385 31.385 0 0 0-15.72 27.14v373.73c0 11.3 6.04 21.58 15.72 27.2a31.152 31.152 0 0 0 31.19-0.42l309.48-186.9a31.306 31.306 0 0 0 14.98-26.72c0-10.91-5.68-21.03-14.98-26.72l-309.42-186.9h-0.06z m567.64 509.8c0 35.36-30.52 63.95-68.3 63.95H136.71c-37.78 0-68.3-28.59-68.3-63.95V224.14c0-35.36 30.52-64.01 68.3-64.01h750.85c37.78 0 68.3 28.65 68.3 64.07v575.98h0.06zM887.61 96.11h-750.9C61.33 96.11 0.1 153.54 0.1 224.14v576.04c0 70.6 61.23 127.96 136.61 127.96h750.85c75.37 0 136.55-57.36 136.55-127.96V224.14c0.05-70.66-61.12-128.03-136.5-128.03z"></Path>
+        <Path x:Key="ControlPath" Data="M374.5 341.46c19.2 0 32 12.8 32 32s-12.8 32-32 32h-176c-19.2 0-32-12.8-32-32s12.8-32 32-32h176z m585.6 37.33v310.4l-137.6-102.4v-105.6l137.6-102.4z m-201.6 441.6c0 3.2-6.4 9.6-12.8 9.6H76.9c-6.4 0-12.8-3.2-12.8-9.6v-576c0-3.2 6.4-9.6 12.8-9.6h668.8c6.4 0 12.8 3.2 12.8 9.6v576z m246.4-537.6c-9.6-6.4-22.4-3.2-32 3.2l-150.4 112v-153.6c0-41.6-35.2-73.6-76.8-73.6H76.9c-41.6 0-76.8 32-76.8 73.6v576c0 41.6 35.2 73.6 76.8 73.6h668.8c41.6 0 76.8-32 76.8-73.6v-156.8l150.4 112c6.4 3.2 12.8 6.4 19.2 6.4s9.6 0 12.8-3.2c9.6-6.4 19.2-16 19.2-28.8v-438.4c0-12.8-6.4-22.4-19.2-28.8z"></Path>
+        <Path x:Key="CheckPath" Data="M558.288219 516.864287l102.185032-159.556627c37.61449 37.61449 60.591124 89.846839 60.591124 148.358268 0 119.102553-96.115921 215.218474-215.218474 215.218474-117.012859 0-213.12878-96.115921-213.128779-213.12878s96.115921-213.12878 213.128779-213.12878c37.61449 0 73.129288 10.448469 104.474697 27.16602L504.106156 485.608866c-8.948689 13.797979-5.009266 32.235278 8.788713 41.173969 0.429937 0.279959 0.869873 0.549919 1.319807 0.809881 15.197774 8.778714 34.614929 4.049407 44.073543-10.728429zM512.124982 961.169204c-248.653576 0-449.244193-200.590617-449.244193-449.244193S263.471406 62.690817 512.124982 62.690817c81.488063 0 158.796739 22.986633 225.666943 60.591124l-91.936533 144.17888c-39.704184-22.986633-87.757145-37.61449-137.909798-37.61449-152.537656 0-275.809598 123.281941-275.809598 275.809598-2.089694 152.537656 121.192247 277.899292 273.719904 277.899292s277.899292-125.371635 277.899292-277.899292c0-79.398369-33.435102-150.447962-87.757145-200.590616l94.026227-146.268574c104.474696 81.488063 171.334902 208.949392 171.334902 353.128272 0.009999 248.653576-200.590617 449.244193-449.234194 449.244193z m0-961.169204c-282.07868 0-511.925011 229.846331-511.925011 511.925011s229.846331 511.925011 511.925011 511.925011 511.925011-229.846331 511.925011-511.925011-229.846331-511.925011-511.925011-511.925011z"></Path>
+
+        <DrawingImage x:Key="Home">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="#05D0F4">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M717.063966 257.317333V63.481941h176.717566v193.835392H717.063966z m0 243.999023V314.420083h176.717566v186.896273H717.063966z m176.717566 230.310762H717.063966V558.62908h176.717566v172.998038z m0 234.620214H717.063966V788.579887h176.717566v177.667445zM341.921592 501.316356V63.481941h321.839142v437.834415H341.921592z m321.839142 464.930976H341.921592V558.62908h321.839142v407.618252zM118.949899 257.317333V63.481941h165.608975v193.835392H118.949899z m0 243.999023V314.420083h165.608975v186.896273H118.949899z m165.598977 230.310762H118.949899V558.62908h165.608975v172.998038zM118.949899 966.247332V788.579887h165.608975v177.667445H118.949899zM872.994171 0.129983H142.666888C69.056233 0.129983 57.047758 4.419439 57.047758 78.030094v867.08992c0 73.610655 12.008475 78.879986 85.61913 78.879986h730.337281c73.610655 0 80.769746-5.269331 80.769746-78.879986V78.030094c0-73.610655-7.16909-77.90011-80.779744-77.900111z"></PathGeometry>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="HomeSelected">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="#13FFF5 ">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M717.063966 257.317333V63.481941h176.717566v193.835392H717.063966z m0 243.999023V314.420083h176.717566v186.896273H717.063966z m176.717566 230.310762H717.063966V558.62908h176.717566v172.998038z m0 234.620214H717.063966V788.579887h176.717566v177.667445zM341.921592 501.316356V63.481941h321.839142v437.834415H341.921592z m321.839142 464.930976H341.921592V558.62908h321.839142v407.618252zM118.949899 257.317333V63.481941h165.608975v193.835392H118.949899z m0 243.999023V314.420083h165.608975v186.896273H118.949899z m165.598977 230.310762H118.949899V558.62908h165.608975v172.998038zM118.949899 966.247332V788.579887h165.608975v177.667445H118.949899zM872.994171 0.129983H142.666888C69.056233 0.129983 57.047758 4.419439 57.047758 78.030094v867.08992c0 73.610655 12.008475 78.879986 85.61913 78.879986h730.337281c73.610655 0 80.769746-5.269331 80.769746-78.879986V78.030094c0-73.610655-7.16909-77.90011-80.779744-77.900111z"></PathGeometry>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="Category">
+            <DrawingImage.Drawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M839.47 330.74c26.6 0 28.93 2.15 29.13 24.9l0.02 5.63c0 26.04-0.96 27.86-23.54 27.99l-199.93 0.01c-28.65 0-31.31 0.03-31.31-28 0-28.65 3.27-30.53 31.31-30.53h194.32z m-449.48 0c28.65 0 28.19 2.49 28.19 30.53 0 26.04 0.4 27.86-22.48 27.99l-199.21 0.01c-26.74 0-27.61 0.03-27.6-22.76v-5.24c0-28.65-0.44-30.53 27.6-30.53h193.5zM868.6 625.71l0.02 5.58c0 26.04-0.96 29.09-23.54 29.4l-199.93 0.03c-28.65 0-31.31-1.39-31.31-29.43 0-24.56 2.4-27.34 20.74-27.64l204.89-0.03c26.6 0 28.93-0.32 29.13 22.09z m-450.42 5.58c0 26.04 0.4 29.09-22.48 29.4l-199.21 0.03c-26.6 0-27.6-1.2-27.6-23.82v-5.61c0-24.83-0.33-27.4 17.83-27.65l203.27-0.02c28.65 0 28.19-0.37 28.19 27.67z m182.86-512.61l-45.1 20.11c-12.8 5.49-26.21 8.53-39.62 8.53-14.02 0-28.04-3.05-40.84-9.14l-35.35-16.46C387.1 97.34 327.98 84.54 269.46 84.54H64.77v791.94h221.14c76.19 0 152.99 17.07 221.87 49.37l8.53 4.27 13.41-5.49c74.97-32.3 154.21-48.15 235.28-48.15h196.59V83.94M269.45 20.55c73.08 0 145.28 16.02 211.5 46.93l35.35 16.46 45.1-20.11c64-28.65 133.49-43.28 203.58-43.28h210.29c26.82 0 48.76 21.94 48.76 48.76v827.73c0 26.82-21.94 48.76-48.76 48.76h-210.9c-67.66 0-134.7 14.02-196.88 40.23l-33.52 14.02c-6.1 2.44-12.19 3.66-18.9 3.66-7.31 0-14.02-1.83-20.72-4.88l-28.65-13.41c-56.08-26.21-118.25-40.23-180.42-40.23H48.81c-26.82 0-48.76-21.94-48.76-48.76V69.31c0-26.82 21.94-48.76 48.76-48.76h220.64z"></PathGeometry>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="Play">
+            <DrawingImage.Drawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M403.33 635.83V372.11L621.66 504 403.39 635.83h-0.06z m-15.05-345.45a31.2 31.2 0 0 0-31.19-0.42 31.385 31.385 0 0 0-15.72 27.14v373.73c0 11.3 6.04 21.58 15.72 27.2a31.152 31.152 0 0 0 31.19-0.42l309.48-186.9a31.306 31.306 0 0 0 14.98-26.72c0-10.91-5.68-21.03-14.98-26.72l-309.42-186.9h-0.06z m567.64 509.8c0 35.36-30.52 63.95-68.3 63.95H136.71c-37.78 0-68.3-28.59-68.3-63.95V224.14c0-35.36 30.52-64.01 68.3-64.01h750.85c37.78 0 68.3 28.65 68.3 64.07v575.98h0.06zM887.61 96.11h-750.9C61.33 96.11 0.1 153.54 0.1 224.14v576.04c0 70.6 61.23 127.96 136.61 127.96h750.85c75.37 0 136.55-57.36 136.55-127.96V224.14c0.05-70.66-61.12-128.03-136.5-128.03z"></PathGeometry>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="Control">
+            <DrawingImage.Drawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M374.5 341.46c19.2 0 32 12.8 32 32s-12.8 32-32 32h-176c-19.2 0-32-12.8-32-32s12.8-32 32-32h176z m585.6 37.33v310.4l-137.6-102.4v-105.6l137.6-102.4z m-201.6 441.6c0 3.2-6.4 9.6-12.8 9.6H76.9c-6.4 0-12.8-3.2-12.8-9.6v-576c0-3.2 6.4-9.6 12.8-9.6h668.8c6.4 0 12.8 3.2 12.8 9.6v576z m246.4-537.6c-9.6-6.4-22.4-3.2-32 3.2l-150.4 112v-153.6c0-41.6-35.2-73.6-76.8-73.6H76.9c-41.6 0-76.8 32-76.8 73.6v576c0 41.6 35.2 73.6 76.8 73.6h668.8c41.6 0 76.8-32 76.8-73.6v-156.8l150.4 112c6.4 3.2 12.8 6.4 19.2 6.4s9.6 0 12.8-3.2c9.6-6.4 19.2-16 19.2-28.8v-438.4c0-12.8-6.4-22.4-19.2-28.8z"></PathGeometry>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="Check">
+            <DrawingImage.Drawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M558.288219 516.864287l102.185032-159.556627c37.61449 37.61449 60.591124 89.846839 60.591124 148.358268 0 119.102553-96.115921 215.218474-215.218474 215.218474-117.012859 0-213.12878-96.115921-213.128779-213.12878s96.115921-213.12878 213.128779-213.12878c37.61449 0 73.129288 10.448469 104.474697 27.16602L504.106156 485.608866c-8.948689 13.797979-5.009266 32.235278 8.788713 41.173969 0.429937 0.279959 0.869873 0.549919 1.319807 0.809881 15.197774 8.778714 34.614929 4.049407 44.073543-10.728429zM512.124982 961.169204c-248.653576 0-449.244193-200.590617-449.244193-449.244193S263.471406 62.690817 512.124982 62.690817c81.488063 0 158.796739 22.986633 225.666943 60.591124l-91.936533 144.17888c-39.704184-22.986633-87.757145-37.61449-137.909798-37.61449-152.537656 0-275.809598 123.281941-275.809598 275.809598-2.089694 152.537656 121.192247 277.899292 273.719904 277.899292s277.899292-125.371635 277.899292-277.899292c0-79.398369-33.435102-150.447962-87.757145-200.590616l94.026227-146.268574c104.474696 81.488063 171.334902 208.949392 171.334902 353.128272 0.009999 248.653576-200.590617 449.244193-449.234194 449.244193z m0-961.169204c-282.07868 0-511.925011 229.846331-511.925011 511.925011s229.846331 511.925011 511.925011 511.925011 511.925011-229.846331 511.925011-511.925011-229.846331-511.925011-511.925011-511.925011z"></PathGeometry>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <Style TargetType="ToggleButton" x:Key="ExpandButton">
+            <Setter Property="Width" Value="16"></Setter>
+            <Setter Property="Height" Value="76"></Setter>
+            <Setter Property="Focusable" Value="False"></Setter>
+            <Setter Property="SnapsToDevicePixels" Value="True"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid SnapsToDevicePixels="True">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard >
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="arrowTransform" Storyboard.TargetProperty="Angle" >
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="0"></EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="arrowTransform" Storyboard.TargetProperty="Angle" >
+                                                <EasingDoubleKeyFrame  KeyTime="0" Value="180"></EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Indeterminate"></VisualState>
+                                </VisualStateGroup>
+
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Path x:Name="back" Width="16" Height="76" Data="M0 0 L16 6 L16 70 L0 76 Z" Fill="#0396B0"></Path>
+                            <Path x:Name="arrow" Height="16" Width="16" Data="M11 2 L5 8 L11 14" Stroke="#FFFFFF" StrokeThickness="1" RenderTransformOrigin=".5 .5">
+                                <Path.RenderTransform>
+                                    <RotateTransform x:Name="arrowTransform" Angle="180" CenterX=".5" CenterY=".5"></RotateTransform>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <StackPanel Background="#061932"   >
@@ -647,5 +850,75 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition  Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ListBox ItemsSource="{Binding Source={StaticResource Datas}}"
+                     Style="{StaticResource CctvListBox}" 
+                     Margin="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid  >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{StaticResource Home}" Height="18" Width="18" Margin="8 0">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}" Value="True">
+                                                <Setter Property="Source" Value="{StaticResource HomeSelected}"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <TextBlock x:Name="title" Grid.Column="1" Text="{Binding Title}" Width="0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}" Value="True">
+                                                <Setter Property="Foreground" Value="#05D0F4 " />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=expandButton, Path=IsChecked}" Value="True">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="Width" BeginTime="0">
+                                                                <EasingDoubleKeyFrame  KeyTime="0:0:0.18" Value="200"></EasingDoubleKeyFrame>
+                                                            </DoubleAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="Width" BeginTime="0">
+                                                                <EasingDoubleKeyFrame  KeyTime="0:0:0.15" Value="0"></EasingDoubleKeyFrame>
+                                                            </DoubleAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Border Grid.Column="1" BorderBrush="#0396B0" BorderThickness="2 0 0 0">
+
+            </Border>
+            <ToggleButton x:Name="expandButton" Grid.Column="1" Style="{StaticResource ExpandButton}" HorizontalAlignment="Left">
+
+
+            </ToggleButton>
+        </Grid>
     </StackPanel>
 </UserControl>
