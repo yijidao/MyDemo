@@ -24,11 +24,11 @@ namespace ReactiveUIDemo
         {
             InitializeComponent();
 
-            _window = new Window() { Width = 1800, Height = 900 };
+            //_window = new Window() { Width = 1800, Height = 900 };
             Loaded += OnLoaded;
         }
 
-        private Window _window;
+        //private Window _window;
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -43,11 +43,13 @@ namespace ReactiveUIDemo
                 };
                 btn.Click += (o, args) =>
                 {
-                    _window.Content = Activator.CreateInstance(demoType);
-                    if (!_window.IsVisible)
-                    {
-                        _window.Show();
-                    }
+                    //_window.Content = Activator.CreateInstance(demoType);
+                    //if (!_window.IsVisible)
+                    //{
+                    //    _window.Show();
+                    //}
+                    var window = new Window { Width = 1800, Height = 900, Content = Activator.CreateInstance(demoType) };
+                    window.Show();
                 };
                 buttonContainer.Children.Add(btn);
             }

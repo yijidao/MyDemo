@@ -12,20 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ReactiveUIDemo.ViewModels;
 
 namespace ReactiveUIDemo.Views
 {
     /// <summary>
-    /// Demo1View.xaml 的交互逻辑
+    /// PollMonitorView.xaml 的交互逻辑
     /// </summary>
-    public partial class Demo1View : UserControl, IDemo
+    public partial class PollMonitorView : UserControl, IDemo
     {
-        public Demo1View()
+        public PollMonitorView()
         {
             InitializeComponent();
-
-            DataContext = new Demo1ViewModel();
         }
     }
 }
