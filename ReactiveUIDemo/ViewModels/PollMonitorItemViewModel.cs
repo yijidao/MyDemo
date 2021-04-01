@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using ReactiveUI;
@@ -23,5 +24,17 @@ namespace ReactiveUIDemo.ViewModels
             get => _name;
             set => this.RaiseAndSetIfChanged(ref _name, value);
         }
+
+        public PollMonitorItemViewModel()
+        {
+            ChangeCommand = ReactiveCommand.Create(ChangeSelected);
+        }
+
+        private void ChangeSelected() => Selected = !Selected;
+
+        public ReactiveCommand<Unit, Unit> ChangeCommand { get; }
+
+        
+
     }
 }
