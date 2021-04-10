@@ -10,6 +10,7 @@ using LibVLCSharp.Shared;
 using Prism.Ioc;
 using Prism.Unity;
 using ReactiveUI;
+using ReactiveUIDemo.ViewModels;
 using Splat;
 
 namespace ReactiveUIDemo
@@ -30,6 +31,7 @@ namespace ReactiveUIDemo
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<IScreen, RouteViewModel>();
         }
 
         protected override Window CreateShell() => new MainWindow2();

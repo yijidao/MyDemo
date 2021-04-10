@@ -18,7 +18,7 @@ namespace ReactiveUIDemo.Views
     /// <summary>
     /// RouteView.xaml 的交互逻辑
     /// </summary>
-    public partial class RouteView : UserControl
+    public partial class RouteView : UserControl, IDemo
     {
         public RouteView()
         {

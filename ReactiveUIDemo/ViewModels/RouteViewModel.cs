@@ -5,6 +5,7 @@ using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Prism.Ioc;
 using ReactiveUI;
 
 namespace ReactiveUIDemo.ViewModels
@@ -13,14 +14,15 @@ namespace ReactiveUIDemo.ViewModels
     {
         public RoutingState Router { get; }
 
-        public ReactiveCommand<Unit, Unit> GoNextCommand { get; }
+        public ReactiveCommand<Unit, IRoutableViewModel> GoNextCommand { get; }
 
         public ReactiveCommand<Unit, Unit> GoBackCommand { get; }
 
         public RouteViewModel()
         {
+            
             Router = new RoutingState();
-            GoNextCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new FirstViewModel()));
+            GoNextCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(ContainerLocator.Current.Resolve<FirstViewModel>()));
             GoBackCommand = Router.NavigateBack;
         }
     }

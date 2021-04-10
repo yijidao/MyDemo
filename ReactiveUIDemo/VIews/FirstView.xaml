@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance vm:FirstViewModel}">
-    <Grid>
+    <Grid Background="Aqua">
         <TextBlock Text="{Binding UrlPathSegment}" FontSize="14" />
     </Grid>
 </UserControl>

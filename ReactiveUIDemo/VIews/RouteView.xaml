@@ -4,12 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ReactiveUIDemo.Views"
+             xmlns:rui="http://reactiveui.net"
+             xmlns:vm="clr-namespace:ReactiveUIDemo.ViewModels"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance vm:RouteViewModel}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <rui:RoutedViewHost x:Name="routedViewHost" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="15">
+            <Button Content="Go Next" Command="{Binding GoNextCommand}"></Button>
+            <Button Content="Go Back" Margin="5 0 0 0" Command="{Binding GoBackCommand}"></Button>
+        </StackPanel>
     </Grid>
 </UserControl>
