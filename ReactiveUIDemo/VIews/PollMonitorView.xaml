@@ -101,6 +101,11 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="2">
             <TextBox Width="100" Text="{Binding Count}"></TextBox>
             <Button Content="加载" Command="{Binding TestCommand}"></Button>
+            <Button Content="添加" Command="{Binding AddCommand}"></Button>
+            <Button Content="移除" Command="{Binding RemoveCommand}"></Button>
+            <Button Content="清空" Command="{Binding ClearCommand}"></Button>
+            <Button Content="前移" Command="{Binding MoveForwardCommand}"></Button>
+            <Button Content="后移" Command="{Binding MoveBackCommand}"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

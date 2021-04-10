@@ -31,7 +31,7 @@
 
     <Grid>
         <vlc:VideoView x:Name="videoView" Style="{StaticResource VideoViewStyle}" MouseLeftButtonDown="VideoView_OnMouseLeftButtonDown">
-
+            
         </vlc:VideoView>
     </Grid>
 </UserControl>

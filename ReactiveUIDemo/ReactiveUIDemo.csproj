@@ -4,6 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net472</TargetFramework>
     <UseWPF>true</UseWPF>
+    <LangVersion>8</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,9 +14,9 @@
     <PackageReference Include="NuGet.Protocol" Version="5.7.0" />
     <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
     <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
-    <PackageReference Include="ReactiveUI.Events.WPF" Version="13.0.38" />
-    <PackageReference Include="ReactiveUI.Fody" Version="13.0.38" />
-    <PackageReference Include="ReactiveUI.WPF" Version="13.0.38" />
+    <PackageReference Include="ReactiveUI.Events.WPF" Version="12.1.5" />
+    <PackageReference Include="ReactiveUI.Fody" Version="12.1.5" />
+    <PackageReference Include="ReactiveUI.WPF" Version="12.1.5" />
     <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.12" />
   </ItemGroup>
 

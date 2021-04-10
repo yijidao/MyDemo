@@ -63,6 +63,12 @@ namespace ReactiveUIDemo.ViewModels
                 });
 
             TestCommand = ReactiveCommand.Create(LoadData);
+            ClearCommand = ReactiveCommand.Create(Clear);
+            AddCommand = ReactiveCommand.Create(Add);
+            RemoveCommand = ReactiveCommand.Create(Remove);
+            MoveForwardCommand = ReactiveCommand.Create(MoveForward);
+            MoveBackCommand = ReactiveCommand.Create(MoveBack);
+
         }
 
         private void LoadData()
@@ -85,6 +91,33 @@ namespace ReactiveUIDemo.ViewModels
                 MoreContentVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
 
+        private void Clear()
+        {
+            PollMonitorList.Clear();
+        }
+
+        private void Add()
+        {
+            var c = PollMonitorList.Items.Count() + 1;
+            PollMonitorList.Add(new PollMonitorItemViewModel{Name = $"六字测试模块{c}"});
+        }
+
+        private void Remove()
+        {
+            if (PollMonitorList.Count == 0) return;
+            PollMonitorList.RemoveAt(0);
+        }
+
+        private void MoveForward()
+        {
+
+        }
+
+        private void MoveBack()
+        {
+
+        }
+
 
         #region 测试代码
 
@@ -96,6 +129,16 @@ namespace ReactiveUIDemo.ViewModels
         }
 
         public ReactiveCommand<Unit, Unit> TestCommand { get; }
+
+        public ReactiveCommand<Unit, Unit> ClearCommand { get; }
+
+        public ReactiveCommand<Unit, Unit> AddCommand { get; }
+
+        public ReactiveCommand<Unit, Unit> RemoveCommand { get; }
+
+        public ReactiveCommand<Unit, Unit> MoveForwardCommand { get; }
+
+        public ReactiveCommand<Unit, Unit> MoveBackCommand { get; }
 
         #endregion
     }

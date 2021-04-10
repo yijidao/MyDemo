@@ -109,7 +109,7 @@
 
                             <Path x:Name="path1" Width="8" Height="8" Data="M0 0 L0 8 L8 8Z" HorizontalAlignment="Right" Fill="{TemplateBinding Background}"></Path>
                             <Path Grid.Row="2" x:Name="path2" Width="8" Height="8" Data="M0 0 L8 0 L8 8Z" HorizontalAlignment="Left" Fill="{TemplateBinding Background}"></Path>
-                            
+
                             <Border x:Name="topBorder" Margin="0 0 8 0"  Background="{TemplateBinding Background}" BorderThickness="0" ></Border>
                             <Border Grid.Row="1" x:Name="centerBorder"  Background="{TemplateBinding Background}" BorderThickness="0" />
                             <Border Grid.Row="2" x:Name="bottomBorder" Margin="8 0 0 0" Background="{TemplateBinding Background}" BorderThickness="0" ></Border>
@@ -130,13 +130,104 @@
                 </Setter.Value>
             </Setter>
         </Style>
-            
+
+        <!--<svg t="1617329141520" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8893" width="200" height="200">
+            <path d="M0.09999 71.772991l304.070306 304.070306 71.683-71.683L71.772991 0.089991 0.09999 71.772991zM949.397285 0.699932L0.709931 949.397285l74.602714 74.602715L512.349966 586.862689l437.047319 437.087316 74.602715-74.512723L586.872688 512.349966l437.087316-437.04732L949.397285 0.699932z" fill="#606060" p-id="8894"></path>
+        </svg>-->
+
+        <DrawingImage x:Key="CloseSourceStyle">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="#ffffff">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M0.09999 71.772991l304.070306 304.070306 71.683-71.683L71.772991 0.089991 0.09999 71.772991zM949.397285 0.699932L0.709931 949.397285l74.602714 74.602715L512.349966 586.862689l437.047319 437.087316 74.602715-74.512723L586.872688 512.349966l437.087316-437.04732L949.397285 0.699932z"></PathGeometry>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <Style x:Key="Btn4" TargetType="Button">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Foreground" Value="#ffffff"></Setter>
+            <Setter Property="Padding" Value="0 0"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Height" Value="24"></Setter>
+            <Setter Property="Width" Value="24"></Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+
+                        <Grid Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" Margin="{TemplateBinding Padding}" Background="{TemplateBinding Background}" x:Name="grid1">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0" />
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="grid1" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#0a3b5a"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <!--<ColorAnimationUsingKeyFrames Storyboard.TargetName="centerBorder" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#0a3b5a"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="bottomBorder" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#0a3b5a"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path1" Storyboard.TargetProperty="Fill.(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#0a3b5a"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="path2" Storyboard.TargetProperty="Fill.(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#0a3b5a"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#ffffff"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>-->
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value=".85"></EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <!--<Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value=".65"></EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#ffffff"></EasingColorKeyFrame>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>-->
+                                    </VisualState>
+                                </VisualStateGroup>
+
+                            </VisualStateManager.VisualStateGroups>
+                           
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Content">
+                <Setter.Value>
+                    <Image Width="14" Height="14" Source="{StaticResource CloseSourceStyle}"></Image>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
 
-    <Canvas Background="#061932">
+    <StackPanel Background="#061932">
         <Button Content="发布信息11111111111111111222222222222" Style="{StaticResource btn3}" FontSize="14" IsEnabled="False" Focusable="True" ></Button>
         <Button Content="发布信息11111111111111111222222222222" Style="{StaticResource btn3}" FontSize="14" IsDefault="True" Canvas.Top="100"  Focusable="True" ></Button>
         <Button Content="发布信息11111111111111111222222222222" Style="{StaticResource btn3}" FontSize="14"  Canvas.Top="50" ></Button>
-
-    </Canvas>
+        <Button Style="{StaticResource Btn4}"  ></Button>
+    </StackPanel>
 </UserControl>
