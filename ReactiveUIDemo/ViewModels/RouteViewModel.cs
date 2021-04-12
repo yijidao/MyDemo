@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Ioc;
 using ReactiveUI;
+using ReactiveUIDemo.Views;
+using Splat;
 
 namespace ReactiveUIDemo.ViewModels
 {
@@ -20,7 +22,8 @@ namespace ReactiveUIDemo.ViewModels
 
         public RouteViewModel()
         {
-            
+            Locator.CurrentMutable.Register(() => new FirstView(), typeof(IViewFor<FirstViewModel>));
+
             Router = new RoutingState();
             GoNextCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(ContainerLocator.Current.Resolve<FirstViewModel>()));
             GoBackCommand = Router.NavigateBack;
