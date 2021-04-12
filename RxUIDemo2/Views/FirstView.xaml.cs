@@ -21,6 +21,7 @@ namespace RxUIDemo2.Views
         public FirstView()
         {
             InitializeComponent();
+            
         }
     }
 }

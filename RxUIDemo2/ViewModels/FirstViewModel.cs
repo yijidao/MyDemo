@@ -11,7 +11,7 @@ namespace RxUIDemo2.ViewModels
         public string? UrlPathSegment { get; } = "first";
         public IScreen HostScreen { get; }
 
-        public FirstViewModel(IScreen screen)
+        public FirstViewModel(IScreen screen = null)
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
         }

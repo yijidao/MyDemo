@@ -25,12 +25,15 @@ namespace RxUIDemo2.Views
         {
             InitializeComponent();
             ViewModel = new MainViewModel();
-
+            this.Events().Loaded.InvokeCommand(this, x => x.ViewModel.LoadedCommand);
             this.WhenActivated(d =>
             {
+                
                 this.OneWayBind(ViewModel, vm => vm.GoBackCommand, v => v.goBack.Command).DisposeWith(d);
                 this.OneWayBind(ViewModel, vm => vm.GoNextCommand, v => v.goNext.Command).DisposeWith(d);
                 this.OneWayBind(ViewModel, vm => vm.Router, v => v.routedViewHost.Router).DisposeWith(d);
+
+                
             });
         }
     }
