@@ -28,7 +28,7 @@ namespace RxUIDemo2.ViewModels
             LoadedCommand = ReactiveCommand.Create<RoutedEventArgs>(e =>
             {
 
-            })
+            });
 
             //LoadedCommand = ReactiveCommand.Create<RoutedEventArgs>(e =>
             //{
