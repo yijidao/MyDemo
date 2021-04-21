@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ClassLibrary1;
 using LibVLCSharp.Shared;
 using MediaPlayer = LibVLCSharp.Shared.MediaPlayer;
 
@@ -32,8 +31,6 @@ namespace VlcPrismModule.Views
         public MediaPlayerView()
         {
             InitializeComponent();
-            var class1 = new Class1();
-            class1.Test();
             var source = new[]
             {
                 "rtmp://58.200.131.2:1935/livetv/gxtv",

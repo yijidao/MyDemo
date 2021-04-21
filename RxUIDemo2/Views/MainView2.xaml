@@ -8,8 +8,17 @@
                     xmlns:vm="clr-namespace:RxUIDemo2.ViewModels"
                     xmlns:rui="http://reactiveui.net"
                     mc:Ignorable="d"
-                    Title="MainView2" Height="450" Width="800">
+                    Title="MainView2" Height="450" Width="800"
+                    x:Name="mainView2">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="click1" Content="Click1" Width="120" Height="30"></Button>
+        </StackPanel>
+
     </Grid>
 </rui:ReactiveWindow>

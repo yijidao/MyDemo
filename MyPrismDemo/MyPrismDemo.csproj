@@ -107,11 +107,15 @@
     </Compile>
     <Compile Include="ViewModels\DetailRegionViewModel.cs" />
     <Compile Include="ViewModels\MainRegionViewModel.cs" />
+    <Compile Include="ViewModels\TrainTimeTableViewModel.cs" />
     <Compile Include="Views\DetailRegionView.xaml.cs">
       <DependentUpon>DetailRegionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainRegionView.xaml.cs">
       <DependentUpon>MainRegionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainTimeTableView.xaml.cs">
+      <DependentUpon>TrainTimeTableView.xaml</DependentUpon>
     </Compile>
     <Page Include="CctvView.xaml">
       <SubType>Designer</SubType>
@@ -138,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainRegionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainTimeTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyPrismDemo"
         xmlns:views="clr-namespace:VlcPrismModule.Views;assembly=VlcPrismModule"
+        xmlns:views2="clr-namespace:MyPrismDemo.Views"
         mc:Ignorable="d"
         Title="MainWindow2" Height="800" Width="1600">
     <Grid>
@@ -19,7 +20,7 @@
                     <TextBlock FontSize="50" FontWeight="Black" Text="Region2"></TextBlock>
                 </Grid>
             </TabItem>
-            <TabItem Header="MonitorView2">
+            <!--<TabItem Header="MonitorView2">
                 <Grid>
                     <views:MonitorView2></views:MonitorView2>
                 </Grid>
@@ -27,6 +28,11 @@
             <TabItem Header="Vlc">
                 <Grid>
                     <views:MediaPlayerView />
+                </Grid>
+            </TabItem>-->
+            <TabItem Header="TrainTimeTable">
+                <Grid>
+                    <views2:TrainTimeTableView />
                 </Grid>
             </TabItem>
         </TabControl>
