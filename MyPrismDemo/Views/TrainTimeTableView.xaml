@@ -10,23 +10,51 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance vm:TrainTimeTableViewModel}">
-    <Grid>
+
+    <!--<UserControl.Resources>
+        <local:TimeConverter x:Key="TimeConverter"></local:TimeConverter>
+    </UserControl.Resources>-->
+
+    <Grid Background="#072945">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Content="Load" Command="{Binding LoadDataCommand}" FontSize="14" Height="30" Width="140" />
+            <Button Content="Pull" Command="{Binding PullDataCommand}" FontSize="14" Height="30" Width="140" Margin="5 0 0 0" />
         </StackPanel>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding TrainTimeInfo}" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1" Visibility="Visible" ItemsSource="{Binding TrainTimeInfo}" 
+                  AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" Background="Transparent" RowHeaderWidth="0" Foreground="White"
+                  >
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#0F3B59" />
+                </Style>
+                   
+            </DataGrid.Resources>
             
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="站点" Binding="{Binding Name}"></DataGridTextColumn>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                </Style>
+            </DataGrid.RowStyle>
 
-                <DataGridTemplateColumn >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="站点" Binding="{Binding Name}" >
+
+                    <!--<DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Background" Value="LightCoral"></Setter>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>-->
+
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn Width="200">
                     <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <Grid>
+                        <DataTemplate >
+                            <Grid Width="200" Margin="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />
@@ -35,7 +63,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.ColumnSpan="2" Text="车次1" TextAlignment="Center"></TextBlock>
+                                <TextBlock Grid.ColumnSpan="2" Text="车次1" HorizontalAlignment="Center"/>
                                 <TextBlock Grid.Row="1" Text="计划" />
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="实际" />
                             </Grid>
@@ -43,15 +71,71 @@
                     </DataGridTemplateColumn.HeaderTemplate>
 
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="vm:TrainTimeItem">
+                        <DataTemplate >
+                            <DataTemplate.Resources>
+                                <local:TimeConverter x:Key="TimeConverter"></local:TimeConverter>
+                            </DataTemplate.Resources>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding PlanTime, StringFormat={}{0:yyyy/MM/dd}}" />
-                                <TextBlock Grid.Column="1" Text="{Binding PlanTime, StringFormat={}{0:yyyy/MM/dd}}" />
-                                <!--<TextBlock Text="{Binding RealTime, StringFormat={}{0:yyyy/MM/dd}}" />-->
+                                <TextBlock Text="{Binding PlanTime1, StringFormat={}{0:HH:mm}}" />
+                                <TextBlock Grid.Column="1" Text="{Binding RealTime1, StringFormat={}{0:HH:mm}, TargetNullValue=-}" >
+                                    <TextBlock.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger Value="True">
+                                                    <DataTrigger.Binding>
+                                                        <MultiBinding Converter="{StaticResource TimeConverter}">
+
+                                                            <Binding Path="PlanTime1" />
+                                                            <Binding Path="RealTime1" />
+                                                        </MultiBinding>
+                                                    </DataTrigger.Binding>
+                                                    <Setter Property="TextBlock.Foreground" Value="#FF3148" />
+                                                </DataTrigger>
+
+                                                <DataTrigger Value="True" Binding="{Binding Timeout1}">
+                                                    <Setter Property="TextBlock.Background" Value="#4CFF3148" />
+                                                </DataTrigger>
+
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="200">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate >
+                            <Grid Width="200">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.ColumnSpan="2" Text="车次2" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Row="1" Text="计划" />
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="实际" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding PlanTime2, StringFormat={}{0:HH:mm}}" />
+                                <TextBlock Grid.Column="1" Text="{Binding RealTime2, StringFormat={}{0:HH:mm}, TargetNullValue=-}" />
                             </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -59,12 +143,21 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!--<DataGrid Grid.Row="1" x:Name="grid" AutoGenerateColumns="False" IsReadOnly="True"></DataGrid>-->
+        <DataGrid Grid.Row="1" x:Name="grid" AutoGenerateColumns="False" IsReadOnly="True" Visibility="Collapsed"
+                  GridLinesVisibility="Horizontal" Background="Transparent" RowHeaderWidth="0" Foreground="White"
+                  >
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#0F3B59" />
+                </Style>
 
-        <!--<DataGrid ItemsSource="{Binding Data.DefaultView}" IsReadOnly="True" >
-            <DataGrid.Columns>
-                <DataGridTextColumn ></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>-->
+            </DataGrid.Resources>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
     </Grid>
 </UserControl>

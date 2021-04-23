@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:MyPrismDemo"
              xmlns:prism="http://prismlibrary.com/">
     <Application.Resources>
-        <Style TargetType="Border" x:Name="Border1">
+        <!--<Style TargetType="Border" x:Name="Border1">
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="BorderBrush" Value="#14CCC4"></Setter>
         </Style>
@@ -16,6 +16,6 @@
         </Style>
         <Style TargetType="Button" x:Key="Button2" BasedOn="{StaticResource Button1}">
             <Setter Property="Background" Value="#139ABE"></Setter>
-        </Style>
+        </Style>-->
     </Application.Resources>
 </prism:PrismApplication>

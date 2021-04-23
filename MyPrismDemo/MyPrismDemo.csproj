@@ -102,6 +102,7 @@
     <Compile Include="CctvView.xaml.cs">
       <DependentUpon>CctvView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="MainWindow2.xaml.cs">
       <DependentUpon>MainWindow2.xaml</DependentUpon>
     </Compile>

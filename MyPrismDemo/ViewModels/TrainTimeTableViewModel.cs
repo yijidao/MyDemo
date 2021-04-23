@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MyPrismDemo.Extensions;
 using Prism.Commands;
 using Prism.Mvvm;
 
@@ -28,7 +30,7 @@ namespace MyPrismDemo.ViewModels
         //    set => SetProperty(ref _trainTimeInfo, value);
         //}
 
-        private ObservableCollection<ExpandoObject> _trainTimeInfo = new ObservableCollection<ExpandoObject>();
+        private ObservableCollection<ExpandoObject> _trainTimeInfo;
         public ObservableCollection<ExpandoObject> TrainTimeInfo
         {
             get => _trainTimeInfo;
@@ -38,86 +40,207 @@ namespace MyPrismDemo.ViewModels
 
         public ICommand LoadDataCommand { get; }
 
+        public ICommand PullDataCommand { get; }
+
+        public string[] Stations { get; } = { "机场北", "机场南", "高增", "人和", "龙归", "嘉禾望岗", "白云大道北", "永泰", "同和", "京溪南方医院", "梅花园", "燕塘" };
+
+        public int TrainCount { get; set; } = 10;
+
+        public int PullIndex { get; set; }
+
+        public int TrainIndex { get; set; } = 1;
+
+        private bool[] _trainTimeFlags;
+        public bool[] TrainTimeFlags
+        {
+            get => _trainTimeFlags;
+            set => SetProperty(ref _trainTimeFlags, value);
+        }
+
+
         public TrainTimeTableViewModel()
         {
             LoadDataCommand = new DelegateCommand(LoadData);
+            PullDataCommand = new DelegateCommand(PullData);
+        }
+
+        private void PullData()
+        {
+            var current = (IDictionary<string, object>)TrainTimeInfo[PullIndex];
+
+            //for (var i = 1; i <= TrainCount; i++)
+            //{
+            //    if (PullIndex % 2 == 0)
+            //    {
+            //        current[$"RealTime{i}"] = ((DateTime)current[$"PlanTime{i}"]);
+            //    }
+            //    else
+            //    {
+            //        current[$"RealTime{i}"] = ((DateTime)current[$"PlanTime{i}"]).AddMinutes(2);
+            //    }
+            //}
+
+            if (PullIndex % 2 == 0)
+            {
+                current[$"RealTime{TrainIndex}"] = (DateTime)current[$"PlanTime{TrainIndex}"];
+            }
+            else
+            {
+                current[$"RealTime{TrainIndex}"] = ((DateTime)current[$"PlanTime{TrainIndex}"]).AddMinutes(2);
+            }
+
+            if (PullIndex == TrainTimeInfo.Count - 1)
+            {
+                var last = (IDictionary<string, object>)TrainTimeInfo[PullIndex];
+
+                for (int i = 1; i <= TrainCount; i++)
+                {
+                    var real = (DateTime?)last[$"RealTime{i}"];
+                    var plan = (DateTime)last[$"PlanTime{i}"];
+
+                    if (real == null || real.Value - plan < TimeSpan.FromMinutes(2)) continue;
+
+                    foreach (var item in TrainTimeInfo)
+                    {
+                        var dic = (IDictionary<string, object>)item;
+                        dic[$"Timeout{i}"] = true;
+                    }
+
+
+
+                }
+                PullIndex = 0;
+
+                TrainIndex++;
+                if (TrainIndex > TrainCount)
+                {
+                    TrainIndex = 1;
+                }
+            }
+            else
+            {
+                PullIndex++;
+            }
         }
 
         public void LoadData()
         {
-            TrainTimeInfo.Add(CreateAndSetValue("机场北", DateTime.Today.AddHours(6)));
-            TrainTimeInfo.Add(CreateAndSetValue("机场南", DateTime.Today.AddHours(6).AddMinutes(1)));
-            TrainTimeInfo.Add(CreateAndSetValue("高增", DateTime.Today.AddHours(6).AddMinutes(5)));
-            TrainTimeInfo.Add(CreateAndSetValue("人和", DateTime.Today.AddHours(6).AddMinutes(8)));
+            PullIndex = 0;
+            var datas = GetDbTrainTimes();
+            TrainTimeFlags = CreateTrainTimeoutFlagList(datas);
+
+            var expandoObjects = ConvertToDynamic(datas);
+            //TrainTimeInfo.AddRange(expandoObjects);
+            TrainTimeInfo = new ObservableCollection<ExpandoObject>(expandoObjects);
         }
 
-        public ExpandoObject CreateAndSetValue(string name, DateTime planTime)
+        private bool[] CreateTrainTimeoutFlagList(TrainTime[] trainTimes)
         {
-            var model = new ExpandoObject();
-            var dic = (IDictionary<string, object>)model;
-            dic.Add("Name", name);
-            dic.Add("PlanTime", planTime);
-            return model;
+            var result = new bool[trainTimes.Length];
+
+            for (int i = 0; i < trainTimes.Length; i++)
+            {
+                var current = trainTimes[i];
+                var lastStationTime = current.StationTimes.LastOrDefault();
+
+                if (lastStationTime?.RealTime != null && lastStationTime.RealTime.Value - lastStationTime.PlanTime >=
+                    TimeSpan.FromMinutes(2))
+                {
+                    result[i] = true;
+                }
+            }
+
+            return result;
         }
 
+        private ExpandoObject[] ConvertToDynamic(TrainTime[] trainTimes)
+        {
+            var stationDic = Stations.ToDictionary(x => x, y =>
+            {
+                var expandoObject = new ExpandoObject();
+                var dic = (IDictionary<string, object>)expandoObject;
+                dic.Add("Name", y);
+                return expandoObject;
+            });
 
+            var result = stationDic.Select(x =>
+            {
+                var expandoObject = x.Value;
+                for (int i = 0; i < trainTimes.Length; i++)
+                {
+                    var dic = (IDictionary<string, object>)expandoObject;
+                    var current = trainTimes[i];
+                    dic.Add($"PlanTime{i + 1}", current.StationTimeDic[x.Key].PlanTime); // 这两行似乎可以优化成一行
+                    dic.Add($"RealTime{i + 1}", current.StationTimeDic[x.Key].RealTime);
+                    dic.Add($"Timeout{i + 1}", false);
+                }
+                return expandoObject;
+            }).ToArray();
 
-        //void PopulateRows(BaseTrainTimeItem[] items, Dictionary<string, object>[] customProps)
-        //{
-        //    var customUsers = items.Select((user, index) => new TrainTimeItem()
-        //    {
-        //        OtherProps = customProps[index];
-        //    });
-        //    grid.ItemsSource = customUsers;
-        //}
+            return result;
+        }
+
+        private TrainTime[] GetDbTrainTimes()
+        {
+            var list = new List<TrainTime>();
+            for (var i = 1; i <= TrainCount; i++)
+            {
+                list.Add(new TrainTime($"车次{i}", GetDbTrainStationTimes()));
+            }
+            return list.ToArray();
+        }
+
+        private TrainStationTime[] GetDbTrainStationTimes() => Stations.Select((t, i) => new TrainStationTime(t, DateTime.Today.AddHours(6).AddMinutes(i * 3))).ToArray();
 
         //public void LoadData()
         //{
-        //    TrainTimeInfo.AddRange(new TrainTimeItem[]
-        //    {
-        //        new TrainTimeItem("机场北", DateTime.Today.AddHours(6)),
-        //        new TrainTimeItem("机场南", DateTime.Today.AddHours(6).AddMinutes(1)),
-        //        new TrainTimeItem("高增", DateTime.Today.AddHours(6).AddMinutes(5)),
-        //        new TrainTimeItem("人和", DateTime.Today.AddHours(6).AddMinutes(8)),
-        //        new TrainTimeItem("龙归", DateTime.Today.AddHours(6).AddMinutes(11)),
-        //    });
+        //    TrainTimeInfo.Add(CreateAndSetValue("机场北", DateTime.Today.AddHours(6)));
+        //    TrainTimeInfo.Add(CreateAndSetValue("机场南", DateTime.Today.AddHours(6).AddMinutes(1)));
+        //    TrainTimeInfo.Add(CreateAndSetValue("高增", DateTime.Today.AddHours(6).AddMinutes(5)));
+        //    TrainTimeInfo.Add(CreateAndSetValue("人和", DateTime.Today.AddHours(6).AddMinutes(8)));
+        //}
+
+        //public ExpandoObject CreateAndSetValue(string name, DateTime planTime, DateTime? realTime = null)
+        //{
+        //    var model = new ExpandoObject();
+        //    var dic = (IDictionary<string, object>)model;
+        //    dic.Add("Name", name);
+        //    dic.Add("PlanTime", planTime);
+        //    dic.Add("RealTime", realTime);
+        //    return model;
         //}
     }
 
-    public class BaseTrainTimeItem : BindableBase
+    public class TrainTime
     {
-        private string _name;
-        public string Name
+        public string TrainName { get; set; }
+        public TrainStationTime[] StationTimes { get; set; }
+
+        public Dictionary<string, TrainStationTime> StationTimeDic { get; }
+
+        public TrainTime(string trainName, TrainStationTime[] stationTimes)
         {
-            get => _name;
-            set => SetProperty(ref _name, value);
+            TrainName = trainName;
+            StationTimes = stationTimes;
+            StationTimeDic = stationTimes.ToDictionary(x => x.Station);
         }
-
-        //private DateTime _planedTime;
-        //public DateTime PlanedTime
-        //{
-        //    get => _planedTime;
-        //    set => SetProperty(ref _planedTime, value);
-        //}
-
-        //private DateTime? _realTime;
-        //public DateTime? RealTime
-        //{
-        //    get => _realTime;
-        //    set => SetProperty(ref _realTime, value);
-        //}
-
-        //public TrainTimeItem(string name, DateTime planedTime, DateTime? realTime = null)
-        //{
-        //    _name = name;
-        //    _planedTime = planedTime;
-        //    _realTime = realTime;
-        //}
     }
 
-    public class TrainTimeItem : BaseTrainTimeItem
+    public class TrainStationTime
     {
-        public Dictionary<string, object> OtherProps { get; set; } = new Dictionary<string, object>();
+        public string Station { get; set; }
+
+        public DateTime PlanTime { get; set; }
+
+        public DateTime? RealTime { get; set; }
+
+        public TrainStationTime(string station, DateTime planTime, DateTime? realTime = null)
+        {
+            Station = station;
+            PlanTime = planTime;
+            RealTime = realTime;
+        }
     }
+
 
 }
