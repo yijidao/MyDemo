@@ -103,17 +103,23 @@
       <DependentUpon>CctvView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\PointExtensions.cs" />
     <Compile Include="MainWindow2.xaml.cs">
       <DependentUpon>MainWindow2.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\DetailRegionViewModel.cs" />
     <Compile Include="ViewModels\MainRegionViewModel.cs" />
+    <Compile Include="ViewModels\RenderViewModel.cs" />
     <Compile Include="ViewModels\TrainTimeTableViewModel.cs" />
     <Compile Include="Views\DetailRegionView.xaml.cs">
       <DependentUpon>DetailRegionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainRegionView.xaml.cs">
       <DependentUpon>MainRegionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Render.cs" />
+    <Compile Include="Views\RenderView.xaml.cs">
+      <DependentUpon>RenderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrainTimeTableView.xaml.cs">
       <DependentUpon>TrainTimeTableView.xaml</DependentUpon>
@@ -143,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainRegionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RenderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -35,6 +35,11 @@
                     <views2:TrainTimeTableView />
                 </Grid>
             </TabItem>
+            <TabItem Header="RenderView">
+                <Grid>
+                    <views2:RenderView /> 
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
