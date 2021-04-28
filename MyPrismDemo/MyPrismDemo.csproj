@@ -114,6 +114,7 @@
     <Compile Include="Views\DetailRegionView.xaml.cs">
       <DependentUpon>DetailRegionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LineRender.cs" />
     <Compile Include="Views\MainRegionView.xaml.cs">
       <DependentUpon>MainRegionView.xaml</DependentUpon>
     </Compile>
@@ -196,6 +197,9 @@
     </PackageReference>
     <PackageReference Include="Prism.Wpf">
       <Version>8.0.0.1909</Version>
+    </PackageReference>
+    <PackageReference Include="System.Reactive">
+      <Version>4.4.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

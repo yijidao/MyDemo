@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using MyPrismDemo.Extensions;
 
 namespace MyPrismDemo.Views
 {
@@ -63,6 +64,42 @@ namespace MyPrismDemo.Views
             foreach (var item in Ellipses)
             {
                 item.Update();
+            }
+        }
+
+        public PathFigure MyPathFigure { get; set; }
+        public Point CurrentPosition { get; set; }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (path.Data == null)
+            {
+                var myPathFigure = new PathFigure();
+                
+                myPathFigure.StartPoint = new Point(10, 50); ;
+                var myLineSegment = new LineSegment();
+                CurrentPosition = new Point(200, 70);
+                myLineSegment.Point = CurrentPosition;
+
+                var myPathSegmentCollection = new PathSegmentCollection();
+                myPathSegmentCollection.Add(myLineSegment);
+
+                myPathFigure.Segments = myPathSegmentCollection;
+                MyPathFigure = myPathFigure;
+
+                var myPathFigureCollection = new PathFigureCollection();
+                myPathFigureCollection.Add(myPathFigure);
+
+                var myPathGeometry = new PathGeometry();
+                myPathGeometry.Figures = myPathFigureCollection;
+
+                path.Data = myPathGeometry;
+            }
+            else
+            {
+                CurrentPosition = CurrentPosition.Change(50, 30);
+                var myLineSegment = new LineSegment(){Point = CurrentPosition};
+                MyPathFigure.Segments.Add(myLineSegment);
             }
         }
     }

@@ -6,7 +6,19 @@
              xmlns:local="clr-namespace:MyPrismDemo.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="grid">
-
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="grid"/>
+        <Grid Grid.Row="1" x:Name="grid2" Height="200">
+            <Path x:Name="path" Stroke="Black" StrokeThickness="1"></Path>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Content="AddData" Click="ButtonBase_OnClick"></Button>
+        </StackPanel>
     </Grid>
+
 </UserControl>

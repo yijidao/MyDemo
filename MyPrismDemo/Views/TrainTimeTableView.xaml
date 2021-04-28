@@ -31,9 +31,9 @@
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#0F3B59" />
                 </Style>
-                   
+
             </DataGrid.Resources>
-            
+
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -41,19 +41,11 @@
             </DataGrid.RowStyle>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="站点" Binding="{Binding Name}" >
-
-                    <!--<DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Background" Value="LightCoral"></Setter>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>-->
-
-                </DataGridTextColumn>
+                <DataGridTextColumn Header="站点" Binding="{Binding Name}" />
 
                 <DataGridTemplateColumn Width="200">
                     <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate >
+                        <DataTemplate>
                             <Grid Width="200" Margin="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
@@ -63,7 +55,9 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.ColumnSpan="2" Text="车次1" HorizontalAlignment="Center"/>
+                                <TextBlock Grid.ColumnSpan="2" 
+                                           Text="{Binding  DataContext.TrainNames[0], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                           HorizontalAlignment="Center"/>
                                 <TextBlock Grid.Row="1" Text="计划" />
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="实际" />
                             </Grid>
@@ -120,8 +114,10 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.ColumnSpan="2" Text="车次2" HorizontalAlignment="Center" />
-                                <TextBlock Grid.Row="1" Text="计划" />
+                                <TextBlock Grid.ColumnSpan="2" 
+                                           Text="{Binding  DataContext.TrainNames[1], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                           HorizontalAlignment="Center" />
+                                <TextBlock Grid.Row="1" Text="计划" Background="#4CFF3148"/>
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="实际" />
                             </Grid>
                         </DataTemplate>

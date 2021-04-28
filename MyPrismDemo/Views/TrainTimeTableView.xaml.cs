@@ -70,8 +70,10 @@ namespace MyPrismDemo.Views
 
         private DataTemplate CreateHeaderTemplate(int index)
         {
+            index -= 1;
+            //< TextBlock Grid.ColumnSpan = ""2"" Text = ""车次{ index} "" HorizontalAlignment = ""Center"" />
             var stringReader = new StringReader(
-                $@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""> 
+                        @"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""> 
                             <Grid Width=""200"">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
@@ -81,12 +83,13 @@ namespace MyPrismDemo.Views
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.ColumnSpan = ""2"" Text = ""车次{index}"" HorizontalAlignment = ""Center"" />
+
+                                <TextBlock Grid.ColumnSpan = ""2"" Text = ""{Binding TrainNames[" + index + @"]}"" HorizontalAlignment = ""Center"" />
                                 <TextBlock Grid.Row = ""1"" Text = ""计划"" />
                                 <TextBlock Grid.Column = ""1"" Grid.Row = ""1"" Text = ""实际"" />
                             </Grid >
                        </DataTemplate>"
-                );
+                        );
             var xmlReader = XmlReader.Create(stringReader);
             return XamlReader.Load(xmlReader) as DataTemplate; ;
         }
@@ -167,7 +170,7 @@ namespace MyPrismDemo.Views
         {
             if (!(values[0] is DateTime)) return false;
             var planTime = (DateTime)values[0];
-            var realTime = values[1] as  DateTime?;
+            var realTime = values[1] as DateTime?;
             if (realTime == null) return false;
             return realTime.Value - planTime >= TimeSpan.FromMinutes(2);
         }

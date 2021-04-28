@@ -57,6 +57,19 @@ namespace MyPrismDemo.ViewModels
             set => SetProperty(ref _trainTimeFlags, value);
         }
 
+        private ObservableCollection<string> _trainNames;
+        public ObservableCollection<string> TrainNames
+        {
+            get => _trainNames;
+            set => SetProperty(ref _trainNames, value);
+        }
+
+        private Dictionary<string, bool> _timeoutDic = new Dictionary<string, bool>();
+        public Dictionary<string, bool> TimeoutDic
+        {
+            get => _timeoutDic;
+            set => SetProperty(ref _timeoutDic, value);
+        }
 
         public TrainTimeTableViewModel()
         {
@@ -105,9 +118,6 @@ namespace MyPrismDemo.ViewModels
                         var dic = (IDictionary<string, object>)item;
                         dic[$"Timeout{i}"] = true;
                     }
-
-
-
                 }
                 PullIndex = 0;
 
@@ -127,6 +137,11 @@ namespace MyPrismDemo.ViewModels
         {
             PullIndex = 0;
             var datas = GetDbTrainTimes();
+
+            TrainNames = new ObservableCollection<string>(datas.Select(x => x.TrainName));
+
+            TimeoutDic = TrainNames.ToDictionary(x => x, x => false);
+
             TrainTimeFlags = CreateTrainTimeoutFlagList(datas);
 
             var expandoObjects = ConvertToDynamic(datas);
