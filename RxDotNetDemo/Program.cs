@@ -13,10 +13,9 @@ namespace RxDotNetDemo
 
             var stockTicker = new StockTicker();
             //var stockMonitor = new StockMonitor(stockTicker);
-            var rxStockMonitor = new RxStockMonitor(stockTicker);
-
-            ChangeStock("600000", 10, stockTicker);
-            ChangeStock("600000", 10, stockTicker);
+            //var rxStockMonitor = new RxStockMonitor(stockTicker);
+            //ChangeStock("600000", 10, stockTicker);
+            //ChangeStock("600000", 10, stockTicker);
 
             Console.ReadLine();
         }
