@@ -118,7 +118,12 @@ namespace MyPrismDemo.ViewModels
                         var dic = (IDictionary<string, object>)item;
                         dic[$"Timeout{i}"] = true;
                     }
+
+                    TimeoutDic[TrainNames[i-1]] = true;
+                    RaisePropertyChanged(nameof(TimeoutDic));
                 }
+                
+
                 PullIndex = 0;
 
                 TrainIndex++;

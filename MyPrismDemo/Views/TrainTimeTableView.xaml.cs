@@ -72,23 +72,46 @@ namespace MyPrismDemo.Views
         {
             index -= 1;
             //< TextBlock Grid.ColumnSpan = ""2"" Text = ""车次{ index} "" HorizontalAlignment = ""Center"" />
-            var stringReader = new StringReader(
-                        @"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""> 
-                            <Grid Width=""200"">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
+            var stringReader = new StringReader(@"
+<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
+              xmlns:local=""clr-namespace:MyPrismDemo.Views;assembly=MyPrismDemo""
+              xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml""> 
+    <DataTemplate.Resources>
+        <local:HeaderTimeoutConvert x:Key=""HeaderTimeoutConvert""></local:HeaderTimeoutConvert>
+    </DataTemplate.Resources >
+    <Grid Width=""200""
+          DataContext=""{ Binding DataContext, RelativeSource = { RelativeSource AncestorType = { x:Type DataGrid}}}"">
+        <Grid.Style>
+            <Style TargetType=""Grid"">
+                <Style.Triggers >
+                    <DataTrigger Value = ""True"">
+                        <DataTrigger.Binding >
+                            <MultiBinding Converter = ""{StaticResource HeaderTimeoutConvert}"" >
+                                <Binding Path = ""TrainNames[" + index + @"]"" />
+                                <Binding Path = ""TimeoutDic"" />
+                            </MultiBinding >
+                        </DataTrigger.Binding >
+                        <DataTrigger.Setters >
+                            <Setter Property = ""Background"" Value = ""#4CFF3148"" />
+                        </DataTrigger.Setters >
+                    </DataTrigger >
+                </Style.Triggers >
+            </Style >
+        </Grid.Style >
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.ColumnSpan = ""2"" Text = ""{Binding TrainNames[" + index + @"]}"" HorizontalAlignment = ""Center"" />
-                                <TextBlock Grid.Row = ""1"" Text = ""计划"" />
-                                <TextBlock Grid.Column = ""1"" Grid.Row = ""1"" Text = ""实际"" />
-                            </Grid >
-                       </DataTemplate>"
+        <TextBlock Grid.ColumnSpan = ""2"" Text = ""{Binding TrainNames[" + index + @"]}"" HorizontalAlignment = ""Center"" />
+        <TextBlock Grid.Row = ""1"" Text = ""计划"" />
+        <TextBlock Grid.Column = ""1"" Grid.Row = ""1"" Text = ""实际"" />
+    </Grid >
+</DataTemplate>"
                         );
             var xmlReader = XmlReader.Create(stringReader);
             return XamlReader.Load(xmlReader) as DataTemplate; ;
@@ -105,20 +128,20 @@ namespace MyPrismDemo.Views
     </DataTemplate.Resources >
 
     <Grid>
+        <Grid.Style>
+            <Style TargetType=""Grid"">
+                <Style.Triggers >
+                    <DataTrigger Value = ""True"" Binding = ""{Binding Timeout" + index + @"}"" >
+                        <Setter Property = ""Background"" Value = ""#4CFF3148"" />
+                    </DataTrigger >
+                </Style.Triggers >
+            </Style >
+        </Grid.Style >
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
             <TextBlock Text=""{Binding PlanTime" + index + @", StringFormat = {}{0:HH:mm}}"" >
-                <TextBlock.Style>
-                    <Style>
-                        <Style.Triggers>
-                            <DataTrigger Value=""True"" Binding=""{ Binding Timeout" + index + @"}"">
-                                <Setter Property = ""TextBlock.Background"" Value = ""#4CFF3148"" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style >
-                </TextBlock.Style >
             </TextBlock>
             <TextBlock Grid.Column=""1"" Text=""{Binding RealTime" + index + @", StringFormat={}{0:HH:mm}, TargetNullValue=-}"" >
                 <TextBlock.Style>
@@ -132,9 +155,6 @@ namespace MyPrismDemo.Views
                                     </MultiBinding>
                                 </DataTrigger.Binding>
                                 <Setter Property = ""TextBlock.Foreground"" Value = ""#FF3148"" />
-                            </DataTrigger>
-                            <DataTrigger Value=""True"" Binding=""{ Binding Timeout" + index + @"}"">
-                                <Setter Property = ""TextBlock.Background"" Value = ""#4CFF3148"" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style >
@@ -180,4 +200,26 @@ namespace MyPrismDemo.Views
             throw new NotImplementedException();
         }
     }
+
+    public class HeaderTimeoutConvert : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values[0] is string trainName && values[1] is Dictionary<string, bool> timeoutDic &&
+                timeoutDic.TryGetValue(trainName, out var timeout))
+            {
+                return timeout;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
