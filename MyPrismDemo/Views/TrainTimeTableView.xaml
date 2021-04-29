@@ -17,7 +17,7 @@
 
     <UserControl.Resources>
         <local:HeaderTimeoutConvert x:Key="HeaderTimeoutConvert"></local:HeaderTimeoutConvert>
-
+        
     </UserControl.Resources>
 
 
@@ -32,7 +32,7 @@
         </StackPanel>
         <DataGrid Grid.Row="1" Visibility="Visible" ItemsSource="{Binding TrainTimeInfo}" 
                   AutoGenerateColumns="False" IsReadOnly="True" Background="Transparent" RowHeaderWidth="0" Foreground="White"
-                  GridLinesVisibility="None"
+                  GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#17557f" 
                   >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
@@ -43,9 +43,7 @@
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Setter Property="Background" Value="Transparent"></Setter>
-                    <Setter Property="Margin" Value="0"></Setter>
-                    <Setter Property="Padding" Value="0"></Setter>
-                    <Setter Property="BorderThickness" Value="0"></Setter>
+                    <Setter Property="Height" Value="36"></Setter>
                 </Style>
             </DataGrid.RowStyle>
 

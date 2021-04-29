@@ -21,12 +21,12 @@
                     <ControlTemplate TargetType="{x:Type RadioButton}" >
                         <BulletDecorator Background="Transparent" VerticalAlignment="Center">
                             <BulletDecorator.Bullet>
-                             
+
                                 <Grid x:Name="border1" Height="17" Width="17" >
                                     <Ellipse  Stroke="#00b2e1" StrokeThickness="1" />
                                     <Ellipse   x:Name="ellipse1" Margin="3.5"  Stroke="#00b2e1" Fill="#00b2e1" Visibility="Hidden"></Ellipse>
                                 </Grid>
-                           
+
                             </BulletDecorator.Bullet>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -43,11 +43,11 @@
                                             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border1" Storyboard.TargetProperty="Opacity">
                                                 <DiscreteDoubleKeyFrame KeyTime="0" Value=".4"></DiscreteDoubleKeyFrame>
                                             </DoubleAnimationUsingKeyFrames>
-                                         
+
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Disabled" />
-                                
+
                                 </VisualStateGroup>
                                 <VisualStateGroup x:Name="CheckStates">
                                     <VisualState x:Name="Checked">
@@ -72,12 +72,77 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="SimpleRadioButton" TargetType="{x:Type RadioButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Background" Value="#1A4868" />
+            <Setter Property="Foreground" Value="#ffffff"></Setter>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}" >
+                        <BulletDecorator Background="Transparent" VerticalAlignment="Center">
+                            <BulletDecorator.Bullet>
+                                <Border x:Name="border1" Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"
+                                                  RecognizesAccessKey="True"
+                                                  TextBlock.Foreground="{TemplateBinding Foreground}"
+                                                  TextBlock.FontSize="{TemplateBinding FontSize}"/>
+                                </Border>
+                            </BulletDecorator.Bullet>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border1" Storyboard.TargetProperty="Opacity">
+                                                <DiscreteDoubleKeyFrame KeyTime="0" Value=".7"></DiscreteDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border1" Storyboard.TargetProperty="Opacity">
+                                                <DiscreteDoubleKeyFrame KeyTime="0" Value=".4"></DiscreteDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" Storyboard.TargetName="border1">
+                                                <DiscreteColorKeyFrame KeyTime="0" Value="#0196a3" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked" />
+                                    <VisualState x:Name="Indeterminate" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </BulletDecorator>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
-        <StackPanel Orientation="Horizontal" Height="40" >
-            <RadioButton Margin="4 0 0 0" Content="单选框1" GroupName="t" ></RadioButton>
-            <RadioButton Margin="4 0 0 0" Content="单选框2" GroupName="t"></RadioButton>
-            <RadioButton Margin="4 0 0 0" Content="单选框3" GroupName="t"></RadioButton>
-            <RadioButton Margin="4 0 0 0" Content="单选框4" GroupName="t"></RadioButton>
-        </StackPanel>
+    <StackPanel Orientation="Horizontal" Height="40" >
+        <RadioButton Margin="4 0 0 0" Content="单选框1" GroupName="t" ></RadioButton>
+        <RadioButton Margin="4 0 0 0" Content="单选框2" GroupName="t"></RadioButton>
+        <RadioButton Margin="4 0 0 0" Content="单选框3" GroupName="t"></RadioButton>
+        <RadioButton Margin="4 0 0 0" Content="单选框4" GroupName="t"></RadioButton>
+
+
+        <RadioButton Margin="4 0 0 0" Content="单选框5" GroupName="t2" Style="{StaticResource SimpleRadioButton}"></RadioButton>
+        <RadioButton Margin="4 0 0 0" Content="单选框6" GroupName="t2" Style="{StaticResource SimpleRadioButton}"></RadioButton>
+        <RadioButton Margin="4 0 0 0" Content="单选框7" GroupName="t2" Style="{StaticResource SimpleRadioButton}"></RadioButton>
+
+        
+    </StackPanel>
 </UserControl>
