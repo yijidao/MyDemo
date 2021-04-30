@@ -167,21 +167,6 @@ namespace MyPrismDemo.Views
             return XamlReader.Load(xmlReader) as DataTemplate;
         }
 
-
-        //void AddColumns(string[] newColumnNames)
-        //{
-        //    foreach (string name in newColumnNames)
-        //    {
-        //        grid.Columns.Add(new DataGridTextColumn
-        //        {
-        //            // bind to a dictionary property
-        //            Binding = new Binding("Custom[" + name + "]"),
-        //            Header = name
-        //        });
-        //    }
-        //}
-
-
     }
 
     public class TimeConverter : IMultiValueConverter

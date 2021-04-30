@@ -17,7 +17,7 @@
 
     <UserControl.Resources>
         <local:HeaderTimeoutConvert x:Key="HeaderTimeoutConvert"></local:HeaderTimeoutConvert>
-        
+
     </UserControl.Resources>
 
 
@@ -32,11 +32,12 @@
         </StackPanel>
         <DataGrid Grid.Row="1" Visibility="Visible" ItemsSource="{Binding TrainTimeInfo}" 
                   AutoGenerateColumns="False" IsReadOnly="True" Background="Transparent" RowHeaderWidth="0" Foreground="White"
-                  GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#17557f" 
+                  GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#17557f" ColumnWidth="200" TextBlock.TextAlignment="Center" 
                   >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#0F3B59" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" ></Setter>
                 </Style>
             </DataGrid.Resources>
 
@@ -48,12 +49,12 @@
             </DataGrid.RowStyle>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="站点" Binding="{Binding Name}" />
-
+                <DataGridTextColumn Header="站点" Binding="{Binding Name}">
+                </DataGridTextColumn>
                 <DataGridTemplateColumn Width="200" >
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <Grid Width="200" Margin="0" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                            <Grid Width="200" Height="100" Margin="0" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
                                 <Grid.Style>
                                     <Style TargetType="Grid">
                                         <Style.Triggers>
@@ -69,6 +70,7 @@
                                                 </DataTrigger.Setters>
                                             </DataTrigger>
                                         </Style.Triggers>
+
                                     </Style>
                                 </Grid.Style>
 
@@ -80,14 +82,26 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
+                                <Border Grid.ColumnSpan="2" BorderThickness="0 0 0 1" BorderBrush="#17557f"></Border>
                                 <TextBlock Grid.ColumnSpan="2" 
                                            Text="{Binding  TrainNames[0]}" 
-                                           HorizontalAlignment="Center" />
-                                <TextBlock Grid.Row="1" Text="计划" />
-                                <TextBlock Grid.Column="1" Grid.Row="1" Text="实际" />
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="1" Text="计划"  VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="实际" VerticalAlignment="Center"/>
                             </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
+
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Value="True" Binding="{Binding Timeout1}">
+                                    <Setter Property="Background" Value="#4CFF3148" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
 
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate >
@@ -95,7 +109,7 @@
                                 <local:TimeConverter x:Key="TimeConverter"></local:TimeConverter>
                             </DataTemplate.Resources>
                             <Grid >
-                                <Grid.Style>
+                                <!--<Grid.Style>
                                     <Style TargetType="Grid">
                                         <Style.Triggers>
                                             <DataTrigger Value="True" Binding="{Binding Timeout1}">
@@ -103,20 +117,19 @@
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                </Grid.Style>
+                                </Grid.Style>-->
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding PlanTime1, StringFormat={}{0:HH:mm}}" />
-                                <TextBlock Grid.Column="1" Text="{Binding RealTime1, StringFormat={}{0:HH:mm}, TargetNullValue=-}" >
+                                <TextBlock Text="{Binding PlanTime1, StringFormat={}{0:HH:mm}}" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="{Binding RealTime1, StringFormat={}{0:HH:mm}, TargetNullValue=-}" VerticalAlignment="Center">
                                     <TextBlock.Style>
                                         <Style>
                                             <Style.Triggers>
                                                 <DataTrigger Value="True">
                                                     <DataTrigger.Binding>
                                                         <MultiBinding Converter="{StaticResource TimeConverter}">
-
                                                             <Binding Path="PlanTime1" />
                                                             <Binding Path="RealTime1" />
                                                         </MultiBinding>

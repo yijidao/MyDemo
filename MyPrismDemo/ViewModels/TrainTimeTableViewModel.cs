@@ -16,20 +16,6 @@ namespace MyPrismDemo.ViewModels
 {
     public class TrainTimeTableViewModel : BindableBase
     {
-        private DataTable _data;
-        public DataTable Data
-        {
-            get => _data;
-            set => SetProperty(ref _data, value);
-        }
-
-        //private ObservableCollection<TrainTimeItem> _trainTimeInfo = new ObservableCollection<TrainTimeItem>();
-        //public ObservableCollection<TrainTimeItem> TrainTimeInfo
-        //{
-        //    get => _trainTimeInfo;
-        //    set => SetProperty(ref _trainTimeInfo, value);
-        //}
-
         private ObservableCollection<ExpandoObject> _trainTimeInfo;
         public ObservableCollection<ExpandoObject> TrainTimeInfo
         {
@@ -80,18 +66,6 @@ namespace MyPrismDemo.ViewModels
         private void PullData()
         {
             var current = (IDictionary<string, object>)TrainTimeInfo[PullIndex];
-
-            //for (var i = 1; i <= TrainCount; i++)
-            //{
-            //    if (PullIndex % 2 == 0)
-            //    {
-            //        current[$"RealTime{i}"] = ((DateTime)current[$"PlanTime{i}"]);
-            //    }
-            //    else
-            //    {
-            //        current[$"RealTime{i}"] = ((DateTime)current[$"PlanTime{i}"]).AddMinutes(2);
-            //    }
-            //}
 
             if (PullIndex % 2 == 0)
             {
@@ -211,24 +185,6 @@ namespace MyPrismDemo.ViewModels
         }
 
         private TrainStationTime[] GetDbTrainStationTimes() => Stations.Select((t, i) => new TrainStationTime(t, DateTime.Today.AddHours(6).AddMinutes(i * 3))).ToArray();
-
-        //public void LoadData()
-        //{
-        //    TrainTimeInfo.Add(CreateAndSetValue("机场北", DateTime.Today.AddHours(6)));
-        //    TrainTimeInfo.Add(CreateAndSetValue("机场南", DateTime.Today.AddHours(6).AddMinutes(1)));
-        //    TrainTimeInfo.Add(CreateAndSetValue("高增", DateTime.Today.AddHours(6).AddMinutes(5)));
-        //    TrainTimeInfo.Add(CreateAndSetValue("人和", DateTime.Today.AddHours(6).AddMinutes(8)));
-        //}
-
-        //public ExpandoObject CreateAndSetValue(string name, DateTime planTime, DateTime? realTime = null)
-        //{
-        //    var model = new ExpandoObject();
-        //    var dic = (IDictionary<string, object>)model;
-        //    dic.Add("Name", name);
-        //    dic.Add("PlanTime", planTime);
-        //    dic.Add("RealTime", realTime);
-        //    return model;
-        //}
     }
 
     public class TrainTime
