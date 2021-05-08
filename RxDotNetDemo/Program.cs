@@ -53,6 +53,15 @@ namespace RxDotNetDemo
 
             var byDefer = CreateOperate.GetObservableByDefer();
             byDefer.SubscribeConsole("ByDefer");
+
+            var eventMock = new EventMock();
+            eventMock.MessageEvent += (sender, args) => { };
+            CreateOperate.GetObservableByEventPattern(eventMock).SubscribeConsole("ByEventPattern");
+            CreateOperate.GetObservableByEventPatternSimplest(eventMock)
+                .SubscribeConsole("byEventPatternSimplest");
+            eventMock.RaiseEvent();
+            eventMock.RaiseEvent();
+            eventMock.RaiseEvent();
         }
 
     }
