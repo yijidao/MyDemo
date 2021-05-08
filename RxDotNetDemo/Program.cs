@@ -55,10 +55,11 @@ namespace RxDotNetDemo
             byDefer.SubscribeConsole("ByDefer");
 
             var eventMock = new EventMock();
-            eventMock.MessageEvent += (sender, args) => { };
-            CreateOperate.GetObservableByEventPattern(eventMock).SubscribeConsole("ByEventPattern");
-            CreateOperate.GetObservableByEventPatternSimplest(eventMock)
-                .SubscribeConsole("byEventPatternSimplest");
+            CreateOperate.GetObservableForEventPattern(eventMock).SubscribeConsole("ForEventPattern");
+            CreateOperate.GetObservableForEventPatternSimplest(eventMock).SubscribeConsole("ForEventPatternSimplest");
+            CreateOperate.GetObservableForNotFollowEventPattern(eventMock).SubscribeConsole("ForNotFollowEventPattern");
+            CreateOperate.GetObservableForMultipleParameters(eventMock).SubscribeConsole("ForMultipleParameters");
+            CreateOperate.GetObservableForNotArgument(eventMock).SubscribeConsole("ForNotArgument");
             eventMock.RaiseEvent();
             eventMock.RaiseEvent();
             eventMock.RaiseEvent();

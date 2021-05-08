@@ -41,7 +41,7 @@ namespace RxDotNetDemo
         {
             return Observable.Defer(() =>
             {
-                var message = new [] {"Msg1", "Msg2", "Msg3"};
+                var message = new[] { "Msg1", "Msg2", "Msg3" };
                 return message.ToObservable();
             });
         }
@@ -52,7 +52,7 @@ namespace RxDotNetDemo
         /// </summary>
         /// <param name="eventMock"></param>
         /// <returns></returns>
-        public static IObservable<string> GetObservableByEventPattern(EventMock eventMock)
+        public static IObservable<string> GetObservableForEventPattern(EventMock eventMock)
         {
             return Observable.FromEventPattern<EventHandler, EventArgs>(h => eventMock.MessageEvent += h,
                 h => eventMock.MessageEvent -= h).Select(change => "eventRaise");
@@ -63,7 +63,39 @@ namespace RxDotNetDemo
         /// </summary>
         /// <param name="eventMock"></param>
         /// <returns></returns>
-        public static IObservable<string> GetObservableByEventPatternSimplest(EventMock eventMock) =>
+        public static IObservable<string> GetObservableForEventPatternSimplest(EventMock eventMock) =>
             Observable.FromEventPattern(eventMock, nameof(eventMock.MessageEvent)).Select(change => "eventRaiseSimplest");
+
+        /// <summary>
+        /// 从非标准事件模式生成 Observable。
+        /// </summary>
+        /// <param name="eventMock"></param>
+        /// <returns></returns>
+        public static IObservable<string> GetObservableForNotFollowEventPattern(EventMock eventMock) =>
+            Observable.FromEvent<Action<string>, string>(h => eventMock.NotFollowEventPatternEvent += h,
+                h => eventMock.NotFollowEventPatternEvent -= h);
+
+        /// <summary>
+        /// 多个参数的事件生成 Observable。
+        /// </summary>
+        /// <param name="eventMock"></param>
+        /// <returns></returns>
+        public static IObservable<Tuple<int, string>> GetObservableForMultipleParameters(EventMock eventMock)
+        {
+            return Observable.FromEvent<Action<int, string>, Tuple<int, string>>(
+                    handler => (value1, value2) => handler(Tuple.Create(value1, value2)), // 传一个转换参数的委托
+                h => eventMock.MultipleParameterEvent += h, h => eventMock.MultipleParameterEvent -= h);
+        }
+
+        /// <summary>
+        /// 没有参数的事件生成 Observable
+        /// </summary>
+        /// <param name="eventMock"></param>
+        /// <returns></returns>
+        public static IObservable<Unit> GetObservableForNotArgument(EventMock eventMock)
+        {
+            return Observable.FromEvent(h => eventMock.NotArgumentEvent += h, h => eventMock.NotArgumentEvent -= h);
+        }
+
     }
 }
