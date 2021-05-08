@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using RxDotNetDemo.Extensions;
 
 namespace RxDotNetDemo
 {
@@ -11,15 +12,24 @@ namespace RxDotNetDemo
 
             Console.WriteLine("Start...");
 
-            var stockTicker = new StockTicker();
-            //var stockMonitor = new StockMonitor(stockTicker);
-            //var rxStockMonitor = new RxStockMonitor(stockTicker);
-            //ChangeStock("600000", 10, stockTicker);
-            //ChangeStock("600000", 10, stockTicker);
+            //StockDemo();
+            CreateDemo();
+
+
+            CreateOperate.GetObservableByCreate();
+
 
             Console.ReadLine();
         }
 
+        private static void StockDemo()
+        {
+            var stockTicker = new StockTicker();
+            var stockMonitor = new StockMonitor(stockTicker);
+            var rxStockMonitor = new RxStockMonitor(stockTicker);
+            ChangeStock("600000", 10, stockTicker);
+            ChangeStock("600000", 10, stockTicker);
+        }
 
         private static void ChangeStock(string symbol, decimal price, StockTicker stockTicker)
         {
@@ -34,6 +44,15 @@ namespace RxDotNetDemo
                     await Task.Delay(TimeSpan.FromSeconds(2));
                 }
             });
+        }
+
+        private static void CreateDemo()
+        {
+            var byCreate = CreateOperate.GetObservableByCreate();
+            byCreate.SubscribeConsole("ByCreate");
+
+            var byDefer = CreateOperate.GetObservableByDefer();
+            byDefer.SubscribeConsole("ByDefer");
         }
 
     }
