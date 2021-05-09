@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace RxDotNetDemo
@@ -95,6 +96,47 @@ namespace RxDotNetDemo
         public static IObservable<Unit> GetObservableForNotArgument(EventMock eventMock)
         {
             return Observable.FromEvent(h => eventMock.NotArgumentEvent += h, h => eventMock.NotArgumentEvent -= h);
+        }
+
+        public static IEnumerable<string> LengthArray { get;  } = new[] { "1", "22", "333", "444" };
+
+        /// <summary>
+        /// Enumerable 转 Observable，只需要调用ToObservable()，迭代结束后会调用 OnComplete()。
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<string> EnumerableToObservable()
+        {
+            return LengthArray.ToObservable();
+        }
+
+        /// <summary>
+        /// Enumerable 转 Observable，抛出异常版本。
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<string> EnumerableToObservableWithException()
+        {
+
+            return lengthArrayWithException().ToObservable();
+
+            IEnumerable<string> lengthArrayWithException()
+            {
+                yield return "1";
+                yield return "22";
+                yield return "333";
+                throw new Exception("测试异常");
+                yield return "4444";
+            }
+        }
+
+        /// <summary>
+        /// Enumerable 转 Observable 用途：常用于静态数据拼接动态数据，比如数据库数据拼接MQ消息等。
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<string> EnumerableToObservableWithConcat()
+        {
+            var observable = GetObservableByDefer();
+            return LengthArray.ToObservable() 
+                .Concat(observable); // Concat 会顺序串联两个 observable
         }
 
     }

@@ -48,12 +48,15 @@ namespace RxDotNetDemo
 
         private static void CreateDemo()
         {
+            // ByCreate
             var byCreate = CreateOperate.GetObservableByCreate();
             byCreate.SubscribeConsole("ByCreate");
 
+            // ByDefer
             var byDefer = CreateOperate.GetObservableByDefer();
             byDefer.SubscribeConsole("ByDefer");
 
+            // 事件生成
             var eventMock = new EventMock();
             CreateOperate.GetObservableForEventPattern(eventMock).SubscribeConsole("ForEventPattern");
             CreateOperate.GetObservableForEventPatternSimplest(eventMock).SubscribeConsole("ForEventPatternSimplest");
@@ -63,6 +66,12 @@ namespace RxDotNetDemo
             eventMock.RaiseEvent();
             eventMock.RaiseEvent();
             eventMock.RaiseEvent();
+
+            // Enumerable 转 Observable
+            CreateOperate.EnumerableToObservable().SubscribeConsole("Enumerable 转 Observable");
+            CreateOperate.EnumerableToObservableWithException().SubscribeConsole("抛异常的Enumerable 转 Observable");
+            CreateOperate.EnumerableToObservableWithConcat()
+                .SubscribeConsole("Enumerable 转 Observable 后使用 Concat() 拼接多个 Observable");
         }
 
     }
