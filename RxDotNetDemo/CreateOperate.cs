@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
@@ -98,9 +99,11 @@ namespace RxDotNetDemo
             return Observable.FromEvent(h => eventMock.NotArgumentEvent += h, h => eventMock.NotArgumentEvent -= h);
         }
 
-        public static IEnumerable<string> LengthArray { get;  } = new[] { "1", "22", "333", "444" };
+        public static IEnumerable<string> LengthArray { get;  } = new[] { "1", "22", "333", "4444" };
 
         /// <summary>
+        /// Enumerable 是 Pull 模式，会阻塞线程
+        /// Observable 是 Push 模式，不会阻塞线程
         /// Enumerable 转 Observable，只需要调用ToObservable()，迭代结束后会调用 OnComplete()。
         /// </summary>
         /// <returns></returns>
@@ -142,7 +145,35 @@ namespace RxDotNetDemo
             //observable.StartWith(LengthArray); StartWith 也有可以实现 Concat 一样的功能
         }
 
+        /// <summary>
+        /// Observable转Enumerable，只需要调用 ToEnumerable()
+        /// 会阻塞线程，而且会把 Pull 模式改成 Push 模式
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<string> ObservableToEnumerable()
+        {
+            return GetObservableByDefer().ToEnumerable();
+        }
 
+        /// <summary>
+        ///  Observable转Dictionary, 调用 ToDictionary()
+        ///  1. 这个方法跟 ToEnumerable() 的不同是返回 IObservable 对象，所以这个方法不会阻塞线程，而是生成结束字典后，将整个字典发射出去
+        ///  2. 如果存在一个Key有多个 Value 的情况，会抛异常，可以使用 ToLookup() 实现一个 Key 多个 Value。
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<IDictionary<int, string>> ObservableToDictionary()
+        {
+            return EnumerableToObservable().ToDictionary(x => x.Length);
+        }
 
+        /// <summary>
+        /// Observable转Lookup, 调用 ToLookup()，用于一个 Key 多个 Value 的情况。
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<ILookup<int, string>> ObservableToLookup()
+        {
+            return GetObservableByDefer().ToLookup(x => x.Length);
+        }
+        
     }
 }

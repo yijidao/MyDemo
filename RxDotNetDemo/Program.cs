@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using RxDotNetDemo.Extensions;
 
@@ -72,6 +75,32 @@ namespace RxDotNetDemo
             CreateOperate.EnumerableToObservableWithException().SubscribeConsole("抛异常的Enumerable 转 Observable");
             CreateOperate.EnumerableToObservableWithConcat()
                 .SubscribeConsole("Enumerable 转 Observable 后使用 Concat() 拼接多个 Observable");
+
+
+            var enumerable = CreateOperate.ObservableToEnumerable();
+            foreach (var item in enumerable)
+            {
+                Console.WriteLine(item);
+            }
+
+            CreateOperate.ObservableToDictionary()
+                .Select(x => string.Join(",", x))
+                .SubscribeConsole("Enumerable 转 Dictionary");
+
+            CreateOperate.ObservableToLookup()
+                .Select(lookup =>
+                {
+                    var groups = new StringBuilder();
+                    foreach (var grouping in lookup)
+                    {
+                        groups.Append($"[Key => {grouping.Count()}]");
+                    }
+
+                    return groups.ToString();
+                })
+                .SubscribeConsole("Enumerable 转 Lookup");
+
+
         }
 
     }
