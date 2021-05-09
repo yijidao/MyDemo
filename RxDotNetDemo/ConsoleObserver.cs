@@ -7,10 +7,12 @@ namespace RxDotNetDemo
     public class ConsoleObserver<T> : IObserver<T>
     {
         private readonly string _name;
+        private readonly Action<T> _onNext;
 
-        public ConsoleObserver(string name = "")
+        public ConsoleObserver(string name = "", Action<T> onNext = null)
         {
             _name = name;
+            _onNext = onNext;
         }
 
         public void OnCompleted() => Console.WriteLine($"{_name} - OnCompleted()");
@@ -21,6 +23,16 @@ namespace RxDotNetDemo
             Console.WriteLine($"\t {error}");
         }
 
-        public void OnNext(T value) => Console.WriteLine($"{_name} - OnNext({value})");
+        public void OnNext(T value)
+        {
+            if (_onNext == null)
+            {
+                Console.WriteLine($"{_name} - OnNext({value})");
+            }
+            else
+            {
+                _onNext.Invoke(value);
+            }
+        }
     }
 }
