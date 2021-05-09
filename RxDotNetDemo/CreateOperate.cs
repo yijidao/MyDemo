@@ -26,7 +26,7 @@ namespace RxDotNetDemo
                 {
                     observer.OnNext(i);
                 }
-
+                observer.OnCompleted();
                 return Disposable.Empty;
             });
         }
