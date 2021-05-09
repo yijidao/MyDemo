@@ -130,6 +130,7 @@ namespace RxDotNetDemo
 
         /// <summary>
         /// Enumerable 转 Observable 用途：常用于静态数据拼接动态数据，比如数据库数据拼接MQ消息等。
+        /// 经常搭配 Concat 或 StartWith 一起使用。
         /// </summary>
         /// <returns></returns>
         public static IObservable<string> EnumerableToObservableWithConcat()
@@ -137,7 +138,11 @@ namespace RxDotNetDemo
             var observable = GetObservableByDefer();
             return LengthArray.ToObservable() 
                 .Concat(observable); // Concat 会顺序串联两个 observable
+
+            //observable.StartWith(LengthArray); StartWith 也有可以实现 Concat 一样的功能
         }
+
+
 
     }
 }
