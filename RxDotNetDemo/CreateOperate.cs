@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
@@ -209,6 +210,15 @@ namespace RxDotNetDemo
             });
         }
 
-
+        /// <summary>
+        /// 从txt文件读取流，涉及到释放调用 IDispose 方法的，可以使用 Using 操作符
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<string> GetObservableByResource()
+        {
+            return Observable.Using(() => File.OpenText("TextFile1.txt"),
+                    stream =>
+                Observable.Generate(stream, s => !s.EndOfStream, s => s, s => s.ReadLine()));
+        }
     }
 }
