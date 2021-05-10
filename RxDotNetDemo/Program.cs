@@ -76,17 +76,19 @@ namespace RxDotNetDemo
             CreateOperate.EnumerableToObservableWithConcat()
                 .SubscribeConsole("Enumerable 转 Observable 后使用 Concat() 拼接多个 Observable");
 
-
+            // Observable 转 Enumerable
             var enumerable = CreateOperate.ObservableToEnumerable();
             foreach (var item in enumerable)
             {
                 Console.WriteLine(item);
             }
 
+            // ObservableToDictionary
             CreateOperate.ObservableToDictionary()
                 .Select(x => string.Join(",", x))
                 .SubscribeConsole("Enumerable 转 Dictionary");
 
+            // ObservableToLookup
             CreateOperate.ObservableToLookup()
                 .Select(lookup =>
                 {
@@ -100,7 +102,9 @@ namespace RxDotNetDemo
                 })
                 .SubscribeConsole("Enumerable 转 Lookup");
 
-
+            // 循环生成Observable
+            CreateOperate.GetObservableByLoopWithGenerate().SubscribeConsole("Generate 循环");
+            CreateOperate.GetObservableByLoopWithRange().SubscribeConsole("Range 循环");
         }
 
     }

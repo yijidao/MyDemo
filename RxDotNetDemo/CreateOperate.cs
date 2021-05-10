@@ -99,7 +99,7 @@ namespace RxDotNetDemo
             return Observable.FromEvent(h => eventMock.NotArgumentEvent += h, h => eventMock.NotArgumentEvent -= h);
         }
 
-        public static IEnumerable<string> LengthArray { get;  } = new[] { "1", "22", "333", "4444" };
+        public static IEnumerable<string> LengthArray { get; } = new[] { "1", "22", "333", "4444" };
 
         /// <summary>
         /// Enumerable 是 Pull 模式，会阻塞线程
@@ -139,7 +139,7 @@ namespace RxDotNetDemo
         public static IObservable<string> EnumerableToObservableWithConcat()
         {
             var observable = GetObservableByDefer();
-            return LengthArray.ToObservable() 
+            return LengthArray.ToObservable()
                 .Concat(observable); // Concat 会顺序串联两个 observable
 
             //observable.StartWith(LengthArray); StartWith 也有可以实现 Concat 一样的功能
@@ -174,6 +174,41 @@ namespace RxDotNetDemo
         {
             return GetObservableByDefer().ToLookup(x => x.Length);
         }
-        
+
+        /// <summary>
+        /// Observable 实现 ForEach 和 While 等循环操作，复杂用 Generate() 实现，简单用 Range() 实现
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<string> GetObservableByLoopWithGenerate()
+        {
+            return Observable.Generate(1, i => i <= 5, i => i + 1, i =>
+            {
+                var builder = new StringBuilder();
+                for (int j = 1; j <= i; j++)
+                {
+                    builder.Append(i.ToString());
+                }
+                return builder.ToString();
+            });
+        }
+
+        /// <summary>
+        /// Observable 实现 ForEach 和 While 等循环操作，复杂用 Generate() 实现，简单用 Range() 实现
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<string> GetObservableByLoopWithRange()
+        {
+            return Observable.Range(1, 5).Select(i =>
+            {
+                var builder = new StringBuilder();
+                for (int j = 1; j <= i; j++)
+                {
+                    builder.Append(i.ToString());
+                }
+                return builder.ToString();
+            });
+        }
+
+
     }
 }
