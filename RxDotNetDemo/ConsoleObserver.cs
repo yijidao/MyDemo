@@ -8,14 +8,20 @@ namespace RxDotNetDemo
     {
         private readonly string _name;
         private readonly Action<T> _onNext;
+        private DateTime StartTime { get; set; }
 
         public ConsoleObserver(string name = "", Action<T> onNext = null)
         {
             _name = name;
             _onNext = onNext;
+            PrintStartTime();
         }
 
-        public void OnCompleted() => Console.WriteLine($"{_name} - OnCompleted()");
+        public void OnCompleted()
+        {
+            Console.WriteLine($"{_name} - OnCompleted()");
+            PrintEndtTime();
+        }
 
         public void OnError(Exception error)
         {
@@ -33,6 +39,18 @@ namespace RxDotNetDemo
             {
                 _onNext.Invoke(value);
             }
+        }
+
+        private void PrintStartTime()
+        {
+            StartTime = DateTime.Now;
+            Console.WriteLine($"-----   Start  [{StartTime}]      -----");
+        }
+
+        private void PrintEndtTime()
+        {
+            Console.WriteLine($"-----   Elapsed Time  [{(DateTime.Now - StartTime).Seconds}(Second)]   -----");
+            Console.WriteLine($"-----   End  [{DateTime.Now}]      -----");
         }
     }
 }
