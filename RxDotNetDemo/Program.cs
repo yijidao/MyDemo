@@ -124,9 +124,9 @@ namespace RxDotNetDemo
         {
             //CreateFromAsynchronous.GeneratePrimeByImperative(5); 
             //CreateFromAsynchronous.GeneratePrime(5).Timestamp().SubscribeConsole("同步方法生成Observable");
-            CreateFromAsynchronous.GeneratePrimeFromTask(5).SubscribeConsole("异步方法生成 Observable");
-            CreateFromAsynchronous.SimpleGeneratePrimeFromTask(5).SubscribeConsole("简化版本异步方法生成 Observable");
-
+            //CreateFromAsynchronous.GeneratePrimeFromTask(5).SubscribeConsole("异步方法生成 Observable");
+            //CreateFromAsynchronous.SimpleGeneratePrimeFromTask(5).Timestamp().SubscribeConsole("简化版本异步方法生成 Observable");
+            CreateFromAsynchronous.AsyncAwaitGenerate(5).Timestamp().SubscribeConsole("AsyncAwait 模式生成 Observable");
         }
 
     }

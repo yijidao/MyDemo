@@ -42,7 +42,7 @@ namespace RxDotNetDemo
         }
 
         /// <summary>
-        /// 异步方法生成Observable，不阻塞线程
+        /// 异步方法生成Observable，不阻塞线程，可取消
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
@@ -66,7 +66,7 @@ namespace RxDotNetDemo
         }
 
         /// <summary>
-        /// 简化版的异步方法生成Observable，不阻塞线程
+        /// 简化版的异步方法生成Observable，不阻塞线程，可取消
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
@@ -83,6 +83,30 @@ namespace RxDotNetDemo
                     }
                     o.OnCompleted();
                 }, ct);
+            });
+        }
+
+        /// <summary>
+        /// AsyncAwait 模式生成Observable
+        /// </summary>
+        /// <param name="amout"></param>
+        /// <returns></returns>
+        public static IObservable<int> AsyncAwaitGenerate(int amout)
+        {
+            return Observable.Create<int>(async o =>
+            {
+                var primes1 = await PrimeGenerator.GenerateAsync(5);
+                foreach (var prime in primes1)
+                {
+                    o.OnNext(prime);
+                }
+
+                var primes2 = await PrimeGenerator.GenerateAsync(5);
+                foreach (var prime in primes2)
+                {
+                    o.OnNext(prime);
+                }
+                o.OnCompleted();
             });
         }
     }
