@@ -107,6 +107,12 @@ namespace RxDotNetDemo
             CreateOperate.GetObservableByLoopWithRange().SubscribeConsole("Range 循环");
             // Using
             CreateOperate.GetObservableByResource().SubscribeConsole("Using 读取流");
+            
+            // 生成简单的Observable
+            CreateOperate.GetObservableByReturn().SubscribeConsole("Return");
+            CreateOperate.GetObservableByThrow().SubscribeConsole("Throw");
+            CreateOperate.GetObservableByNever().SubscribeConsole("Never");
+            CreateOperate.GetObservableByEmpty().SubscribeConsole("Empty");
         }
 
     }

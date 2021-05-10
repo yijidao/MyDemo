@@ -220,5 +220,42 @@ namespace RxDotNetDemo
                     stream =>
                 Observable.Generate(stream, s => !s.EndOfStream, s => s, s => s.ReadLine()));
         }
+
+        /// <summary>
+        /// Return 会直接返回一个Observable
+        /// Return、Never、Throw、Empty 会生成简单的 Observable,一般是用于单元测试情况下使用。
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<string> GetObservableByReturn()
+        {
+            return Observable.Return("CreateByReturn");
+        }
+
+        /// <summary>
+        /// Never 会生成一个永远不会结束的 Observable
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<string> GetObservableByNever()
+        {
+            return Observable.Never<string>();
+        }
+
+        /// <summary>
+        /// Throw 会生成一个抛出异常的 Observable
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<Exception> GetObservableByThrow()
+        {
+            return Observable.Throw<Exception>(new Exception("测试异常"));
+        }
+
+        /// <summary>
+        /// Empty 会生成一个空的 Observable
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<string> GetObservableByEmpty()
+        {
+            return Observable.Empty<string>();
+        }
     }
 }
