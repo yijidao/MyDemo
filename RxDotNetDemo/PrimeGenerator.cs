@@ -53,6 +53,16 @@ namespace RxDotNetDemo
         }
 
         /// <summary>
+        /// 异步生成质数，这是实现Task的方式是错的，这里只是为了测试用
+        /// </summary>
+        /// <param name="amout"></param>
+        /// <returns></returns>
+        public static async Task<IReadOnlyCollection<int>> GenerateAsync(int amout)
+        {
+            return await Task.Run(() => Generate(amout).ToList().AsReadOnly());
+        }
+
+        /// <summary>
         /// 模拟计算质数的过程
         /// </summary>
         /// <param name="index"></param>
