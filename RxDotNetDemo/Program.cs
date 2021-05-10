@@ -16,11 +16,8 @@ namespace RxDotNetDemo
             Console.WriteLine("Start...");
 
             //StockDemo();
-            CreateDemo();
-
-
-            CreateOperate.GetObservableByCreate();
-
+            //CreateDemo();
+            CreateFromDotNetAsynchronousType();
 
             Console.ReadLine();
         }
@@ -49,10 +46,15 @@ namespace RxDotNetDemo
             });
         }
 
-        private static void CreateDemo()
+        /// <summary>
+        /// 生成Observable的测试代码
+        /// </summary>
+        private static async void CreateDemo()
         {
             // ByCreate
-            var byCreate = CreateOperate.GetObservableByCreate();
+            Console.WriteLine($"ByCreate Start... {DateTime.Now.ToLongTimeString()}");
+            var byCreate = CreateOperate.GetObservableByCreate().Timestamp();
+            await Task.Delay(TimeSpan.FromSeconds(2));
             byCreate.SubscribeConsole("ByCreate");
 
             // ByDefer
@@ -113,6 +115,18 @@ namespace RxDotNetDemo
             CreateOperate.GetObservableByThrow().SubscribeConsole("Throw");
             CreateOperate.GetObservableByNever().SubscribeConsole("Never");
             CreateOperate.GetObservableByEmpty().SubscribeConsole("Empty");
+        }
+
+        /// <summary>
+        /// 从异步中生成Observable的测试代码
+        /// </summary>
+        private static void CreateFromDotNetAsynchronousType()
+        {
+            //CreateFromAsynchronous.GeneratePrimeByImperative(5); 
+            //CreateFromAsynchronous.GeneratePrime(5).Timestamp().SubscribeConsole("同步方法生成Observable");
+            CreateFromAsynchronous.GeneratePrimeFromTask(5).SubscribeConsole("异步方法生成 Observable");
+            CreateFromAsynchronous.SimpleGeneratePrimeFromTask(5).SubscribeConsole("简化版本异步方法生成 Observable");
+
         }
 
     }
