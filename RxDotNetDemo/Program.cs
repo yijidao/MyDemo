@@ -17,7 +17,8 @@ namespace RxDotNetDemo
 
             //StockDemo();
             //CreateDemo();
-            CreateFromDotNetAsynchronousType();
+            //CreateFromDotNetAsynchronousType();
+            PeriodicCreate();
 
             Console.ReadLine();
         }
@@ -130,7 +131,12 @@ namespace RxDotNetDemo
             //CreateFromAsynchronous.TaskToObservable(5).Timestamp().SubscribeConsole("Task 生成 Observable");
             //CreateFromAsynchronous.RunAsyncCodeInPipeline().Timestamp().SubscribeConsole("在执行链路中运行异步方法");
             //CreateFromAsynchronous.RunAsyncCodeInPipelineByLinq().Timestamp().SubscribeConsole("在执行链路中运行异步方法的Linq实现");
-            CreateFromAsynchronous.RunAsyncCodeInPipelineWithOrder().Timestamp().SubscribeConsole("在执行链路中运行异步方法，且结果有序");
+            //CreateFromAsynchronous.RunAsyncCodeInPipelineWithOrder().Timestamp().SubscribeConsole("在执行链路中运行异步方法，且结果有序");
+        }
+
+        private static void PeriodicCreate()
+        {
+            CreateOfPeriodicBehavior.CreateByInterval().SubscribeConsole("周期性生成Observable");
         }
 
     }
