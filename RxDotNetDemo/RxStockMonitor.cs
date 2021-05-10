@@ -47,8 +47,6 @@ namespace RxDotNetDemo
 
     class DrasticChange
     {
-
-
         public string Symbol { get; set; }
 
         public decimal ChangeRadio { get; set; }

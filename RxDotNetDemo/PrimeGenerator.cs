@@ -24,17 +24,7 @@ namespace RxDotNetDemo
             var set = new HashSet<int>();
             while (set.Count < amout)
             {
-                var isPrime = true;
-                for (int i = 2; i < current; i++)
-                {
-                    if (current % i == 0) // 不是质数
-                    {
-                        isPrime = false;
-                        break;
-                    }
-                }
-
-                if (isPrime)
+                if (CheckPrime(current))
                 {
                     set.Add(current);
                 }
@@ -53,7 +43,7 @@ namespace RxDotNetDemo
         }
 
         /// <summary>
-        /// 异步生成质数，这是实现Task的方式是错的，这里只是为了测试用
+        /// 异步生成质数，这里只是为了测试用
         /// </summary>
         /// <param name="amout"></param>
         /// <returns></returns>
@@ -71,6 +61,27 @@ namespace RxDotNetDemo
         {
             Task.Delay(1000).Wait();
             return index < Primes.Length ? Primes[index] : Primes.Last();
+        }
+
+        public static bool CheckPrime(int value)
+        {
+            var isPrime = true;
+            for (int i = 2; i < value; i++)
+            {
+                if (value % i == 0) // 不是质数
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+
+            return isPrime;
+        }
+
+        public static async Task<bool> CheckPrimeAsync(int value)
+        {
+            await Task.Delay(1000);
+            return CheckPrime(value);
         }
     }
 }

@@ -126,7 +126,11 @@ namespace RxDotNetDemo
             //CreateFromAsynchronous.GeneratePrime(5).Timestamp().SubscribeConsole("同步方法生成Observable");
             //CreateFromAsynchronous.GeneratePrimeFromTask(5).SubscribeConsole("异步方法生成 Observable");
             //CreateFromAsynchronous.SimpleGeneratePrimeFromTask(5).Timestamp().SubscribeConsole("简化版本异步方法生成 Observable");
-            CreateFromAsynchronous.AsyncAwaitGenerate(5).Timestamp().SubscribeConsole("AsyncAwait 模式生成 Observable");
+            //CreateFromAsynchronous.AsyncAwaitGenerate(5).Timestamp().SubscribeConsole("AsyncAwait 模式生成 Observable");
+            //CreateFromAsynchronous.TaskToObservable(5).Timestamp().SubscribeConsole("Task 生成 Observable");
+            //CreateFromAsynchronous.RunAsyncCodeInPipeline().Timestamp().SubscribeConsole("在执行链路中运行异步方法");
+            //CreateFromAsynchronous.RunAsyncCodeInPipelineByLinq().Timestamp().SubscribeConsole("在执行链路中运行异步方法的Linq实现");
+            CreateFromAsynchronous.RunAsyncCodeInPipelineWithOrder().Timestamp().SubscribeConsole("在执行链路中运行异步方法，且结果有序");
         }
 
     }

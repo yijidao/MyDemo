@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -88,6 +89,7 @@ namespace RxDotNetDemo
 
         /// <summary>
         /// AsyncAwait 模式生成Observable
+        /// 执行时间等于所有task总和
         /// </summary>
         /// <param name="amout"></param>
         /// <returns></returns>
@@ -109,5 +111,61 @@ namespace RxDotNetDemo
                 o.OnCompleted();
             });
         }
+
+        /// <summary>
+        /// Task 生成 Observable，使用 ToObservable。
+        /// 这个写法很简单，而且执行时间是耗时最长的 Task 时间，跟 AsyncAwaitGenerate 不一样
+        /// </summary>
+        /// <param name="amout"></param>
+        /// <returns></returns>
+        public static IObservable<int> TaskToObservable(int amout)
+        {
+            var o1 = PrimeGenerator.GenerateAsync(5).ToObservable();
+            var o2 = PrimeGenerator.GenerateAsync(5).ToObservable();
+            return o1.Concat(o2)  // 先用 Concat 连接两个集合
+                .SelectMany(primes => primes); // 再用 SelectMany 投影每个值
+        }
+
+        /// <summary>
+        /// 在执行链路中运行异步方法
+        /// 比如想在 Where() 中运行异步判断，但是 Where 不支持返回值 Task<bool>，所以可以使用 SelectMany 的重载方法来进行投影，并生成新的带原始数据的对象
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<int> RunAsyncCodeInPipeline()
+        {
+            return Observable.Range(2, 9)
+                .SelectMany(x => PrimeGenerator.CheckPrimeAsync(x), (number, isPrime) => new { number, isPrime })
+                .Where(x => x.isPrime)
+                .Select(x => x.number);
+        }
+
+        /// <summary>
+        /// RunAsyncCodeInPipeline 的 linq 实现，更直观
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<int> RunAsyncCodeInPipelineByLinq()
+        {
+            var resule = from number in Observable.Range(2, 9)
+                         from isPrime in PrimeGenerator.CheckPrimeAsync(number)
+                         where isPrime
+                         select number;
+            return resule;
+        }
+
+        /// <summary>
+        /// 在链路中中运行异步方法，而且结果顺序输出
+        /// 使用 Select 和 Concat  代替 SelectMany 就可以顺序输出
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<int> RunAsyncCodeInPipelineWithOrder()
+        {
+            return Observable.Range(2, 9)
+                .Select(async x => new {number = x, isPrime = await PrimeGenerator.CheckPrimeAsync(x)})
+                .Concat()
+                .Where(x => x.isPrime)
+                .Select(x => x.number);
+        }
+
+
     }
 }
