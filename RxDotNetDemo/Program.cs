@@ -24,7 +24,8 @@ namespace RxDotNetDemo
             //CreateDemo();
             //CreateFromDotNetAsynchronousType();
             //PeriodicCreate();
-            CreateObserverDemo();
+            //CreateObserverDemo();
+            ControlObservableAndObserver();
 
             Console.ReadLine();
         }
@@ -116,7 +117,7 @@ namespace RxDotNetDemo
             CreateOperate.GetObservableByLoopWithRange().SubscribeConsole("Range 循环");
             // Using
             CreateOperate.GetObservableByResource().SubscribeConsole("Using 读取流");
-            
+
             // 生成简单的Observable
             CreateOperate.GetObservableByReturn().SubscribeConsole("Return");
             CreateOperate.GetObservableByThrow().SubscribeConsole("Throw");
@@ -156,11 +157,25 @@ namespace RxDotNetDemo
         /// </summary>
         private static void CreateObserverDemo()
         {
-            //CreateObserver.CreateBySubscribe();
-            //CreateObserver.NoPassOnErrorAndAsync();
-            //CreateObserver.SubscribeWithCancellation();
+            CreateObserver.GetObserverBySubscribe();
+            CreateObserver.NoPassOnErrorAndAsync();
+            CreateObserver.SubscribeWithCancellation();
             CreateObserver.GetObserverByCreate();
         }
 
+        /// <summary>
+        /// 控制 Observable 和 Observer 之间关系的操作符
+        /// </summary>
+        private static void ControlObservableAndObserver()
+        {
+            //ControlOperate.DelayingSubscription();
+            //ControlOperate.StopEmitForAbsoluteTime();
+            //ControlOperate.StopEmitForAnotherObservable2();
+            //ControlOperate.SkinNotification();
+            //ControlOperate.StopByTakeWhile();
+            //ControlOperate.StartBySkinWhile();
+            //ControlOperate.ResubscribingByRepeat();
+            ControlOperate.AddSideEffect();
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace RxDotNetDemo
         }
 
         /// <summary>
-        /// 如果没有给 OnError 传值，并且执行了异步代码，就算异步代码抛异常了，也无法捕获到异常，而是直接结束
+        /// 如果没有给 OnError 传值，并且执行管道中执行了异步代码，就算异步代码抛异常了，也无法捕获到异常，而是直接结束
         /// </summary>
         public static void NoPassOnErrorAndAsync()
         {
