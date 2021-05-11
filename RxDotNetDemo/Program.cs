@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RxDotNetDemo.Controlling_the_observable_temperature.Multicasing_with_subjects;
 using RxDotNetDemo.Extensions;
 
 namespace RxDotNetDemo
@@ -25,7 +26,8 @@ namespace RxDotNetDemo
             //CreateFromDotNetAsynchronousType();
             //PeriodicCreate();
             //CreateObserverDemo();
-            ControlObservableAndObserver();
+            //ControlObservableAndObserver();
+            SujectionDemo();
 
             Console.ReadLine();
         }
@@ -168,14 +170,19 @@ namespace RxDotNetDemo
         /// </summary>
         private static void ControlObservableAndObserver()
         {
-            //ControlOperate.DelayingSubscription();
-            //ControlOperate.StopEmitForAbsoluteTime();
-            //ControlOperate.StopEmitForAnotherObservable2();
-            //ControlOperate.SkinNotification();
-            //ControlOperate.StopByTakeWhile();
-            //ControlOperate.StartBySkinWhile();
-            //ControlOperate.ResubscribingByRepeat();
+            ControlOperate.DelayingSubscription();
+            ControlOperate.StopEmitForAbsoluteTime();
+            ControlOperate.StopEmitForAnotherObservable2();
+            ControlOperate.SkinNotification();
+            ControlOperate.StopByTakeWhile();
+            ControlOperate.StartBySkinWhile();
+            ControlOperate.ResubscribingByRepeat();
             ControlOperate.AddSideEffect();
+        }
+
+        private static void SujectionDemo()
+        {
+            SimpleBroadcastingWithSubject.SubjectToBroad();
         }
     }
 }

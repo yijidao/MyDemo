@@ -51,7 +51,7 @@ namespace ReactiveUIDemo.Views
                 .TakeUntil(mouseUp)
                 .Select(m => m.EventArgs.GetPosition(canvas))
                 .Repeat()
-                .Subscribe(pos => line.Points.Add(pos));
+                .Subscribe(pos => line?.Points.Add(pos));
         }
     }
 }
