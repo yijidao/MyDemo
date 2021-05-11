@@ -180,9 +180,14 @@ namespace RxDotNetDemo
             ControlOperate.AddSideEffect();
         }
 
+        /// <summary>
+        /// subject 练习
+        /// </summary>
         private static void SujectionDemo()
         {
-            SimpleBroadcastingWithSubject.SubjectToBroad();
+            //SimpleBroadcastingWithSubject.SubjectToBroad();
+            //SimpleBroadcastingWithSubject.MultipleSource();
+            SimpleBroadcastingWithSubject.ClassicMisuse();
         }
     }
 }

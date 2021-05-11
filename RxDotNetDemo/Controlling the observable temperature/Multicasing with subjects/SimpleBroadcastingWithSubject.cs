@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Reactive.Threading.Tasks;
 using System.Text;
 using RxDotNetDemo.Extensions;
 
@@ -19,7 +22,7 @@ namespace RxDotNetDemo.Controlling_the_observable_temperature.Multicasing_with_s
     public class SimpleBroadcastingWithSubject
     {
         /// <summary>
-        /// Subject 实现广播，这里会有多个OnComplete 被调用
+        /// Subject 实现广播
         /// </summary>
         public static void SubjectToBroad()
         {
@@ -32,6 +35,34 @@ namespace RxDotNetDemo.Controlling_the_observable_temperature.Multicasing_with_s
             sbj.OnCompleted();
         }
 
-        
+        /// <summary>
+        /// 如果 subject 订阅了多个 Observable，只要其中一个调用了 OnComplete，那么 Subject 就会调用 OnComplete 并结束
+        /// </summary>
+        public static void MultipleSource()
+        {
+            var sbj = new Subject<string>();
+            Observable.Interval(TimeSpan.FromSeconds(1))
+                .Select(x => $"First: {x}")
+                .Take(5)
+                .Subscribe(sbj);
+            Observable.Interval(TimeSpan.FromSeconds(2))
+                .Select(x => $"Second: {x}")
+                .Take(5)
+                .Subscribe(sbj);
+            sbj.SubscribeConsole();
+        }
+
+        /// <summary>
+        /// 一个典型的错误使用 Subject 的方式，就是用来合并两个 Observable，合并应该用 Meger
+        /// 使用 Subject 前先思考一下，有没有重新造轮子了
+        /// </summary>
+        public static void ClassicMisuse()
+        {
+            var sbj = new Subject<string>();
+            sbj.SubscribeConsole();
+
+            Observable.Timer(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1)).Select(x => $"IEnumerable {x}").Subscribe(sbj); // 这个 Observable 没有机会完成，因为另一个 Observable 先完成了，所以整个Subject 就完成了
+            PrimeGenerator.GenerateAsync(5).ToObservable().SelectMany(x => x.Select(y => $"Task {y}")).Subscribe(sbj);
+        }
     }
 }
