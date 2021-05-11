@@ -15,10 +15,16 @@ namespace RxDotNetDemo
 
             Console.WriteLine("Start...");
 
+            //TaskScheduler.UnobservedTaskException += (sender, eventArgs) =>
+            //{
+            //    Console.WriteLine($"UnobservedTaskException： {eventArgs.Exception}");
+            //};
+
             //StockDemo();
             //CreateDemo();
             //CreateFromDotNetAsynchronousType();
-            PeriodicCreate();
+            //PeriodicCreate();
+            CreateObserverDemo();
 
             Console.ReadLine();
         }
@@ -143,6 +149,17 @@ namespace RxDotNetDemo
             CreateOfPeriodicBehavior.CreateByTimer1().Timestamp().SubscribeConsole("ByTimer(dueTime, period)");
             CreateOfPeriodicBehavior.CreateByTimer2().Timestamp().SubscribeConsole("ByTimer(dueTime)");
             CreateOfPeriodicBehavior.CreateByTime3().Timestamp().SubscribeConsole("Timer(DateTimeOffset dueTime)");
+        }
+
+        /// <summary>
+        /// 创建 Observer
+        /// </summary>
+        private static void CreateObserverDemo()
+        {
+            //CreateObserver.CreateBySubscribe();
+            //CreateObserver.NoPassOnErrorAndAsync();
+            //CreateObserver.SubscribeWithCancellation();
+            CreateObserver.GetObserverByCreate();
         }
 
     }
