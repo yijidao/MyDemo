@@ -27,7 +27,7 @@ namespace RxDotNetDemo
             //PeriodicCreate();
             //CreateObserverDemo();
             //ControlObservableAndObserver();
-            SujectionDemo();
+            SubjectDemo();
 
             Console.ReadLine();
         }
@@ -183,11 +183,15 @@ namespace RxDotNetDemo
         /// <summary>
         /// subject 练习
         /// </summary>
-        private static void SujectionDemo()
+        private static void SubjectDemo()
         {
             //SimpleBroadcastingWithSubject.SubjectToBroad();
             //SimpleBroadcastingWithSubject.MultipleSource();
-            SimpleBroadcastingWithSubject.ClassicMisuse();
+            //SimpleBroadcastingWithSubject.ClassicMisuse();
+            //SimpleBroadcastingWithSubject.AsyncSubjectConvertTask();
+            //SimpleBroadcastingWithSubject.PreserveLastStateWithBehaviorSubject();
+            //SimpleBroadcastingWithSubject.CacheSequenceWthReplaySubject();
+            SimpleBroadcastingWithSubject.ProtectSubject();
         }
     }
 }
