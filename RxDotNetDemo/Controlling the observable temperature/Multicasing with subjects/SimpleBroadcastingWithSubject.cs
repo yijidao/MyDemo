@@ -129,7 +129,7 @@ namespace RxDotNetDemo.Controlling_the_observable_temperature.Multicasing_with_s
         }
 
         /// <summary>
-        /// 将 subject 转型成 observable 提供给用户
+        /// 使用 AsObservable 将 subject 转型成 observable 提供给用户
         /// 不能直接提供 subject，因为这样用户可以直接调用 onNext() onComplete() 等方法造成破坏性的修改
         /// </summary>
         public static void ProtectSubject()
