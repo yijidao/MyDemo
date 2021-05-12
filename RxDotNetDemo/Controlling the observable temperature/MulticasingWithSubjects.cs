@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RxDotNetDemo.Extensions;
 
-namespace RxDotNetDemo.Controlling_the_observable_temperature.Multicasing_with_subjects
+namespace RxDotNetDemo.Controlling_the_observable_temperature
 {
     /// <summary>
     /// Subject 既可以充当Observable，也可以充当Observer，所以它经常被作为 Observable 和 Observer 沟通的媒介
@@ -20,7 +20,7 @@ namespace RxDotNetDemo.Controlling_the_observable_temperature.Multicasing_with_s
     /// 3. ReplaySubjec<T>: 广播当前和未来收到的消息给Observer
     /// 4. BehaviorSuject<T>: 广播并缓存最新值
     /// </summary>
-    public class SimpleBroadcastingWithSubject
+    public class MulticasingWithSubjects
     {
         /// <summary>
         /// 如果 subject 订阅了多个 Observable，只要其中一个调用了 OnComplete，那么 Subject 就会调用 OnComplete 并结束
@@ -40,9 +40,9 @@ namespace RxDotNetDemo.Controlling_the_observable_temperature.Multicasing_with_s
         }
 
         /// <summary>
-        /// Subject 实现广播， 当订阅后，可以收到 subject 发射的通知，但是无法收到之前发射的通知
+        /// Subject 实现广播， 当订阅后，可以收到 subject 发射的通知，但是无法收到之前发射的通知 
         /// </summary>
-        public static void SubjectToBroad()
+        public static void SimpleBroadcastingWithSubject()
         {
             var sbj = new Subject<int>();
             //sbj.OnNext(1); // 在订阅前发射通知，则订阅无法收到

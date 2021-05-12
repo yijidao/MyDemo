@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RxDotNetDemo.Controlling_the_observable_temperature.Multicasing_with_subjects;
+using RxDotNetDemo.Controlling_the_observable_temperature;
 using RxDotNetDemo.Extensions;
 
 namespace RxDotNetDemo
@@ -27,7 +27,7 @@ namespace RxDotNetDemo
             //PeriodicCreate();
             //CreateObserverDemo();
             //ControlObservableAndObserver();
-            SubjectDemo();
+            //SubjectDemo();
 
             Console.ReadLine();
         }
@@ -185,13 +185,13 @@ namespace RxDotNetDemo
         /// </summary>
         private static void SubjectDemo()
         {
-            //SimpleBroadcastingWithSubject.SubjectToBroad();
-            //SimpleBroadcastingWithSubject.MultipleSource();
-            //SimpleBroadcastingWithSubject.ClassicMisuse();
-            //SimpleBroadcastingWithSubject.AsyncSubjectConvertTask();
-            //SimpleBroadcastingWithSubject.PreserveLastStateWithBehaviorSubject();
-            //SimpleBroadcastingWithSubject.CacheSequenceWthReplaySubject();
-            SimpleBroadcastingWithSubject.ProtectSubject();
+            MulticasingWithSubjects.SimpleBroadcastingWithSubject();
+            MulticasingWithSubjects.MultipleSource();
+            MulticasingWithSubjects.ClassicMisuse();
+            MulticasingWithSubjects.AsyncSubjectConvertTask();
+            MulticasingWithSubjects.PreserveLastStateWithBehaviorSubject();
+            MulticasingWithSubjects.CacheSequenceWthReplaySubject();
+            MulticasingWithSubjects.ProtectSubject();
         }
     }
 }
