@@ -197,7 +197,12 @@ namespace RxDotNetDemo
 
         private static void HotAndColdDemo()
         {
-            HeatingAndCoolingObservable.TurnColdObservableHot();
+            //HeatingAndCoolingObservable.TurnColdObservableHot();
+            //HeatingAndCoolingObservable.ReusingThePublishObservable();
+            //HeatingAndCoolingObservable.ReusingThePublishObservable2();
+            //HeatingAndCoolingObservable.TurnColdObservableHotWithCacheValue();
+            HeatingAndCoolingObservable.PublishLastDemo();
+
         }
     }
 }
