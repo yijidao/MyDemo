@@ -17,8 +17,8 @@ namespace RxDotNetDemo.Controlling_the_observable_temperature
     /// Rx 提供了四种 ISubject 的实现
     /// 1. Subject<T>: 广播每个接收到的消息给所有 Observer，当订阅后，可以收到 subject 发射的通知，但是无法收到之前发射的通知
     /// 2. AsyncSubject<T>: 代表一个异步操作，并且在异步完成时，发射出异步操作的返回值。也就是缓存最后收到的值，也就是调用了 OnComplete() 之后才会发射出最后收到的通知。
-    /// 3. ReplaySubjec<T>: 广播当前和未来收到的消息给Observer
-    /// 4. BehaviorSuject<T>: 广播并缓存最新值
+    /// 3. ReplaySubject<T>: 广播当前和未来收到的消息给Observer
+    /// 4. BehaviorSubject<T>: 广播并缓存最新值
     /// </summary>
     public class MulticasingWithSubjects
     {

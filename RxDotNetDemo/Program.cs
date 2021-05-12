@@ -201,8 +201,13 @@ namespace RxDotNetDemo
             //HeatingAndCoolingObservable.ReusingThePublishObservable();
             //HeatingAndCoolingObservable.ReusingThePublishObservable2();
             //HeatingAndCoolingObservable.TurnColdObservableHotWithCacheValue();
-            HeatingAndCoolingObservable.PublishLastDemo();
+            //HeatingAndCoolingObservable.PublishLastDemo();
+            //HeatingAndCoolingObservable.ReconnectConnectableObservable();
+            //HeatingAndCoolingObservable.AutoDisconnectWithRefCount();
+            HeatingAndCoolingObservable.HotObserverToCold();
+
 
         }
+
     }
 }

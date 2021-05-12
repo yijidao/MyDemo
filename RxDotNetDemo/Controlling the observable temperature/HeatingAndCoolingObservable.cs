@@ -16,6 +16,9 @@ namespace RxDotNetDemo.Controlling_the_observable_temperature
     /// 1. Cold 只有在 Observer 订阅时才会发射通知，并且是发射完整序列的通知，每个 Observable 收到的通知都是互相隔离的。
     /// 2. Create、Defer、Range、Interval 等操作符产生的 Observable  都是 Cold 的。
     /// </summary>
+    ///
+    /// Publish 的实现中使用了 Multicast 方法，这是一个底层的方法，如果需要实现自己的 Publish，使用具体的 Subject，可以参考一下
+    /// 
     public class HeatingAndCoolingObservable
     {
         /// <summary>
@@ -66,7 +69,7 @@ namespace RxDotNetDemo.Controlling_the_observable_temperature
             var numbers = Observable.Range(1, 5).Select(_ => i++);
             var o = numbers.Zip(numbers, (i1, i2) => i1 + i2);
             o.SubscribeConsole(); // 输出 1 5 9 13 17
-            
+
         }
 
         /// <summary>
@@ -81,7 +84,7 @@ namespace RxDotNetDemo.Controlling_the_observable_temperature
         }
 
         /// <summary>
-        /// PubishLast 可以实现 AsyncSubject
+        /// PublishLast 可以实现 AsyncSubject
         /// </summary>
         public static void PublishLastDemo()
         {
@@ -93,5 +96,60 @@ namespace RxDotNetDemo.Controlling_the_observable_temperature
             co.SubscribeConsole("second");
         }
 
+        /// <summary>
+        /// 使用 IDispose.Dispose() 和 Connect() 来实现切换 subject 的源，主要用于切换服务或者数据源等场景吧
+        /// 1. 必须先调用 Dispose 再调用 Connect
+        /// 2. 必须还没调用 OnComplete
+        /// </summary>
+        public static void ReconnectConnectableObservable()
+        {
+            var co = Observable.Defer(() => Get()).Publish();
+            co.SubscribeConsole("first");
+            var s = co.Connect();
+            Task.Delay(2000).Wait();
+            s.Dispose();
+            s = co.Connect();
+
+            IObservable<long> Get()
+            {
+                return Observable.Interval(TimeSpan.FromSeconds(1));
+            }
+        }
+
+        /// <summary>
+        /// 调用 RefCount() 可以实现当没有Observer 订阅 subject 时，subject 自动取消对 observable 的订阅
+        /// </summary>
+        public static void AutoDisconnectWithRefCount()
+        {
+            var co = Observable.Interval(TimeSpan.FromSeconds(1)).Do(n =>
+            {
+                Console.WriteLine($"generate {n}");
+            }).Publish().RefCount();
+            //co.Connect();
+            var s = co.SubscribeConsole("first");
+            Task.Delay(5000).Wait();
+            s.Dispose(); // 调用 dispose 取消对 subject 的订阅
+            Task.Delay(5000).Wait();
+            var s2 = co.SubscribeConsole("second");
+            //s2.Dispose();
+        }
+
+        /// <summary>
+        /// 调用 Replay() 可以实现 ReplaySubject 的功能，当调用 Replay 时，会缓存当前的通知和未来的通知，然后将整个序列发射给 observable
+        /// 1. Replay() 可以实现 Hot To Cold
+        /// 2. Replay() 无法缓存调用之前的通知
+        /// 3. Replay() 有多个重载，支持个数或者时间滑动窗设置缓存大小
+        /// </summary>
+        public static void HotObserverToCold()
+        {
+            var co = Observable.Interval(TimeSpan.FromSeconds(1))
+                .Take(5)
+                .Replay();
+            co.Connect();
+            co.SubscribeConsole("first");
+
+            Task.Delay(3000).Wait();
+            co.SubscribeConsole("second");
+        }
     }
 }
