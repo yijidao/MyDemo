@@ -28,6 +28,7 @@ namespace RxDotNetDemo
             //CreateObserverDemo();
             //ControlObservableAndObserver();
             //SubjectDemo();
+            HotAndColdDemo();
 
             Console.ReadLine();
         }
@@ -192,6 +193,11 @@ namespace RxDotNetDemo
             MulticasingWithSubjects.PreserveLastStateWithBehaviorSubject();
             MulticasingWithSubjects.CacheSequenceWthReplaySubject();
             MulticasingWithSubjects.ProtectSubject();
+        }
+
+        private static void HotAndColdDemo()
+        {
+            HeatingAndCoolingObservable.TurnColdObservableHot();
         }
     }
 }
