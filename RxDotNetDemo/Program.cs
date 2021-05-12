@@ -252,7 +252,8 @@ namespace RxDotNetDemo
             //CombiningObservables.CombiningTheLatestEmittedValue();
             //CombiningObservables.ConcatenatingObservables();
             //CombiningObservables.ConcatenatingObservables2();
-            CombiningObservables.ConcatenatingObservables3();
+            //CombiningObservables.ConcatenatingObservables3();
+            CombiningObservables.MergingObservables();
         }
     }
 }

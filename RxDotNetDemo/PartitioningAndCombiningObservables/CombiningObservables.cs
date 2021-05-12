@@ -84,5 +84,17 @@ namespace RxDotNetDemo.PartitioningAndCombiningObservables
             o.Concat(o2)
                 .SubscribeConsole("ColdAndCold");
         }
+
+        /// <summary>
+        /// merge可以把两个源的通知发射到 meger 后的源里，而且是实时的，所以这个demo，就算 o 在前面，o2 在后面，但是因为 o delay了一下，所以发射出的消息还是排在 o2 后面
+        /// </summary>
+        public static void MergingObservables()
+        {
+            var o = Task.Delay(500).ContinueWith(_ => new[] {"A1", "A2"}).ToObservable();
+            var o2 = Task.FromResult(new []{"B1", "B2"}).ToObservable();
+            o.Merge(o2)
+                .SelectMany(x => x)
+                .SubscribeConsole("merge");
+        }
     }
 }
