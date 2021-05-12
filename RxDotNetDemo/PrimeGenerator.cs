@@ -34,6 +34,11 @@ namespace RxDotNetDemo
             return set.ToArray();
         }
 
+        /// <summary>
+        /// 同步生成质数,这里加了延时,模拟计算
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         public static IEnumerable<int> Generate(int amount)
         {
             for (int i = 0; i < amount; i++)
@@ -63,9 +68,14 @@ namespace RxDotNetDemo
             return index < Primes.Length ? Primes[index] : Primes.Last();
         }
 
-        public static bool CheckPrime(int value)
+        public static bool CheckPrime(long value)
         {
             var isPrime = true;
+            if (value < 2)
+            {
+                return false;
+            }
+
             for (int i = 2; i < value; i++)
             {
                 if (value % i == 0) // 不是质数

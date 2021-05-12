@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RxDotNetDemo.BasicQueryOperators;
 using RxDotNetDemo.Controlling_the_observable_temperature;
 using RxDotNetDemo.Extensions;
 
@@ -28,8 +29,10 @@ namespace RxDotNetDemo
             //CreateObserverDemo();
             //ControlObservableAndObserver();
             //SubjectDemo();
-            HotAndColdDemo();
-
+            //HotAndColdDemo();
+            BasicQueryOperatorsDemo();
+            
+            Console.WriteLine("Press Key...");
             Console.ReadLine();
         }
 
@@ -195,19 +198,29 @@ namespace RxDotNetDemo
             MulticasingWithSubjects.ProtectSubject();
         }
 
+        /// <summary>
+        /// 通过subject,实现 Hot 和 Cold 的各种骚操作
+        /// </summary>
         private static void HotAndColdDemo()
         {
-            //HeatingAndCoolingObservable.TurnColdObservableHot();
-            //HeatingAndCoolingObservable.ReusingThePublishObservable();
-            //HeatingAndCoolingObservable.ReusingThePublishObservable2();
-            //HeatingAndCoolingObservable.TurnColdObservableHotWithCacheValue();
-            //HeatingAndCoolingObservable.PublishLastDemo();
-            //HeatingAndCoolingObservable.ReconnectConnectableObservable();
-            //HeatingAndCoolingObservable.AutoDisconnectWithRefCount();
+            HeatingAndCoolingObservable.TurnColdObservableHot();
+            HeatingAndCoolingObservable.ReusingThePublishObservable();
+            HeatingAndCoolingObservable.ReusingThePublishObservable2();
+            HeatingAndCoolingObservable.TurnColdObservableHotWithCacheValue();
+            HeatingAndCoolingObservable.PublishLastDemo();
+            HeatingAndCoolingObservable.ReconnectConnectableObservable();
+            HeatingAndCoolingObservable.AutoDisconnectWithRefCount();
             HeatingAndCoolingObservable.HotObserverToCold();
-
-
         }
 
+        private static void BasicQueryOperatorsDemo()
+        {
+            //MappingOperator.Select();
+            //MappingOperator.SelectWithIndex();
+            //FlatteningOperator.FlatteningObservableOfEnumerable();
+            //FlatteningOperator.FlatteningObservableOfEnumerableWithSource();
+            //FlatteningOperator.FlatteningObservableOfObservable();
+            FlatteningOperator.FlatteningObservableOfObservableWithSource();
+        }
     }
 }
