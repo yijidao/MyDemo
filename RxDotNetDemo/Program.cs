@@ -213,6 +213,9 @@ namespace RxDotNetDemo
             HeatingAndCoolingObservable.HotObserverToCold();
         }
 
+        /// <summary>
+        /// Select、SelectMany、Where、Distinct、DistinctUntilChanged
+        /// </summary>
         private static void BasicQueryOperatorsDemo()
         {
             //MappingOperator.Select();
@@ -220,7 +223,11 @@ namespace RxDotNetDemo
             //FlatteningOperator.FlatteningObservableOfEnumerable();
             //FlatteningOperator.FlatteningObservableOfEnumerableWithSource();
             //FlatteningOperator.FlatteningObservableOfObservable();
-            FlatteningOperator.FlatteningObservableOfObservableWithSource();
+            //FlatteningOperator.FlatteningObservableOfObservableWithSource();
+            //FilteringObservable.FilteringWithTheWhere();
+            //FilteringObservable.CreatingDistinctSequence();
+            FilteringObservable.RemovingDuplicateContiguousValues();
+
         }
     }
 }
