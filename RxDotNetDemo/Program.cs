@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using RxDotNetDemo.BasicQueryOperators;
 using RxDotNetDemo.Controlling_the_observable_temperature;
 using RxDotNetDemo.Extensions;
+using RxDotNetDemo.PartitioningAndCombiningObservables;
 
 namespace RxDotNetDemo
 {
@@ -30,8 +31,10 @@ namespace RxDotNetDemo
             //ControlObservableAndObserver();
             //SubjectDemo();
             //HotAndColdDemo();
-            BasicQueryOperatorsDemo();
-            
+            //BasicQueryOperatorsDemo();
+            PartitionAndCombine();
+
+
             Console.WriteLine("Press Key...");
             Console.ReadLine();
         }
@@ -219,26 +222,37 @@ namespace RxDotNetDemo
         private static void BasicQueryOperatorsDemo()
         {
             // 映射
-            //MappingOperator.Select();
-            //MappingOperator.SelectWithIndex();
-            
+            MappingOperator.Select();
+            MappingOperator.SelectWithIndex();
+
             // 展平
-            //FlatteningOperator.FlatteningObservableOfEnumerable();
-            //FlatteningOperator.FlatteningObservableOfEnumerableWithSource();
-            //FlatteningOperator.FlatteningObservableOfObservable();
-            //FlatteningOperator.FlatteningObservableOfObservableWithSource();
-            
+            FlatteningOperator.FlatteningObservableOfEnumerable();
+            FlatteningOperator.FlatteningObservableOfEnumerableWithSource();
+            FlatteningOperator.FlatteningObservableOfObservable();
+            FlatteningOperator.FlatteningObservableOfObservableWithSource();
+
             // 过滤
-            //FilteringObservable.FilteringWithTheWhere();
-            //FilteringObservable.CreatingDistinctSequence();
-            //FilteringObservable.RemovingDuplicateContiguousValues();
+            FilteringObservable.FilteringWithTheWhere();
+            FilteringObservable.CreatingDistinctSequence();
+            FilteringObservable.RemovingDuplicateContiguousValues();
 
             // 聚合
-            //BasicAggregationOperator.BasicAggregationOperatorDemo();
-            //BasicAggregationOperator.FindingMaximumAndMinimumItems();
-            //BasicAggregationOperator.ScanAndAggregateDemo();
+            BasicAggregationOperator.BasicAggregationOperatorDemo();
+            BasicAggregationOperator.FindingMaximumAndMinimumItems();
+            BasicAggregationOperator.ScanAndAggregateDemo();
             BasicAggregationOperator.SecondLargestItem();
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void PartitionAndCombine()
+        {
+            //CombiningObservables.ParingItemsFromObservables();
+            //CombiningObservables.CombiningTheLatestEmittedValue();
+            //CombiningObservables.ConcatenatingObservables();
+            //CombiningObservables.ConcatenatingObservables2();
+            CombiningObservables.ConcatenatingObservables3();
         }
     }
 }
