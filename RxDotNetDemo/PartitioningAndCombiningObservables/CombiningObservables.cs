@@ -122,12 +122,65 @@ namespace RxDotNetDemo.PartitioningAndCombiningObservables
         public static void ControllingTheConcurrencyOfMerge()
         {
             var o = Observable.Interval(TimeSpan.FromSeconds(1)).Select(i => $"first{i}").Take(2);
-            var o2 = Observable.Interval(TimeSpan.FromSeconds(1)).Select(i => $"second{i}").Take(2);
+            var o2 = Observable.Interval(TimeSpan.FromSeconds(1)).Select(i => $"second{i}").Take(3);
             var o3 = Observable.Interval(TimeSpan.FromSeconds(1)).Select(i => $"third{i}").Take(2);
 
             new[] {o, o2, o3}.ToObservable()
                 .Merge(2) // 设置 merge 每次最多订阅两个 Observable 进行消息的合并
                 .SubscribeConsole("concurrency merge");
+        }
+
+        /// <summary>
+        /// switch　接收一个 observable，这个 Observable 发射的通知也是 Observable, switch 会切换到最新收到的 observable 并订阅该对象，跟merge 不一样，merge 是订阅所有对象
+        /// </summary>
+        public static void SwitchLatestObservable()
+        {
+            var textSubject = new Subject<string>();
+            var o = textSubject.AsObservable();
+            o.Select(txt => Observable.Return($"{txt}-Result").Delay(TimeSpan.FromSeconds(txt == "R1" ? 1 : 0)))
+                .Switch()
+                .SubscribeConsole("SwitchLatest");
+            textSubject.OnNext("R1");
+            textSubject.OnNext("R2");
+            Task.Delay(500).Wait();
+            textSubject.OnNext("R3");
+        }
+
+        /// <summary>
+        /// switch 这个 demo 更形象点
+        /// </summary>
+        public static void SwitchLatestObservable2()
+        {
+            var o = Observable.Interval(TimeSpan.FromSeconds(1)).Select(x => $"first-{x}");
+            var o2 = Observable.Timer(TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(1)).Select(x => $"second-{x}");
+            var o3 = Observable.Timer(TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(1)).Select(x => $"third-{x}");
+            new[] { o,  o3, o2, }.ToObservable()
+                .Switch()
+                .SubscribeConsole("SwitchLatest");
+
+            //var sbj = new Subject<IObservable<string>>();
+            //var o4 = sbj.AsObservable();
+            //o4.Switch().SubscribeConsole("SwitchLatest");
+
+            //sbj.OnNext(o);
+            //Task.Delay(3000).Wait();
+            //sbj.OnNext(o2);
+            //Task.Delay(8000).Wait();
+            //sbj.OnNext(o3);
+
+
+
+        }
+
+        /// <summary>
+        /// amb 会切换到最先发射出通知的 Observable，并且订阅该对象
+        /// </summary>
+        public static void SwitchingToTheFirstObservableToEmit()
+        {
+            var o = Observable.Interval(TimeSpan.FromSeconds(2)).Select(i => $"Server1-{i}");
+            var o2 = Observable.Interval(TimeSpan.FromSeconds(1)).Select(i => $"Server2-{i}");
+            o.Amb(o2)
+                .SubscribeConsole("Amb");
         }
     }
 }

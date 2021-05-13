@@ -261,6 +261,9 @@ namespace RxDotNetDemo
             //CombiningObservables.MergingObservables();
             //CombiningObservables.DynamicConcatenatingAndMerging();
             //CombiningObservables.ControllingTheConcurrencyOfMerge();
+            //CombiningObservables.SwitchLatestObservable();
+            CombiningObservables.SwitchLatestObservable2();
+            //CombiningObservables.SwitchingToTheFirstObservableToEmit();
         }
     }
 }
