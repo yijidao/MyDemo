@@ -8,6 +8,7 @@ using RxDotNetDemo.BasicQueryOperators;
 using RxDotNetDemo.Controlling_the_observable_temperature;
 using RxDotNetDemo.Extensions;
 using RxDotNetDemo.PartitioningAndCombiningObservables;
+using RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization;
 
 namespace RxDotNetDemo
 {
@@ -32,7 +33,8 @@ namespace RxDotNetDemo
             //SubjectDemo();
             //HotAndColdDemo();
             //BasicQueryOperatorsDemo();
-            PartitionAndCombine();
+            //PartitionAndCombine();
+            ConcurrencyAndSynchronization();
 
 
             Console.WriteLine("Press Key...");
@@ -249,21 +251,26 @@ namespace RxDotNetDemo
         public static void PartitionAndCombine()
         {
             // zip 和 combineLast 配对多个 observable 发射出的通知
-            //CombiningObservables.ParingItemsFromObservables();
-            //CombiningObservables.CombiningTheLatestEmittedValue();
+            CombiningObservables.ParingItemsFromObservables();
+            CombiningObservables.CombiningTheLatestEmittedValue();
 
             // concat 串联多个 observable
-            //CombiningObservables.ConcatenatingObservables();
-            //CombiningObservables.ConcatenatingObservables2();
-            //CombiningObservables.ConcatenatingObservables3();
+            CombiningObservables.ConcatenatingObservables();
+            CombiningObservables.ConcatenatingObservables2();
+            CombiningObservables.ConcatenatingObservables3();
 
             // merge 合并多个 observable　发射的通知
-            //CombiningObservables.MergingObservables();
-            //CombiningObservables.DynamicConcatenatingAndMerging();
-            //CombiningObservables.ControllingTheConcurrencyOfMerge();
-            //CombiningObservables.SwitchLatestObservable();
+            CombiningObservables.MergingObservables();
+            CombiningObservables.DynamicConcatenatingAndMerging();
+            CombiningObservables.ControllingTheConcurrencyOfMerge();
+            CombiningObservables.SwitchLatestObservable();
             CombiningObservables.SwitchLatestObservable2();
-            //CombiningObservables.SwitchingToTheFirstObservableToEmit();
+            CombiningObservables.SwitchingToTheFirstObservableToEmit();
+        }
+
+        public static void ConcurrencyAndSynchronization()
+        {
+            ControllingConcurrencyWithSchedulers.FirstScheduler();
         }
     }
 }
