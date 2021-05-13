@@ -86,7 +86,7 @@ namespace RxDotNetDemo.PartitioningAndCombiningObservables
         }
 
         /// <summary>
-        /// merge可以把两个源的通知发射到 meger 后的源里，而且是实时的，所以这个demo，就算 o 在前面，o2 在后面，但是因为 o delay了一下，所以发射出的消息还是排在 o2 后面
+        /// merge可以把两个源的通知发射到 merge 后的源里，而且是实时的，所以这个demo，就算 o 在前面，o2 在后面，但是因为 o delay了一下，所以发射出的消息还是排在 o2 后面
         /// </summary>
         public static void MergingObservables()
         {
@@ -95,6 +95,39 @@ namespace RxDotNetDemo.PartitioningAndCombiningObservables
             o.Merge(o2)
                 .SelectMany(x => x)
                 .SubscribeConsole("merge");
+        }
+
+        /// <summary>
+        /// 第一个 observer 的值生成第二个 observer，然后 merge 第二个 observer 发射的值
+        /// 这个 demo 模拟当用户在界面中输入，然后调用服务去查询结果
+        /// select + merge 的操作也可以使用 selectMany 直接实现
+        /// </summary>
+        public static void DynamicConcatenatingAndMerging()
+        {
+            var texts = new[] {"Hello", "World"}.ToObservable();
+            texts.Select(txt => Observable.Return($"{txt}-Result"))
+                .Merge()
+                .SubscribeConsole("SelectAndMerge");
+
+            Task.Delay(1000).Wait();
+
+            texts.SelectMany(txt => Observable.Return($"{txt}-Result"))
+                .SubscribeConsole("SelectMany");
+        }
+
+        /// <summary>
+        /// 同时订阅太多的 observable 可能会有性能问题
+        /// 所以可以给 Merge 设置参数，设定 Merge 最多同时订阅的 observable 个数
+        /// </summary>
+        public static void ControllingTheConcurrencyOfMerge()
+        {
+            var o = Observable.Interval(TimeSpan.FromSeconds(1)).Select(i => $"first{i}").Take(2);
+            var o2 = Observable.Interval(TimeSpan.FromSeconds(1)).Select(i => $"second{i}").Take(2);
+            var o3 = Observable.Interval(TimeSpan.FromSeconds(1)).Select(i => $"third{i}").Take(2);
+
+            new[] {o, o2, o3}.ToObservable()
+                .Merge(2) // 设置 merge 每次最多订阅两个 Observable 进行消息的合并
+                .SubscribeConsole("concurrency merge");
         }
     }
 }

@@ -244,16 +244,23 @@ namespace RxDotNetDemo
         }
 
         /// <summary>
-        /// 
+        /// 拆分和组合的操作符 demo
         /// </summary>
         public static void PartitionAndCombine()
         {
+            // zip 和 combineLast 配对多个 observable 发射出的通知
             //CombiningObservables.ParingItemsFromObservables();
             //CombiningObservables.CombiningTheLatestEmittedValue();
+
+            // concat 串联多个 observable
             //CombiningObservables.ConcatenatingObservables();
             //CombiningObservables.ConcatenatingObservables2();
             //CombiningObservables.ConcatenatingObservables3();
-            CombiningObservables.MergingObservables();
+
+            // merge 合并多个 observable　发射的通知
+            //CombiningObservables.MergingObservables();
+            //CombiningObservables.DynamicConcatenatingAndMerging();
+            //CombiningObservables.ControllingTheConcurrencyOfMerge();
         }
     }
 }
