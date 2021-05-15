@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Concurrency;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
@@ -81,6 +82,85 @@ namespace RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization
             o.Dispose(); // 这一行永远不会执行，所以会不停地在控制台上打印
 
             Console.WriteLine($"After - Thread:{Thread.CurrentThread.ManagedThreadId}");
+        }
+
+        /// <summary>
+        /// scheduler 测试类
+        /// 一个 scheduler 执行两个调度
+        /// </summary>
+        /// <param name="scheduler"></param>
+        public static void TestScheduler(IScheduler scheduler)
+        {
+            scheduler.Schedule(Unit.Default, (s, _) => Console.WriteLine($"Action1 - Thread:{Thread.CurrentThread.ManagedThreadId}"));
+            scheduler.Schedule(Unit.Default, (s, _) => Console.WriteLine($"Action2 - Thread:{Thread.CurrentThread.ManagedThreadId}"));
+        }
+
+        /// <summary>
+        /// NewThreadScheduler 会在新线程运行调度，一般不会通过构造函数去生成 Scheduler，而是调用 Scheduler.Default 去接受一个共享的实例
+        /// 构造函数也可以传一个工厂委托去生成线程
+        /// 需要注意的一个问题是，NewThreadScheduler 虽然每次都会新建一个线程，但是内部递归调度并不会再次新建线程，而是共享之前创建的线程
+        /// 因为新建线程开销大，所以只有执行长时间的任务，采用 NewThreadScheduler，其他时间短的任务，应该用其他 Scheduler，如ThreadPoolScheduler
+        /// </summary>
+        public static void TestNewThreadScheduler()
+        {
+            TestScheduler(NewThreadScheduler.Default); // 
+            //new NewThreadScheduler(threadFactory) // 也接受一个工厂参数
+        }
+
+        /// <summary>
+        /// 新建一个线程开销比较大，比如说内存就要1M左右，所以最好线程要能共享
+        /// ThreadPoolScheduler 是基于线程池实现的调度
+        /// 跟NewThreadScheduler 不一致的是，ThreadPoolScheduler 的内部递归调度，是以队列的方式，排队从线程池中取数据，所以每次运行的线程可能不同
+        /// PoolScheduler 是一个用的最多的 Scheduler
+        /// </summary>
+        public static void TestThreadPoolScheduler()
+        {
+            TestScheduler(ThreadPoolScheduler.Instance);
+        }
+
+        /// <summary>
+        /// TaskPoolScheduler 工作方式跟 ThreadPoolScheduler 相似，只是 TaskPoolScheduler 是基于 TPL(Task Parallel Library) 的
+        /// 在一些没有实现线程池平台，那么可以用 TaskPoolScheduler
+        /// </summary>
+        public static void TestTaskPoolScheduler()
+        {
+            TestScheduler(TaskPoolScheduler.Default);
+        }
+
+        /// <summary>
+        /// CurrentThreadScheduler 的线程跟执行的线程是一样的，而且内部递归调用也是以队列的方式，排队执行
+        /// 所以这个Scheduler 会阻塞线程
+        /// </summary>
+        public static void TestCurrentThreadScheduler()
+        {
+            Console.WriteLine($"Call thread:{Thread.CurrentThread.ManagedThreadId}");
+            TestScheduler(CurrentThreadScheduler.Instance);
+        }
+
+        /// <summary>
+        /// ImmediateScheduler 跟 CurrentThreadScheduler 有点相似，都是线程跟执行的线程一样，并且会阻塞线程
+        /// 不同的是，内部的 scheduler 递归调用不会等上一个 scheduler 执行完毕，再执行下一个，而是立刻执行下一个
+        /// 所以 ImmediateScheduler 很适合一些定时执行小工作
+        /// </summary>
+        public static void TestImmediateScheduler()
+        {
+            var immediateScheduler = ImmediateScheduler.Instance;
+
+            Console.WriteLine($"Calling thread:{Thread.CurrentThread.ManagedThreadId} Current time:{immediateScheduler.Now}");
+
+            immediateScheduler.Schedule(Unit.Default, TimeSpan.FromSeconds(2), (IScheduler scheduler, Unit action) =>
+            {
+                Console.WriteLine($"Outer Action - Thread:{Thread.CurrentThread.ManagedThreadId} Current time:{immediateScheduler.Now}");
+                scheduler.Schedule(Unit.Default, (IScheduler scheduler2, Unit action2) =>
+                {
+                    Console.WriteLine($"Inner Action - Thread:{Thread.CurrentThread.ManagedThreadId}"); // 这里会立刻打印，而不会等 Outer Action - Done 打印完再打印
+                    return Disposable.Empty;
+                });
+                Console.WriteLine($"Outer Action - Done");
+                return Disposable.Empty;
+            });
+
+            Console.WriteLine($"After the Schedule,Time: {immediateScheduler.Now}");
         }
     }
 }

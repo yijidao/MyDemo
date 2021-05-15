@@ -273,7 +273,14 @@ namespace RxDotNetDemo
             //ControllingConcurrencyWithSchedulers.FirstScheduler();
             //ControllingConcurrencyWithSchedulers.ParameterizingConcurrency();
             //ControllingConcurrencyWithSchedulers.ParameterizingConcurrency2();
-            ControllingConcurrencyWithSchedulers.ParameterizingConcurrency3();
+            //ControllingConcurrencyWithSchedulers.ParameterizingConcurrency3();
+
+            //ControllingConcurrencyWithSchedulers.TestNewThreadScheduler();
+            //ControllingConcurrencyWithSchedulers.TestThreadPoolScheduler();
+            //ControllingConcurrencyWithSchedulers.TestTaskPoolScheduler();
+            //ControllingConcurrencyWithSchedulers.TestCurrentThreadScheduler();
+            ControllingConcurrencyWithSchedulers.TestImmediateScheduler();
+
         }
     }
 }
