@@ -20,7 +20,7 @@ namespace RxDotNetDemo
         public void OnCompleted()
         {
             Console.WriteLine($"{_name} - OnCompleted()");
-            PrintEndtTime();
+            PrintEndTime();
         }
 
         public void OnError(Exception error)
@@ -47,7 +47,7 @@ namespace RxDotNetDemo
             Console.WriteLine($"-----   Start  [{StartTime}]      -----");
         }
 
-        private void PrintEndtTime()
+        private void PrintEndTime()
         {
             Console.WriteLine($"-----   Elapsed Time  [{(DateTime.Now - StartTime).Seconds}(Second)]   -----");
             Console.WriteLine($"-----   End  [{DateTime.Now}]      -----");

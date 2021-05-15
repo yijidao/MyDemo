@@ -270,7 +270,10 @@ namespace RxDotNetDemo
 
         public static void ConcurrencyAndSynchronization()
         {
-            ControllingConcurrencyWithSchedulers.FirstScheduler();
+            //ControllingConcurrencyWithSchedulers.FirstScheduler();
+            //ControllingConcurrencyWithSchedulers.ParameterizingConcurrency();
+            //ControllingConcurrencyWithSchedulers.ParameterizingConcurrency2();
+            ControllingConcurrencyWithSchedulers.ParameterizingConcurrency3();
         }
     }
 }

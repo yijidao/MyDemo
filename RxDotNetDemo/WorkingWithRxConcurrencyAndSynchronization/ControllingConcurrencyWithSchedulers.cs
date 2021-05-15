@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Concurrency;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
+using RxDotNetDemo.Extensions;
 
 namespace RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization
 {
@@ -39,8 +41,46 @@ namespace RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization
             //ISchedulerLongRunning
         }
 
+        /// <summary>
+        /// Rx 的操作符都有一个重载，接受 IScheduler 参数，用于指定默认的执行模式
+        /// CurrentThreadScheduler.Instance 可以指定在当前线程，这会阻塞线程变成同步
+        /// </summary>
+        public static void ParameterizingConcurrency()
+        {
+            Console.WriteLine($"Before - Thread:{Thread.CurrentThread.ManagedThreadId}");
+            Observable.Interval(TimeSpan.FromSeconds(1), CurrentThreadScheduler.Instance) //
+                .Take(3)
+                .Subscribe(x => Console.WriteLine($"Inside - Thread:{Thread.CurrentThread.ManagedThreadId}"));
+                //.SubscribeConsole($"Inside - Thread:{Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"After - Thread:{Thread.CurrentThread.ManagedThreadId}"); // 只有上面执行完，才会执行这一行
+        }
 
+        /// <summary>
+        /// 不指定 CurrentThreadScheduler.Instance 的话，Interval 会切换到其他线程执行
+        /// </summary>
+        public static void ParameterizingConcurrency2()
+        {
+            Console.WriteLine($"Before - Thread:{Thread.CurrentThread.ManagedThreadId}");
+            Observable.Interval(TimeSpan.FromSeconds(1))
+                .Take(3)
+                .Subscribe(x => Console.WriteLine($"Inside - Thread:{Thread.CurrentThread.ManagedThreadId}")); // 直接打印会切换到不同线程
+                //.SubscribeConsole($"Inside - Thread:{Thread.CurrentThread.ManagedThreadId}"); // 用拓展方法就会切换到同一个线程，为啥呢？
+            Console.WriteLine($"After - Thread:{Thread.CurrentThread.ManagedThreadId}"); // 不需要上面执行完才执行这一行
+        }
 
+        /// <summary>
+        /// Rx 并非所有操作都在后台线程执行，如果需要明确执行线程，最好指定 IScheduler
+        /// 这个 demo 展示了没有指定 IScheduler 的情况下，rx 却在同一线程上执行，导致阻塞方法执行
+        /// </summary>
+        public static void ParameterizingConcurrency3()
+        {
+            Console.WriteLine($"Before - Thread:{Thread.CurrentThread.ManagedThreadId}");
+            var o = Observable.Range(1, 5)
+                .Repeat() // repeat 会不停地在这个方法的线程不停地重新订阅这个observable，导致方法阻塞
+                .Subscribe(x => Console.WriteLine($"Inside - Thread:{Thread.CurrentThread.ManagedThreadId}"));
+            o.Dispose(); // 这一行永远不会执行，所以会不停地在控制台上打印
 
+            Console.WriteLine($"After - Thread:{Thread.CurrentThread.ManagedThreadId}");
+        }
     }
 }
