@@ -12,6 +12,7 @@ namespace RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization
     /// rx 的设计理念： 任何涉及到并发的事情，都必须使用 Scheduler 类。
     /// Scheduler 是一个 rx 用于并发和事件的抽象层
     /// IScheduler 定义了当前时间属性和几个调度重载
+    /// 除了实现 ISchedule，还可以实现 ISchedulerPeriodic（增加了一个周期性的方法定义） 和 ISchedulerLongRunning（增加了一个长期运行的方法定义）。
     /// </summary>
     public class ControllingConcurrencyWithSchedulers
     {
@@ -32,6 +33,14 @@ namespace RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization
             };
 
             var scheduling = scheduler.Schedule(0, TimeSpan.FromSeconds(2), action);
+
+            //ISchedulerPeriodic
+            //IScheduler
+            //ISchedulerLongRunning
         }
+
+
+
+
     }
 }
