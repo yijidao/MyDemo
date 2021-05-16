@@ -34,7 +34,8 @@ namespace RxDotNetDemo
             //HotAndColdDemo();
             //BasicQueryOperatorsDemo();
             //PartitionAndCombine();
-            ConcurrencyAndSynchronization();
+            //ConcurrencyAndSynchronization();
+            TimeBasedOperators();
 
 
             Console.WriteLine("Press Key...");
@@ -284,6 +285,18 @@ namespace RxDotNetDemo
             ControllingConcurrencyWithSchedulers.TestCurrentThreadScheduler();
             ControllingConcurrencyWithSchedulers.TestImmediateScheduler();
             ControllingConcurrencyWithSchedulers.TestEventLoopScheduler();
+        }
+
+        public static void TimeBasedOperators()
+        {
+            UsingTimeBasedOperators.AddTimestamp();
+            UsingTimeBasedOperators.AddTimeIntervalBetweenNotifications();
+            UsingTimeBasedOperators.AddingTimeoutPolicy();
+            UsingTimeBasedOperators.DelayingTheNotifications();
+            UsingTimeBasedOperators.AddingVariableDelay();
+            UsingTimeBasedOperators.ThrottlingNotifications();
+            UsingTimeBasedOperators.VariableThrottle();
+            UsingTimeBasedOperators.SamplingObservableInIntervals();
         }
     }
 }
