@@ -35,7 +35,8 @@ namespace RxDotNetDemo
             //BasicQueryOperatorsDemo();
             //PartitionAndCombine();
             //ConcurrencyAndSynchronization();
-            TimeBasedOperators();
+            //TimeBasedOperators();
+            SynchronizingTheEmissionDemo();
 
 
             Console.WriteLine("Press Key...");
@@ -297,6 +298,12 @@ namespace RxDotNetDemo
             UsingTimeBasedOperators.ThrottlingNotifications();
             UsingTimeBasedOperators.VariableThrottle();
             UsingTimeBasedOperators.SamplingObservableInIntervals();
+        }
+
+        public static void SynchronizingTheEmissionDemo()
+        {
+            //SynchronizingTheObservableEmissions.ChangingTheSubscriptionOrUnSubscriptionExecutionContext();
+            SynchronizingTheObservableEmissions.UsingSubscribeOnAndObserveOnTogether();
         }
     }
 }

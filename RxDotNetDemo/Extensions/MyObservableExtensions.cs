@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Text;
+using System.Threading;
 
 namespace RxDotNetDemo.Extensions
 {
@@ -25,6 +26,23 @@ namespace RxDotNetDemo.Extensions
                 {
                     Console.WriteLine($"{msg} - OnCompleted()");
                 });
+        }
+
+        public static IObservable<T> LogWithThread<T>(this IObservable<T> observable, string msg = "")
+        {
+            return Observable.Defer(() =>
+            {
+                Console.WriteLine($"{msg} Subscription happened on Thread:{Thread.CurrentThread.ManagedThreadId}");
+
+                return observable.Do(x =>
+                        Console.WriteLine($"{msg} - OnNext({x}) Thread: {Thread.CurrentThread.ManagedThreadId}"),
+                    ex =>
+                    {
+                        Console.WriteLine($"{msg} - OnError Thread: {Thread.CurrentThread.ManagedThreadId}");
+                        Console.WriteLine($"\t {ex}");
+                    },
+                    () => Console.WriteLine($"{msg} - OnCompleted() Thread {Thread.CurrentThread.ManagedThreadId}"));
+            });
         }
     }
 }
