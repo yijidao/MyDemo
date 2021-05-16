@@ -268,19 +268,22 @@ namespace RxDotNetDemo
             CombiningObservables.SwitchingToTheFirstObservableToEmit();
         }
 
+        /// <summary>
+        /// rx 控制并发是利用 scheduler 机制，这里写了一些关于 rx scheduler 的 demo
+        /// </summary>
         public static void ConcurrencyAndSynchronization()
         {
-            //ControllingConcurrencyWithSchedulers.FirstScheduler();
-            //ControllingConcurrencyWithSchedulers.ParameterizingConcurrency();
-            //ControllingConcurrencyWithSchedulers.ParameterizingConcurrency2();
-            //ControllingConcurrencyWithSchedulers.ParameterizingConcurrency3();
+            ControllingConcurrencyWithSchedulers.FirstScheduler();
+            ControllingConcurrencyWithSchedulers.ParameterizingConcurrency();
+            ControllingConcurrencyWithSchedulers.ParameterizingConcurrency2();
+            ControllingConcurrencyWithSchedulers.ParameterizingConcurrency3();
 
-            //ControllingConcurrencyWithSchedulers.TestNewThreadScheduler();
-            //ControllingConcurrencyWithSchedulers.TestThreadPoolScheduler();
-            //ControllingConcurrencyWithSchedulers.TestTaskPoolScheduler();
-            //ControllingConcurrencyWithSchedulers.TestCurrentThreadScheduler();
+            ControllingConcurrencyWithSchedulers.TestNewThreadScheduler();
+            ControllingConcurrencyWithSchedulers.TestThreadPoolScheduler();
+            ControllingConcurrencyWithSchedulers.TestTaskPoolScheduler();
+            ControllingConcurrencyWithSchedulers.TestCurrentThreadScheduler();
             ControllingConcurrencyWithSchedulers.TestImmediateScheduler();
-
+            ControllingConcurrencyWithSchedulers.TestEventLoopScheduler();
         }
     }
 }

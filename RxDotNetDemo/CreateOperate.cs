@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace RxDotNetDemo

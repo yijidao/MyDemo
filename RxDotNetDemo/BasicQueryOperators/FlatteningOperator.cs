@@ -46,11 +46,11 @@ namespace RxDotNetDemo.BasicQueryOperators
         /// </summary>
         public static void FlatteningObservableOfObservable()
         {
-            var o = Observable.Create<ChatRoom>(o =>
+            var o = Observable.Create<ChatRoom>(observer =>
             {
-                o.OnNext(new ChatRoom("Y",3));
+                observer.OnNext(new ChatRoom("Y",3));
                 Task.Delay(10000).Wait();
-                o.OnNext(new ChatRoom("X"));
+                observer.OnNext(new ChatRoom("X"));
                 return Disposable.Empty;
             });
 
@@ -66,11 +66,11 @@ namespace RxDotNetDemo.BasicQueryOperators
         /// </summary>
         public static void FlatteningObservableOfObservableWithSource()
         {
-            var o = Observable.Create<ChatRoom>(o =>
+            var o = Observable.Create<ChatRoom>(observer =>
             {
-                o.OnNext(new ChatRoom("Y", 3));
+                observer.OnNext(new ChatRoom("Y", 3));
                 Task.Delay(10000).Wait();
-                o.OnNext(new ChatRoom("X"));
+                observer.OnNext(new ChatRoom("X"));
                 return Disposable.Empty;
             });
 

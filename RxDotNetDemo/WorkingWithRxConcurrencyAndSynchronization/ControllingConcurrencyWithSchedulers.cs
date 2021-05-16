@@ -162,5 +162,24 @@ namespace RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization
 
             Console.WriteLine($"After the Schedule,Time: {immediateScheduler.Now}");
         }
+
+        /// <summary>
+        /// EventLoopScheduler 会把所有的操作都运行到一个线程上，内部的递归操作是按时间队列进行执行的，上一个执行完并出队，下一个才会执行
+        /// </summary>
+        public static void TestEventLoopScheduler()
+        {
+            Console.WriteLine($"Calling thread:{Thread.CurrentThread.ManagedThreadId}");
+            TestScheduler( new EventLoopScheduler());
+        }
+
+        /// <summary>
+        /// SynchronizationContext 是在特定上下文下执行
+        /// System.Reactive.Windows.Threading 中有 DispatcherScheduler 用于WPF执行
+        /// </summary>
+        public static void TestSynchronizationContext()
+        {
+            
+        }
+
     }
 }
