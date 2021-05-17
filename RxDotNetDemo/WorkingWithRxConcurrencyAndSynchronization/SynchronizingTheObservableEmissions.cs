@@ -35,7 +35,7 @@ namespace RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization
         public static void ChangingTheSubscriptionOrUnSubscriptionExecutionContext()
         {
             var eventLoopScheduler = new EventLoopScheduler();
-            
+
 
             var subscription = Observable.Timer(DateTimeOffset.Now, TimeSpan.FromSeconds(1))
                 .Do(_ => Console.WriteLine("Inside Do"))
@@ -63,7 +63,7 @@ namespace RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization
         /// </summary>
         public static void UsingSubscribeOnAndObserveOnTogether()
         {
-            new[] {0, 1, 2, 3, 4, 5}.ToObservable()
+            new[] { 0, 1, 2, 3, 4, 5 }.ToObservable()
                 .Take(3).LogWithThread("A")
                 .Where(x => x % 2 == 0).LogWithThread("B")
                 .SubscribeOn(NewThreadScheduler.Default).LogWithThread("C") // SubscribeOn 会影响所有操作的线程，所以他的位置在哪，其实不重要
@@ -72,5 +72,82 @@ namespace RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization
                 .SubscribeConsole("squares by time");
         }
 
+        /// <summary>
+        /// Rx 的每个操作符的输入应该保证序列化输入，这样才不会因为并发导致各种各样的问题
+        /// 但是并发的情况总是存在的，如 Observable 是第三方提供的，或者在多线程的情况下调用
+        /// Synchronize 可以确保通知是序列化执行的，Synchronize 内部实现了 lock，用于 lock 的对象被称为 gate
+        /// 这个demo 展示了如何通过 Synchronize 确保通知序列化
+        /// </summary>
+        public static void SynchronizingNotifications()
+        {
+            var messenger = new Messenger();
+
+            Observable.FromEventPattern<string>(h => messenger.MessageReceived += h,
+                    h => messenger.MessageReceived -= h)
+                .Select(x => x.EventArgs)
+                .Synchronize()
+                .Subscribe(msg =>
+                {
+                    Console.WriteLine($"Message {msg} arrived");
+                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                    Console.WriteLine($"Message {msg} exit");
+                });
+
+            Task.Run(() => messenger.RaiseEvent("msg1"));
+            Task.Run(() => messenger.RaiseEvent("msg2"));
+            Task.Run(() => messenger.RaiseEvent("msg3"));
+        }
+
+        /// <summary>
+        /// Synchronize 接受一个 object 对象用于 lock，这个特性可以用于多个 Observable 的订阅序列进行
+        /// </summary>
+        public static void SynchronizingNotificationsWithGate()
+        {
+            var message = new Messenger();
+            var gate = new object();
+
+            Observable.FromEventPattern<string>(h => message.MessageReceived += h, h => message.MessageReceived -= h)
+                .Select(x => x.EventArgs)
+                .Synchronize(gate)
+                .Subscribe(msg =>
+                {
+                    Console.WriteLine($"Message {msg} arrived");
+                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                    Console.WriteLine($"Message {msg} exit");
+                });
+
+            Observable.FromEventPattern<string>(h => message.MessageReceived2 += h, h => message.MessageReceived2 -= h)
+                .Select(x => x.EventArgs)
+                .Synchronize(gate)
+                .Subscribe(msg =>
+                {
+                    Console.WriteLine($"Message2 {msg} arrived");
+                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                    Console.WriteLine($"Message2 {msg} exit");
+                });
+
+            message.RaiseAllEvent("msg1");
+            message.RaiseAllEvent("msg2");
+            message.RaiseAllEvent("msg3");
+        }
+
+    }
+
+    class Messenger
+    {
+        public event EventHandler<string> MessageReceived;
+
+        public event EventHandler<string> MessageReceived2;
+
+        public void RaiseEvent(string value)
+        {
+            MessageReceived?.Invoke(this, value);
+        }
+
+        public void RaiseAllEvent(string value)
+        {
+            MessageReceived?.Invoke(this, value);
+            MessageReceived2?.Invoke(this, value);
+        }
     }
 }

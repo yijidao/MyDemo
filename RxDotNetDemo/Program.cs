@@ -36,7 +36,7 @@ namespace RxDotNetDemo
             //PartitionAndCombine();
             //ConcurrencyAndSynchronization();
             //TimeBasedOperators();
-            SynchronizingTheEmissionDemo();
+            //SynchronizingTheEmissionDemo();
 
 
             Console.WriteLine("Press Key...");
@@ -302,8 +302,10 @@ namespace RxDotNetDemo
 
         public static void SynchronizingTheEmissionDemo()
         {
-            //SynchronizingTheObservableEmissions.ChangingTheSubscriptionOrUnSubscriptionExecutionContext();
+            SynchronizingTheObservableEmissions.ChangingTheSubscriptionOrUnSubscriptionExecutionContext();
             SynchronizingTheObservableEmissions.UsingSubscribeOnAndObserveOnTogether();
+            SynchronizingTheObservableEmissions.SynchronizingNotifications();
+            SynchronizingTheObservableEmissions.SynchronizingNotificationsWithGate();
         }
     }
 }
