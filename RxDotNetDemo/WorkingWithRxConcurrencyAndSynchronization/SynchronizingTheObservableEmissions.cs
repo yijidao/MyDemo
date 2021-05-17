@@ -55,14 +55,20 @@ namespace RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization
             Console.WriteLine("Subscription disposed");
         }
 
+        /// <summary>
+        /// ObserveOn 和 SubscribeOn 结合使用
+        /// SubscribeOn 一般用于切换所有操作到后台线程，位置不重要
+        /// ObserveOn 一般用于切换后续操作到UI线程，位置影响结果
+        /// subscribe 是从下到上执行，而消息的通知，也就是 onNext、OnComplete 等则是从上到下执行
+        /// </summary>
         public static void UsingSubscribeOnAndObserveOnTogether()
         {
             new[] {0, 1, 2, 3, 4, 5}.ToObservable()
                 .Take(3).LogWithThread("A")
                 .Where(x => x % 2 == 0).LogWithThread("B")
-                .SubscribeOn(NewThreadScheduler.Default).LogWithThread("C")
+                .SubscribeOn(NewThreadScheduler.Default).LogWithThread("C") // SubscribeOn 会影响所有操作的线程，所以他的位置在哪，其实不重要
                 .Select(x => x * x).LogWithThread("D")
-                .ObserveOn(TaskPoolScheduler.Default).LogWithThread("E")
+                .ObserveOn(TaskPoolScheduler.Default).LogWithThread("E") // ObserveOn 会影响后续操作的线程，也就是 LogWithThread 和 SubscribeConsole
                 .SubscribeConsole("squares by time");
         }
 
