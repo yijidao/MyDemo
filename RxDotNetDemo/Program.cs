@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RxDotNetDemo.BasicQueryOperators;
 using RxDotNetDemo.Controlling_the_observable_temperature;
+using RxDotNetDemo.ErrorHandlingAndRecovery;
 using RxDotNetDemo.Extensions;
 using RxDotNetDemo.PartitioningAndCombiningObservables;
 using RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization;
@@ -37,6 +38,7 @@ namespace RxDotNetDemo
             //ConcurrencyAndSynchronization();
             //TimeBasedOperators();
             //SynchronizingTheEmissionDemo();
+            ErrorHandlingAndRecoveryDemo();
 
 
             Console.WriteLine("Press Key...");
@@ -306,6 +308,15 @@ namespace RxDotNetDemo
             SynchronizingTheObservableEmissions.UsingSubscribeOnAndObserveOnTogether();
             SynchronizingTheObservableEmissions.SynchronizingNotifications();
             SynchronizingTheObservableEmissions.SynchronizingNotificationsWithGate();
+        }
+
+        public static void ErrorHandlingAndRecoveryDemo()
+        {
+            //ReactingToErrors.ErrorsFromTheObservableSide();
+            //ReactingToErrors.CatchingErrors();
+            //ReactingToErrors.VariableCatch();
+            ReactingToErrors.RetryingToSubscribe();
+
         }
     }
 }
