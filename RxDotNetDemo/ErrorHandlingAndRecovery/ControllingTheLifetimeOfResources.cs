@@ -93,11 +93,11 @@ namespace RxDotNetDemo.ErrorHandlingAndRecovery
         /// <summary>
         /// 无法 gc 原因 https://stackoverflow.com/questions/29119997/c-sharp-why-gc-cant-collect-weakreferences-target-in-my-code
         /// </summary>
-        public static void CreatingWeakObserve()
+        public static void CreatingWeakObserver()
         {
-            var obj = new object();
+            object obj = new object();
             var weak = new WeakReference(obj);
-
+            
             GC.Collect();
             Console.WriteLine($"IsAlive: {weak.IsAlive}");
 
@@ -106,6 +106,29 @@ namespace RxDotNetDemo.ErrorHandlingAndRecovery
             //GC.WaitForPendingFinalizers();
             Thread.Sleep(TimeSpan.FromSeconds(2));
             Console.WriteLine($"IsAlive: {weak.IsAlive}");
+        }
+
+        /// <summary>
+        /// 通过虚引用来解决一些无法手动释放引用的情况
+        /// </summary>
+        public static void CreatingWeakObserver2()
+        {
+            var subscription = Observable.Interval(TimeSpan.FromSeconds(1))
+                .AsWeakObservable()
+                .SubscribeConsole("Interval");
+
+            Console.WriteLine("Collecting");
+            GC.Collect();
+            Thread.Sleep(2000);
+
+            GC.KeepAlive(subscription);
+            Console.WriteLine("Done sleeping");
+            Console.WriteLine("Collecting");
+
+            subscription = null;
+            GC.Collect();
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+            Console.WriteLine("Done sleeping");
         }
 
     }

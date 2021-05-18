@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
+using RxDotNetDemo.ErrorHandlingAndRecovery;
 
 namespace RxDotNetDemo.Extensions
 {
@@ -42,6 +43,17 @@ namespace RxDotNetDemo.Extensions
                         Console.WriteLine($"\t {ex}");
                     },
                     () => Console.WriteLine($"{msg} - OnCompleted() Thread {Thread.CurrentThread.ManagedThreadId}"));
+            });
+        }
+
+        public static IObservable<T> AsWeakObservable<T>(this IObservable<T> source)
+        {
+            return Observable.Create<T>(o =>
+            {
+                var weakObserverProxy = new WeakObserverProxy<T>(o);
+                var subscription = source.Subscribe(weakObserverProxy);
+                weakObserverProxy.SetSubscription(subscription);
+                return weakObserverProxy.AsDisposable();
             });
         }
     }

@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VlcPrismModule", "VlcPrismM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RxUIDemo2", "RxUIDemo2\RxUIDemo2.csproj", "{3C3B79D9-C4C0-4C16-8F3A-C3142B3904E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxDotNetDemo", "RxDotNetDemo\RxDotNetDemo.csproj", "{6080EA12-63DC-41A0-A444-125B12508FA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RxDotNetDemo", "RxDotNetDemo\RxDotNetDemo.csproj", "{6080EA12-63DC-41A0-A444-125B12508FA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -320,7 +320,8 @@ namespace RxDotNetDemo
             //ControllingTheLifetimeOfResources.DisposingInDeterministicWay();
             //ControllingTheLifetimeOfResources.DisposingInDeterministicWay2();
             //ControllingTheLifetimeOfResources.DeterministicFinalization();
-            ControllingTheLifetimeOfResources.CreatingWeakObserve();
+            ControllingTheLifetimeOfResources.CreatingWeakObserver();
+            //ControllingTheLifetimeOfResources.CreatingWeakObserver2();
 
         }
     }
