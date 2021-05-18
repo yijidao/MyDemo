@@ -315,7 +315,12 @@ namespace RxDotNetDemo
             //ReactingToErrors.ErrorsFromTheObservableSide();
             //ReactingToErrors.CatchingErrors();
             //ReactingToErrors.VariableCatch();
-            ReactingToErrors.RetryingToSubscribe();
+            //ReactingToErrors.RetryingToSubscribe();
+
+            //ControllingTheLifetimeOfResources.DisposingInDeterministicWay();
+            //ControllingTheLifetimeOfResources.DisposingInDeterministicWay2();
+            //ControllingTheLifetimeOfResources.DeterministicFinalization();
+            ControllingTheLifetimeOfResources.CreatingWeakObserve();
 
         }
     }
