@@ -20,7 +20,7 @@ namespace RxDotNetDemo.FunctionalThinking
     /// 函数式编程提供了其他的编程思考方式，声明式编程、不可变特性、函数优先原则。
     /// Declarative style of programing：Tell what,not how。如xaml、html就是声明书编程的好处，人类可读，所以不易出错。
     /// Immutability: 不要修改值，而是生成一个新的值。value struct 就是一个例子，react 的状态管理也是一个例子。好处不言而喻，就是不用担心状态和多线程问题。加锁太烦了。
-    /// First-class functions: 通过一个个具有不可变特性的函数去组成整个代码逻辑，实现声明式的代码。
+    /// First-class functions: 通过一个个具有不可变特性的函数去组成整个代码逻辑，参数和返回值都可以是函数。带来的好处就是声明式，以及跟数据函数一样的可预测、可复用。
     /// </summary>
     public class TheAdvantagesOfThinkingFunctionally
     {
