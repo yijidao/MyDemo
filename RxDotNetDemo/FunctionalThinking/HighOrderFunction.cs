@@ -40,7 +40,7 @@ namespace RxDotNetDemo.FunctionalThinking
 
             for (int i = 0; i < leftItems.Length; i++)
             {
-                if (tester(leftItems[i], rightItems[i]) == false) return false; 
+                if (tester(leftItems[i], rightItems[i]) == false) return false;
             }
 
             return true;
@@ -54,7 +54,7 @@ namespace RxDotNetDemo.FunctionalThinking
         /// </summary>
         public static void AnonymousMethods()
         {
-            ComparisonTest tester = delegate(string first, string second)
+            ComparisonTest tester = delegate (string first, string second)
             {
                 return first.Length == second.Length;
             };
@@ -73,13 +73,13 @@ namespace RxDotNetDemo.FunctionalThinking
             var actions = new List<ActionDelegate>();
             for (int i = 0; i < 5; i++)
             {
-                actions.Add(delegate()
+                actions.Add(delegate ()
                 {
                     Console.WriteLine(i); // 捕获了变量 i
                 });
             }
 
-            
+
             foreach (var act in actions)
             {
                 act(); // 这里指挥打印 5，这就是闭包捕获变量的例子
@@ -87,6 +87,62 @@ namespace RxDotNetDemo.FunctionalThinking
         }
 
         public delegate void ActionDelegate();
+
+        /// <summary>
+        /// C# 3.0 增加了 lambda，所以可以使用 lambda 表达式优化匿名函数
+        /// </summary>
+        public static void LambdaExpressions()
+        {
+            ComparisonTest tester = (first, second) => first.Length == second.Length;
+            Console.WriteLine($"anonymous methods returned: {tester("Hello", "World")}");
+
+            var cities = new[] { "London", "Madrid" };
+            var friends = new[] { "Minnie", "Goofey" };
+            Console.WriteLine($"Are friends and cities similar? {AreSimilar(cities, friends, tester)}"); // 使用匿名方法实现的委托
+        }
+
+        /// <summary>
+        /// lambda 只是简化的匿名函数，所以当然也有闭包的特性
+        /// </summary>
+        public static void LambdaExpressionsClosures()
+        {
+            var actions = new List<ActionDelegate>();
+            for (int i = 0; i < 5; i++)
+            {
+                actions.Add(() => Console.WriteLine(i)); // 捕获了变量 i
+            }
+
+            foreach (var act in actions)
+            {
+                act(); // 这里指挥打印 5，这就是闭包捕获变量的例子
+            }
+        }
+
+        /// <summary>
+        /// 使用委托需要使用关键字 delegate 声明，贼烦
+        /// 所以 .net 提供了 Func 和 Action 进一步封装委托，方便使用。芜湖，舒服多了。
+        /// </summary>
+        public static void FuncAndAction()
+        {
+            Func<string, string, bool> tester = (s1, s2) => s1.Length == s2.Length; // 使用 Func 来减少 delegate 的声明，进一步减少割裂感
+            Console.WriteLine($"anonymous methods returned: {tester("Hello", "World")}");
+
+            var cities = new[] { "London", "Madrid" };
+            var friends = new[] { "Minnie", "Goofey" };
+            Console.WriteLine($"Are friends and cities similar? {AreSimilarFunc(cities, friends, tester)}"); 
+        }
+
+        public static bool AreSimilarFunc(string[] leftItems, string[] rightItems, Func<string, string, bool> tester)
+        {
+            if (leftItems.Length != rightItems.Length) return false;
+
+            for (int i = 0; i < leftItems.Length; i++)
+            {
+                if (tester(leftItems[i], rightItems[i]) == false) return false;
+            }
+
+            return true;
+        }
     }
 
     class StringComparators

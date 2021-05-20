@@ -331,7 +331,10 @@ namespace RxDotNetDemo
         {
             //HighOrderFunction.DelegateAsParameterType();
             //HighOrderFunction.AnonymousMethods();
-            HighOrderFunction.Closures();
+            //HighOrderFunction.Closures();
+            //HighOrderFunction.LambdaExpressions();
+            //HighOrderFunction.LambdaExpressionsClosures();
+            HighOrderFunction.FuncAndAction();
         }
     }
 }
