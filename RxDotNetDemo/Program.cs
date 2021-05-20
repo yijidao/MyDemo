@@ -8,6 +8,7 @@ using RxDotNetDemo.BasicQueryOperators;
 using RxDotNetDemo.Controlling_the_observable_temperature;
 using RxDotNetDemo.ErrorHandlingAndRecovery;
 using RxDotNetDemo.Extensions;
+using RxDotNetDemo.FunctionalThinking;
 using RxDotNetDemo.PartitioningAndCombiningObservables;
 using RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization;
 
@@ -38,7 +39,8 @@ namespace RxDotNetDemo
             //ConcurrencyAndSynchronization();
             //TimeBasedOperators();
             //SynchronizingTheEmissionDemo();
-            ErrorHandlingAndRecoveryDemo();
+            //ErrorHandlingAndRecoveryDemo();
+            FunctionalPrograming();
 
 
             Console.WriteLine("Press Key...");
@@ -312,17 +314,24 @@ namespace RxDotNetDemo
 
         public static void ErrorHandlingAndRecoveryDemo()
         {
-            //ReactingToErrors.ErrorsFromTheObservableSide();
-            //ReactingToErrors.CatchingErrors();
-            //ReactingToErrors.VariableCatch();
-            //ReactingToErrors.RetryingToSubscribe();
+            ReactingToErrors.ErrorsFromTheObservableSide();
+            ReactingToErrors.CatchingErrors();
+            ReactingToErrors.VariableCatch();
+            ReactingToErrors.RetryingToSubscribe();
 
-            //ControllingTheLifetimeOfResources.DisposingInDeterministicWay();
-            //ControllingTheLifetimeOfResources.DisposingInDeterministicWay2();
-            //ControllingTheLifetimeOfResources.DeterministicFinalization();
+            ControllingTheLifetimeOfResources.DisposingInDeterministicWay();
+            ControllingTheLifetimeOfResources.DisposingInDeterministicWay2();
+            ControllingTheLifetimeOfResources.DeterministicFinalization();
             ControllingTheLifetimeOfResources.CreatingWeakObserver();
-            //ControllingTheLifetimeOfResources.CreatingWeakObserver2();
+            ControllingTheLifetimeOfResources.CreatingWeakObserver2();
 
+        }
+
+        public static void FunctionalPrograming()
+        {
+            //HighOrderFunction.DelegateAsParameterType();
+            //HighOrderFunction.AnonymousMethods();
+            HighOrderFunction.Closures();
         }
     }
 }
