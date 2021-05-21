@@ -35,14 +35,14 @@ namespace RxDotNetDemo.ErrorHandlingAndRecovery
         /// </summary>
         public static void DisposingInDeterministicWay2()
         {
-            var subject= new Subject<int>();
+            var subject = new Subject<int>();
             var observable = Observable.Using(() => Disposable.Create(() => { Console.WriteLine("DISPOSED"); }),
                 _ => subject);
 
             Console.WriteLine("Disposed when completed");
             observable.SubscribeConsole();
             subject.OnCompleted();
-            
+
             Console.WriteLine("Disposed when error occurs");
             subject = new Subject<int>();
             observable.SubscribeConsole();
@@ -97,7 +97,7 @@ namespace RxDotNetDemo.ErrorHandlingAndRecovery
         {
             object obj = new object();
             var weak = new WeakReference(obj);
-            
+
             GC.Collect();
             Console.WriteLine($"IsAlive: {weak.IsAlive}");
 
@@ -131,5 +131,78 @@ namespace RxDotNetDemo.ErrorHandlingAndRecovery
             Console.WriteLine("Done sleeping");
         }
 
+        public static void WeakCache()
+        {
+            var cacheSize = 50;
+            var r = new Random(cacheSize);
+            var c = new Cache(cacheSize);
+
+            var dataName = "";
+            GC.Collect(0);
+            for (int i = 0; i < c.Count; i++)
+            {
+                var index = r.Next(c.Count);
+                dataName = c[index].Name;
+            }
+
+            var regenPercent = c.RegenerationCount / (double) c.Count;
+            Console.WriteLine($"Cache size:{c.Count}, Regenerated:{regenPercent:P2}%");
+        }
+    }
+
+    public class Cache
+    {
+        private static Dictionary<int, WeakReference> _cache;
+
+        private int _regenCount = 0;
+
+        public Cache(int count)
+        {
+            _cache = new Dictionary<int, WeakReference>();
+
+            for (int i = 0; i < count; i++)
+            {
+                _cache.Add(i, new WeakReference(new Data(i), false));
+            }
+        }
+
+        public int Count => _cache.Count;
+
+        public int RegenerationCount => _regenCount;
+
+        public Data this[int index]
+        {
+            get
+            {
+                var d = _cache[index].Target as Data;
+                if (d == null)
+                {
+                    Console.WriteLine($"Regenerate object at {index}: Yes");
+                    d = new Data(index);
+                    _cache[index].Target = d;
+                    _regenCount++;
+                }
+                else
+                {
+                    Console.WriteLine($"Regenerate object at {index}: No");
+                }
+
+                return d;
+            }
+        }
+    }
+
+    public class Data
+    {
+        private byte[] _data;
+        private string _name;
+
+        public Data(int size)
+        {
+            _data = new byte[size * 1024];
+            _name = size.ToString();
+        }
+
+        public string Name => _name;
     }
 }
