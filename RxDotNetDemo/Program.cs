@@ -39,8 +39,8 @@ namespace RxDotNetDemo
             //ConcurrencyAndSynchronization();
             //TimeBasedOperators();
             //SynchronizingTheEmissionDemo();
-            ErrorHandlingAndRecoveryDemo();
-            //FunctionalPrograming();
+            //ErrorHandlingAndRecoveryDemo();
+            FunctionalPrograming();
 
 
             Console.WriteLine("Press Key...");
@@ -314,17 +314,17 @@ namespace RxDotNetDemo
 
         public static void ErrorHandlingAndRecoveryDemo()
         {
-            //ReactingToErrors.ErrorsFromTheObservableSide();
-            //ReactingToErrors.CatchingErrors();
-            //ReactingToErrors.VariableCatch();
-            //ReactingToErrors.RetryingToSubscribe();
+            ReactingToErrors.ErrorsFromTheObservableSide();
+            ReactingToErrors.CatchingErrors();
+            ReactingToErrors.VariableCatch();
+            ReactingToErrors.RetryingToSubscribe();
 
-            //ControllingTheLifetimeOfResources.DisposingInDeterministicWay();
-            //ControllingTheLifetimeOfResources.DisposingInDeterministicWay2();
-            //ControllingTheLifetimeOfResources.DeterministicFinalization();
+            ControllingTheLifetimeOfResources.DisposingInDeterministicWay();
+            ControllingTheLifetimeOfResources.DisposingInDeterministicWay2();
+            ControllingTheLifetimeOfResources.DeterministicFinalization();
             ControllingTheLifetimeOfResources.CreatingWeakObserver();
-            //ControllingTheLifetimeOfResources.CreatingWeakObserver2();
-            //ControllingTheLifetimeOfResources.WeakCache();
+            ControllingTheLifetimeOfResources.CreatingWeakObserver2();
+            ControllingTheLifetimeOfResources.WeakCache();
 
         }
 
@@ -335,7 +335,9 @@ namespace RxDotNetDemo
             //HighOrderFunction.Closures();
             //HighOrderFunction.LambdaExpressions();
             //HighOrderFunction.LambdaExpressionsClosures();
-            HighOrderFunction.FuncAndAction();
+            //HighOrderFunction.FuncAndAction();
+            //HighOrderFunction.UsingFuncAsStrategy();
+            HighOrderFunction.UsingFuncAsFactory();
         }
     }
 }
