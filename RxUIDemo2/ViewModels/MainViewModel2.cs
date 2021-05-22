@@ -25,7 +25,7 @@ namespace RxUIDemo2.ViewModels
 
         private void RxSwitch()
         {
-            Observable.Generate()
+            //Observable.Generate();
         }
 
 

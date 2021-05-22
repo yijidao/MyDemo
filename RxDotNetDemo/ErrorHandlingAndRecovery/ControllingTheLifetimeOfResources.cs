@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
@@ -92,20 +93,30 @@ namespace RxDotNetDemo.ErrorHandlingAndRecovery
 
         /// <summary>
         /// 无法 gc 原因 https://stackoverflow.com/questions/29119997/c-sharp-why-gc-cant-collect-weakreferences-target-in-my-code
+        /// 虚引用gc后的demo
+        /// 
         /// </summary>
         public static void CreatingWeakObserver()
         {
-            object obj = new object();
-            var weak = new WeakReference(obj);
+            //object obj = new object();
+            //var weak = new WeakReference(obj);
 
-            GC.Collect();
-            Console.WriteLine($"IsAlive: {weak.IsAlive}");
+            //GC.Collect();
+            //Console.WriteLine($"IsAlive: {weak.IsAlive}");
 
-            obj = null;
+            //obj = null;
+            //GC.Collect();
+            ////GC.WaitForPendingFinalizers();
+            //Thread.Sleep(TimeSpan.FromSeconds(2));
+            //Console.WriteLine($"IsAlive: {weak.IsAlive}");
+            var list = new List<WeakReference>();
+            for (int i = 0; i < 50; i++)
+            {
+                list.Add(new WeakReference(new Data(100), false));
+            }
             GC.Collect();
-            //GC.WaitForPendingFinalizers();
-            Thread.Sleep(TimeSpan.FromSeconds(2));
-            Console.WriteLine($"IsAlive: {weak.IsAlive}");
+            Console.WriteLine($"IsAlive: {list.Count(x => x.IsAlive)}");
+
         }
 
         /// <summary>
@@ -131,6 +142,9 @@ namespace RxDotNetDemo.ErrorHandlingAndRecovery
             Console.WriteLine("Done sleeping");
         }
 
+        /// <summary>
+        /// 虚引用实现缓存
+        /// </summary>
         public static void WeakCache()
         {
             var cacheSize = 50;
@@ -146,7 +160,20 @@ namespace RxDotNetDemo.ErrorHandlingAndRecovery
             }
 
             var regenPercent = c.RegenerationCount / (double) c.Count;
-            Console.WriteLine($"Cache size:{c.Count}, Regenerated:{regenPercent:P2}%");
+            Console.WriteLine($"Cache size:{c.Count}, Regenerated:{regenPercent:P2}");
+
+            c.ResetRegenerationCount();
+            GC.Collect();
+            Thread.Sleep(1000);
+            for (int i = 0; i < c.Count; i++)
+            {
+                var index = r.Next(c.Count);
+                dataName = c[index].Name;
+            }
+
+            regenPercent = c.RegenerationCount / (double)c.Count;
+            Console.WriteLine($"Cache size:{c.Count}, Regenerated:{regenPercent:P2}");
+
         }
     }
 
@@ -169,6 +196,8 @@ namespace RxDotNetDemo.ErrorHandlingAndRecovery
         public int Count => _cache.Count;
 
         public int RegenerationCount => _regenCount;
+
+        public void ResetRegenerationCount() => _regenCount = 0;
 
         public Data this[int index]
         {
