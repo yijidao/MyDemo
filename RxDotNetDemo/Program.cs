@@ -337,7 +337,11 @@ namespace RxDotNetDemo
             //HighOrderFunction.LambdaExpressionsClosures();
             //HighOrderFunction.FuncAndAction();
             //HighOrderFunction.UsingFuncAsStrategy();
-            HighOrderFunction.UsingFuncAsFactory();
+            //HighOrderFunction.UsingFuncAsFactory();
+
+            MethodChainingWithExtensionMethods.ExtensionMethodTest();
+            MethodChainingWithExtensionMethods.WorkingWithNull();
+            MethodChainingWithExtensionMethods.FluentInterfacesAndMethodChaining();
         }
     }
 }
