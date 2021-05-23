@@ -4,6 +4,10 @@ using System.Text;
 
 namespace RxDotNetDemo.FunctionalThinking
 {
+    /// <summary>
+    /// 假如要给一个编译后的类添加方法，只能该代码再编译，如果是第三方类，如 .net，那么就只能通过扩展方法。
+    /// 拓展方法应该尽量面对接口，因为这样可以适配到更多的类，实现接口实现方法，从而实现多重继承。
+    /// </summary>
     class MethodChainingWithExtensionMethods
     {
         /// <summary>
