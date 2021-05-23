@@ -339,9 +339,14 @@ namespace RxDotNetDemo
             //HighOrderFunction.UsingFuncAsStrategy();
             //HighOrderFunction.UsingFuncAsFactory();
 
-            MethodChainingWithExtensionMethods.ExtensionMethodTest();
-            MethodChainingWithExtensionMethods.WorkingWithNull();
-            MethodChainingWithExtensionMethods.FluentInterfacesAndMethodChaining();
+            //MethodChainingWithExtensionMethods.ExtensionMethodTest();
+            //MethodChainingWithExtensionMethods.WorkingWithNull();
+            //MethodChainingWithExtensionMethods.FluentInterfacesAndMethodChaining();
+            
+            //QueryingCollectionsWithLinq.LinqTest();
+            //QueryingCollectionsWithLinq.NestedQueriesAndJoins();
+            //QueryingCollectionsWithLinq.EfficientByDeferredExecution();
+            QueryingCollectionsWithLinq.TheYieldKeyword();
         }
     }
 }
