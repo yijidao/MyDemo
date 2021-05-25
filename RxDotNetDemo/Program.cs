@@ -35,12 +35,12 @@ namespace RxDotNetDemo
             //SubjectDemo();
             //HotAndColdDemo();
             //BasicQueryOperatorsDemo();
-            //PartitionAndCombine();
+            PartitionAndCombine();
             //ConcurrencyAndSynchronization();
             //TimeBasedOperators();
             //SynchronizingTheEmissionDemo();
             //ErrorHandlingAndRecoveryDemo();
-            FunctionalPrograming();
+            //FunctionalPrograming();
 
 
             Console.WriteLine("Press Key...");
@@ -256,22 +256,27 @@ namespace RxDotNetDemo
         /// </summary>
         public static void PartitionAndCombine()
         {
-            // zip 和 combineLast 配对多个 observable 发射出的通知
-            CombiningObservables.ParingItemsFromObservables();
-            CombiningObservables.CombiningTheLatestEmittedValue();
+            //// zip 和 combineLast 配对多个 observable 发射出的通知
+            //CombiningObservables.ParingItemsFromObservables();
+            //CombiningObservables.CombiningTheLatestEmittedValue();
 
-            // concat 串联多个 observable
-            CombiningObservables.ConcatenatingObservables();
-            CombiningObservables.ConcatenatingObservables2();
-            CombiningObservables.ConcatenatingObservables3();
+            //// concat 串联多个 observable
+            //CombiningObservables.ConcatenatingObservables();
+            //CombiningObservables.ConcatenatingObservables2();
+            //CombiningObservables.ConcatenatingObservables3();
 
-            // merge 合并多个 observable　发射的通知
-            CombiningObservables.MergingObservables();
-            CombiningObservables.DynamicConcatenatingAndMerging();
-            CombiningObservables.ControllingTheConcurrencyOfMerge();
-            CombiningObservables.SwitchLatestObservable();
-            CombiningObservables.SwitchLatestObservable2();
-            CombiningObservables.SwitchingToTheFirstObservableToEmit();
+            //// merge 合并多个 observable　发射的通知
+            //CombiningObservables.MergingObservables();
+            //CombiningObservables.DynamicConcatenatingAndMerging();
+            //CombiningObservables.ControllingTheConcurrencyOfMerge();
+            //CombiningObservables.SwitchLatestObservable();
+            //CombiningObservables.SwitchLatestObservable2();
+            //CombiningObservables.SwitchingToTheFirstObservableToEmit();
+
+            // groupby 分组
+            //GroupingElementsFromTheObservable.GroupOperate();
+            GroupingElementsFromTheObservable.GroupClause();
+
         }
 
         /// <summary>
@@ -330,22 +335,22 @@ namespace RxDotNetDemo
 
         public static void FunctionalPrograming()
         {
-            //HighOrderFunction.DelegateAsParameterType();
-            //HighOrderFunction.AnonymousMethods();
-            //HighOrderFunction.Closures();
-            //HighOrderFunction.LambdaExpressions();
-            //HighOrderFunction.LambdaExpressionsClosures();
-            //HighOrderFunction.FuncAndAction();
-            //HighOrderFunction.UsingFuncAsStrategy();
-            //HighOrderFunction.UsingFuncAsFactory();
+            HighOrderFunction.DelegateAsParameterType();
+            HighOrderFunction.AnonymousMethods();
+            HighOrderFunction.Closures();
+            HighOrderFunction.LambdaExpressions();
+            HighOrderFunction.LambdaExpressionsClosures();
+            HighOrderFunction.FuncAndAction();
+            HighOrderFunction.UsingFuncAsStrategy();
+            HighOrderFunction.UsingFuncAsFactory();
 
-            //MethodChainingWithExtensionMethods.ExtensionMethodTest();
-            //MethodChainingWithExtensionMethods.WorkingWithNull();
-            //MethodChainingWithExtensionMethods.FluentInterfacesAndMethodChaining();
-            
-            //QueryingCollectionsWithLinq.LinqTest();
-            //QueryingCollectionsWithLinq.NestedQueriesAndJoins();
-            //QueryingCollectionsWithLinq.EfficientByDeferredExecution();
+            MethodChainingWithExtensionMethods.ExtensionMethodTest();
+            MethodChainingWithExtensionMethods.WorkingWithNull();
+            MethodChainingWithExtensionMethods.FluentInterfacesAndMethodChaining();
+
+            QueryingCollectionsWithLinq.LinqTest();
+            QueryingCollectionsWithLinq.NestedQueriesAndJoins();
+            QueryingCollectionsWithLinq.EfficientByDeferredExecution();
             QueryingCollectionsWithLinq.TheYieldKeyword();
         }
     }
