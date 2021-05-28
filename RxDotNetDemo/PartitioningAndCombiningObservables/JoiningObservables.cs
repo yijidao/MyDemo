@@ -21,6 +21,9 @@ namespace RxDotNetDemo.PartitioningAndCombiningObservables
         /// rightDurationSelector 用来决定，right observable 的通知的时间片是多长
         /// leftDurationSelector 用来决定，left observable 的通知的时间片是多长
         /// 两个时间片重叠就证明存在关联关系
+        ///
+        /// 这个 demo 描述了当男生和女生同时在房间里时，就打印出来
+        /// 
         /// </summary>
         public static void JoiningToAFlatStream()
         {
@@ -42,7 +45,7 @@ namespace RxDotNetDemo.PartitioningAndCombiningObservables
                 male => maleExiting.Where(exit => exit.Name == male.Name),
                 female => femaleExiting.Where(exit => exit.Name == female.Name),
                 (m, f) => new { Male = m.Name, Female = f.Name })
-                .SubscribeConsole("Together At Root");
+                .SubscribeConsole("Together At Room");
 
             doorOpenedSubject.OnNext(new DoorOpened("Bob", Gender.Male, OpenDirection.Entering));
             doorOpenedSubject.OnNext(new DoorOpened("Sara", Gender.Female, OpenDirection.Entering));
@@ -88,6 +91,87 @@ namespace RxDotNetDemo.PartitioningAndCombiningObservables
             doorOpenedSubject.OnNext(new DoorOpened("John", Gender.Male, OpenDirection.Leaving));
             doorOpenedSubject.OnNext(new DoorOpened("Dan", Gender.Male, OpenDirection.Leaving));
 
+        }
+
+        /// <summary>
+        /// GroupJoin 实现分组关联，跟 Join 一样是通过时间片来定义关联关系的
+        /// 不过 groupjoin 是返回一个 observable，同一个分组的会被发射到同一个 observable 中
+        /// </summary>
+        public static void JoiningIntoGroups()
+        {
+            var doorOpenedSubject = new Subject<DoorOpened>();
+
+            var entrances = doorOpenedSubject.Where(o => o.Direction == OpenDirection.Entering);
+            var exits = doorOpenedSubject.Where(o => o.Direction == OpenDirection.Leaving);
+
+            var maleEntering = entrances.Where(x => x.Gender == Gender.Male);
+            var femaleEntering = entrances.Where(x => x.Gender == Gender.Female);
+
+            var maleExiting = exits.Where(x => x.Gender == Gender.Male);
+            var femaleExiting = exits.Where(x => x.Gender == Gender.Female);
+
+            // resultSelector 的参数是普通对象和一个  observable
+            var malesAcquaintances = maleEntering.GroupJoin(femaleEntering,
+                male => maleExiting.Where(exit => exit.Name == male.Name),
+                female => femaleExiting.Where(exit => exit.Name == female.Name),
+                (m, females) => new { Male = m.Name, Females = females});
+
+
+            // 通过 Scan 显示当前一个男生同时和几个女生在一个房间里
+            var amountPerUser = from acquaintances in malesAcquaintances
+                from cnt in acquaintances.Females.Scan(0, (acc, curr) => acc + 1)
+                select new {acquaintances.Male, cnt};
+
+            amountPerUser.SubscribeConsole("Amount of meetings for User");
+
+            doorOpenedSubject.OnNext(new DoorOpened("Bob", Gender.Male, OpenDirection.Entering));
+            doorOpenedSubject.OnNext(new DoorOpened("Sara", Gender.Female, OpenDirection.Entering));
+            doorOpenedSubject.OnNext(new DoorOpened("John", Gender.Male, OpenDirection.Entering));
+            doorOpenedSubject.OnNext(new DoorOpened("Sara", Gender.Female, OpenDirection.Leaving));
+            doorOpenedSubject.OnNext(new DoorOpened("Fibi", Gender.Female, OpenDirection.Entering));
+            doorOpenedSubject.OnNext(new DoorOpened("Bob", Gender.Male, OpenDirection.Leaving));
+            doorOpenedSubject.OnNext(new DoorOpened("Dan", Gender.Male, OpenDirection.Entering));
+            doorOpenedSubject.OnNext(new DoorOpened("Fibi", Gender.Female, OpenDirection.Leaving));
+            doorOpenedSubject.OnNext(new DoorOpened("John", Gender.Male, OpenDirection.Leaving));
+            doorOpenedSubject.OnNext(new DoorOpened("Dan", Gender.Male, OpenDirection.Leaving));
+        }
+
+        public static void JoiningIntoGroupsUseClause()
+        {
+            var doorOpenedSubject = new Subject<DoorOpened>();
+
+            var entrances = doorOpenedSubject.Where(o => o.Direction == OpenDirection.Entering);
+            var exits = doorOpenedSubject.Where(o => o.Direction == OpenDirection.Leaving);
+
+            var maleEntering = entrances.Where(x => x.Gender == Gender.Male);
+            var femaleEntering = entrances.Where(x => x.Gender == Gender.Female);
+
+            var maleExiting = exits.Where(x => x.Gender == Gender.Male);
+            var femaleExiting = exits.Where(x => x.Gender == Gender.Female);
+
+            var malesAcquaintances = from male in maleEntering
+                join female in femaleEntering on maleExiting.Where(e => e.Name == male.Name) equals femaleExiting.Where(
+                        e => e.Name == female.Name)
+                    into maleEncounters
+                select new {Male = male, Females = maleEncounters};
+
+            // 通过 Scan 显示当前一个男生同时和几个女生在一个房间里
+            var amountPerUser = from acquaintances in malesAcquaintances
+                from cnt in acquaintances.Females.Scan(0, (acc, curr) => acc + 1)
+                select new { acquaintances.Male.Name, cnt };
+            amountPerUser.SubscribeConsole("Amount of meetings for User");
+
+
+            doorOpenedSubject.OnNext(new DoorOpened("Bob", Gender.Male, OpenDirection.Entering));
+            doorOpenedSubject.OnNext(new DoorOpened("Sara", Gender.Female, OpenDirection.Entering));
+            doorOpenedSubject.OnNext(new DoorOpened("John", Gender.Male, OpenDirection.Entering));
+            doorOpenedSubject.OnNext(new DoorOpened("Sara", Gender.Female, OpenDirection.Leaving));
+            doorOpenedSubject.OnNext(new DoorOpened("Fibi", Gender.Female, OpenDirection.Entering));
+            doorOpenedSubject.OnNext(new DoorOpened("Bob", Gender.Male, OpenDirection.Leaving));
+            doorOpenedSubject.OnNext(new DoorOpened("Dan", Gender.Male, OpenDirection.Entering));
+            doorOpenedSubject.OnNext(new DoorOpened("Fibi", Gender.Female, OpenDirection.Leaving));
+            doorOpenedSubject.OnNext(new DoorOpened("John", Gender.Male, OpenDirection.Leaving));
+            doorOpenedSubject.OnNext(new DoorOpened("Dan", Gender.Male, OpenDirection.Leaving));
         }
     }
 

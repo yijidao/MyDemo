@@ -230,25 +230,25 @@ namespace RxDotNetDemo
         private static void BasicQueryOperatorsDemo()
         {
             // 映射
-            MappingOperator.Select();
-            MappingOperator.SelectWithIndex();
+            //MappingOperator.Select();
+            //MappingOperator.SelectWithIndex();
 
-            // 展平
-            FlatteningOperator.FlatteningObservableOfEnumerable();
-            FlatteningOperator.FlatteningObservableOfEnumerableWithSource();
-            FlatteningOperator.FlatteningObservableOfObservable();
-            FlatteningOperator.FlatteningObservableOfObservableWithSource();
+            //// 展平
+            //FlatteningOperator.FlatteningObservableOfEnumerable();
+            //FlatteningOperator.FlatteningObservableOfEnumerableWithSource();
+            //FlatteningOperator.FlatteningObservableOfObservable();
+            //FlatteningOperator.FlatteningObservableOfObservableWithSource();
 
-            // 过滤
-            FilteringObservable.FilteringWithTheWhere();
-            FilteringObservable.CreatingDistinctSequence();
-            FilteringObservable.RemovingDuplicateContiguousValues();
+            //// 过滤
+            //FilteringObservable.FilteringWithTheWhere();
+            //FilteringObservable.CreatingDistinctSequence();
+            //FilteringObservable.RemovingDuplicateContiguousValues();
 
             // 聚合
-            BasicAggregationOperator.BasicAggregationOperatorDemo();
-            BasicAggregationOperator.FindingMaximumAndMinimumItems();
+            //BasicAggregationOperator.BasicAggregationOperatorDemo();
+            //BasicAggregationOperator.FindingMaximumAndMinimumItems();
             BasicAggregationOperator.ScanAndAggregateDemo();
-            BasicAggregationOperator.SecondLargestItem();
+            //BasicAggregationOperator.SecondLargestItem();
         }
 
         /// <summary>
@@ -278,7 +278,9 @@ namespace RxDotNetDemo
             //GroupingElementsFromTheObservable.GroupClause();
             
             //JoiningObservables.JoiningToAFlatStream();
-            JoiningObservables.JoiningToAFlatStreamClause();
+            //JoiningObservables.JoiningToAFlatStreamClause();
+            //JoiningObservables.JoiningIntoGroups();
+            JoiningObservables.JoiningIntoGroupsUseClause();
 
         }
 
