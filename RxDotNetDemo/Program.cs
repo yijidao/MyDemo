@@ -275,7 +275,10 @@ namespace RxDotNetDemo
 
             // groupby 分组
             //GroupingElementsFromTheObservable.GroupOperate();
-            GroupingElementsFromTheObservable.GroupClause();
+            //GroupingElementsFromTheObservable.GroupClause();
+            
+            //JoiningObservables.JoiningToAFlatStream();
+            JoiningObservables.JoiningToAFlatStreamClause();
 
         }
 
