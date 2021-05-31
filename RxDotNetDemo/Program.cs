@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RxDotNetDemo.Asynchronous;
 using RxDotNetDemo.BasicQueryOperators;
 using RxDotNetDemo.Controlling_the_observable_temperature;
 using RxDotNetDemo.ErrorHandlingAndRecovery;
@@ -35,13 +36,13 @@ namespace RxDotNetDemo
             //SubjectDemo();
             //HotAndColdDemo();
             //BasicQueryOperatorsDemo();
-            PartitionAndCombine();
+            //PartitionAndCombine();
             //ConcurrencyAndSynchronization();
             //TimeBasedOperators();
             //SynchronizingTheEmissionDemo();
             //ErrorHandlingAndRecoveryDemo();
             //FunctionalPrograming();
-
+            Asynchronous();
 
             Console.WriteLine("Press Key...");
             Console.ReadLine();
@@ -361,6 +362,15 @@ namespace RxDotNetDemo
             QueryingCollectionsWithLinq.NestedQueriesAndJoins();
             QueryingCollectionsWithLinq.EfficientByDeferredExecution();
             QueryingCollectionsWithLinq.TheYieldKeyword();
+        }
+
+        /// <summary>
+        /// 异步练习
+        /// </summary>
+        public static void Asynchronous()
+        {
+            //AsynchronousCodeInDotNet.ManualCreateThread();
+            //AsynchronousCodeInDotNet.CreateThreadByThreadPool();
         }
     }
 }
