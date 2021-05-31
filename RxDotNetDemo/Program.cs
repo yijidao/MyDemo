@@ -276,12 +276,16 @@ namespace RxDotNetDemo
             // groupby 分组
             //GroupingElementsFromTheObservable.GroupOperate();
             //GroupingElementsFromTheObservable.GroupClause();
-            
+
+            // join 和 groupJoin 时间片关联
             //JoiningObservables.JoiningToAFlatStream();
             //JoiningObservables.JoiningToAFlatStreamClause();
             //JoiningObservables.JoiningIntoGroups();
-            JoiningObservables.JoiningIntoGroupsUseClause();
+            //JoiningObservables.JoiningIntoGroupsUseClause();
 
+            //BuffersAndSlidingWindows.BufferChatMessage();
+            //BuffersAndSlidingWindows.WindowDonations();
+            BuffersAndSlidingWindows.BufferSpeed();
         }
 
         /// <summary>
