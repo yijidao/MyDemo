@@ -371,6 +371,7 @@ namespace RxDotNetDemo
         {
             //AsynchronousCodeInDotNet.ManualCreateThread();
             //AsynchronousCodeInDotNet.CreateThreadByThreadPool();
+            AsynchronousCodeInDotNet.TaskBaseAsynchronousPattern();
         }
     }
 }

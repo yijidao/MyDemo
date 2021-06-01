@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 
@@ -44,6 +45,26 @@ namespace RxDotNetDemo.Asynchronous
             {
                 Console.WriteLine("Long work is done,the result is ...");
             });
+        }
+
+        /// <summary>
+        /// TAP 在 .net 中有两个关键的实现类，Task 和 Task<TResult>。Task 和 Task<TResult> 的区别是，Task 返回 Task，Task<TResult> 直接返回计算后的结果。
+        /// Task 是 future 模型的 .net 实现。future 初始化的时候不知道计算结果，但是在计算完毕后，就会得到计算结果。
+        /// TAP 内部使用了 TaskScheduler 来进行任务的调度。当 Task 创建并开始后，Task 会被推入队列，并由 TaskScheduler 进行管理。
+        /// Task.Status 可以显示任务的状态，
+        /// Task 新建的时候，状态是 WaitingForActivation，
+        /// 被 TaskScheduler 分配线程后，状态是 Running，
+        /// 完成计算后，状态时 RanToCompletion。
+        /// 在计算完成后，可以使用 Task.Result 来获得计算后的结果。但是这跟 wait 一样，会阻塞线程。
+        /// 
+        /// 
+        /// </summary>
+        public static void TaskBaseAsynchronousPattern()
+        {
+            var httpClient = new HttpClient();
+            var request = httpClient.GetAsync("http://ReactiveX.io");
+            Console.WriteLine($"the request was sent, status:{request.Status}");
+            Console.WriteLine(request.Result.Headers);
         }
 
     }
