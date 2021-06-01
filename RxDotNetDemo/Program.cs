@@ -11,6 +11,7 @@ using RxDotNetDemo.ErrorHandlingAndRecovery;
 using RxDotNetDemo.Extensions;
 using RxDotNetDemo.FunctionalThinking;
 using RxDotNetDemo.PartitioningAndCombiningObservables;
+using RxDotNetDemo.RxDisposablesLibrary;
 using RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization;
 
 namespace RxDotNetDemo
@@ -42,7 +43,8 @@ namespace RxDotNetDemo
             //SynchronizingTheEmissionDemo();
             //ErrorHandlingAndRecoveryDemo();
             //FunctionalPrograming();
-            Asynchronous();
+            //Asynchronous();
+            RxDisposables();
 
             Console.WriteLine("Press Key...");
             Console.ReadLine();
@@ -376,6 +378,14 @@ namespace RxDotNetDemo
             //AsynchronousCodeInDotNet.UseContinueWith2();
             //AsynchronousCodeInDotNet.SimplifyingAsynchronousCodeWithAsyncAwait();
             AsynchronousCodeInDotNet.AsyncMethodCaller();
+        }
+
+        /// <summary>
+        /// Rx 提供了一个 Disposable 的工具包
+        /// </summary>
+        public static void RxDisposables()
+        {
+            RxDisposableLibrary.RefCountDisposable();
         }
     }
 }
