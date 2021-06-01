@@ -67,5 +67,19 @@ namespace RxDotNetDemo.Asynchronous
             Console.WriteLine(request.Result.Headers);
         }
 
+        /// <summary>
+        /// 直接调用Task.Result 会阻塞线程。所以一般不用，可以使用 continueWith 来取代这个操作。
+        /// </summary>
+        public static void UseContinueWith()
+        {
+            var httpClient = new HttpClient();
+            httpClient.GetAsync("http://ReactiveX.io")
+                .ContinueWith(requestTask =>
+                {
+                    Console.WriteLine($"the request was sent, status: {requestTask.Status}"); // 这里的状态就是 RanToCompletion
+                    Console.WriteLine(requestTask.Result.Headers);
+                });
+        }
+
     }
 }
