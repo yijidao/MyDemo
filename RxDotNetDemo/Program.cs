@@ -372,7 +372,10 @@ namespace RxDotNetDemo
             //AsynchronousCodeInDotNet.ManualCreateThread();
             //AsynchronousCodeInDotNet.CreateThreadByThreadPool();
             //AsynchronousCodeInDotNet.TaskBaseAsynchronousPattern();
-            AsynchronousCodeInDotNet.UseContinueWith();
+            //AsynchronousCodeInDotNet.UseContinueWith();
+            //AsynchronousCodeInDotNet.UseContinueWith2();
+            //AsynchronousCodeInDotNet.SimplifyingAsynchronousCodeWithAsyncAwait();
+            AsynchronousCodeInDotNet.AsyncMethodCaller();
         }
     }
 }

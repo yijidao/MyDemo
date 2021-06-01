@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace RxDotNetDemo.Asynchronous
 {
@@ -69,6 +70,7 @@ namespace RxDotNetDemo.Asynchronous
 
         /// <summary>
         /// 直接调用Task.Result 会阻塞线程。所以一般不用，可以使用 continueWith 来取代这个操作。
+        /// ContinueWith 中的代码会在 Task 完成（无论成功还是失败）之后执行，ContinueWith 会接受前一个Task 作为参数。
         /// </summary>
         public static void UseContinueWith()
         {
@@ -81,5 +83,62 @@ namespace RxDotNetDemo.Asynchronous
                 });
         }
 
+        /// <summary>
+        /// ContinueWith 有一个问题，就是写起来很麻烦，需要循环嵌套，太长了
+        /// 这个demo 展示了ContinueWith 嵌套的问题
+        /// </summary>
+        public static void UseContinueWith2()
+        {
+            var httpClient = new HttpClient();
+            httpClient.GetAsync("http://ReactiveX.io")
+                .ContinueWith(requestTask =>
+                {
+                    var httpContent = requestTask.Result.Content;
+                    httpContent.ReadAsStringAsync()
+                        .ContinueWith(contentTask =>
+                        {
+                            Console.WriteLine(contentTask.Result);
+                        });
+                });
+        }
+
+        /// <summary>
+        /// 使用 async - await 来替代 ContinueWith，可以是代码更简洁可读
+        /// 当使用了 async，编译器就会生成一个 Task
+        /// 其实一般情况下，异步代码就是这样的，一行行的 async - await
+        /// </summary>
+        public static async void SimplifyingAsynchronousCodeWithAsyncAwait()
+        {
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync("http://ReactiveX.io");
+            var page = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(page);
+        }
+
+
+        /// <summary>
+        /// 使用 async 可以通知编译器生成一个 Task，但是如果代码内部并没有支持异步操作，那么就不会切换线程，
+        /// 而且这种使用 async 去修饰同步方法，编译器依旧会生成一个状态机去管理代码，其实有损代码性能的。
+        ///
+        /// 新建 Task 可以调用 Task.Run
+        /// </summary>
+        public static async void AsyncMethodCaller()
+        {
+            var isSame = await MyAsyncMethod(Thread.CurrentThread.ManagedThreadId);
+            Console.WriteLine($"1 - {isSame}"); // True
+
+            var isSame2 = await MyAsyncMethod2(Thread.CurrentThread.ManagedThreadId);
+            Console.WriteLine($"2 - {isSame2}"); // False
+        }
+
+        public static async Task<bool> MyAsyncMethod(int callingThreadId)
+        {
+            return callingThreadId == Thread.CurrentThread.ManagedThreadId;
+        }
+
+        public static async Task<bool> MyAsyncMethod2(int callingThreadId)
+        {
+            return await Task.Run(() => callingThreadId == Thread.CurrentThread.ManagedThreadId);
+        }
     }
 }
