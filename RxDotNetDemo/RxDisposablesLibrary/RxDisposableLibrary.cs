@@ -109,7 +109,61 @@ namespace RxDotNetDemo.RxDisposablesLibrary
             d1.Dispose();
             Console.WriteLine("Disposing 2nd");
             d2.Dispose();
+        }
 
+        /// <summary>
+        /// 跟 SerialDisposable 类似，可以重复设置的 Disposable，但是不会自动 Dispose 上一个 IDisposable，感觉是一个比较底层的方法，估计用不上。
+        /// </summary>
+        public static void MultipleAssignmentDisposable()
+        {
+            //new MultipleAssignmentDisposable()
+        }
+
+        /// <summary>
+        /// 只能设置一次的 IDisposable，如果已经被设置了，则会抛异常
+        /// </summary>
+        public static void SingleAssignmentDisposable()
+        {
+            //new SingleAssignmentDisposable()
+        }
+
+        /// <summary>
+        /// CompositeDisposable 可以添加多个 IDisposable，当调用 Dispose时，会同时调用内部 IDisposable 的 Dispose
+        /// 这个经常用于对 Disposable 进行分组，然后按组调用 Dispose
+        /// </summary>
+        public static void CompositeDisposable()
+        {
+            var compositeDisposable = new CompositeDisposable(
+                Disposable.Create(() => Console.WriteLine($"1st disposed")),
+                Disposable.Create(() => Console.WriteLine($"2nd disposed")));
+
+            compositeDisposable.Dispose();
+        }
+
+        /// <summary>
+        /// CancellationDisposable 是 IDisposable 和 CancellationTokenSource 之间的适配器层
+        /// 当调用 CancellationDisposable.Dispose() 时，CancellationTokenSource 会被 canceled
+        /// </summary>
+        public static void CancellationDisposable()
+        {
+            var cancelable = new CancellationDisposable();
+            Task.Run(() =>
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+                Console.WriteLine("Inner");
+            }, cancelable.Token);
+            cancelable.Dispose();
+        }
+
+        /// <summary>
+        /// BooleanDisposable 只是封装了一下布尔值，调用完 Dispose，IsDisposed 会为 True
+        /// </summary>
+        public static void BoolDisposable()
+        {
+            var boolDisposable = new BooleanDisposable();
+            Console.WriteLine($"Before, IsDisposed = {boolDisposable.IsDisposed}");
+            boolDisposable.Dispose();
+            Console.WriteLine($"After, IsDisposed = {boolDisposable.IsDisposed}");
         }
     }
 }

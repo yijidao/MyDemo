@@ -385,7 +385,10 @@ namespace RxDotNetDemo
         /// </summary>
         public static void RxDisposables()
         {
-            RxDisposableLibrary.RefCountDisposable();
+            //RxDisposableLibrary.RefCountDisposable();
+            //RxDisposableLibrary.CompositeDisposable();
+            //RxDisposableLibrary.CancellationDisposable();
+            RxDisposableLibrary.BoolDisposable();
         }
     }
 }
