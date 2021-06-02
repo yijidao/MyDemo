@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RxUIDemo2", "RxUIDemo2\RxUI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RxDotNetDemo", "RxDotNetDemo\RxDotNetDemo.csproj", "{6080EA12-63DC-41A0-A444-125B12508FA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPattern", "DesignPattern\DesignPattern.csproj", "{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -223,6 +225,18 @@ Global
 		{6080EA12-63DC-41A0-A444-125B12508FA6}.Release|x64.Build.0 = Release|Any CPU
 		{6080EA12-63DC-41A0-A444-125B12508FA6}.Release|x86.ActiveCfg = Release|Any CPU
 		{6080EA12-63DC-41A0-A444-125B12508FA6}.Release|x86.Build.0 = Release|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Debug|x64.Build.0 = Debug|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Debug|x86.Build.0 = Debug|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Release|x64.ActiveCfg = Release|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Release|x64.Build.0 = Release|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Release|x86.ActiveCfg = Release|Any CPU
+		{EAB8C0CF-C07B-409E-9A52-F8C07F9FAFAB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
