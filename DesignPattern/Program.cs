@@ -1,4 +1,5 @@
 ﻿using System;
+using DesignPattern.DesignPrinciples;
 
 namespace DesignPattern
 {
@@ -6,7 +7,15 @@ namespace DesignPattern
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            //Console.WriteLine("Hello World!");
+            LSPDemo();
+        }
+
+        public static void LSPDemo()
+        {
+            var lsp = new LiskovSubstitutionPrinciple();
+            lsp.OverloadDemo();
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,10 +14,13 @@ namespace DesignPattern.DesignPrinciples
     /// 所以里氏替换原则，其实是用来思考如何设计父类和子类的。
     ///
     /// 当子类继承父类时，会异化父类的属性或者方法（就是说在这个子类里，父类只有部分属性或者行为有意义），那么就不应该使用继承，
-    /// 因为这样继承的话，在使用父类的地方使用了这个子类，就有隐藏的bug可能。此时应该使用组合、聚合来使用父类的部分行为或者属性。
+    /// 因为这样继承的话，在使用父类的地方使用了这个子类，就有隐藏的bug可能。此时应该使用依赖、组合、聚合来使用父类的部分行为或者属性。
     /// </summary>
     class LiskovSubstitutionPrinciple
     {
+        /// <summary>
+        ///能使用父类的地方，就能使用子类
+        /// </summary>
         public void SoldierDemo()
         {
             var soldier = new Soldier
@@ -44,7 +48,39 @@ namespace DesignPattern.DesignPrinciples
             soldier.KillEnemy();
             soldier2.KillEnemy();
             soldier3.KillEnemy();
+        }
 
+        /// <summary>
+        /// 可以使用子类的地方，不一定能替换成父类
+        /// </summary>
+        public void DowncastDemo()
+        {
+            var snipper = new Snipper();
+            //snipper.Gun = (AUG)new Rifle(); // 这里虽然编译不报错，但是会在运行时报类型转型异常，证明可以使用子类的地方，不一定能替换成父类
+            snipper.Gun = new AUG();
+
+            snipper.KillEnemy();
+        }
+
+        /// <summary>
+        /// 子类重载或覆写父类方法时，子类参数范围可以比父类大，但是不可以比父类小，如果比父类小，可能会运行不到子类的重载方法。
+        /// 其实这个设计自己懂还不够，其实子类就不应该重载父类的方法，因为反直觉的代码总是不好的
+        /// </summary>
+        public void OverloadDemo()
+        {
+            var father = new Father();
+            var son = new Son();
+
+            // 子类重载或覆写父类方法时，子类参数范围可以比父类大
+            father.DoSomeThing(new AUG()); // 运行父类
+            son.DoSomeThing(new AUG()); // 运行子类
+            son.DoSomeThing(new Rifle()); // 运行子类
+
+            // 子类重载或覆写父类方法时，子类参数范围不可以比父类小，这样会导致运行不了子类的方法，而是去运行父类的方法
+            // 其实只要把握住，能运行父类的地方，子类就能运行，这样就能设计出比较良好的继承关系
+            father.DoSomeThing2(new Rifle()); // 运行父类
+            son.DoSomeThing2(new AUG()); // 运行子类
+            son.DoSomeThing2(new Rifle()); // 运行父类，这里子类实例却运行了父类方法，反直觉
         }
 
     }
@@ -118,9 +154,12 @@ namespace DesignPattern.DesignPrinciples
     /// </summary>
     class ToyGun : AbstractToy
     {
-        
+
     }
 
+    /// <summary>
+    /// 士兵
+    /// </summary>
     class Soldier
     {
         /// <summary>
@@ -132,6 +171,71 @@ namespace DesignPattern.DesignPrinciples
         {
             Console.WriteLine("士兵开始杀人...");
             Gun.Shoot();
+        }
+    }
+
+    /// <summary>
+    /// AUG狙击枪
+    /// </summary>
+    class AUG : Rifle
+    {
+        public void ZoomOut()
+        {
+            Console.WriteLine("使用望远镜瞄准...");
+        }
+
+        public override void Shoot()
+        {
+            Console.WriteLine("AUG射击...");
+        }
+    }
+
+    /// <summary>
+    /// 狙击手
+    /// </summary>
+    class Snipper
+    {
+        public AUG Gun { get; set; }
+        public void KillEnemy()
+        {
+            Gun.ZoomOut();
+            Gun.Shoot();
+        }
+    }
+
+    class Father
+    {
+        public virtual void DoSomeThing(AUG gun)
+        {
+            Console.WriteLine("[DoSomeThing] 运行父类...");
+            gun.Shoot();
+        }
+
+        public virtual void DoSomeThing2(Rifle gun)
+        {
+            Console.WriteLine("[DoSomeThing2] 运行父类...");
+            gun.Shoot();
+        }
+    }
+
+    class Son : Father
+    {
+
+        /// <summary>
+        /// 重载父类方法，并且参数范围比父类的大，因为能使用子类的地方就可以使用父类
+        /// 这里是重载，而不是重写
+        /// </summary>
+        /// <param name="gun"></param>
+        public void DoSomeThing(Rifle gun)
+        {
+            Console.WriteLine("[DoSomeThing] 运行子类...");
+            gun.Shoot();
+        }
+
+        public void DoSomeThing2(AUG gun)
+        {
+            Console.WriteLine("[DoSomeThing2] 运行子类...");
+            gun.Shoot();
         }
     }
 }
