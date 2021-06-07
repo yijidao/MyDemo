@@ -792,8 +792,16 @@
 
 
     <Grid>
-        <DataGrid x:Name="grid">
-
+        <DataGrid x:Name="grid" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Width="100" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextAlignment" Value="Center"></Setter>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </UserControl>
