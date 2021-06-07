@@ -8,14 +8,17 @@ namespace DesignPattern
         static void Main(string[] args)
         {
             //Console.WriteLine("Hello World!");
-            LSPDemo();
+            PrincipleDemo();
         }
 
-        public static void LSPDemo()
+        public static void PrincipleDemo()
         {
             var lsp = new LiskovSubstitutionPrinciple();
             lsp.OverloadDemo();
 
+            var ocp = new OpenClosedPrinciple();
+            ocp.MockSell();
+            ocp.MockOffSell();
         }
     }
 }
