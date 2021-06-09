@@ -5,6 +5,10 @@ using System.Text;
 namespace DesignPattern.DesignPattern
 {
     /// <summary>
+    /// 工厂模式的定义：
+    /// Define an interface for creating an object,but let subclasses decide which class to instantiate.Factory Method lets a class defer instantiation to subclass.
+    /// 定义创建类的接口，让子类决定实例化哪个类。工厂方法使一个类的实例化推迟到子类。
+    /// 
     /// 工厂模式就具有良好的解耦性，当业务发生变化时，只需要修改具体的工厂类或者拓展工厂类就可以，
     /// 而且工厂模式不关心具体产品实现，所以只要产品抽象类定义得好，只需要新增具体产品类，其他代码不用修改，就能完成业务了。
     ///
