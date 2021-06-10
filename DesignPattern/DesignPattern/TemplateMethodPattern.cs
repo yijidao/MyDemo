@@ -60,15 +60,15 @@ namespace DesignPattern.DesignPattern
         /// <summary>
         /// 算法实现
         /// </summary>
-        public override void Step1()
+        protected override void Step1()
         {
         }
 
-        public override void Step2()
+        protected override void Step2()
         {
         }
 
-        public override void Step3()
+        protected override void Step3()
         {
         }
     }
@@ -81,15 +81,15 @@ namespace DesignPattern.DesignPattern
         /// <summary>
         /// 算法实现
         /// </summary>
-        public override void Step1()
+        protected override void Step1()
         {
         }
 
-        public override void Step2()
+        protected override void Step2()
         {
         }
 
-        public override void Step3()
+        protected override void Step3()
         {
         }
     }
