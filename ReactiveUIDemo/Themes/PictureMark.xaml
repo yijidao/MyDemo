@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctls="clr-namespace:ReactiveUIDemo.Controls"
+                    xmlns:vs="clr-namespace:ReactiveUIDemo.Views">
+    <Style TargetType="ctls:PictureMark">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ctls:PictureMark">
+                    
+                    <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="{TemplateBinding Background}" x:Name="grid">
+                        <AdornerDecorator></AdornerDecorator>
+                        <Border BorderBrush="Black" BorderThickness="1" Visibility="{TemplateBinding Editing}"/>
+                        
+                        <TextBlock x:Name="MarkInfo" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ctls:PictureMark}}, Path=Mark.Info, Mode=TwoWay}"></TextBlock>
+                        <Button x:Name="remove" Height="10" Width="10" VerticalAlignment="Top" HorizontalAlignment="Right"  Visibility="{TemplateBinding Editing}"></Button>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

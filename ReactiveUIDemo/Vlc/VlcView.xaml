@@ -10,7 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <Style TargetType="vlc:VideoView" x:Key="VideoViewStyle">
+        <Style TargetType="vlc:VideoView" x:Key="VideoViewstyle">
             <!--<Setter Property="BorderThickness" Value="2"></Setter>
             <Style.Triggers>
                 --><!--<Trigger Property="IsFocused" Value="True">
@@ -30,7 +30,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <vlc:VideoView x:Name="videoView" Style="{StaticResource VideoViewStyle}" MouseLeftButtonDown="VideoView_OnMouseLeftButtonDown">
+        <vlc:VideoView x:Name="videoView" Style="{StaticResource VideoViewstyle}" MouseLeftButtonDown="VideoView_OnMouseLeftButtonDown">
             
         </vlc:VideoView>
     </Grid>

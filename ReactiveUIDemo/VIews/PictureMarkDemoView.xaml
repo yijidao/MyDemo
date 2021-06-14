@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="ReactiveUIDemo.Views.PictureMarkDemoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ReactiveUIDemo.Views"
+             xmlns:ctls="clr-namespace:ReactiveUIDemo.Controls"
+             xmlns:vms="clr-namespace:ReactiveUIDemo.ViewModels"
+             d:DataContext="{d:DesignInstance vms:PictureMarkDemoViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Themes/PictureMark.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="编辑" x:Name="Edit" Margin="0 0 20 0"/>
+            <Button Content="保存" x:Name="Save"/>
+        </StackPanel>
+        <Grid Width="1418" Height="918" Grid.Row="1">
+            <Border BorderBrush="LightCoral" BorderThickness="1">
+                <Image x:Name="Image" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill"  ></Image>
+            </Border>
+
+            <Canvas x:Name="MarkContainer" Background="Transparent" AllowDrop="True" />
+        </Grid>
+        <ListBox x:Name="monitors" Grid.RowSpan="2" Grid.Column="1" ItemsSource="{Binding Monitors}" DisplayMemberPath="Info" Width="200" AllowDrop="True">
+        </ListBox>
+    </Grid>
+</UserControl>
