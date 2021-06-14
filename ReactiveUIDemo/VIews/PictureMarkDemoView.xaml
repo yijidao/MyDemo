@@ -33,7 +33,7 @@
         </StackPanel>
         <Grid Width="1418" Height="918" Grid.Row="1">
             <Border BorderBrush="LightCoral" BorderThickness="1">
-                <Image x:Name="Image" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill"  ></Image>
+                <Image x:Name="Image" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill"></Image>
             </Border>
 
             <Canvas x:Name="MarkContainer" Background="Transparent" AllowDrop="True" />
