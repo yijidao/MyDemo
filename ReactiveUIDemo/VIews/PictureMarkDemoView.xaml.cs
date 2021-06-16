@@ -33,8 +33,8 @@ namespace ReactiveUIDemo.Views
             InitializeComponent();
             var viewModel = new PictureMarkDemoViewModel();
             DataContext = viewModel;
-            var bimg = new BitmapImage(new Uri(@"D:\Code\MyDemo\ReactiveUIDemo\Images\map.jpg", UriKind.RelativeOrAbsolute));
-            Image.Source = bimg;
+            //var bimg = new BitmapImage(new Uri(@"D:\Code\MyDemo\ReactiveUIDemo\Images\map.jpg", UriKind.RelativeOrAbsolute));
+            //Image.Source = bimg;
 
             var downSubject = new Subject<PictureMark>();
             var upSubject = new Subject<PictureMark>();
@@ -103,9 +103,6 @@ namespace ReactiveUIDemo.Views
                         var pictureMark = new PictureMark
                         {
                             DataContext = markInfo,
-                            Width = 36,
-                            Height = 36,
-                            Background = new SolidColorBrush(Colors.LightBlue),
                             Editing = Visibility.Visible
                         };
 

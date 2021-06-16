@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using ReactiveUI;
 
@@ -69,11 +71,11 @@ namespace ReactiveUIDemo.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            var remove = GetTemplateChild("remove") as Button;
-            remove.Click += (sender, args) =>
-            {
-                RaiseEvent(new RoutedEventArgs(RemoveEvent, this));
-            };
+            //var remove = GetTemplateChild("remove") as Button;
+            //remove.Click += (sender, args) =>
+            //{
+            //    RaiseEvent(new RoutedEventArgs(RemoveEvent, this));
+            //};
         }
     }
 
@@ -111,4 +113,19 @@ namespace ReactiveUIDemo.Controls
         }
 
     }
+
+    class PictureMarkMarginConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var width = (double) value;
+            return new Thickness(width, -6, 0, 0);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
