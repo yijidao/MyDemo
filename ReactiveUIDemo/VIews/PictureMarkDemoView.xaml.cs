@@ -36,8 +36,8 @@ namespace ReactiveUIDemo.Views
             //var bimg = new BitmapImage(new Uri(@"D:\Code\MyDemo\ReactiveUIDemo\Images\map.jpg", UriKind.RelativeOrAbsolute));
             //Image.Source = bimg;
 
-            var downSubject = new Subject<PictureMark>();
-            var upSubject = new Subject<PictureMark>();
+            var downSubject = new Subject<MonitorMark>();
+            var upSubject = new Subject<MonitorMark>();
 
             var move = Observable.FromEventPattern<MouseEventArgs>(this.MarkContainer,
                 nameof(this.MarkContainer.MouseMove));
@@ -46,9 +46,9 @@ namespace ReactiveUIDemo.Views
             IDisposable d2 = null;
             IDisposable d3 = null;
 
-            MarkContainer.AddHandler(PictureMark.RemoveEvent, new RoutedEventHandler(((o, eventArgs) =>
+            MarkContainer.AddHandler(MonitorMark.RemoveEvent, new RoutedEventHandler(((o, eventArgs) =>
             {
-                var ctl = (PictureMark) eventArgs.OriginalSource;
+                var ctl = (MonitorMark) eventArgs.OriginalSource;
                 MarkContainer.Children.Remove(ctl);
                 viewModel.Marks.Remove(ctl.Mark);
             })));
@@ -61,25 +61,25 @@ namespace ReactiveUIDemo.Views
                 Edit.Visibility = Visibility.Hidden;
                 Save.Visibility = Visibility.Visible;
 
-                foreach (UIElement element in MarkContainer.Children)
-                {
-                    if (element is PictureMark pictureMark)
-                    {
-                        pictureMark.Editing = Visibility.Visible;
-                    }
-                }
+                //foreach (UIElement element in MarkContainer.Children)
+                //{
+                //    if (element is MonitorMark pictureMark)
+                //    {
+                //        pictureMark.Editing = Visibility.Visible;
+                //    }
+                //}
 
-                PictureMark current = null;
-                d = move.SkipUntil(downSubject.Do(x => current = x))
-                    .TakeUntil(upSubject.Do(_ => current = null))
-                    .Repeat()
-                    .Select(x => x.EventArgs.GetPosition(MarkContainer))
-                    .Subscribe(p =>
-                    {
-                        Debug.WriteLine($"------  X:{p.X}  Y:{p.Y}  ------");
-                        Canvas.SetLeft(current, p.X);
-                        Canvas.SetTop(current, p.Y);
-                    });
+                MonitorMark current = null;
+                //d = move.SkipUntil(downSubject.Do(x => current = x))
+                //    .TakeUntil(upSubject.Do(_ => current = null))
+                //    .Repeat()
+                //    .Select(x => x.EventArgs.GetPosition(MarkContainer))
+                //    .Subscribe(p =>
+                //    {
+                //        Debug.WriteLine($"------  X:{p.X}  Y:{p.Y}  ------");
+                //        Canvas.SetLeft(current, p.X);
+                //        Canvas.SetTop(current, p.Y);
+                //    });
 
 
                 d2 = Observable.FromEventPattern<MouseEventArgs>(monitors, nameof(monitors.MouseMove))
@@ -100,14 +100,14 @@ namespace ReactiveUIDemo.Views
                         markInfo.X = p.X;
                         markInfo.Y = p.Y;
 
-                        var pictureMark = new PictureMark
+                        var pictureMark = new MonitorMark
                         {
                             DataContext = markInfo,
-                            Editing = Visibility.Visible
+                            //Editing = Visibility.Visible
                         };
 
-                        pictureMark.MouseLeftButtonDown += (o, args) => downSubject.OnNext((PictureMark)o);
-                        pictureMark.MouseLeftButtonUp += (o, args) => upSubject.OnNext((PictureMark)o);
+                        pictureMark.MouseLeftButtonDown += (o, args) => downSubject.OnNext((MonitorMark)o);
+                        pictureMark.MouseLeftButtonUp += (o, args) => upSubject.OnNext((MonitorMark)o);
                         MarkContainer.Children.Add(pictureMark);
                         viewModel.Marks.Add(markInfo);
                     });
@@ -118,13 +118,13 @@ namespace ReactiveUIDemo.Views
             {
                 viewModel.Save();
 
-                foreach (UIElement element in MarkContainer.Children)
-                {
-                    if (element is PictureMark pictureMark)
-                    {
-                        pictureMark.Editing = Visibility.Collapsed;
-                    }
-                }
+                //foreach (UIElement element in MarkContainer.Children)
+                //{
+                //    if (element is MonitorMark pictureMark)
+                //    {
+                //        pictureMark.Editing = Visibility.Collapsed;
+                //    }
+                //}
 
                 Save.Visibility = Visibility.Hidden;
                 Edit.Visibility = Visibility.Visible;

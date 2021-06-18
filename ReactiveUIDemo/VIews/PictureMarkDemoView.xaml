@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Themes/PictureMark.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Themes/MonitorMark.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -32,7 +32,7 @@
             <Button Content="保存" x:Name="Save"/>
         </StackPanel>
         <Grid Width="1418" Height="918" Grid.Row="1">
-            <Border BorderBrush="LightCoral" BorderThickness="1" Background="#001133">
+            <Border BorderBrush="LightCoral" BorderThickness="1" Background="LightBlue">
                 <!--<Image x:Name="Image" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill" 
                        Source="https://images.adsttc.com.qtlcn.com/media/images/6070/2713/971d/6c01/64eb/6a76/large_jpg/4fl.jpg?1617962858"></Image>-->
             </Border>
