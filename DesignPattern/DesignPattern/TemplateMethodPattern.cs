@@ -35,11 +35,12 @@ namespace DesignPattern.DesignPattern
         /// <summary>
         /// 算法步骤
         /// </summary>
-        protected abstract void Step1();
+        internal abstract void Step1();
 
-        protected abstract void Step2();
+        internal abstract void Step2();
 
-        protected abstract void Step3();
+        internal abstract void Step3();
+
 
         /// <summary>
         /// 模板方法
@@ -60,15 +61,15 @@ namespace DesignPattern.DesignPattern
         /// <summary>
         /// 算法实现
         /// </summary>
-        protected override void Step1()
+        internal override void Step1()
         {
         }
 
-        protected override void Step2()
+        internal override void Step2()
         {
         }
 
-        protected override void Step3()
+        internal override void Step3()
         {
         }
     }
@@ -81,15 +82,15 @@ namespace DesignPattern.DesignPattern
         /// <summary>
         /// 算法实现
         /// </summary>
-        protected override void Step1()
+        internal override void Step1()
         {
         }
 
-        protected override void Step2()
+        internal override void Step2()
         {
         }
 
-        protected override void Step3()
+        internal override void Step3()
         {
         }
     }
