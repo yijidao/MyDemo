@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Text;
 
 namespace DesignPattern.DesignPattern
@@ -15,6 +16,29 @@ namespace DesignPattern.DesignPattern
     /// </summary>
     class ProxyPattern
     {
+        /// <summary>
+        /// 普通代理
+        /// </summary>
+        public void CommonProxy()
+        {
+            IGamePlayer proxy = new GamePlayerProxy("张三");
+            proxy.Login("admin", "123456");
+            proxy.KillBoss();
+            proxy.Upgrade();
+        }
+
+        /// <summary>
+        /// 强制代理
+        /// </summary>
+        public void ForceProxy()
+        {
+            IGamePlayerForForceProxy player = new GamePlayerForForceProxy("张三");
+            var proxy = player.GetProxy();
+            proxy.Login("admin", "123456");
+            proxy.KillBoss();
+            proxy.Upgrade();
+        }
+
     }
 
     #region 代理模式模板代码
@@ -91,7 +115,145 @@ namespace DesignPattern.DesignPattern
         public void Upgrade();
     }
 
+    class GamePlayer : IGamePlayer
+    {
+        private readonly IGamePlayer _gamePlayer;
+        private readonly string _name;
 
-    
+        public GamePlayer(IGamePlayer gamePlayer, string name)
+        {
+            _gamePlayer = gamePlayer ?? throw new Exception("必须使用代理登录");
+            _name = name;
+        }
+
+        public void Login(string user, string password)
+        {
+            Console.WriteLine($"账号为【{user}】的用户【{_name}】登录了！");
+        }
+
+        public void KillBoss()
+        {
+            Console.WriteLine($"【{_name}】正在打怪！");
+        }
+
+        public void Upgrade()
+        {
+            Console.WriteLine($"【{_name}】升级了");
+        }
+    }
+
+    class GamePlayerProxy : IGamePlayer
+    {
+        private IGamePlayer _gamePlayer;
+        public GamePlayerProxy(string name)
+        {
+            _gamePlayer = new GamePlayer(this, name);
+        }
+
+
+        public void Login(string user, string password)
+        {
+            _gamePlayer.Login(user, password);
+        }
+
+        public void KillBoss()
+        {
+            _gamePlayer.KillBoss();
+        }
+
+        public void Upgrade()
+        {
+            _gamePlayer.Upgrade();
+        }
+    }
+
+    #endregion
+
+    #region 强制代理，不能直接 new 对象进行使用，也不直接 new 代理类，而是通过对象生成代理类
+
+    interface IGamePlayerForForceProxy
+    {
+        public void Login(string user, string password);
+
+        public void KillBoss();
+
+        public void Upgrade();
+
+        /// <summary>
+        /// 获取代理
+        /// </summary>
+        /// <returns></returns>
+        public IGamePlayerForForceProxy GetProxy();
+    }
+
+    class GamePlayerForForceProxy : IGamePlayerForForceProxy
+    {
+        private readonly string _name;
+
+        private IGamePlayerForForceProxy _proxy;
+
+        public GamePlayerForForceProxy(string name)
+        {
+            _name = name;
+        }
+
+        public void Login(string user, string password)
+        {
+            if (IsProxy()) Console.WriteLine($"账号为【{user}】的用户【{_name}】登录了！");
+            else Console.WriteLine("请使用代理访问！");
+
+        }
+
+        public void KillBoss()
+        {
+            if (IsProxy()) Console.WriteLine($"【{_name}】正在打怪！");
+            else Console.WriteLine("请使用代理访问！");
+        }
+
+        public void Upgrade()
+        {
+            if (IsProxy()) Console.WriteLine($"【{_name}】升级了");
+            else Console.WriteLine("请使用代理访问！");
+        }
+
+        public IGamePlayerForForceProxy GetProxy()
+        {
+            _proxy = new GamePlayerProxyForForceProxy(this);
+            return _proxy;
+        }
+
+        private bool IsProxy() => _proxy != null;
+    }
+
+    class GamePlayerProxyForForceProxy : IGamePlayerForForceProxy
+    {
+        private readonly IGamePlayerForForceProxy _gamePlayer;
+
+        public GamePlayerProxyForForceProxy(IGamePlayerForForceProxy gamePlayer)
+        {
+            _gamePlayer = gamePlayer;
+        }
+
+        public void Login(string user, string password)
+        {
+            _gamePlayer.Login(user, password);
+        }
+
+        public void KillBoss()
+        {
+            _gamePlayer.KillBoss();
+        }
+
+        public void Upgrade()
+        {
+            _gamePlayer.Upgrade();
+        }
+
+        public IGamePlayerForForceProxy GetProxy()
+        {
+            return this;
+        }
+    }
+
     #endregion
 }
