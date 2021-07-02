@@ -21,6 +21,9 @@ namespace DesignPattern.DesignPattern
     /// 动态代理指通过反射来实现代理功能。
     /// 1. .net 提供了 RealProxy 实现动态代理功能。（必须通过继承的方式）
     /// 2. Castle 提供了一整套工具实现动态代理功能。
+    ///
+    /// AOP 也可以写代理，AOP 框架一般只要搞清楚几个名词就明白了。
+    /// Aspect（切面）、JoinPoint（切入点）、Advice（通知）、Weave（织入）
     /// 
     /// </summary>
     class ProxyPattern
