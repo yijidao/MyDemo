@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Text;
+using Castle.DynamicProxy;
+using Castle.DynamicProxy.Generators;
 
 namespace DesignPattern.DesignPattern
 {
@@ -13,6 +15,13 @@ namespace DesignPattern.DesignPattern
     /// 代理模式分为普通代理、强制代理、动态代理。
     ///
     /// 代理模式一般由Subject 接口、RealSubject 实现类、Proxy 代理类组成。
+    ///
+    /// 强制代理指无法直接调用目标类方法，必须通过代理类调用目标类方法。
+    ///
+    /// 动态代理指通过反射来实现代理功能。
+    /// 1. .net 提供了 RealProxy 实现动态代理功能。（必须通过继承的方式）
+    /// 2. Castle 提供了一整套工具实现动态代理功能。
+    /// 
     /// </summary>
     class ProxyPattern
     {
@@ -39,6 +48,23 @@ namespace DesignPattern.DesignPattern
             proxy.Upgrade();
         }
 
+        /// <summary>
+        /// 使用 Castle 实现动态代理
+        /// 需要添加
+        /// <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+        /// <_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
+        /// </AssemblyAttribute>
+        /// 从而使 Castle 可以访问内部类
+        /// </summary>
+        public void DynimicProxy()
+        {
+            var proxyGenerator = new ProxyGenerator();
+            var proxy = proxyGenerator.CreateInterfaceProxyWithTarget<IGamePlayer>(new GamePlayer("张三"), ProxyGenerationOptions.Default,
+                new GamePlayerInterceptor());
+            proxy.Login("admin", "123456");
+            proxy.KillBoss();
+            proxy.Upgrade();
+        }
     }
 
     #region 代理模式模板代码
@@ -119,6 +145,11 @@ namespace DesignPattern.DesignPattern
     {
         private readonly IGamePlayer _gamePlayer;
         private readonly string _name;
+
+        public GamePlayer(string name)
+        {
+            _name = name;
+        }
 
         public GamePlayer(IGamePlayer gamePlayer, string name)
         {
@@ -256,4 +287,27 @@ namespace DesignPattern.DesignPattern
     }
 
     #endregion
+
+    #region 使用 Castle 实现动态代理
+
+    class GamePlayerInterceptor : StandardInterceptor
+    {
+        protected override void PreProceed(IInvocation invocation)
+        {
+            if (invocation.MethodInvocationTarget.Name.Equals("Login"))
+            {
+                Console.WriteLine($"代理登录账号：【{invocation.Arguments[0]}】");
+            }
+            base.PreProceed(invocation);
+        }
+
+        protected override void PostProceed(IInvocation invocation)
+        {
+            base.PostProceed(invocation);
+
+        }
+    }
+
+    #endregion
+
 }

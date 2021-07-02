@@ -1,4 +1,5 @@
 ﻿using System;
+using DesignPattern.DesignPattern;
 using DesignPattern.DesignPrinciples;
 
 namespace DesignPattern
@@ -8,7 +9,9 @@ namespace DesignPattern
         static void Main(string[] args)
         {
             //Console.WriteLine("Hello World!");
-            PrincipleDemo();
+            //PrincipleDemo();
+            ProxyPatternDemo();
+            Console.ReadLine();
         }
 
         public static void PrincipleDemo()
@@ -19,6 +22,12 @@ namespace DesignPattern
             var ocp = new OpenClosedPrinciple();
             ocp.MockSell();
             ocp.MockOffSell();
+        }
+
+        public static void ProxyPatternDemo()
+        {
+            var pp = new ProxyPattern();
+            pp.DynimicProxy();
         }
     }
 }
