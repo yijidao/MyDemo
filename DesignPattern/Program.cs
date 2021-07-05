@@ -10,7 +10,8 @@ namespace DesignPattern
         {
             //Console.WriteLine("Hello World!");
             //PrincipleDemo();
-            ProxyPatternDemo();
+            //ProxyPatternDemo();
+            MediatorPatternDemo();
             Console.ReadLine();
         }
 
@@ -28,6 +29,14 @@ namespace DesignPattern
         {
             var pp = new ProxyPattern();
             pp.DynimicProxy();
+        }
+
+        public static void MediatorPatternDemo()
+        {
+            var mp = new MediatorPattern();
+            //mp.CouplePssDemo();
+
+            mp.MpPssDemo();
         }
     }
 }
