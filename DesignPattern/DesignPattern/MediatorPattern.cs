@@ -1,11 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace DesignPattern.DesignPattern
 {
     /// <summary>
     /// 中介者模式，调停者模式
+    /// Define an object that encapsulates how a set of objects interact.
+    /// Mediator promotes loose coupling by keeping objects from referring to each other explicitly,and it lets you vary their interaction independently.
+    /// 定义一个对象封装一系列的对象交互。
+    /// 中介者通过跟各个对象保持引用，实现各个对象之间的松耦合，从而实现可以单独修改一个对象而不影响其他对象。
+    ///
+    /// 中介者模式由几部分组成：
+    /// 1. Mediator
+    ///    抽象中介者角色。定义中介者的接口，用于各个同事类之间的交互。
+    /// 2. Concrete Mediator
+    ///    具体中介者角色。调用各个同事类进行交互，这个类必须依赖各个同事角色。
+    /// 3. Colleague
+    ///    同事角色。每个同事角色都关联中介者类，并且跟其他同事类通讯时必须通过中介者类。
+    ///    同事类的行为可以分为两种：
+    ///    1. 自我方法（Self-Method），比如改变自身的状态、处理自身的行为。
+    ///    2. 依赖方法（Dep-Method），必须依赖中介者才能完成的行为。
+    ///
+    /// 优点：将本来的 N 对 N 关系，变成 N 对 1 关系
+    /// 缺点：如果逻辑非常复杂，中介类也会很复杂
+    /// 
+    /// 如果是对象间的依赖是网状的，就一定要用中介者模式来解耦。
     /// </summary>
     class MediatorPattern
     {
@@ -298,4 +319,79 @@ namespace DesignPattern.DesignPattern
 
     #endregion
 
+    #region 中介者模式通用源码
+
+    /// <summary>
+    /// 抽象中介者
+    /// </summary>
+    abstract class MediatorSample
+    {
+        /// <summary>
+        /// 同事类，这里使用具体类而不使用抽象类，是因为在抽象者模式中，常常需要调用具体同事类的自定义方法。
+        /// </summary>
+        protected ConcreteColleagueSample C1 { get; set; }
+        /// <summary>
+        /// 同事类，这里使用具体类而不使用抽象类，是因为在抽象者模式中，常常需要调用具体同事类的自定义方法。
+        /// </summary>
+        protected ConcreteColleagueSample C2 { get; set; }
+
+        public abstract void DoSomething1();
+        public abstract void DoSomething2();
+    }
+
+    /// <summary>
+    /// 具体中介者
+    /// </summary>
+    class ConcreteMediatorSample : MediatorSample
+    {
+        public override void DoSomething1()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DoSomething2()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 抽象同事类
+    /// </summary>
+    abstract class ColleagueSample
+    {
+        public MediatorSample Mediator { get; }
+
+        protected ColleagueSample(MediatorSample mediator)
+        {
+            Mediator = mediator;
+        }
+    }
+
+    /// <summary>
+    /// 具体同事类
+    /// </summary>
+    class ConcreteColleagueSample : ColleagueSample
+    {
+        public ConcreteColleagueSample(MediatorSample mediator) : base(mediator)
+        {
+        }
+        /// <summary>
+        /// 自有方法，处理自己的逻辑
+        /// </summary>
+        public void SelftMethod()
+        {
+
+        }
+
+        /// <summary>
+        /// 依赖方法，自己不能处理的逻辑，委托给中介者处理
+        /// </summary>
+        public void DepMethod()
+        {
+            Mediator.DoSomething1();
+        }
+    }
+
+    #endregion
 }
