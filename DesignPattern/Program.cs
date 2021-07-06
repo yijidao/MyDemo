@@ -11,7 +11,8 @@ namespace DesignPattern
             //Console.WriteLine("Hello World!");
             //PrincipleDemo();
             //ProxyPatternDemo();
-            MediatorPatternDemo();
+            //MediatorPatternDemo();
+            ResponsibilityChainDemo();
             Console.ReadLine();
         }
 
@@ -37,6 +38,12 @@ namespace DesignPattern
             //mp.CouplePssDemo();
 
             mp.MpPssDemo();
+        }
+
+        public static void ResponsibilityChainDemo()
+        {
+            var rc = new ChainOfResponsibilityPattern();
+            rc.Demo();
         }
     }
 }
