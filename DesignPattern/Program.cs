@@ -13,7 +13,9 @@ namespace DesignPattern
             //ProxyPatternDemo();
             //MediatorPatternDemo();
             //ResponsibilityChainDemo();
-            DecoratorDemo();
+            //DecoratorDemo();
+            //StrategyDemo();
+            AdapterDemo();
             Console.ReadLine();
         }
 
@@ -51,6 +53,18 @@ namespace DesignPattern
         {
             var dp = new DecoratorPattern();
             dp.DecoratorDemo();
+        }
+
+        public static void StrategyDemo()
+        {
+            var sp = new StrategyPattern();
+            sp.StrategyDemo();
+        }
+
+        public static void AdapterDemo()
+        {
+            var ap = new AdapterPattern();
+            ap.AdapterDemo();
         }
     }
 }

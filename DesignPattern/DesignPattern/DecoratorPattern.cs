@@ -38,9 +38,9 @@ namespace DesignPattern.DesignPattern
 
         public void DecoratorDemo()
         {
-            Component component = new ConcreateComponent();
-            component = new ConcreateDecorator(component); // 第一次装饰
-            component = new ConcreateDecorator2(component); // 第二次装饰
+            Component component = new ConcreteComponent();
+            component = new ConcreteDecorator(component); // 第一次装饰
+            component = new ConcreteDecorator2(component); // 第二次装饰
             component.Operation();
         }
 
@@ -58,7 +58,7 @@ namespace DesignPattern.DesignPattern
     /// <summary>
     /// 具体组件。也是被装饰的对象。
     /// </summary>
-    class ConcreateComponent : Component
+    class ConcreteComponent : Component
     {
         public override void Operation()
         {
@@ -87,9 +87,9 @@ namespace DesignPattern.DesignPattern
     /// <summary>
     /// 具体装饰器。
     /// </summary>
-    class ConcreateDecorator : Decorator
+    class ConcreteDecorator : Decorator
     {
-        public ConcreateDecorator(Component component) : base(component)
+        public ConcreteDecorator(Component component) : base(component)
         {
         }
 
@@ -108,9 +108,9 @@ namespace DesignPattern.DesignPattern
     /// <summary>
     /// 具体装饰器
     /// </summary>
-    class ConcreateDecorator2 : Decorator
+    class ConcreteDecorator2 : Decorator
     {
-        public ConcreateDecorator2(Component component) : base(component)
+        public ConcreteDecorator2(Component component) : base(component)
         {
         }
 
