@@ -12,7 +12,8 @@ namespace DesignPattern
             //PrincipleDemo();
             //ProxyPatternDemo();
             //MediatorPatternDemo();
-            ResponsibilityChainDemo();
+            //ResponsibilityChainDemo();
+            DecoratorDemo();
             Console.ReadLine();
         }
 
@@ -44,6 +45,12 @@ namespace DesignPattern
         {
             var rc = new ChainOfResponsibilityPattern();
             rc.Demo();
+        }
+
+        public static void DecoratorDemo()
+        {
+            var dp = new DecoratorPattern();
+            dp.DecoratorDemo();
         }
     }
 }
