@@ -15,7 +15,8 @@ namespace DesignPattern
             //ResponsibilityChainDemo();
             //DecoratorDemo();
             //StrategyDemo();
-            AdapterDemo();
+            //AdapterDemo();
+            InteratorDemo();
             Console.ReadLine();
         }
 
@@ -65,6 +66,12 @@ namespace DesignPattern
         {
             var ap = new AdapterPattern();
             ap.AdapterDemo();
+        }
+
+        public static void InteratorDemo()
+        {
+            var ip = new InteratorPattern();
+            ip.InteratorDemo();
         }
     }
 }
