@@ -41,7 +41,7 @@ namespace DesignPattern.DesignPattern
             Component component = new ConcreteComponent();
             component = new ConcreteDecorator(component); // 第一次装饰
             component = new ConcreteDecorator2(component); // 第二次装饰
-            component.Operation();
+            component.DoSomething();
         }
 
     }
@@ -52,7 +52,7 @@ namespace DesignPattern.DesignPattern
     /// </summary>
     abstract class Component
     {
-        public abstract void Operation();
+        public abstract void DoSomething();
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ namespace DesignPattern.DesignPattern
     /// </summary>
     class ConcreteComponent : Component
     {
-        public override void Operation()
+        public override void DoSomething()
         {
             Console.WriteLine("Do something");
         }
@@ -78,9 +78,9 @@ namespace DesignPattern.DesignPattern
             Component = component;
         }
 
-        public override void Operation()
+        public override void DoSomething()
         {
-            Component.Operation();
+            Component.DoSomething();
         }
     }
 
@@ -93,10 +93,10 @@ namespace DesignPattern.DesignPattern
         {
         }
 
-        public override void Operation()
+        public override void DoSomething()
         {
             Method1();
-            base.Operation();
+            base.DoSomething();
         }
 
         public void Method1()
@@ -114,10 +114,10 @@ namespace DesignPattern.DesignPattern
         {
         }
 
-        public override void Operation()
+        public override void DoSomething()
         {
             Method2();
-            base.Operation();
+            base.DoSomething();
         }
 
         public void Method2()

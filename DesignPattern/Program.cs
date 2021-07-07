@@ -16,7 +16,8 @@ namespace DesignPattern
             //DecoratorDemo();
             //StrategyDemo();
             //AdapterDemo();
-            InteratorDemo();
+            //InteratorDemo();
+            CompositeDemo();
             Console.ReadLine();
         }
 
@@ -72,6 +73,12 @@ namespace DesignPattern
         {
             var ip = new InteratorPattern();
             ip.InteratorDemo();
+        }
+
+        public static void CompositeDemo()
+        {
+            var cp = new CompositePattern();
+            cp.CompositeDemo();
         }
     }
 }
