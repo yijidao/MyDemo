@@ -86,9 +86,26 @@ namespace DesignPattern.DesignPattern
             Console.WriteLine("------  恢复上一个状态  ------");
             caretaker.RestoreMemento();
             Console.WriteLine($"当前状态：【{originator.State}】【{originator.State2}】【{originator.State3}】");
-
         }
 
+        public void MementoDemo4()
+        {
+            var originator = new Originator();
+            var caretaker = new Caretaker3<Originator>(originator);
+            originator.State = "s11";
+            originator.State2 = "s21";
+            originator.State3 = "s31";
+            Console.WriteLine($"当前状态：【{originator.State}】【{originator.State2}】【{originator.State3}】");
+            caretaker.CreateMemento();
+            originator.State = "s12";
+            originator.State2 = "s22";
+            originator.State3 = "s32";
+            Console.WriteLine($"当前状态：【{originator.State}】【{originator.State2}】【{originator.State3}】");
+
+            Console.WriteLine("------  恢复上一个状态  ------");
+            caretaker.RestoreMemento();
+            Console.WriteLine($"当前状态：【{originator.State}】【{originator.State2}】【{originator.State3}】");
+        }
     }
 
     #region 备忘录模式经典实现
@@ -160,6 +177,45 @@ namespace DesignPattern.DesignPattern
             foreach (var fieldInfo in type.GetFields(bindingFlags))
             {
                 fieldInfo.SetValue(Originator, fieldInfo.GetValue(_menento));
+            }
+        }
+    }
+
+    /// <summary>
+    /// 备忘录管理员角色
+    /// 对备忘录角色进行管理、保存和提供。
+    /// 使用字典 + 泛型来实现备份。
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    class Caretaker3<T> where T : class
+    {
+        public T Originator { get; }
+        public Caretaker3(T originator)
+        {
+            Originator = originator;
+        }
+
+        private Dictionary<FieldInfo, object> _memento;
+
+        public void CreateMemento()
+        {
+            _memento = new Dictionary<FieldInfo, object>();
+            var bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public |
+                               BindingFlags.FlattenHierarchy;
+
+            var type = Originator.GetType();
+
+            foreach (var fieldInfo in type.GetFields(bindingFlags))
+            {
+                _memento.Add(fieldInfo, fieldInfo.GetValue(Originator));
+            }
+        }
+
+        public void RestoreMemento()
+        {
+            foreach (var item in _memento)
+            {
+                item.Key.SetValue(Originator, item.Value);
             }
         }
     }
