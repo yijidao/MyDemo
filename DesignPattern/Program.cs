@@ -20,7 +20,8 @@ namespace DesignPattern
             //CompositeDemo();
             //ObserverDemo();
             //PrototypeDemo();
-            MementoDemo();
+            //MementoDemo();
+            VisitorDemo();
             Console.ReadLine();
         }
 
@@ -104,6 +105,13 @@ namespace DesignPattern
             //mp.MementoDemo2();
             //mp.MementoDemo3();
             mp.MementoDemo4();
+        }
+
+        public static void VisitorDemo()
+        {
+            var vp = new VisitorPattern();
+            //vp.VisitorDemo();
+            vp.VisitorDemo2();
         }
     }
 }
