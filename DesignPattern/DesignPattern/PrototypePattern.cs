@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DesignPattern.Extensions;
 
 namespace DesignPattern.DesignPattern
 {
@@ -48,6 +49,22 @@ namespace DesignPattern.DesignPattern
 
             Console.WriteLine($"------  Deep Copy  ------");
             Console.WriteLine(deep);
+        }
+
+        public void PrototypeDemo2()
+        {
+            var prototype = new PrototypeClass
+            {
+                Id = 77,
+                Info = new PrototypeInfoClass {Info = "详细信息1"}
+            };
+            var copy = prototype.Copy();
+            Console.WriteLine(copy);
+            prototype.Info.Info = "详细信息2";
+            Console.WriteLine(copy);
+            copy = prototype.Copy();
+            Console.WriteLine(copy);
+
         }
     }
 

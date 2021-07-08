@@ -20,6 +20,7 @@ namespace DesignPattern
             //CompositeDemo();
             //ObserverDemo();
             PrototypeDemo();
+            //MementoDemo();
             Console.ReadLine();
         }
 
@@ -92,7 +93,14 @@ namespace DesignPattern
         public static void PrototypeDemo()
         {
             var pp = new PrototypePattern();
-            pp.PrototypeDemo();
+            //pp.PrototypeDemo();
+            pp.PrototypeDemo2();
+        }
+
+        public static void MementoDemo()
+        {
+            var mp = new MementoPattern();
+            //mp.MementoDemo();
         }
     }
 }
