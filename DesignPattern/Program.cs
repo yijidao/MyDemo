@@ -19,8 +19,8 @@ namespace DesignPattern
             //InteratorDemo();
             //CompositeDemo();
             //ObserverDemo();
-            PrototypeDemo();
-            //MementoDemo();
+            //PrototypeDemo();
+            MementoDemo();
             Console.ReadLine();
         }
 
@@ -101,6 +101,8 @@ namespace DesignPattern
         {
             var mp = new MementoPattern();
             //mp.MementoDemo();
+            //mp.MementoDemo2();
+            mp.MementoDemo3();;
         }
     }
 }
