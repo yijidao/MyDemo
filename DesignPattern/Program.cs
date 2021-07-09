@@ -21,7 +21,8 @@ namespace DesignPattern
             //ObserverDemo();
             //PrototypeDemo();
             //MementoDemo();
-            VisitorDemo();
+            //VisitorDemo();
+            StateDemo();
             Console.ReadLine();
         }
 
@@ -112,6 +113,12 @@ namespace DesignPattern
             var vp = new VisitorPattern();
             //vp.VisitorDemo();
             vp.VisitorDemo2();
+        }
+
+        public static void StateDemo()
+        {
+            var sp = new StatePattern();
+            sp.StatePatternDemo();
         }
     }
 }
