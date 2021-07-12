@@ -22,7 +22,8 @@ namespace DesignPattern
             //PrototypeDemo();
             //MementoDemo();
             //VisitorDemo();
-            StateDemo();
+            //StateDemo();
+            InterpreterDemo();
             Console.ReadLine();
         }
 
@@ -119,6 +120,12 @@ namespace DesignPattern
         {
             var sp = new StatePattern();
             sp.StatePatternDemo();
+        }
+
+        public static void InterpreterDemo()
+        {
+            var ip = new InterpreterPattern();
+            ip.Interpreter();
         }
     }
 }
