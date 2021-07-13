@@ -14,14 +14,12 @@ namespace DesignPattern.DesignPattern
     /// 四个角色组成：
     /// - 实现化角色 IImplementor
     ///   - 接口或者抽象类，定义角色必须的行为和属性。
-    /// 
     /// - 具体实现化角色 ConcreteImplementor
-    /// 
     /// - 抽象化角色 Abstraction
     ///   - 主要职责是定义出该角色的行为，同时保存一个对实现化角色的引用。
-    /// 
     /// - 重定义角色 RefinedAbstraction
     ///   - 修改抽象化角色中引用到实现化角色的行为。
+    /// - IImplementor 和 ConcreteImplementor 就像两个桥墩，链接两个桥墩的，就是桥。IImplementor 代表抽象，ConcreteImplementor 代表不同的实现。
     ///
     /// 优点：
     /// - 抽象和实现解耦。这也是桥梁模式的主要特点，为了解决继承的缺点而提出的设计模式。实现不受抽象的约束。
