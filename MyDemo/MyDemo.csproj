@@ -77,6 +77,7 @@
     <Compile Include="ButtonDemo.xaml.cs">
       <DependentUpon>ButtonDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChatBubble.cs" />
     <Compile Include="CheckBoxDemo.xaml.cs">
       <DependentUpon>CheckBoxDemo.xaml</DependentUpon>
     </Compile>
