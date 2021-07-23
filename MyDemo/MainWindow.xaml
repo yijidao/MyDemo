@@ -56,6 +56,7 @@
             <Button Content="MediaDemo" Click="Button_Click"></Button>
             <Button Content="ImageDemo" Click="Button_Click"></Button>
             <Button Content="DataGridDemo" Click="Button_Click"></Button>
+            <Button Content="CharDemo" Click="Button_Click"></Button>
         </WrapPanel>
         <ContentControl Margin="5,20,5,5" Grid.Row="1" x:Name="controlContainer" />
     </Grid>

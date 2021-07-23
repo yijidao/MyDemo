@@ -5,5 +5,6 @@
         <ResourceDictionary Source="/MyDemo;component/Themes/MyColorPicker2.xaml" />
         <ResourceDictionary Source="/MyDemo;component/Themes/MyFlipPanel.xaml" />
         <ResourceDictionary Source="/MyDemo;component/Themes/MyTileView.xaml" />
+        <ResourceDictionary Source="/MyDemo;component/Themes/ChatBubble.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

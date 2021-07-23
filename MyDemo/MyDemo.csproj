@@ -77,6 +77,9 @@
     <Compile Include="ButtonDemo.xaml.cs">
       <DependentUpon>ButtonDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CharDemo.xaml.cs">
+      <DependentUpon>CharDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChatBubble.cs" />
     <Compile Include="CheckBoxDemo.xaml.cs">
       <DependentUpon>CheckBoxDemo.xaml</DependentUpon>
@@ -185,6 +188,10 @@
     </Compile>
     <Compile Include="VisualCanvas.cs" />
     <Page Include="ButtonDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CharDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -345,6 +352,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextBoxDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ChatBubble.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
