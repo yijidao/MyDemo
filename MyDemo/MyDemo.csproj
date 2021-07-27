@@ -183,6 +183,9 @@
     <Compile Include="TextBoxDemo.xaml.cs">
       <DependentUpon>TextBoxDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ToggleButtonDemo.xaml.cs">
+      <DependentUpon>ToggleButtonDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TreeViewDemo.xaml.cs">
       <DependentUpon>TreeViewDemo.xaml</DependentUpon>
     </Compile>
@@ -372,6 +375,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\MyTileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToggleButtonDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
