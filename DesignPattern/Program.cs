@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using DesignPattern.AOP;
 using DesignPattern.DesignPattern;
 using DesignPattern.DesignPrinciples;
 
@@ -23,7 +25,9 @@ namespace DesignPattern
             //MementoDemo();
             //VisitorDemo();
             //StateDemo();
-            InterpreterDemo();
+            //InterpreterDemo();
+            AopDemo();
+
             Console.ReadLine();
         }
 
@@ -126,6 +130,13 @@ namespace DesignPattern
         {
             var ip = new InterpreterPattern();
             ip.Interpreter();
+        }
+
+
+        public static void AopDemo()
+        {
+            var t = new TimingDemo();
+            t.Test().Wait();
         }
     }
 }
