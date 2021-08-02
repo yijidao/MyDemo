@@ -137,6 +137,8 @@ namespace DesignPattern
         {
             var t = new TimingDemo();
             t.Test().Wait();
+            t.Test2().Wait();
+            t.Test3().Wait();
         }
     }
 }
