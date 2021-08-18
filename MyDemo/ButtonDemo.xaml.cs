@@ -25,6 +25,11 @@ namespace MyDemo
         {
             InitializeComponent();
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("click");
+        }
     }
 
     public class Thickness2ThicknessConverter : IValueConverter

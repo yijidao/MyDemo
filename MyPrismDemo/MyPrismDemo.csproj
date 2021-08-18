@@ -107,8 +107,12 @@
     <Compile Include="MainWindow2.xaml.cs">
       <DependentUpon>MainWindow2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Service\Impl\MockTestService.cs" />
+    <Compile Include="Service\Impl\TestService.cs" />
+    <Compile Include="Service\ITestService.cs" />
     <Compile Include="ViewModels\DetailRegionViewModel.cs" />
     <Compile Include="ViewModels\MainRegionViewModel.cs" />
+    <Compile Include="ViewModels\MoqViewModel.cs" />
     <Compile Include="ViewModels\RenderViewModel.cs" />
     <Compile Include="ViewModels\TrainTimeTableViewModel.cs" />
     <Compile Include="Views\DetailRegionView.xaml.cs">
@@ -117,6 +121,9 @@
     <Compile Include="Views\LineRender.cs" />
     <Compile Include="Views\MainRegionView.xaml.cs">
       <DependentUpon>MainRegionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MoqView.xaml.cs">
+      <DependentUpon>MoqView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Render.cs" />
     <Compile Include="Views\RenderView.xaml.cs">
@@ -150,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainRegionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MoqView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,6 +203,12 @@
     <Folder Include="Attributes\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Moq">
+      <Version>4.16.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Unity">
       <Version>8.0.0.1909</Version>
     </PackageReference>
