@@ -424,7 +424,7 @@
       <Version>86.0.241</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>84.4.10</Version>
+      <Version>86.0.241</Version>
     </PackageReference>
     <PackageReference Include="Extended.Wpf.Toolkit">
       <Version>3.8.1</Version>
