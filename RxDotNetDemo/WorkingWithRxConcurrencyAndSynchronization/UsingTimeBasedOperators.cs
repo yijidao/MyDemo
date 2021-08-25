@@ -18,11 +18,13 @@ namespace RxDotNetDemo.WorkingWithRxConcurrencyAndSynchronization
         /// </summary>
         public static void AddTimestamp()
         {
-            var o = Observable.Interval(TimeSpan.FromSeconds(1));
+            var o = Observable.Interval(TimeSpan.FromSeconds(5));
             o.Take(3)
                 .Timestamp()
                 .SubscribeConsole("Timestamp");
         }
+
+
 
         /// <summary>
         /// TimeInterval 记录每个通知之间时间的间隔

@@ -19,6 +19,7 @@ namespace RxDotNetDemo.PartitioningAndCombiningObservables
         {
             var o = Observable.Range(1, 5);
             var o2 = Observable.Interval(TimeSpan.FromSeconds(1));
+            
             o.Zip(o2, (i, l) => i + l)
                 .SubscribeConsole("Zip");
         }

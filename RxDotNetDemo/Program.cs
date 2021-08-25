@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using RxDotNetDemo.Asynchronous;
@@ -44,10 +45,38 @@ namespace RxDotNetDemo
             //ErrorHandlingAndRecoveryDemo();
             //FunctionalPrograming();
             //Asynchronous();
-            RxDisposables();
+            //RxDisposables();
 
-            Console.WriteLine("Press Key...");
-            Console.ReadLine();
+
+            while (true)
+            {
+                var read = Console.ReadLine()?.Trim();
+                if (string.IsNullOrWhiteSpace(read)) continue;
+
+                if (read.Equals("exit")) break;
+
+                var type = Assembly.GetExecutingAssembly().GetType(read);
+                if (type == null)
+                {
+                    Console.WriteLine("type is null");
+                    continue;
+                }
+
+                read = Console.ReadLine()?.Trim();
+                if(string.IsNullOrWhiteSpace(read)) continue;
+                
+                var method = type.GetMethod(read);
+                if (method == null)
+                {
+                    Console.WriteLine("method is null");
+                    continue;
+                }
+                method?.Invoke(null, null);
+            }
+
+
+            //Console.WriteLine("Press Key...");
+            //Console.ReadLine();
         }
 
         private static void StockDemo()
