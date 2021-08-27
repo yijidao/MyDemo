@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using MyPrismDemo.Service;
 using MyPrismDemo.Service.Impl;
+using MyPrismDemo.ViewModels;
 using MyPrismDemo.Views;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -29,6 +30,11 @@ namespace MyPrismDemo
 
             //containerRegistry.RegisterSingleton<ITestService, TestService>();
             containerRegistry.RegisterSingleton<ITestService>(() => new MockTestService(new TestService()));
+
+            containerRegistry.RegisterDialog<DialogView, SubDialogViewModel>("subdialog");
+            containerRegistry.RegisterDialog<DialogView>();
+
+
         }
 
         //protected override Window CreateShell() => new MainWindow2(); //new MainWindow();

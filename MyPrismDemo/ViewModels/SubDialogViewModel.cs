@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyPrismDemo.ViewModels
 {
-    public class RenderViewModel
+    public class SubDialogViewModel : DialogViewModel
     {
-        public RenderViewModel()
+        public SubDialogViewModel()
         {
             
         }

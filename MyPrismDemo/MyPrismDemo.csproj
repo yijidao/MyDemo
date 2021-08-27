@@ -111,12 +111,17 @@
     <Compile Include="Service\Impl\TestService.cs" />
     <Compile Include="Service\ITestService.cs" />
     <Compile Include="ViewModels\DetailRegionViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModel.cs" />
     <Compile Include="ViewModels\MainRegionViewModel.cs" />
     <Compile Include="ViewModels\MoqViewModel.cs" />
     <Compile Include="ViewModels\RenderViewModel.cs" />
+    <Compile Include="ViewModels\SubDialogViewModel.cs" />
     <Compile Include="ViewModels\TrainTimeTableViewModel.cs" />
     <Compile Include="Views\DetailRegionView.xaml.cs">
       <DependentUpon>DetailRegionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogView.xaml.cs">
+      <DependentUpon>DialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LineRender.cs" />
     <Compile Include="Views\MainRegionView.xaml.cs">
@@ -153,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DetailRegionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

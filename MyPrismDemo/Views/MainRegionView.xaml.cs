@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Prism.Ioc;
+using Prism.Services.Dialogs;
 
 namespace MyPrismDemo.Views
 {
@@ -23,6 +25,19 @@ namespace MyPrismDemo.Views
         public MainRegionView()
         {
             InitializeComponent();
+
+            var dialogService = ContainerLocator.Current.Resolve<IDialogService>();
+
+            dialog.Click += (sender, args) =>
+            {
+                dialogService.ShowDialog(nameof(DialogView));
+            };
+
+            subdialog.Click += (sender, args) =>
+            {
+                dialogService.ShowDialog("subdialog");
+            };
+
         }
     }
 }
