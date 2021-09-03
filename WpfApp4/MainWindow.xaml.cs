@@ -105,19 +105,30 @@ namespace WpfApp4
             //var panel = new System.Windows.Forms.Panel();
             //panel.Width = (int) ActualWidth;
             //panel.Height = (int) ActualHeight;
-            var domain = AppDomain.CreateDomain($"{assemblyName}");
-            domain.UnhandledException += (sender, args) =>
-            {
+            //var domain = AppDomain.CreateDomain($"{assemblyName}");
+            //domain.UnhandledException += (sender, args) =>
+            //{
 
-            };
+            //};
             
-            var wrapElement = (WrapElement)domain.CreateInstanceAndUnwrap(assemblyName, typeName);
-            var handel = wrapElement.GetUserControl1();
+            //var wrapElement = (WrapElement)domain.CreateInstanceAndUnwrap(assemblyName, typeName);
+            //var handel = wrapElement.GetUserControl1();
+
+            //var controlHost = new ControlHost(handel);
+
+            //var p= Process.Start(@"D:\CSharpCode\MyDemo\WpfApp5\bin\Debug\WpfApp5.exe");
+
+            //var controlHost = new ControlHost(p.MainWindowHandle);
+            //var tabItem = new TabItem();
+            //tabItem.Content = controlHost;
+            //tabControl.Items.Add(tabItem);
+            // D:\CSharpCode\MyDemo\WpfApp5\bin\Debug\WpfApp5.exe
+
             //host.Child = panel;
-            SetParent(handel, panel.Handle);
+            //SetParent(handel, panel.Handle);
             //MoveWindow(handel, 0, 0, 400, 400, true);
-            MoveWindow(handel, 0, 0, panel.Width, panel.Height, true);
-            
+            //MoveWindow(handel, 0, 0, panel.Width, panel.Height, true);
+
 
             //var tabItem = new TabItem();
             //tabItem.Content = host;
