@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,36 +15,35 @@ using System.Windows.Shapes;
 using Grpc.Core;
 using GrpcGreeterClient;
 
-namespace WpfApp6
+namespace WpfApp7
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Server _server;
+        private Channel _channel;
+        private Greeter.GreeterClient _client;
 
         public MainWindow()
         {
             InitializeComponent();
-            
+
             Loaded += OnLoaded;
+
+            request.Click += (sender, args) =>
+            {
+                var content = input.Text;
+                input.Text = string.Empty;
+                var response = _client.SayHello(new HelloRequest { Name = content });
+                message.AppendText(response.Message + Environment.NewLine);
+            };
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            _server = new Server
-            {
-                Services = {Greeter.BindService(new GreeterService())},
-                Ports = {new ServerPort("localhost", 8099, ServerCredentials.Insecure)}
-            };
-            _server.Start();
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            _server.ShutdownAsync().Wait();
-            base.OnClosing(e);
+            _channel = new Channel("localhost", 8099, ChannelCredentials.Insecure);
+            _client = new Greeter.GreeterClient(_channel);
         }
     }
 }

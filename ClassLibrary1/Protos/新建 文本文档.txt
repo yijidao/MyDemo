@@ -1,0 +1,1 @@
+..\packages\protoc *.proto  --csharp_out ..\ --grpc_out ..\ --plugin=protoc-gen-grpc=..\packages\grpc_csharp_plugin.exe
