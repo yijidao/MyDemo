@@ -28,6 +28,7 @@ namespace WpfApp6
         public MainWindow()
         {
             InitializeComponent();
+
             
             Loaded += OnLoaded;
         }
@@ -36,10 +37,26 @@ namespace WpfApp6
         {
             _server = new Server
             {
-                Services = {Greeter.BindService(new GreeterService())},
-                Ports = {new ServerPort("localhost", 8099, ServerCredentials.Insecure)}
+                Services =
+                {
+                    Greeter.BindService(new GreeterService()),
+                    WpfCommunication.BindService(new WpfCommunicationService()),
+                },
+                Ports = { new ServerPort("localhost", 8099, ServerCredentials.Insecure) }
             };
             _server.Start();
+
+            
+            var host = new ControlHost(ActualHeight, ActualWidth);
+            host.Visibility = Visibility.Hidden;
+            Content = host;
+
+            //var window = new Window();
+
+            //window.Content = host;
+            //window.Show();
+
+            //grid.Children.Add(new ControlHost());
         }
 
         protected override void OnClosing(CancelEventArgs e)

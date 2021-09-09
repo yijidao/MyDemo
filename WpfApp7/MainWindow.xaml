@@ -23,6 +23,10 @@
                 x:Name="request"
                 Width="60"
                 Content="send" />
+            <Button
+                x:Name="handle"
+                Width="60"
+                Content="handle" />
         </StackPanel>
         <TextBox
             x:Name="message"

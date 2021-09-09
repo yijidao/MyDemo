@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Interop;
 
 namespace WpfApp5
 {
@@ -16,7 +17,9 @@ namespace WpfApp5
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            //MainWindow = new MainWindow();
+            MainWindow = new MainWindow();
+            MainWindow.Show();
+            var handle= new WindowInteropHelper(MainWindow);
         }
     }
 }

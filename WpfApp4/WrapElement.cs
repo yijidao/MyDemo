@@ -31,6 +31,8 @@ namespace WpfApp4
                 WindowStyle = WS_CHILD,
             };
             var source = new HwndSource(p) { RootVisual = new UserControl1() };
+            
+
             return source.Handle;
         }
 

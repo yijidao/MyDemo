@@ -38,6 +38,12 @@ namespace WpfApp7
                 var response = _client.SayHello(new HelloRequest { Name = content });
                 message.AppendText(response.Message + Environment.NewLine);
             };
+            handle.Click += (sender, args) =>
+            {
+                var client = new WpfCommunication.WpfCommunicationClient(_channel);
+                var response = client.GetUserControl1(new WpfRequest());
+                message.AppendText(response.Handle.ToString() + Environment.NewLine);
+            };
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
