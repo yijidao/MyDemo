@@ -25,18 +25,19 @@ namespace GrpcGreeterClient {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgtncmVldC5wcm90bxIFZ3JlZXQiHAoMSGVsbG9SZXF1ZXN0EgwKBG5hbWUY",
-            "ASABKAkiHQoKSGVsbG9SZXBseRIPCgdtZXNzYWdlGAEgASgJIhoKCldwZlJl",
-            "cXVlc3QSDAoEbmFtZRgBIAEoCSIaCghXcGZSZXBseRIOCgZoYW5kbGUYASAB",
-            "KAUyPQoHR3JlZXRlchIyCghTYXlIZWxsbxITLmdyZWV0LkhlbGxvUmVxdWVz",
-            "dBoRLmdyZWV0LkhlbGxvUmVwbHkySQoQV3BmQ29tbXVuaWNhdGlvbhI1Cg9H",
-            "ZXRVc2VyQ29udHJvbDESES5ncmVldC5XcGZSZXF1ZXN0Gg8uZ3JlZXQuV3Bm",
-            "UmVwbHlCFKoCEUdycGNHcmVldGVyQ2xpZW50YgZwcm90bzM="));
+            "ASABKAkiHQoKSGVsbG9SZXBseRIPCgdtZXNzYWdlGAEgASgJIioKCldwZlJl",
+            "cXVlc3QSDAoEbmFtZRgBIAEoCRIOCgZoYW5kbGUYAiABKAUiGgoIV3BmUmVw",
+            "bHkSDgoGaGFuZGxlGAEgASgFMj0KB0dyZWV0ZXISMgoIU2F5SGVsbG8SEy5n",
+            "cmVldC5IZWxsb1JlcXVlc3QaES5ncmVldC5IZWxsb1JlcGx5MkkKEFdwZkNv",
+            "bW11bmljYXRpb24SNQoPR2V0VXNlckNvbnRyb2wxEhEuZ3JlZXQuV3BmUmVx",
+            "dWVzdBoPLmdyZWV0LldwZlJlcGx5QhSqAhFHcnBjR3JlZXRlckNsaWVudGIG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.HelloRequest), global::GrpcGreeterClient.HelloRequest.Parser, new[]{ "Name" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.HelloReply), global::GrpcGreeterClient.HelloReply.Parser, new[]{ "Message" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.WpfRequest), global::GrpcGreeterClient.WpfRequest.Parser, new[]{ "Name" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.WpfRequest), global::GrpcGreeterClient.WpfRequest.Parser, new[]{ "Name", "Handle" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GrpcGreeterClient.WpfReply), global::GrpcGreeterClient.WpfReply.Parser, new[]{ "Handle" }, null, null, null, null)
           }));
     }
@@ -424,6 +425,7 @@ namespace GrpcGreeterClient {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public WpfRequest(WpfRequest other) : this() {
       name_ = other.name_;
+      handle_ = other.handle_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -443,6 +445,17 @@ namespace GrpcGreeterClient {
       }
     }
 
+    /// <summary>Field number for the "handle" field.</summary>
+    public const int HandleFieldNumber = 2;
+    private int handle_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Handle {
+      get { return handle_; }
+      set {
+        handle_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as WpfRequest);
@@ -457,6 +470,7 @@ namespace GrpcGreeterClient {
         return true;
       }
       if (Name != other.Name) return false;
+      if (Handle != other.Handle) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -464,6 +478,7 @@ namespace GrpcGreeterClient {
     public override int GetHashCode() {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Handle != 0) hash ^= Handle.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -484,6 +499,10 @@ namespace GrpcGreeterClient {
         output.WriteRawTag(10);
         output.WriteString(Name);
       }
+      if (Handle != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Handle);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -497,6 +516,10 @@ namespace GrpcGreeterClient {
         output.WriteRawTag(10);
         output.WriteString(Name);
       }
+      if (Handle != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Handle);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -508,6 +531,9 @@ namespace GrpcGreeterClient {
       int size = 0;
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Handle != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Handle);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -522,6 +548,9 @@ namespace GrpcGreeterClient {
       }
       if (other.Name.Length != 0) {
         Name = other.Name;
+      }
+      if (other.Handle != 0) {
+        Handle = other.Handle;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -541,6 +570,10 @@ namespace GrpcGreeterClient {
             Name = input.ReadString();
             break;
           }
+          case 16: {
+            Handle = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -557,6 +590,10 @@ namespace GrpcGreeterClient {
             break;
           case 10: {
             Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            Handle = input.ReadInt32();
             break;
           }
         }

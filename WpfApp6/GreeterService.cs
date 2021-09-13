@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Media;
+using System.Windows.Threading;
 using Grpc.Core;
 using GrpcGreeterClient;
 
@@ -23,22 +27,56 @@ namespace WpfApp6
 
     class WpfCommunicationService : WpfCommunication.WpfCommunicationBase
     {
-        //public HwndHost _host = new ControlHost();
+        public HwndHost _host = new ControlHost(500, 500);
 
-        public WpfCommunicationService()
-        {
-            
-        }
-
-        //public override Task<WpfReply> GetUserControl1(WpfRequest request, ServerCallContext context)
+        //public WpfCommunicationService()
         //{
-        //    var handle = _host.Handle.ToInt32();
 
-        //    return Task.FromResult(new WpfReply
-        //    {
-        //        Handle = handle
-        //    });
         //}
+
+        public override Task<WpfReply> GetUserControl1(WpfRequest request, ServerCallContext context)
+        {
+            //var handle = _host.Handle.ToInt32();
+
+            //return Task.FromResult(new WpfReply
+            //{
+            //    Handle = handle
+            //});
+
+            try
+            {
+
+
+
+                var p = new HwndSourceParameters("UserControl1")
+                {
+                    ParentWindow = new IntPtr(-3),
+                    WindowStyle = 1073741824
+                };
+                
+                var hwndSource = App.Current.Dispatcher.Invoke(() =>
+                {
+                    var source = new HwndSource(p);
+                    source.RootVisual = new UserControl1()
+                    {
+                        Height = 300,Width = 500
+                    };
+                    source.CompositionTarget.BackgroundColor = Colors.White;
+                    source.SizeToContent = SizeToContent.Manual;
+                    return source;
+                });
+
+                return Task.FromResult(new WpfReply { Handle = hwndSource.Handle.ToInt32() });
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                
+            }
+
+            return Task.FromResult(new WpfReply());
+
+        }
     }
 
 
@@ -55,22 +93,31 @@ namespace WpfApp6
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
+            //var p = new HwndSourceParameters("UserControl1")
+            //{
+            //    ParentWindow = hwndParent.Handle,
+            //    WindowStyle = 0x40000000
+            //};
             var p = new HwndSourceParameters("UserControl1")
             {
-                ParentWindow = hwndParent.Handle,
-                WindowStyle = 0x40000000
+                ParentWindow = new IntPtr(-3),
+                WindowStyle = 1073741824
             };
-            var source = new HwndSource(p) {RootVisual = new UserControl1()
+            var source = new HwndSource(p)
             {
-                Height = _height,
-                Width = _width
-            }};
+                RootVisual = new UserControl1()
+                {
+                    Height = _height,
+                    Width = _width
+                }
+            };
+
             return new HandleRef(this, source.Handle);
         }
 
         protected override void DestroyWindowCore(HandleRef hwnd)
         {
-            
+
         }
     }
 }

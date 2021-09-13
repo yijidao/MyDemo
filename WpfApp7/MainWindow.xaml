@@ -9,9 +9,10 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <Grid>
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
         <StackPanel
@@ -33,5 +34,11 @@
             Grid.Row="1"
             Margin="10"
             IsReadOnly="True" />
+        <Border
+            x:Name="border"
+            Grid.Row="2"
+            Margin="10"
+            BorderBrush="Aqua"
+            BorderThickness="1" />
     </Grid>
 </Window>

@@ -40,9 +40,14 @@ namespace WpfApp7
             };
             handle.Click += (sender, args) =>
             {
-                var client = new WpfCommunication.WpfCommunicationClient(_channel);
-                var response = client.GetUserControl1(new WpfRequest());
-                message.AppendText(response.Handle.ToString() + Environment.NewLine);
+                //var client = new WpfCommunication.WpfCommunicationClient(_channel);
+                //var response = client.GetUserControl1(new WpfRequest());
+                //message.AppendText(response.Handle.ToString() + Environment.NewLine);
+                //var host = new ControlHost(response.Handle);
+
+                var host = new ControlHost(_channel);
+
+                border.Child = host;
             };
         }
 

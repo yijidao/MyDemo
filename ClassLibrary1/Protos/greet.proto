@@ -26,6 +26,7 @@ message HelloReply {
 
 message WpfRequest {
   string name = 1;
+  int32 handle=2;
 }
 
 message WpfReply{

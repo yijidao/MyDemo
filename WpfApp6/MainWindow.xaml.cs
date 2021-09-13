@@ -47,9 +47,9 @@ namespace WpfApp6
             _server.Start();
 
             
-            var host = new ControlHost(ActualHeight, ActualWidth);
-            host.Visibility = Visibility.Hidden;
-            Content = host;
+            //var host = new ControlHost(ActualHeight, ActualWidth);
+            //host.Visibility = Visibility.Hidden;
+            //Content = host;
 
             //var window = new Window();
 

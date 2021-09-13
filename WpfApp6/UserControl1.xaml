@@ -8,7 +8,11 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid Background="Red">
-        <!--<Button Content="btn" />-->
+    <Grid>
+        <Button
+            x:Name="button"
+            Width="150"
+            Height="100"
+            Content="throw exception" />
     </Grid>
 </UserControl>
