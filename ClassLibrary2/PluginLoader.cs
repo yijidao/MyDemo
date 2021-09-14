@@ -24,7 +24,7 @@ namespace ClassLibrary2
             {
                 FileName = "ConsoleApp3.exe",
                 UseShellExecute = false,
-                CreateNoWindow = false,
+                CreateNoWindow = true,
                 Arguments = assemblyPath
             };
 
@@ -43,12 +43,6 @@ namespace ClassLibrary2
                 {
                     using (var sw = new StreamReader(pipeServer))
                     {
-                        //sw.AutoFlush = true;
-                        //sw.WriteLine("SYNC");
-                        //pipeServer.WaitForPipeDrain();
-                        //Console.WriteLine("[SERVER] Enter text:");
-                        //sw.WriteLine(Console.ReadLine());
-
                         var viewHandle = sw.ReadLine();
                         _handle = new IntPtr(int.Parse(viewHandle));
                     }
@@ -63,13 +57,6 @@ namespace ClassLibrary2
             }
 
             return process;
-            //return Process.Start(new ProcessStartInfo
-            //{
-            //    FileName = "ConsoleApp3.exe",
-            //    UseShellExecute = false,
-            //    CreateNoWindow = true,
-            //    Arguments = assemblyPath
-            //});
         }
 
         public FrameworkElement GetView() => new ControlHost(_handle) ;

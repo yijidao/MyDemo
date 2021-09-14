@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 
 namespace ConsoleApp3
@@ -38,35 +39,11 @@ namespace ConsoleApp3
 
                 using (var sw = new StreamWriter(pipeClient))
                 {
-
-
-                    Console.ReadLine();
-
-                    //string temp;
-                    //do
-                    //{
-                    //    Console.WriteLine("[CLIENT] Wait for sync");
-                    //    temp = sr.ReadLine();
-                    //} while (!temp.StartsWith("SYNC"));
-
-                    //while ((temp = sr.ReadLine()) != null)
-                    //{
-                    //    Console.WriteLine($"[CLIENT] Echo: {temp}");
-                    //}
-
                     sw.AutoFlush = true;
                     sw.WriteLine(handle);
-                    //sw.WriteLine("SYNC");
-                    //pipeClient.WaitForPipeDrain();
-                    
-
                 }
             }
-            Console.Write("[CLIENT] Press Enter to continue...");
-            Console.ReadLine();
-
-
-            Console.ReadLine();
+            Dispatcher.Run();
         }
 
         static string GetViewHandle(FrameworkElement view)

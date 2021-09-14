@@ -27,27 +27,10 @@ namespace WpfApp6
 
     class WpfCommunicationService : WpfCommunication.WpfCommunicationBase
     {
-        public HwndHost _host = new ControlHost(500, 500);
-
-        //public WpfCommunicationService()
-        //{
-
-        //}
-
         public override Task<WpfReply> GetUserControl1(WpfRequest request, ServerCallContext context)
         {
-            //var handle = _host.Handle.ToInt32();
-
-            //return Task.FromResult(new WpfReply
-            //{
-            //    Handle = handle
-            //});
-
             try
             {
-
-
-
                 var p = new HwndSourceParameters("UserControl1")
                 {
                     ParentWindow = new IntPtr(-3),

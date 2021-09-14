@@ -41,12 +41,13 @@ namespace WpfApp8
 
                 border1.Child = control;
             };
+
+            Application.Current.Exit += (o, eventArgs) =>
+            {
+                _processes.Where(x => !x.HasExited).ToList().ForEach(x => x.Kill());
+            };
         }
 
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            _processes.Where(x => !x.HasExited).ToList().ForEach(x => x.Kill());
-            base.OnClosing(e);
-        }
+
     }
 }

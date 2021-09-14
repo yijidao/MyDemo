@@ -11,7 +11,9 @@ namespace WpfControlLibrary1
     {
         public FrameworkElement CreateView()
         {
-            return new UserControl1();
+            return new UserControl1()
+            {
+            };
         }
     }
 }
