@@ -74,6 +74,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BackgroundWorkerDemo.xaml.cs">
+      <DependentUpon>BackgroundWorkerDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ButtonDemo.xaml.cs">
       <DependentUpon>ButtonDemo.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <DependentUpon>TreeViewDemo.xaml</DependentUpon>
     </Compile>
     <Compile Include="VisualCanvas.cs" />
+    <Page Include="BackgroundWorkerDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ButtonDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
