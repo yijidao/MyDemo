@@ -23,12 +23,13 @@ namespace WebView2Demo
         public Demo1()
         {
             InitializeComponent();
-            webView.Source = new Uri("http://www.google.com");
+            //webView.Source = new Uri("http://www.google.com");
+            webView.Source = new Uri("D:/CSharpCode/MyDemo/WebView2Demo/WebView2Test.html");
             webView.NavigationStarting += (sender, args) => Log($"[{nameof(webView.NavigationStarting)}]: {args.Uri}");
             webView.NavigationCompleted += (sender, args) => Log($"[{nameof(webView.NavigationCompleted)}]: {args.WebErrorStatus}");
             webView.ContentLoading += (sender, args) => Log($"[{nameof(webView.ContentLoading)}]: {args.IsErrorPage}");;
             webView.SourceChanged += (sender, args) => Log($"[{nameof(webView.ContentLoading)}]: {args.IsNewDocument}"); ;
-            webView.WebMessageReceived += (sender, args) => { };
+            webView.WebMessageReceived += (sender, args) => { Log($"[H5ToWpf]: {args.TryGetWebMessageAsString()}"); };
 
             navigate.Click += (sender, args) =>
             {
@@ -43,6 +44,12 @@ namespace WebView2Demo
                 webView.CoreWebView2.Navigate(url);
             };
 
+            postToH5.Click += (sender, args) =>
+            {
+                Log($"[WpfToH5]: {address.Text}");
+                webView.CoreWebView2.PostWebMessageAsString(address.Text);
+                address.Clear();
+            };
         }
 
         private void Log(string message) => logTextBox.AppendText($"{message}{Environment.NewLine}");

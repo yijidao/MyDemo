@@ -28,6 +28,12 @@
                 Margin="10,0,0,0"
                 Content="navigate"
                 DockPanel.Dock="Right" />
+            <Button
+                x:Name="postToH5"
+                Width="80"
+                Margin="10,0,0,0"
+                Content="PostToH5"
+                DockPanel.Dock="Right" />
             <TextBox
                 x:Name="address"
                 VerticalContentAlignment="Center"

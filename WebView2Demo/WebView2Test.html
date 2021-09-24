@@ -1,0 +1,24 @@
+<html>
+
+<body>
+  <div>
+    <input id="message" type="text" style="height: 48; width: 200;" />
+  </div>
+  <div>
+    <button onclick="postToWpf()">发送</button>
+  </div>
+</body>
+<script>
+  window.chrome.webview.addEventListener('message', event => alert(event.data));
+
+  function postToWpf(params) {
+    let msg = document.getElementById('message');
+    
+    window.chrome.webview.postMessage(msg.value);
+    msg.value = "";
+  }
+
+
+</script>
+
+</html>
