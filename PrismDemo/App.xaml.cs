@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Prism;
+using Prism.DryIoc;
 using Prism.Ioc;
 using PrismDemo.Service;
 
