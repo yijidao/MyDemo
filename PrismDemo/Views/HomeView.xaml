@@ -24,11 +24,21 @@
                 Text="{Binding Title}" />
         </Border>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style x:Key="BtnStyle" TargetType="Button">
+                    <Setter Property="Width" Value="120" />
+                    <Setter Property="Height" Value="28" />
+                    <Setter Property="Margin" Value="8,8,0,8" />
+                </Style>
+            </StackPanel.Resources>
             <Button
-                Width="120"
-                Height="28"
                 Command="{Binding Command1}"
-                Content="Command1" />
+                Content="Command1"
+                Style="{StaticResource BtnStyle}" />
+            <Button
+                Command="{Binding Command2}"
+                Content="Command2"
+                Style="{StaticResource BtnStyle}" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Castle.DynamicProxy;
 using DryIoc;
 using ImTools;
+using Prism.DryIoc;
+using Prism.Ioc;
 
 namespace PrismAopModuleDemo
 {
@@ -34,5 +36,13 @@ namespace PrismAopModuleDemo
                     Parameters.Of.Type<IInterceptor[]>(typeof(TInterceptor[]))),
                 setup: Setup.DecoratorOf(useDecorateeReuse: true, decorateeServiceKey: serviceKey));
         }
+
+        public static void Intercept<TService, TInterceptor>(this IContainerRegistry containerRegistry) where TInterceptor : class, IInterceptor
+        {
+            var container = containerRegistry.GetContainer();
+            container.Intercept<TService, TInterceptor>();
+        }
     }
+
+    
 }

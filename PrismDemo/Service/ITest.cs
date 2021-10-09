@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PrismDemo.Service
 {
-    interface ITest
+    public interface ITest
     {
         void T1();
 
@@ -19,6 +19,7 @@ namespace PrismDemo.Service
         public void T1()
         {
             Debug.WriteLine("T1...");
+            throw new Exception();
         }
 
         public async Task AsyncT1()

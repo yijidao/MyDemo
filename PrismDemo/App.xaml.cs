@@ -5,9 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using DryIoc;
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
+using PrismAopModuleDemo;
 using PrismDemo.Service;
 
 namespace PrismDemo
@@ -20,6 +22,9 @@ namespace PrismDemo
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ITest, Test1>();
+            //containerRegistry.Intercept<ITest, ExceptionInterceptor>();
+            //containerRegistry.Intercept<ITest, LoggingInterceptor>();
+            containerRegistry.InterceptAsync<ITest, AsyncMethodLogInterceptor>();
         }
 
         protected override Window CreateShell() => new MainWindow();

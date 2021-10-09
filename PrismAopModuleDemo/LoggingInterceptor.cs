@@ -12,8 +12,10 @@ namespace PrismAopModuleDemo
     {
         public void Intercept(IInvocation invocation)
         {
-            Debug.WriteLine($"[Log]  {invocation.Method.Name} call...");
+            Debug.WriteLine($"[Log]  {invocation.Method.Name} start...");
             invocation.Proceed();
+            Debug.WriteLine($"[Log]  {invocation.Method.Name} end...");
+
         }
     }
 }
