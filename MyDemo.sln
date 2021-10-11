@@ -43,9 +43,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp7", "WpfApp7\WpfApp7.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebView2Demo", "WebView2Demo\WebView2Demo.csproj", "{189AACA2-F7AA-4CB5-B9B0-E6303649FAFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDemo", "PrismDemo\PrismDemo.csproj", "{70CAA199-2DBC-4422-B6F4-4E0F0CF64AC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismDemo", "PrismDemo\PrismDemo.csproj", "{70CAA199-2DBC-4422-B6F4-4E0F0CF64AC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismAopModuleDemo", "PrismAopModuleDemo\PrismAopModuleDemo.csproj", "{1E633B2D-DDF2-4DE2-9412-47D5A9C348FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismAopModuleDemo", "PrismAopModuleDemo\PrismAopModuleDemo.csproj", "{1E633B2D-DDF2-4DE2-9412-47D5A9C348FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheDemo", "CacheDemo\CacheDemo.csproj", "{6783C09B-1F66-4D6B-9ADF-1061C86B1880}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -321,6 +323,18 @@ Global
 		{1E633B2D-DDF2-4DE2-9412-47D5A9C348FE}.Release|x64.Build.0 = Release|Any CPU
 		{1E633B2D-DDF2-4DE2-9412-47D5A9C348FE}.Release|x86.ActiveCfg = Release|Any CPU
 		{1E633B2D-DDF2-4DE2-9412-47D5A9C348FE}.Release|x86.Build.0 = Release|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Debug|x64.Build.0 = Debug|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Debug|x86.Build.0 = Debug|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Release|x64.ActiveCfg = Release|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Release|x64.Build.0 = Release|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Release|x86.ActiveCfg = Release|Any CPU
+		{6783C09B-1F66-4D6B-9ADF-1061C86B1880}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
