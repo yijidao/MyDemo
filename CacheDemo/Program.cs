@@ -24,13 +24,19 @@ namespace CacheDemo
 
             for (int i = 1; i < 11; i++)
             {
+                //if (i== 1 || i >= 7)
+                //{
+                //    var value = await demo.Get(CacheKeys.Entry);
+                //    Log("Cache", value);
+                //}
                 var value = await demo.Get(CacheKeys.Entry);
                 Log("Cache", value);
+
                 await Task.Delay(TimeSpan.FromSeconds(1));
-                if (i % 3 == 0 && demo.Cache.TryGetValue(CacheKeys.Cts, out CancellationTokenSource cts))
-                {
-                    cts.Cancel();
-                }
+                //if (i % 5 == 0 && demo.Cache.TryGetValue(CacheKeys.Cts, out CancellationTokenSource cts))
+                //{
+                //    cts.Cancel();
+                //}
             }
         }
 
@@ -54,9 +60,9 @@ namespace CacheDemo
             {
                 //entry.SlidingExpiration = TimeSpan.FromSeconds(3);
                 //entry.AbsoluteExpiration = DateTimeOffset.Now.Add(TimeSpan.FromSeconds(3));
-                //entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(3);
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(3);
 
-                var cts= new CancellationTokenSource();
+                var cts = new CancellationTokenSource();
                 Cache.Set(CacheKeys.Cts, cts);
 
                 entry.ExpirationTokens.Add(new CancellationChangeToken(cts.Token));
@@ -68,7 +74,7 @@ namespace CacheDemo
                         Program.Log("EvictionCallback", $"[reason]  {reason}  [state]  {state}");
                     }
                 });
-                
+
                 return Task.FromResult<DateTime>(DateTime.Now);
             });
         }
