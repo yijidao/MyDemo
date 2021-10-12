@@ -15,6 +15,9 @@ namespace PrismDemo.Service
         Task AsyncT1();
         [Cache]
         Task<string> AsyncT2(long? id = null);
+
+        [Cache]
+        Task<string> AsyncT2(string id = null);
     }
 
     public class Test1 : ITest
@@ -35,8 +38,16 @@ namespace PrismDemo.Service
         public async Task<string> AsyncT2(long? id)
         {
             await Task.Delay(TimeSpan.FromSeconds(.5));
+            if (id == 3) throw new ArgumentException("3");
             Debug.WriteLine("AsyncT2...");
             return id == null ? "id is  null" : id.ToString();
+        }
+
+        public async Task<string> AsyncT2(string id = null)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(.5));
+            Debug.WriteLine("String AsyncT2...");
+            return id ?? "id is  null";
         }
     }
 }

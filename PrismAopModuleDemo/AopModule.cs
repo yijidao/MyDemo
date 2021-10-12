@@ -12,7 +12,6 @@ namespace PrismAopModuleDemo
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<LoggingInterceptor>();
         }
 
         public void OnInitialized(IContainerProvider containerProvider)

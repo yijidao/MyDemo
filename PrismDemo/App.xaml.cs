@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Castle.Core.Logging;
+using Castle.Services.Logging.Log4netIntegration;
 using DryIoc;
 using Microsoft.Extensions.Caching.Memory;
 using Prism;
@@ -26,9 +28,14 @@ namespace PrismDemo
             //containerRegistry.Intercept<ITest, ExceptionInterceptor>();
             //containerRegistry.Intercept<ITest, LoggingInterceptor>();
             //containerRegistry.InterceptAsync<ITest, AsyncMethodLogInterceptor>();
-
-            containerRegistry.RegisterSingleton<IMemoryCache>(provider => new MemoryCache(new MemoryCacheOptions()));
-
+            
+            containerRegistry.RegisterSingleton<ILogger>(_ =>
+            {
+                var factory = new Log4netFactory();
+                return factory.Create("app");
+            });
+            containerRegistry.RegisterSingleton<IMemoryCache>(_ => new MemoryCache(new MemoryCacheOptions()));
+            containerRegistry.InterceptAsync<ITest, LogInterceptor>();
             containerRegistry.InterceptAsync<ITest, CacheInterceptor>();
         }
 

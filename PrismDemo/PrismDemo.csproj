@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Castle.Core-log4net" Version="4.4.1" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
@@ -14,6 +15,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PrismAopModuleDemo\PrismAopModuleDemo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

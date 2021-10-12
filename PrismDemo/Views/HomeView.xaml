@@ -43,6 +43,10 @@
                 Command="{Binding Command3}"
                 Content="Command3"
                 Style="{StaticResource BtnStyle}" />
+            <Button
+                Command="{Binding Command4}"
+                Content="Command4"
+                Style="{StaticResource BtnStyle}" />
             <TextBox Style="{StaticResource BtnStyle}" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>

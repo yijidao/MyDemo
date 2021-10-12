@@ -33,6 +33,7 @@ namespace PrismDemo.ViewModels
         public ICommand Command2 { get; }
 
         public ICommand Command3 { get; }
+        public ICommand Command4 { get; }
 
         public HomeViewModel(ITest test)
         {
@@ -55,6 +56,12 @@ namespace PrismDemo.ViewModels
             {
                 var result = await _test.AsyncT2(Input);
                 Debug.WriteLine($"Command3  {result}");
+            });
+
+            Command4 = new DelegateCommand(async () =>
+            {
+                var result = await _test.AsyncT2(Input?.ToString());
+                Debug.WriteLine($"Command4  {result}");
             });
         }
     }
