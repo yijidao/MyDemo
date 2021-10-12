@@ -25,7 +25,7 @@
         </Border>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <StackPanel.Resources>
-                <Style x:Key="BtnStyle" TargetType="Button">
+                <Style x:Key="BtnStyle" TargetType="Control">
                     <Setter Property="Width" Value="120" />
                     <Setter Property="Height" Value="28" />
                     <Setter Property="Margin" Value="8,8,0,8" />
@@ -39,6 +39,11 @@
                 Command="{Binding Command2}"
                 Content="Command2"
                 Style="{StaticResource BtnStyle}" />
+            <Button
+                Command="{Binding Command3}"
+                Content="Command3"
+                Style="{StaticResource BtnStyle}" />
+            <TextBox Style="{StaticResource BtnStyle}" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
 </UserControl>

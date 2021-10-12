@@ -21,9 +21,18 @@ namespace PrismDemo.ViewModels
             set => SetProperty(ref _title, value);
         }
 
+        private long? _input;
+        public long? Input
+        {
+            get => _input;
+            set => SetProperty(ref _input, value);
+        }
+
         public ICommand Command1 { get; }
 
         public ICommand Command2 { get; }
+
+        public ICommand Command3 { get; }
 
         public HomeViewModel(ITest test)
         {
@@ -40,6 +49,12 @@ namespace PrismDemo.ViewModels
 
                 await _test.AsyncT1();
                 Debug.WriteLine("Command2");
+            });
+
+            Command3 = new DelegateCommand(async () =>
+            {
+                var result = await _test.AsyncT2(Input);
+                Debug.WriteLine($"Command3  {result}");
             });
         }
     }

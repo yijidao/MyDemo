@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using DryIoc;
+using Microsoft.Extensions.Caching.Memory;
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
@@ -24,7 +25,11 @@ namespace PrismDemo
             containerRegistry.RegisterSingleton<ITest, Test1>();
             //containerRegistry.Intercept<ITest, ExceptionInterceptor>();
             //containerRegistry.Intercept<ITest, LoggingInterceptor>();
-            containerRegistry.InterceptAsync<ITest, AsyncMethodLogInterceptor>();
+            //containerRegistry.InterceptAsync<ITest, AsyncMethodLogInterceptor>();
+
+            containerRegistry.RegisterSingleton<IMemoryCache>(provider => new MemoryCache(new MemoryCacheOptions()));
+
+            containerRegistry.InterceptAsync<ITest, CacheInterceptor>();
         }
 
         protected override Window CreateShell() => new MainWindow();
