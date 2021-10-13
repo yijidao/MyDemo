@@ -16,7 +16,32 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             //AnonymousPipeServer();
-            NamedPipeServer();
+            //NamedPipeServer();
+
+            var watcher = new FileSystemWatcher($"{Environment.CurrentDirectory}");
+
+            watcher.NotifyFilter = 
+                                    NotifyFilters.CreationTime
+                                  
+                                   | NotifyFilters.FileName
+                                   
+                                   | NotifyFilters.LastWrite
+                                   
+                                   | NotifyFilters.Size;
+
+            watcher.Changed += (sender, eventArgs) => { };
+            watcher.Created += (sender, eventArgs) => { };
+            watcher.Deleted += (sender, eventArgs) => { };
+            watcher.Renamed += (sender, eventArgs) => { };
+            watcher.Error += (sender, eventArgs) => { };
+
+            watcher.Filter = "PrismDemo.config";
+            watcher.IncludeSubdirectories = true;
+            watcher.EnableRaisingEvents = true;
+
+            Console.WriteLine("Press enter to exit.");
+            Console.ReadLine();
+
         }
 
         /// <summary>
@@ -155,7 +180,7 @@ namespace ConsoleApp1
                 len = UInt16.MaxValue;
             }
 
-            _ioStream.WriteByte((byte)(len/256));
+            _ioStream.WriteByte((byte)(len / 256));
             _ioStream.WriteByte((byte)(len & 255));
             _ioStream.Write(outBuffer, 0, len);
             _ioStream.Flush();
@@ -164,7 +189,7 @@ namespace ConsoleApp1
         }
     }
 
-    
+
     class ReadFileToStream
     {
         private readonly StreamString _ss;

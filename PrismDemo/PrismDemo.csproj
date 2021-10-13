@@ -15,9 +15,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PrismAopModuleDemo\PrismAopModuleDemo.csproj" />
+    <ProjectReference Include="..\PrismConfigModuleDemo\PrismConfigModuleDemo.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

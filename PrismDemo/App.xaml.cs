@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Prism;
 using Prism.DryIoc;
 using Prism.Ioc;
+using Prism.Modularity;
 using PrismAopModuleDemo;
 using PrismDemo.Service;
 
@@ -41,9 +43,10 @@ namespace PrismDemo
 
             //containerRegistry.InterceptAsync<ITest, LogInterceptor>();
             //containerRegistry.InterceptAsync<ITest, CacheInterceptor>();
-        }
 
+        }
         protected override Window CreateShell() => new MainWindow();
 
+        protected override IModuleCatalog CreateModuleCatalog() => new ConfigurationModuleCatalog();
     }
 }
