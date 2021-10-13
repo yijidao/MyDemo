@@ -49,11 +49,12 @@ namespace PrismAopModuleDemo
             registrator.Intercept<TService, AsyncInterceptor<TInterceptor>>(serviceKey);
         }
 
-        public static void InterceptAsync<TService, TInterceptor>(this IContainerRegistry containerRegistry)
+        public static IContainerRegistry InterceptAsync<TService, TInterceptor>(this IContainerRegistry containerRegistry)
             where TInterceptor : class, IAsyncInterceptor
         {
             var container = containerRegistry.GetContainer();
             container.InterceptAsync<TService, TInterceptor>();
+            return containerRegistry;
         }
     }
 }

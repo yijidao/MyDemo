@@ -24,19 +24,23 @@ namespace PrismDemo
     {
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<ITest, Test1>();
-            //containerRegistry.Intercept<ITest, ExceptionInterceptor>();
-            //containerRegistry.Intercept<ITest, LoggingInterceptor>();
-            //containerRegistry.InterceptAsync<ITest, AsyncMethodLogInterceptor>();
-            
+            containerRegistry.RegisterSingleton<IMemoryCache>(_ => new MemoryCache(new MemoryCacheOptions()));
             containerRegistry.RegisterSingleton<ILogger>(_ =>
             {
                 var factory = new Log4netFactory();
                 return factory.Create("app");
             });
-            containerRegistry.RegisterSingleton<IMemoryCache>(_ => new MemoryCache(new MemoryCacheOptions()));
-            containerRegistry.InterceptAsync<ITest, LogInterceptor>();
-            containerRegistry.InterceptAsync<ITest, CacheInterceptor>();
+
+            containerRegistry.RegisterSingleton<ITest, Test1>()
+                .InterceptAsync<ITest, CacheInterceptor>()
+                .InterceptAsync<ITest, LogInterceptor>();
+
+            //containerRegistry.Intercept<ITest, ExceptionInterceptor>();
+            //containerRegistry.Intercept<ITest, LoggingInterceptor>();
+            //containerRegistry.InterceptAsync<ITest, AsyncMethodLogInterceptor>();
+
+            //containerRegistry.InterceptAsync<ITest, LogInterceptor>();
+            //containerRegistry.InterceptAsync<ITest, CacheInterceptor>();
         }
 
         protected override Window CreateShell() => new MainWindow();
