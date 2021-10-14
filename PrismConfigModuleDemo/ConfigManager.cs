@@ -4,37 +4,47 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.Core.Configuration;
+using Castle.Core.Logging;
 
 namespace PrismConfigModuleDemo
 {
+
     public class ConfigManager : IDisposable
     {
+        private readonly ILogger _logger;
+        private FileSystemWatcher _watcher;
+        private IDisposable _observableDisposable;
+        private Configuration _config;
+        //public Configuration Config { get; private set; }
 
-        public string ConfigPath => Path.Combine(Environment.CurrentDirectory, "PrismDemo.config");
-
-        public FileSystemWatcher Watcher { get; private set; }
-
-        public IDisposable ObservableDisposable { get; set; }
-
-        public ConfigManager()
+        public ConfigManager(ILogger logger)
         {
-            
+            _logger = logger;
+            Load();
+            WatchConfigFile();
         }
 
-        public void Load()
+        private void Load()
         {
-            var fileMap = new ExeConfigurationFileMap {ExeConfigFilename = ConfigPath};
-            var c= ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
-            c.Save(ConfigurationSaveMode.Modified);
-            
-            ConfigurationManager.RefreshSection(c.AppSettings.SectionInformation.Name);
+            try
+            {
+                var path = Path.Combine(Environment.CurrentDirectory, "PrismDemo.config");
+                _config = ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap(path),
+                    ConfigurationUserLevel.None);
+            }
+            catch (Exception e)
+            {
+                _logger.Error("加载config", e);
+            }
+
         }
 
-        public void WatchConfigFile()
+        private void WatchConfigFile()
         {
-            if (Watcher != null) return;
             var watcher = new FileSystemWatcher($"{Environment.CurrentDirectory}")
             {
                 Filter = "PrismDemo.config",
@@ -44,23 +54,25 @@ namespace PrismConfigModuleDemo
 
             };
 
-            ObservableDisposable = Observable.FromEventPattern(watcher, nameof(watcher.Changed))
+            _observableDisposable = Observable.FromEventPattern(watcher, nameof(watcher.Changed))
                 .Throttle(TimeSpan.FromSeconds(2))
                 .Subscribe(_ =>
                 {
                     Load();
                 });
-            
-            
+            _watcher = watcher;
+        }
 
-            Watcher = watcher;
+        public string GetAppSetting(string key)
+        {
+            return _config.AppSettings.Settings[key]?.Value ?? "";
         }
 
 
         public void Dispose()
         {
-            Watcher?.Dispose();
-            ObservableDisposable?.Dispose();
+            _watcher?.Dispose();
+            _observableDisposable?.Dispose();
         }
     }
 }

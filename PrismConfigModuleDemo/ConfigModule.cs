@@ -17,7 +17,7 @@ namespace PrismConfigModuleDemo
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            containerProvider.Resolve<ConfigManager>().WatchConfigFile();
+            //containerProvider.Resolve<ConfigManager>().WatchConfigFile();
         }
     }
 }

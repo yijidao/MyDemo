@@ -37,6 +37,8 @@ namespace PrismDemo
                 .InterceptAsync<ITest, CacheInterceptor>()
                 .InterceptAsync<ITest, LogInterceptor>();
 
+            
+
             //containerRegistry.Intercept<ITest, ExceptionInterceptor>();
             //containerRegistry.Intercept<ITest, LoggingInterceptor>();
             //containerRegistry.InterceptAsync<ITest, AsyncMethodLogInterceptor>();
