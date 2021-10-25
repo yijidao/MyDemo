@@ -39,7 +39,8 @@
             <ItemsControl
                 Grid.Row="1"
                 Margin="12,0,12,12"
-                ItemsSource="{Binding CardItems}">
+                ItemsSource="{Binding CardItems}"
+                Visibility="Collapsed">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
