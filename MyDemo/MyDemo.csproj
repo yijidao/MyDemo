@@ -80,6 +80,9 @@
     <Compile Include="ButtonDemo.xaml.cs">
       <DependentUpon>ButtonDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CardDemo.xaml.cs">
+      <DependentUpon>CardDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CharDemo.xaml.cs">
       <DependentUpon>CharDemo.xaml</DependentUpon>
     </Compile>
@@ -198,6 +201,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ButtonDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CardDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,75 @@
+﻿<UserControl
+    x:Class="MyDemo.CardDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="#083153 "
+    mc:Ignorable="d">
+    <Border
+        Width="456"
+        Height="372"
+        BorderBrush="LightCyan"
+        BorderThickness="1">
+        <Grid
+            x:Name="container"
+            d:DataContext="{d:DesignInstance local:CardModel}"
+            TextBlock.FontSize="14"
+            TextBlock.Foreground="White"
+            TextBlock.TextAlignment="Center">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <DockPanel Margin="12" LastChildFill="False">
+                <TextBlock Text="{Binding Title}" />
+                <Button
+                    Width="72"
+                    Height="20"
+                    Background="#0196A3 "
+                    Content="查看详情"
+                    DockPanel.Dock="Right"
+                    FontSize="12"
+                    Foreground="White" />
+            </DockPanel>
+            <ItemsControl
+                Grid.Row="1"
+                Margin="12,0,12,12"
+                ItemsSource="{Binding CardItems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="86" Height="64">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Border Background="#0F3B59 ">
+                                <TextBlock VerticalAlignment="Center" Text="{Binding}" />
+                            </Border>
+                            <Border
+                                Grid.Row="1"
+                                Width="12"
+                                Height="12"
+                                VerticalAlignment="Center"
+                                Background="#3EC41A"
+                                CornerRadius="6">
+                                <Border.Effect>
+                                    <BlurEffect KernelType="Gaussian" Radius="2" />
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Border>
+</UserControl>
