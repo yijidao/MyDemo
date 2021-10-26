@@ -30,16 +30,17 @@ namespace MyDemo
                 Title = "1号线综合监控",
             };
 
-            for (int i = 1; i <= 16; i++)
+            for (int i = 1; i <= 28; i++)
             {
                 cardModel.CardItems.Add($"Item{i}");
             }
 
             container.DataContext = cardModel;
 
-            var list = Create(cardModel, 7);
-            Grid.SetRow(list, 1);
-            container.Children.Add(list);
+            var list = Create(cardModel, 5);
+            cardContainer.Content = list;
+            //Grid.SetRow(list, 1);
+            //container.Children.Add(list);
         }
 
         /// <summary>

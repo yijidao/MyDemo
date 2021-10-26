@@ -71,6 +71,10 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <ScrollViewer
+                x:Name="cardContainer"
+                Grid.Row="1"
+                VerticalScrollBarVisibility="Auto" />
         </Grid>
     </Border>
 </UserControl>
