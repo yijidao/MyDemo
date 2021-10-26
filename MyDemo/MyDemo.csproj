@@ -180,6 +180,9 @@
     <Compile Include="MyXamlWriterView.xaml.cs">
       <DependentUpon>MyXamlWriterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProgressBarDemo.xaml.cs">
+      <DependentUpon>ProgressBarDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RadioButtonDemo.xaml.cs">
       <DependentUpon>RadioButtonDemo.xaml</DependentUpon>
     </Compile>
@@ -345,6 +348,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyXamlWriterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProgressBarDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
