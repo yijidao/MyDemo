@@ -8,8 +8,11 @@
     Title="MainWindow"
     Width="1600"
     Height="1200"
+    Background="{StaticResource BgBrush}"
     mc:Ignorable="d">
+
     <Grid>
-        <local:Demo1 />
+        <!--<local:Demo1 />-->
+        <local:AutoRefreshDemo />
     </Grid>
 </Window>
