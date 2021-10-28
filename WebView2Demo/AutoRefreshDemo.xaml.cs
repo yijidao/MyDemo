@@ -45,13 +45,13 @@ namespace WebView2Demo
                 webView2.CoreWebView2.Navigate(url);
             };
 
-            var o = Observable.FromEventPattern(isAuto, nameof(isAuto.Checked))
-                .Select(_ => isAuto.IsChecked == true);
+            var o = Observable.FromEventPattern(isAuto, nameof(isAuto.Checked));
 
+            var o2 = Observable.FromEventPattern(isAuto, nameof(isAuto.Unchecked));
 
             Observable.Interval(TimeSpan.FromSeconds(120))
-                .SkipUntil(o.Where(x => x))
-                .TakeUntil(o.Where(x => !x))
+                .SkipUntil(o)
+                .TakeUntil(o2)
                 .Repeat()
                 .ObserveOnDispatcher()
                 .Subscribe(_ =>
