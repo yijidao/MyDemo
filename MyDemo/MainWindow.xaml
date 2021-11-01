@@ -64,6 +64,7 @@
             <Button Click="Button_Click" Content="BackgroundWorkerDemo" />
             <Button Click="Button_Click" Content="CardDemo" />
             <Button Click="Button_Click" Content="ProgressBarDemo" />
+            <Button Click="Button_Click" Content="RouterDemo" />
         </WrapPanel>
         <ContentControl
             x:Name="controlContainer"
