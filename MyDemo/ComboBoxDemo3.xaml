@@ -1,19 +1,15 @@
 ﻿<UserControl
-    x:Class="MyDemo.ComboboxDemo2"
+    x:Class="MyDemo.ComboBoxDemo3"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cvs="clr-namespace:DemoResource.converter;assembly=DemoResource"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MyDemo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:prism="http://prismlibrary.com/"
-    x:Name="view"
-    d:DataContext="{d:DesignInstance local:ComboboxDemo2ViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     Background="{StaticResource BgBrush}"
     mc:Ignorable="d">
-
     <UserControl.Resources>
 
         <DrawingImage x:Key="Down">
@@ -33,7 +29,6 @@
 
     </UserControl.Resources>
 
-
     <Grid Margin="30" Background="Transparent">
         <StackPanel>
             <Border
@@ -48,12 +43,13 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBox Background="Transparent" BorderThickness="0" />
+
                     <ToggleButton
                         x:Name="arrow"
                         Grid.Column="1"
                         BorderThickness="0"
-                        IsThreeState="False">
-
+                        IsThreeState="False"
+                        PreviewMouseDown="Arrow_OnPreviewMouseDown">
                         <ToggleButton.Template>
                             <ControlTemplate TargetType="ToggleButton">
                                 <Grid
@@ -110,54 +106,34 @@
                     </ToggleButton>
 
                 </Grid>
-            </Border>
 
-            <local:MyPopup
+            </Border>
+            <!--<local:MyPopup
                 x:Name="dropdown"
-                AllowsTransparency="True"
-                IsOpen="{Binding ElementName=arrow, Path=IsChecked, Mode=TwoWay}"
+                AllowsTransparency="False"
+                IsOpen="{Binding ElementName=arrow, Mode=TwoWay, Path=IsChecked}"
                 Placement="Bottom"
                 PlacementTarget="{Binding ElementName=combobox}"
-                StaysOpen="False"
-                VerticalOffset="4">
-                <Grid Margin="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <ListBox
-                        x:Name="items"
-                        Width="{Binding ElementName=combobox, Path=ActualWidth}"
-                        Background="#0D3F61"
-                        BorderThickness="0"
-                        DisplayMemberPath="Name"
-                        ItemsSource="{Binding Models}"
-                        SelectedItem="{Binding SelectedModel}">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="Height" Value="32" />
-                                <Setter Property="Foreground" Value="#ffffff" />
-                                <Setter Property="BorderThickness" Value="0" />
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
-                    <ListBox
-                        Grid.Column="1"
-                        Width="{Binding ElementName=combobox, Path=ActualWidth}"
-                        Margin="8,0,0,0"
-                        Background="#0D3F61"
-                        BorderThickness="0"
-                        ItemsSource="{Binding SelectedModel.Children}">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="Height" Value="32" />
-                                <Setter Property="Foreground" Value="#ffffff" />
-                                <Setter Property="BorderThickness" Value="0" />
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
-                </Grid>
-            </local:MyPopup>
+                StaysOpen="False">
+                <Grid
+                    Width="200"
+                    Height="350"
+                    Background="#0D3F61" />
+            </local:MyPopup>-->
+            <!--<Popup
+                x:Name="dropdown"
+                AllowsTransparency="False"
+                IsOpen="{Binding ElementName=arrow, Mode=TwoWay, Path=IsChecked}"
+                Placement="Bottom"
+                PlacementTarget="{Binding ElementName=combobox}"
+                PreviewMouseDown="Dropdown_OnPreviewMouseDown"
+                StaysOpen="False">
+                <Grid
+                    Width="200"
+                    Height="350"
+                    Background="#0D3F61" />
+            </Popup>-->
+
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,10 +15,6 @@ namespace MyDemo
     /// </summary>
     public partial class ComboboxDemo2 : UserControl
     {
-
-
-
-
         public ComboboxDemo2()
         {
             InitializeComponent();
@@ -24,10 +22,45 @@ namespace MyDemo
             DataContext = new ComboboxDemo2ViewModel();
         }
 
-        private void OpenPopup(object sender, MouseButtonEventArgs e)
-        {
-            dropdown.IsOpen = !dropdown.IsOpen;
-        }
+        //private void OpenPopup(object sender, MouseButtonEventArgs e)
+        //{
+        //    dropdown.IsOpen = !dropdown.IsOpen;
+        //}
+
+        
+
+        //private void Dropdown_OnLostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    dropdown.IsOpen = false;
+        //}
+
+        //private void Dropdown_OnOpened(object sender, EventArgs e)
+        //{
+        //    Mouse.Capture(this, CaptureMode.SubTree);
+        //}
+
+
+        //public bool IsOpen
+        //{
+        //    get => (bool)GetValue(IsOpenProperty);
+        //    set => SetValue(IsOpenProperty, value);
+        //}
+
+        //public static readonly DependencyProperty IsOpenProperty =
+        //    DependencyProperty.Register("IsOpen", typeof(bool), typeof(ComboboxDemo2), new PropertyMetadata(false));
+
+        //protected override void OnMouseDown(MouseButtonEventArgs e)
+        //{
+        //    base.OnMouseDown(e);
+
+        //    if (Mouse.Captured == this)
+        //    {
+        //        SetCurrentValue(ComboboxDemo2.IsOpenProperty, false);
+        //        ReleaseMouseCapture();
+        //    }
+
+        //    e.Handled = true;
+        //}
     }
 
 
@@ -45,6 +78,13 @@ namespace MyDemo
         {
             get => _selectedModel;
             set => SetProperty(ref _selectedModel, value);
+        }
+
+        private bool _isDropDownOpen = false;
+        public bool IsDropDownOpen
+        {
+            get => _isDropDownOpen;
+            set => SetProperty(ref _isDropDownOpen, value);
         }
 
         public ComboboxDemo2ViewModel()
@@ -71,6 +111,14 @@ namespace MyDemo
             Models = new ObservableCollection<ComboboxDemo2Model>(models);
         }
 
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+            if (args.PropertyName == nameof(IsDropDownOpen))
+            {
+                Debug.WriteLine(IsDropDownOpen);
+            }
+        }
     }
 
     public class ComboboxDemo2Model

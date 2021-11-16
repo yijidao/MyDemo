@@ -97,6 +97,9 @@
     <Compile Include="ComboboxDemo2.xaml.cs">
       <DependentUpon>ComboboxDemo2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ComboBoxDemo3.xaml.cs">
+      <DependentUpon>ComboBoxDemo3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataGridDemo.xaml.cs">
       <DependentUpon>DataGridDemo.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ComboboxDemo2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComboBoxDemo3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
