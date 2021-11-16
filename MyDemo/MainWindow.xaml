@@ -54,6 +54,7 @@
             <Button Click="Button_Click" Content="TextBoxDemo" />
             <Button Click="Button_Click" Content="ListBoxDemo" />
             <Button Click="Button_Click" Content="ComboBoxDemo" />
+            <Button Click="Button_Click" Content="ComboboxDemo2" />
             <Button Click="Button_Click" Content="TreeViewDemo" />
             <Button Click="Button_Click" Content="GridDemo" />
             <Button Click="Button_Click" Content="MediaDemo" />
@@ -65,6 +66,7 @@
             <Button Click="Button_Click" Content="CardDemo" />
             <Button Click="Button_Click" Content="ProgressBarDemo" />
             <Button Click="Button_Click" Content="RouterDemo" />
+
         </WrapPanel>
         <ContentControl
             x:Name="controlContainer"
