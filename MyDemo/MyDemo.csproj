@@ -211,6 +211,9 @@
     <Compile Include="TreeViewDemo.xaml.cs">
       <DependentUpon>TreeViewDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VisualBrushDemo.xaml.cs">
+      <DependentUpon>VisualBrushDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VisualCanvas.cs" />
     <Page Include="BackgroundWorkerDemo.xaml">
       <SubType>Designer</SubType>
@@ -433,6 +436,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TreeViewDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VisualBrushDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

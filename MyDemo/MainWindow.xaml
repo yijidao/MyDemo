@@ -68,6 +68,7 @@
             <Button Click="Button_Click" Content="RouterDemo" />
             <Button Click="Button_Click" Content="ComboBoxDemo3" />
             <Button Click="Button_Click" Content="DatePickerDemo" />
+            <Button Click="Button_Click" Content="VisualBrushDemo" />
 
         </WrapPanel>
         <ContentControl
