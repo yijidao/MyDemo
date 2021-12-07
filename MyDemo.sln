@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30204.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDemo", "MyDemo\MyDemo.csproj", "{3796676E-F072-4A7E-BD8E-4E5E3B97CAEC}"
 EndProject
@@ -51,7 +51,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CacheDemo", "CacheDemo\Cach
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismConfigModuleDemo", "PrismConfigModuleDemo\PrismConfigModuleDemo.csproj", "{90D8783E-EB01-4980-BABB-00A450812B70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoResource", "DemoResource\DemoResource.csproj", "{50E54529-2E4B-4400-83BA-E60C98943A0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoResource", "DemoResource\DemoResource.csproj", "{50E54529-2E4B-4400-83BA-E60C98943A0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VlcDemo", "VlcDemo\VlcDemo.csproj", "{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -363,6 +365,18 @@ Global
 		{50E54529-2E4B-4400-83BA-E60C98943A0C}.Release|x64.Build.0 = Release|Any CPU
 		{50E54529-2E4B-4400-83BA-E60C98943A0C}.Release|x86.ActiveCfg = Release|Any CPU
 		{50E54529-2E4B-4400-83BA-E60C98943A0C}.Release|x86.Build.0 = Release|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Debug|x64.Build.0 = Debug|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Debug|x86.Build.0 = Debug|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Release|x64.ActiveCfg = Release|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Release|x64.Build.0 = Release|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Release|x86.ActiveCfg = Release|Any CPU
+		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

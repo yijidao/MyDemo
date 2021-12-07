@@ -1,0 +1,132 @@
+﻿<UserControl
+    x:Class="MyDemo.VideoPlayerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpf="clr-namespace:LibVLCSharp.WPF;assembly=LibVLCSharp.WPF"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Hjmos.VLCSharp.WPF;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="RcGeneric.xaml" />
+            </ResourceDictionary.MergedDictionaries>-->
+            <Style x:Key="ImageStyle" TargetType="Image">
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="14" />
+            </Style>
+            <SolidColorBrush x:Key="CommonBrush" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="ActiveBrush" Color="#13FFF5 " />
+
+            <DrawingImage x:Key="FullScreen">
+                <DrawingImage.Drawing>
+                    <GeometryDrawing Brush="{StaticResource CommonBrush}">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M0.099987 1024V658.316425h73.110719v243.749055l313.960141-313.960142 51.723434 51.773427L127.903762 950.879283h237.879801v73.110718H0.099987zM0.099987 0.129983v365.683576h73.110719V122.054505l313.960141 313.960142 51.723434-51.723434L127.903762 73.300694h237.879801V0.129983H0.099987z m1023.870017 1023.870017V658.316425h-73.170711v237.8798l-313.960142-313.960142-51.663441 51.663441 316.919766 316.919767H658.296427v73.17071h365.673577z m0-1023.870017v365.683576h-73.170711V127.92376l-313.960142 313.960141-51.663441-51.773427L902.045483 73.190708H658.296427V0.129983h365.673577z" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+
+            <DrawingImage x:Key="RestoreScreen">
+                <DrawingImage.Drawing>
+                    <GeometryDrawing Brush="{StaticResource CommonBrush}">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M1022.82015 1024v-51.363479l-255.737534-256.367454h256.887388v-72.07085l-382.231475-0.109986 0.109986 378.771914h73.350688V768.202474l256.767403 255.797526h50.853544z m-1022.720163 0v-51.363479l256.887388-256.367454H1.249841v-72.07085l381.081621-0.109986-0.109986 378.771914h-73.350688V768.202474L52.093387 1024H0.099987zM1022.82015 1.269839V51.493463L767.082616 307.860916h256.887388v72.07085l-382.231475 0.109987 0.109986-379.921768h73.350688v255.797525L971.976605 1.269839h50.843545zM0.099987 1.269839V51.493463l256.887388 256.367453H1.249841v72.07085l381.081621 0.109987L382.211477 0.129983H308.860789v255.797526L52.093387 1.269839H0.099987z" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+            <DrawingImage x:Key="Fault">
+                <DrawingImage.Drawing>
+                    <GeometryDrawing Brush="#F8E71C">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M489.63 746.18a58.955 58.955 0 0 1 48.14 0c14.46 8.8 23.29 24.67 23.26 41.78-0.72 16.9-9.37 32.43-23.26 41.78a58.955 58.955 0 0 1-48.14 0c-14.42-8.84-23.24-24.69-23.26-41.78 0.94-16.83 9.53-32.27 23.26-41.78z m-13.49-403.2c-0.07-21.72 16.35-39.82 37.68-41.55 20.76 0.13 37.55 17.18 37.68 38.24v309.25c0 13.66-7.18 26.29-18.84 33.12a37.207 37.207 0 0 1-37.68 0c-11.66-6.83-18.84-19.46-18.84-33.12V342.98zM85.64 972.34h856.12c29.57 0.01 56.92-15.89 71.87-41.78 13.9-27.24 13.9-59.63 0-86.87L585.68 88.26c-14.65-26.16-42.22-42.11-71.87-41.55-29.45 1.08-56.41 17.03-71.87 42.49L14.01 844.62C5.09 856.23 0.19 870.5 0.06 885.22v3.54c0.2 14.54 3.7 28.84 10.23 41.78 15.95 26.61 44.68 42.54 75.35 41.8z" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+            <DrawingImage x:Key="Monitor">
+                <DrawingImage.Drawing>
+                    <GeometryDrawing Brush="#FFFFFF ">
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="M120.967005 260.28204L635.501733 785.115661H73.842068V260.28204h47.124937z m903.022996 75.341907v395.517512L788.745272 598.29573V467.849743l235.244729-132.225796z m-12.738632 626.632686l-61.013445 61.743367L0.099989 61.853356 61.113435 0.109988l261.821875 260.172052 398.657175-3.299646v407.336244l289.658884 297.937995z" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingImage.Drawing>
+            </DrawingImage>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <wpf:VideoView
+            x:Name="videoView"
+            Background="Black"
+            BorderThickness="1">
+            <Grid
+                x:Name="backPanel"
+                Margin="10"
+                Background="#01000000">
+                <Border
+                    x:Name="monitorName"
+                    Height="20"
+                    Margin="0,0,0,-10"
+                    VerticalAlignment="Bottom"
+                    Background="#BF000000"
+                    Visibility="Collapsed">
+                    <TextBlock Foreground="#ffffff" Text="{Binding Name}" />
+                </Border>
+                <Grid x:Name="faultTip" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Image
+                        x:Name="faultIcon"
+                        Width="44"
+                        Height="44"
+                        Margin="0,0,0,0"
+                        VerticalAlignment="Center"
+                        Source="{StaticResource Fault}" />
+                </Grid>
+
+                <Grid x:Name="stopTip" Opacity=".2">
+                    <Image
+                        x:Name="stopIcon"
+                        Width="44"
+                        Height="44"
+                        Margin="0"
+                        VerticalAlignment="Center"
+                        Source="{StaticResource Monitor}" />
+                </Grid>
+
+                <Button
+                    x:Name="fullScreenButton"
+                    Width="20"
+                    Height="20"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Visibility="Collapsed">
+                    <Image Source="{StaticResource FullScreen}" Style="{StaticResource ImageStyle}" />
+                </Button>
+                <Button
+                    x:Name="restoreScreenButton"
+                    Width="20"
+                    Height="20"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Visibility="Collapsed">
+                    <Image Source="{StaticResource RestoreScreen}" Style="{StaticResource ImageStyle}" />
+                </Button>
+            </Grid>
+        </wpf:VideoView>
+    </Grid>
+</UserControl>

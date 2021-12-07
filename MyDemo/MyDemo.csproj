@@ -52,6 +52,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DryIoc">
+      <HintPath>..\..\..\Users\wzp\.nuget\packages\dryioc.dll\4.7.7\lib\netstandard2.0\DryIoc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -119,6 +122,9 @@
       <DependentUpon>ListBoxDemo.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListBoxWithImage.cs" />
+    <Compile Include="MainWindow2.xaml.cs">
+      <DependentUpon>MainWindow2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MediaDemo.xaml.cs">
       <DependentUpon>MediaDemo.xaml</DependentUpon>
     </Compile>
@@ -190,6 +196,9 @@
     <Compile Include="MyXamlWriterView.xaml.cs">
       <DependentUpon>MyXamlWriterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NineVideoDemo.xaml.cs">
+      <DependentUpon>NineVideoDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProgressBarDemo.xaml.cs">
       <DependentUpon>ProgressBarDemo.xaml</DependentUpon>
     </Compile>
@@ -211,10 +220,25 @@
     <Compile Include="TreeViewDemo.xaml.cs">
       <DependentUpon>TreeViewDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VideoPanelView.xaml.cs">
+      <DependentUpon>VideoPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VideoPlayerView.xaml.cs">
+      <DependentUpon>VideoPlayerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VisualBrushDemo.xaml.cs">
       <DependentUpon>VisualBrushDemo.xaml</DependentUpon>
     </Compile>
     <Compile Include="VisualCanvas.cs" />
+    <Compile Include="VlcDemo.xaml.cs">
+      <DependentUpon>VlcDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VlcDemo2.xaml.cs">
+      <DependentUpon>VlcDemo2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VlcDemo3.xaml.cs">
+      <DependentUpon>VlcDemo3.xaml</DependentUpon>
+    </Compile>
     <Page Include="BackgroundWorkerDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -283,6 +307,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWindow2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MediaDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -379,6 +407,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="NineVideoDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProgressBarDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -439,7 +471,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="VideoPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VideoPlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VisualBrushDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VlcDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VlcDemo2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VlcDemo3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -483,8 +535,17 @@
     <PackageReference Include="CefSharp.WinForms">
       <Version>86.0.241</Version>
     </PackageReference>
+    <PackageReference Include="DryIoc.dll">
+      <Version>4.7.7</Version>
+    </PackageReference>
     <PackageReference Include="Extended.Wpf.Toolkit">
       <Version>3.8.1</Version>
+    </PackageReference>
+    <PackageReference Include="LibVLCSharp">
+      <Version>3.6.2</Version>
+    </PackageReference>
+    <PackageReference Include="LibVLCSharp.WPF">
+      <Version>3.6.2</Version>
     </PackageReference>
     <PackageReference Include="Prism.Core">
       <Version>8.1.97</Version>
@@ -500,6 +561,9 @@
     </PackageReference>
     <PackageReference Include="System.Runtime">
       <Version>4.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="VideoLAN.LibVLC.Windows">
+      <Version>3.0.16</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

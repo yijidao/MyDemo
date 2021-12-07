@@ -1,0 +1,212 @@
+﻿<UserControl
+    x:Class="MyDemo.NineVideoDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="CommonBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="ActiveBrush" Color="#13FFF5 " />
+        <DrawingImage x:Key="NineSplitImage">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="{StaticResource CommonBrush}">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M960.1 702.53c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H793.7c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-361.45 0c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64h-166.4c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-534.55 0h166.4c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H64.1c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64z m896-319.2c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H793.7c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-362.98 0c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64h-166.4c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-533.02 0h166.4c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H64.1c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64z m896-319.2c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H793.7c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-361.45 0c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64h-166.4c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-534.55 0h166.4c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H64.1c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="FourSplitImage">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="{StaticResource CommonBrush}">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M960.12 64.24c35.34 0 63.98 28.65 63.98 63.98v291.86c0 35.34-28.65 63.98-63.98 63.98H608.21c-35.34 0-63.98-28.65-63.98-63.98V128.23c0-35.34 28.65-63.98 63.98-63.98h351.91z m-544.13 0c35.34 0 63.98 28.65 63.98 63.98v291.86c0 35.34-28.65 63.98-63.98 63.98H64.08C28.74 484.06 0.1 455.41 0.1 420.08V128.23c0-35.34 28.65-63.98 63.98-63.98h351.91z m544.13 475.94c35.34 0 63.98 28.65 63.98 63.98v291.86c0 35.34-28.65 63.98-63.98 63.98H608.21c-35.34 0-63.98-28.65-63.98-63.98V604.16c0-35.34 28.65-63.98 63.98-63.98h351.91z m-544.13 0c35.34 0 63.98 28.65 63.98 63.98v291.86c0 35.34-28.65 63.98-63.98 63.98H64.08C28.74 960 0.1 931.35 0.1 896.02V604.16c0-35.34 28.65-63.98 63.98-63.98h351.91z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="OneSplitImage">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="{StaticResource CommonBrush}">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M64.1 64h896c35.35 0 64 28.65 64 64v768c0 35.35-28.65 64-64 64h-896c-35.35 0-64-28.65-64-64V128c0-35.35 28.65-64 64-64z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="ActiveNineSplitImage">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="{StaticResource ActiveBrush}">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M960.1 702.53c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H793.7c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-361.45 0c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64h-166.4c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-534.55 0h166.4c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H64.1c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64z m896-319.2c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H793.7c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-362.98 0c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64h-166.4c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-533.02 0h166.4c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H64.1c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64z m896-319.2c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H793.7c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-361.45 0c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64h-166.4c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64h166.4z m-534.55 0h166.4c35.35 0 64 28.65 64 64v129.6c0 35.35-28.65 64-64 64H64.1c-35.35 0-64-28.65-64-64v-129.6c0-35.35 28.65-64 64-64z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="ActiveFourSplitImage">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="{StaticResource ActiveBrush}">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M960.12 64.24c35.34 0 63.98 28.65 63.98 63.98v291.86c0 35.34-28.65 63.98-63.98 63.98H608.21c-35.34 0-63.98-28.65-63.98-63.98V128.23c0-35.34 28.65-63.98 63.98-63.98h351.91z m-544.13 0c35.34 0 63.98 28.65 63.98 63.98v291.86c0 35.34-28.65 63.98-63.98 63.98H64.08C28.74 484.06 0.1 455.41 0.1 420.08V128.23c0-35.34 28.65-63.98 63.98-63.98h351.91z m544.13 475.94c35.34 0 63.98 28.65 63.98 63.98v291.86c0 35.34-28.65 63.98-63.98 63.98H608.21c-35.34 0-63.98-28.65-63.98-63.98V604.16c0-35.34 28.65-63.98 63.98-63.98h351.91z m-544.13 0c35.34 0 63.98 28.65 63.98 63.98v291.86c0 35.34-28.65 63.98-63.98 63.98H64.08C28.74 960 0.1 931.35 0.1 896.02V604.16c0-35.34 28.65-63.98 63.98-63.98h351.91z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="ActiveOneSplitImage">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="{StaticResource ActiveBrush}">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M64.1 64h896c35.35 0 64 28.65 64 64v768c0 35.35-28.65 64-64 64h-896c-35.35 0-64-28.65-64-64V128c0-35.35 28.65-64 64-64z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+
+
+        <DrawingImage x:Key="StopPlay">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="{StaticResource CommonBrush}">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M510.685167 520.533917c-13.138332 0-24.626874-4.109478-33.925693-12.828372-9.298819-8.728892-13.678264-18.987589-13.678264-31.815961V46.834054c0-12.828371 4.379444-23.097068 14.778124-32.84583C487.158154 4.749397 498.106764 0.129983 511.785027 0.129983s25.176804 4.109478 35.025554 13.858241c9.84875 9.238827 14.778124 20.017459 14.778124 32.84583v429.05553c0 12.318436-4.379444 23.097068-13.678264 31.815961-11.508539 9.228828-22.99708 12.828371-37.225274 12.828372z m0 503.466083c-69.501177 0-136.262701-12.828371-197.55492-37.975179-62.38208-25.656743-117.105133-60.562311-163.089295-103.666839-46.514095-42.594592-83.17944-94.428012-109.996036-151.920713C13.778251 672.954566 0.099987 609.312646 0.099987 543.620986c0-37.975179 4.379444-74.930487 13.678264-110.855927s22.987082-71.330944 41.044789-104.176774c16.967846-32.84583 38.855067-63.64192 64.571802-91.878336 25.716735-28.736352 54.723053-54.403093 87.558885-77.490162 9.298819-6.159218 18.607638-9.238827 28.456387-9.238828 2.739652 0 5.469306 0 8.208958 0.509936 13.138332 2.04974 24.076943 7.699023 32.285901 17.95772 8.208958 9.748762 11.488541 20.527394 9.298819 33.355765-2.189722 12.828371-8.208958 22.577134-19.157567 30.276157-54.723053 37.975179-96.317772 83.64938-125.334089 137.542538-29.006318 53.893158-43.774443 112.905666-43.774443 174.497847 0 53.373224 10.39868 103.666839 32.285902 150.880845 21.337291 47.214006 50.893539 88.788728 88.648745 123.174363 37.215275 34.89557 81.539648 63.121986 131.333327 83.64938 50.343609 20.527394 104.52673 30.79609 161.439505 30.796091s111.085897-10.778632 161.439505-30.796091c50.343609-20.527394 94.667982-48.243875 131.333327-83.64938 37.215275-34.89557 67.311455-76.470292 89.198676-123.174363 21.887221-47.214006 32.835831-98.017556 32.835831-151.400779 0-62.612051-15.867986-122.654429-46.514095-178.597326-31.19604-55.942898-74.970482-103.166903-130.793395-139.092342-11.488541-7.699023-18.057708-16.93785-20.24743-29.256286-2.739652-12.828371 0-23.607003 8.208958-34.89557 8.208958-9.748762 18.057708-15.398045 31.19604-17.95772 3.279584-0.509935 6.569166-0.509935 9.298819-0.509935 9.84875 0 19.157568 3.079609 27.906457 8.728891 34.475623 23.097068 64.571802 48.753811 91.388398 77.490163 26.266665 29.256286 49.793679 60.57231 68.951247 94.428012a438.013393 438.013393 0 0 1 43.774442 106.756447c9.84875 37.465244 15.318055 75.440423 15.318056 113.935535 0 66.201596-13.678264 128.813647-40.494859 186.806285-27.33653 58.52257-64.001875 109.336119-109.96604 152.450646-45.424233 42.594592-100.687217 77.490162-162.539365 103.156904-62.902014 24.126937-129.663539 36.955308-200.254577 36.955308z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="StartPlay">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="{StaticResource CommonBrush}">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry Figures="M447.683165 702.970756a35.848449 35.848449 0 0 1-19.84748 5.989239c-8.688897 0.359954-17.16782-2.75965-23.537012-8.678898a32.617859 32.617859 0 0 1-10.408679-22.827102V346.66599c0.039995-6.669153 2.309707-13.128333 6.45918-18.347671 11.718512-13.978225 32.05593-16.927851 47.254001-6.849131L694.911779 486.858192c2.999619 1.849765 5.659282 4.189468 7.879 6.92912a29.596243 29.596243 0 0 1 5.839258 23.547011A29.624239 29.624239 0 0 1 694.911779 537.341783L447.683165 702.970756zM512.034996 78.889985c-239.239628 0-433.175007 193.935379-433.175008 433.175007S272.795368 945.239999 512.034996 945.239999 945.210003 751.30462 945.210003 512.064992 751.274623 78.889985 512.034996 78.889985z m0 945.110015c-282.734106 0-511.935008-229.200902-511.935009-511.935008s229.200902-511.935008 511.935009-511.935009 511.935008 229.200902 511.935008 511.935009a511.935008 511.935008 0 0 1-149.940965 361.994043c-96.007812 95.997813-226.221281 149.940965-361.994043 149.940965z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <Style x:Key="ImageStyle" TargetType="Image">
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Height" Value="14" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <UniformGrid
+                x:Name="screenContain"
+                Margin="10"
+                Rows="3" />
+
+            <Border
+                Grid.Row="1"
+                Background="#FF18486F"
+                Opacity="0.85">
+                <StackPanel
+                    Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <UniformGrid Columns="3" RadioButton.Checked="SplitScreenButton_OnChecked">
+                        <RadioButton x:Name="niceSplit" Margin="12">
+                            <RadioButton.Template>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <Grid>
+                                        <Image
+                                            x:Name="image1"
+                                            Source="{StaticResource NineSplitImage}"
+                                            Style="{StaticResource ImageStyle}" />
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="image1" Property="Source" Value="{StaticResource ActiveNineSplitImage}" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </RadioButton.Template>
+                        </RadioButton>
+
+                        <RadioButton x:Name="fourSplit">
+                            <RadioButton.Template>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <Grid>
+                                        <Image
+                                            x:Name="image1"
+                                            Source="{StaticResource FourSplitImage}"
+                                            Style="{StaticResource ImageStyle}" />
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="image1" Property="Source" Value="{StaticResource ActiveFourSplitImage}" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </RadioButton.Template>
+                        </RadioButton>
+
+                        <RadioButton x:Name="oneSplit">
+                            <RadioButton.Template>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <Grid>
+                                        <Image
+                                            x:Name="image1"
+                                            Source="{StaticResource OneSplitImage}"
+                                            Style="{StaticResource ImageStyle}" />
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="image1" Property="Source" Value="{StaticResource ActiveOneSplitImage}" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </RadioButton.Template>
+                        </RadioButton>
+                    </UniformGrid>
+                    <UniformGrid>
+                        <ToggleButton
+                            x:Name="playButton"
+                            Margin="15,12,25,12"
+                            IsChecked="True">
+                            <ToggleButton.Template>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Grid>
+                                        <Image
+                                            x:Name="image1"
+                                            Source="{StaticResource StartPlay}"
+                                            Style="{StaticResource ImageStyle}" />
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CheckStates">
+                                                <VisualState x:Name="Checked" />
+                                                <VisualState x:Name="UnChecked" />
+                                                <VisualState x:Name="Indeterminate" />
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="image1" Property="Source" Value="{StaticResource StopPlay}" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+        </Grid>
+    </Grid>
+</UserControl>

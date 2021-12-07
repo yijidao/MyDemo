@@ -69,6 +69,11 @@
             <Button Click="Button_Click" Content="ComboBoxDemo3" />
             <Button Click="Button_Click" Content="DatePickerDemo" />
             <Button Click="Button_Click" Content="VisualBrushDemo" />
+            <Button Click="Button_Click" Content="VlcDemo" />
+            <Button Click="Button_Click" Content="VlcDemo2" />
+            <Button Click="Button_Click" Content="VlcDemo3" />
+            <Button Click="Button_Click" Content="NineVideoDemo" />
+
 
         </WrapPanel>
         <ContentControl
