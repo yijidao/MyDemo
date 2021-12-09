@@ -35,7 +35,8 @@ namespace MyDemo
         //{
         //    return new MainWindow();
         //}
-        protected override Window CreateShell() => new MainWindow2();
+        protected override Window CreateShell() => new MainWindow();
+        //protected override Window CreateShell() => new MainWindow2();
 
         private void InitCefsharp()
         {

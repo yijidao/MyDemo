@@ -73,6 +73,7 @@
             <Button Click="Button_Click" Content="VlcDemo2" />
             <Button Click="Button_Click" Content="VlcDemo3" />
             <Button Click="Button_Click" Content="NineVideoDemo" />
+            <Button Click="Button_Click" Content="DataGridDemo2" />
 
 
         </WrapPanel>
