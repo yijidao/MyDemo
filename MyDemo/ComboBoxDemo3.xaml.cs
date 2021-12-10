@@ -40,13 +40,16 @@ namespace MyDemo
 
     public class MyPopup : Popup
     {
+        // 不覆盖这个方法，会导致 IsOpen 不停地赋值，导致  toggle button 取不到正确的值
+
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            bool isOpen = this.IsOpen;
+            //bool isOpen = this.IsOpen;
+            Debug.WriteLine("OnPreviewMouseDown");
             base.OnPreviewMouseLeftButtonDown(e);
-
-            if (isOpen && !this.IsOpen)
-                e.Handled = true;
+            if(!IsOpen) e.Handled=true;
+            //if (isOpen && !this.IsOpen)
+            //    e.Handled = true;
         }
     }
 
