@@ -16,11 +16,11 @@
         <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
             <Button x:Name="add" Content="Add" />
         </StackPanel>
-        <!--<ScrollViewer></ScrollViewer>-->
         <DataGrid
-            ScrollViewer.ScrollChanged="DataGrid_OnScrollChanged"
             x:Name="dataGrid"
             Grid.Row="1"
-            IsReadOnly="False" />
+            CanUserAddRows="False"
+            IsReadOnly="False"
+            ScrollViewer.ScrollChanged="DataGrid_OnScrollChanged" />
     </Grid>
 </UserControl>
