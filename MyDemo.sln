@@ -55,6 +55,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoResource", "DemoResourc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VlcDemo", "VlcDemo\VlcDemo.csproj", "{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp9", "WpfApp9\WpfApp9.csproj", "{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -377,6 +379,18 @@ Global
 		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Release|x64.Build.0 = Release|Any CPU
 		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Release|x86.ActiveCfg = Release|Any CPU
 		{D01328E2-70E7-4DAB-96FD-46E5DF6E6A1C}.Release|x86.Build.0 = Release|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Debug|x64.Build.0 = Debug|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Debug|x86.Build.0 = Debug|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Release|x64.ActiveCfg = Release|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Release|x64.Build.0 = Release|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Release|x86.ActiveCfg = Release|Any CPU
+		{AEAAED2D-538E-4E87-8FA1-7D968A9DFC29}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -34,7 +34,11 @@ namespace MyDemo
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var p = Mouse.GetPosition(App.Current.MainWindow);
+
+            
+            //new ToolTip()
+
+            var p = Mouse.GetPosition(Application.Current.MainWindow);
             
             _window.Left= p.X;
             _window.Top = p.Y;
