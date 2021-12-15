@@ -82,7 +82,9 @@ namespace MyDemo
 
             foreach (var player in _playerDic)
             {
-                player.Key.Play(@"C:\pci\HJMos_NCC_Client\HJMos_NCC_Client_V1.0\src\Hjmos.Ncc.WSV1\bin\Debug\Videos\01.mp4");
+                //player.Key.Play(@"C:\pci\HJMos_NCC_Client\HJMos_NCC_Client_V1.0\src\Hjmos.Ncc.WSV1\bin\Debug\Videos\01.mp4");
+                player.Key.Play(@"https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8");
+                
             }
         }
 
