@@ -242,9 +242,6 @@
     <Compile Include="VlcDemo3.xaml.cs">
       <DependentUpon>VlcDemo3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowDemo.xaml.cs">
-      <DependentUpon>WindowDemo.xaml</DependentUpon>
-    </Compile>
     <Page Include="BackgroundWorkerDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -502,10 +499,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VlcDemo3.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WindowDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
