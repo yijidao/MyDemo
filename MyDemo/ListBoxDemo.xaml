@@ -1111,7 +1111,86 @@
             <Setter Property="ItemContainerStyle" Value="{StaticResource CircleListBoxItem}" />
         </Style>
 
+        <Style x:Key="MajorListBoxItem" TargetType="ListBoxItem">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Setter Property="Width" Value="88" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border
+                            x:Name="Border1"
+                            Background="Transparent"
+                            SnapsToDevicePixels="True">
+                            <Grid>
 
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    x:Name="separator1"
+                                    Grid.Column="1"
+                                    Foreground="#fff"
+                                    Text="/" />
+                                <ContentPresenter Grid.Column="1" HorizontalAlignment="Center" />
+                            </Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#13FFF5" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#13FFF5" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+
+                            </VisualStateManager.VisualStateGroups>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter TargetName="separator1" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MajorListBox" TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="AlternationCount" Value="2147483647" />
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ScrollViewer
+                            HorizontalScrollBarVisibility="Auto"
+                            Style="{StaticResource CustomScrollViewerStyle}"
+                            VerticalScrollBarVisibility="Auto">
+                            <ItemsPresenter Width="{TemplateBinding Width}" SnapsToDevicePixels="True" />
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource MajorListBoxItem}" />
+        </Style>
 
     </UserControl.Resources>
 
@@ -1241,8 +1320,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
-        <Border
+        <ListBox
+            Margin="20"
+            DisplayMemberPath="Title"
+            ItemsSource="{Binding Source={StaticResource Datas}}"
+            Style="{StaticResource MajorListBox}" />
+        <!--<Border
             Width="60"
             Height="60"
             Margin="20"
@@ -1256,7 +1339,7 @@
                 BorderBrush="Aqua"
                 BorderThickness="10"
                 CornerRadius="30" />
-        </Border>
+        </Border>-->
 
     </StackPanel>
 </UserControl>
