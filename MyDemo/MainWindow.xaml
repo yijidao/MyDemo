@@ -75,6 +75,7 @@
             <Button Click="Button_Click" Content="NineVideoDemo" />
             <Button Click="Button_Click" Content="DataGridDemo2" />
             <Button Click="Button_Click" Content="WindowDemo" />
+            <Button Click="Button_Click" Content="ProgressBarDemo" />
 
 
         </WrapPanel>

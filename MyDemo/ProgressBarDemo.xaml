@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    Background="{StaticResource BgBrush}"
     mc:Ignorable="d">
     <UserControl.Resources>
 
@@ -149,6 +150,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+
+
     </UserControl.Resources>
     <Grid>
         <StackPanel>
@@ -197,6 +201,49 @@
                 Margin="16,16,16,0"
                 Style="{StaticResource HjmosProgressBar}"
                 Value="80" />
+
+            <Path
+                Data="M 10,100 A 100,50 45 1 0 200,100 "
+                Stroke="#000"
+                StrokeThickness="1" />
+
+            <Grid Margin="20">
+                <Path Stroke="#1C3F5D" StrokeThickness="12">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="70 0">
+                                <ArcSegment
+                                    Point="70 140"
+                                    Size="70 70"
+                                    SweepDirection="Clockwise" />
+                                <ArcSegment
+                                    Point="70 0"
+                                    Size="70 70"
+                                    SweepDirection="Clockwise" />
+                            </PathFigure>
+
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <Path
+                    x:Name="path2"
+                    SnapsToDevicePixels="True"
+                    StrokeEndLineCap="Flat"
+                    StrokeStartLineCap="Flat"
+                    StrokeThickness="12">
+
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="70 0">
+                                <ArcSegment
+                                    Point="140 70"
+                                    Size="70 70"
+                                    SweepDirection="Clockwise" />
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+            </Grid>
         </StackPanel>
     </Grid>
 </UserControl>
