@@ -1,9 +1,9 @@
-﻿<Application x:Class="ConfigDemo.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ConfigDemo"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
-</Application>
+﻿<prism:PrismApplication
+    x:Class="ConfigDemo.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ConfigDemo"
+    xmlns:prism="http://prismlibrary.com/"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources />
+</prism:PrismApplication>
