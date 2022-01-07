@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConfigDemo
+namespace ConfigDemo.ViewModels
 {
-    public class WebConfigSection : ConfigurationSection
+    public abstract class AbstractConfigSection : ConfigurationSection
     {
         [ConfigurationProperty("description")]
         public string Description
@@ -22,19 +22,5 @@ namespace ConfigDemo
             get => (string)this["name"];
             set => this["name"] = value;
         }
-
-        [ConfigurationProperty("url", IsRequired = true)]
-        public string Url
-        {
-            get => (string)this["url"];
-            set => this["url"] = value;
-        }
-
-        [ConfigurationProperty("paths", IsRequired = true, IsDefaultCollection = false)]
-        public CommonConfigElementCollection Paths => (CommonConfigElementCollection)this["paths"];
     }
-
-    
-
-   
 }

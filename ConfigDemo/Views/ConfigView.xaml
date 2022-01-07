@@ -15,55 +15,348 @@
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <DataTemplate x:Key="Item" DataType="{x:Type root:CommonConfigElement}">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="{Binding Key, StringFormat={}{0}:}" />
-                <TextBox Margin="8,0,0,0" Text="{Binding Value}" />
-            </StackPanel>
+
+        <Style x:Key="VisualWaterTextBox2" TargetType="TextBox">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="MinWidth" Value="120" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="AllowDrop" Value="true" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{StaticResource SBrush_White1}" />
+            <Setter Property="BorderBrush" Value="{StaticResource SBrush_Cyan6}" />
+            <Setter Property="CaretBrush" Value="{StaticResource SBrush_White1}" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="{StaticResource FontSize_Text_M}" />
+            <!--<Setter Property="FontFamily" Value="PingFang SC"/>-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border
+                            Name="tbBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            TextBlock.FontSize="{TemplateBinding FontSize}"
+                            TextBlock.Foreground="{TemplateBinding Foreground}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <!--  图标  -->
+                                <ScrollViewer
+                                    x:Name="PART_ContentHost"
+                                    Grid.Column="1"
+                                    Margin="8,0"
+                                    VerticalAlignment="Center" />
+                                <!--  水印  -->
+                                <!--
+                                <ContentControl x:Name="waterMark" Grid.Column="1"  Opacity="0.3"  Margin="{TemplateBinding common:Attacher.WaterMarkMargin}"
+                                            VerticalAlignment="{TemplateBinding common:Attacher.WaterMarkVerticalAlignment}"
+                                            Content="{TemplateBinding common:Attacher.Watermark}"
+                                            FontSize="{TemplateBinding FontSize}"
+                                            FontFamily="{TemplateBinding FontFamily}"
+                                            Foreground="{TemplateBinding Foreground}">
+                                    <ContentControl.Visibility>
+                                        <MultiBinding Converter="{StaticResource TextBoxWatermarkConverter}">
+                                            <Binding Path="Text" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
+                                            <Binding Path="IsKeyboardFocused"  RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
+                                        </MultiBinding>
+                                    </ContentControl.Visibility>
+                                </ContentCo-->
+                                ntrol&gt;
+                            </Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.65" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="ReadOnly" />
+                                    <VisualState x:Name="MouseOver" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Content, ElementName=appendIcon}" Value="{x:Null}">
+                                <Setter TargetName="appendIcon" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter TargetName="tbBorder" Property="BorderBrush" Value="{StaticResource SBrush_Cyan5}" />
+                            </Trigger>
+                            <Trigger Property="TextWrapping" Value="Wrap">
+                                <Setter TargetName="PART_ContentHost" Property="VerticalAlignment" Value="Top" />
+                                <Setter TargetName="PART_ContentHost" Property="Margin" Value="8,6" />
+                                <Setter TargetName="waterMark" Property="VerticalAlignment" Value="Top" />
+                                <Setter TargetName="waterMark" Property="Margin" Value="8,6" />
+                            </Trigger>
+                            <Trigger Property="TextWrapping" Value="WrapWithOverflow">
+                                <Setter TargetName="PART_ContentHost" Property="VerticalAlignment" Value="Top" />
+                                <Setter TargetName="PART_ContentHost" Property="Margin" Value="8,6" />
+                                <Setter TargetName="waterMark" Property="VerticalAlignment" Value="Top" />
+                                <Setter TargetName="waterMark" Property="Margin" Value="8,6" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#FF0A3755" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <Style x:Key="Checking" TargetType="Image">
+            <Setter Property="Width" Value="14" />
+            <Setter Property="Height" Value="14" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Visibility" Value="Hidden" />
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <RotateTransform />
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Source">
+                <Setter.Value>
+                    <DrawingImage>
+                        <DrawingImage.Drawing>
+                            <GeometryDrawing Brush="#00B0B3">
+                                <GeometryDrawing.Geometry>
+                                    <PathGeometry Figures="M919.1 704c-24.2 54.9-59.3 104.6-102.4 145.7-43.1 41.1-93.9 73.5-148.9 94.7-54.9 21.3-113.4 31.4-172.3 30C378.4 971.9 267 922.8 186.1 838c-39.5-41.4-70.5-90.2-91.2-143.5-41-106.3-38.3-224.5 7.7-328.7 22.6-50.9 55.2-97 95.2-135s87.3-68 138.2-87.6c50.9-19.7 105.4-28.9 159.6-27.5 54.2 1.5 107.6 13.3 156.4 35.1 48.9 21.7 93.1 53.2 129.7 91.6 36.5 38.4 65.3 83.9 84 132.8 18.7 48.9 27.7 100.9 26.2 153.3h0.3c-3 35.7 23.1 67.3 58.7 71.1-6.4 36-17.1 71-31.8 104.4z m105-175.4c-2.5-139.1-60.3-271.4-160.6-367.8C713.9 16.3 491.9-23.8 301.2 59.4c-61 26.8-116.1 65.5-161.8 113.1S57.8 276.4 34 337.4c-47.7 122.5-45 258.8 7.6 379.3 25.9 58.9 63.5 112.3 109.5 156.4 46 44.1 100.6 78.9 159.6 101.9 58.9 22.9 121.7 34 184.9 32.6 191.2-3.7 361.4-122.3 431.1-300.4 13.4-34.5 22.6-70.5 27.4-107.1l3.9 0.1c18.5 0 36.1-7.7 48.6-21.3 12.5-13.6 18.7-31.8 17.2-50.2l0.3-0.1z" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingImage.Drawing>
+                    </DrawingImage>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsVisible" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.Angle">
+
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.1" Value="30" />
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="60" />
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.3" Value="90" />
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.4" Value="120" />
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.5" Value="150" />
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.6" Value="180" />
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.7" Value="210" />
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.8" Value="240" />
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.9" Value="270" />
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:1.0" Value="300" />
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:1.1" Value="330" />
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:1.2" Value="360" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                </Trigger>
+
+                <DataTrigger Binding="{Binding CheckStatus}" Value="{x:Static vm:ConfigCheck.Checking}">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+
+        </Style>
+
+        <Style x:Key="Error" TargetType="Image">
+            <Setter Property="Width" Value="14" />
+            <Setter Property="Height" Value="14" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Visibility" Value="Hidden" />
+            <Setter Property="Source">
+                <Setter.Value>
+                    <DrawingImage>
+                        <DrawingImage.Drawing>
+                            <GeometryDrawing Brush="#F22F45">
+                                <GeometryDrawing.Geometry>
+                                    <PathGeometry Figures="M677.833805 271.77346L511.750024 439.157114 345.366273 271.77346c-20.398008-20.298018-53.294795-20.298018-73.692804 0-20.298018 20.398008-20.298018 53.294795 0 73.692803l167.383654 166.383752-167.383654 165.98379c-13.298701 13.198711-18.698174 32.396836-13.898642 50.595059 4.699541 18.098233 18.798164 32.396836 36.796406 37.396348 18.098233 4.999512 37.396348-0.09999 50.79504-13.198711l166.383751-166.083781 166.083781 166.083781c20.597988 20.597988 54.094717 20.597988 74.692706 0s20.597988-54.094717 0-74.692705L585.642808 511.750024l166.883703-166.383751c20.298018-20.597988 20.098037-53.794747-0.499951-74.192755-20.597988-20.298018-53.794747-20.098037-74.192755 0.599942zM512.049995 0.09999c282.772386 0 511.950005 229.177619 511.950005 511.950005s-229.177619 511.950005-511.950005 511.950005S0.09999 794.822381 0.09999 512.049995 229.27761 0.09999 512.049995 0.09999z" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingImage.Drawing>
+                    </DrawingImage>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CheckStatus}" Value="{x:Static vm:ConfigCheck.Error}">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+
+        </Style>
+
+        <Style x:Key="Success" TargetType="Image">
+            <Setter Property="Width" Value="14" />
+            <Setter Property="Height" Value="14" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Visibility" Value="Hidden" />
+            <Setter Property="Source">
+                <Setter.Value>
+                    <DrawingImage>
+                        <DrawingImage.Drawing>
+                            <GeometryDrawing Brush="#44CE52">
+                                <GeometryDrawing.Geometry>
+                                    <PathGeometry Figures="M857.832455 356.330404L490.604179 731.357157c-6.798672 7.198594-15.396993 12.297598-25.095099 14.497168-4.499121 1.299746-9.198203 1.999609-13.897285 1.99961-13.897286 0-27.294669-5.798867-36.792814-15.996876L205.659832 533.19586c-9.098223-9.698106-13.897286-22.495606-13.397383-35.892989 0.399922-13.497364 6.098809-25.894942 15.896895-35.093146 9.398164-8.798282 21.595782-13.597344 34.393282-13.597345 13.897286 0 27.294669 5.798867 36.792814 15.996876L452.211677 623.878149l331.835189-336.234329c9.498145-10.098028 22.895528-15.996876 36.792814-15.996876 12.7975 0 25.095099 4.799063 34.393282 13.597344 9.798086 9.198203 15.496973 21.695763 15.896895 35.093146 0.599883 13.397383-4.19918 26.194884-13.297402 35.99297z m-345.832455 667.669596c282.744776 0 511.90002-229.155243 511.90002-511.90002S794.744776 0.199961 512 0.199961 0.09998 229.355204 0.09998 512.09998s229.155243 511.90002 511.90002 511.90002z" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingImage.Drawing>
+                    </DrawingImage>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CheckStatus}" Value="{x:Static vm:ConfigCheck.Success}">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TextBlock1" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#fff" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="TextBlock2" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#80ffffff" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="8,0,0,0" />
+        </Style>
+        <Style x:Key="TextBlock3" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#fff" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <DataTemplate x:Key="Item" DataType="{x:Type vm:CommonConfigElement}">
+
+            <Grid Margin="0,0,0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Margin="0,8" Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TextBlock1}" Text="{Binding Key}" />
+                    <TextBlock Style="{StaticResource TextBlock2}" Text="{Binding Description}" />
+                </StackPanel>
+
+                <TextBox
+                    Grid.Row="1"
+                    Style="{StaticResource VisualWaterTextBox2}"
+                    Text="{Binding Value}" />
+                <Image
+                    Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource Success}" />
+                <Image
+                    Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource Error}"
+                    Visibility="Collapsed" />
+                <Image
+                    Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource Checking}" />
+
+            </Grid>
         </DataTemplate>
 
-        <DataTemplate x:Key="Web" DataType="{x:Type root:WebConfigSection}">
-            <Border>
+        <DataTemplate x:Key="Web" DataType="{x:Type vm:WebConfigSection}">
+            <Border
+                Margin="0,0,0,16"
+                BorderBrush="#17557F "
+                BorderThickness="1"
+                CornerRadius="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Border>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}" />
-                            <TextBlock Margin="8,0,0,0" Text="{Binding Description}" />
+                    <Border
+                        Background="#0D3F61"
+                        BorderBrush="#17557F "
+                        BorderThickness="0,0,0,1">
+                        <StackPanel
+                            Height="28"
+                            Margin="8"
+                            Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource TextBlock3}" Text="{Binding Name}" />
+                            <TextBlock Style="{StaticResource TextBlock2}" Text="{Binding Description}" />
                         </StackPanel>
                     </Border>
                     <Border Grid.Row="1">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="URL:" />
-                            <TextBox Margin="8,0,0,0" Text="{Binding Url}" />
-                        </StackPanel>
+
+                        <Grid Margin="8,0,8,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <StackPanel Margin="0,8" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource TextBlock1}" Text="URL" />
+                                <TextBlock Style="{StaticResource TextBlock2}" Text="Web url" />
+
+                            </StackPanel>
+
+                            <TextBox
+                                Grid.Row="1"
+                                Style="{StaticResource VisualWaterTextBox2}"
+                                Text="{Binding Paths.Url}" />
+                        </Grid>
                     </Border>
                     <Border Grid.Row="2">
-                        <ItemsControl ItemTemplate="{StaticResource Item}" ItemsSource="{Binding Paths}" />
+                        <ItemsControl
+                            Margin="8,0,8,8"
+                            ItemTemplate="{StaticResource Item}"
+                            ItemsSource="{Binding Paths}" />
                     </Border>
                 </Grid>
             </Border>
         </DataTemplate>
 
-        <DataTemplate x:Key="Common" DataType="{x:Type root:CommonConfigSection}">
-            <Border>
+        <DataTemplate x:Key="Common" DataType="{x:Type vm:CommonConfigSection}">
+            <Border
+                Margin="0,0,0,16"
+                BorderBrush="#17557F "
+                BorderThickness="1"
+                CornerRadius="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Border>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}" />
-                            <TextBlock Margin="8,0,0,0" Text="{Binding Description}" />
+                    <Border
+                        Background="#0D3F61"
+                        BorderBrush="#17557F "
+                        BorderThickness="0,0,0,1">
+                        <StackPanel
+                            Height="28"
+                            Margin="8"
+                            Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource TextBlock3}" Text="{Binding Name}" />
+                            <TextBlock Style="{StaticResource TextBlock2}" Text="{Binding Description}" />
                         </StackPanel>
                     </Border>
                     <Border Grid.Row="1">
-                        <ItemsControl ItemTemplate="{StaticResource Item}" ItemsSource="{Binding Settings}" />
+                        <ItemsControl
+                            Margin="8"
+                            ItemTemplate="{StaticResource Item}"
+                            ItemsSource="{Binding Settings}" />
                     </Border>
                 </Grid>
             </Border>
@@ -76,7 +369,96 @@
 
     </UserControl.Resources>
 
+    <!--<prism:Dialog.WindowStyle>
+        <Style BasedOn="{StaticResource GeneralWindow2}" TargetType="controls:CustomDialogWindow">
+            <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
+            <Setter Property="ResizeMode" Value="NoResize" />
+            <Setter Property="ShowInTaskbar" Value="True" />
+            <Setter Property="Width" Value="1566" />
+            <Setter Property="Height" Value="848" />
+            <Setter Property="WindowState" Value="Normal" />
+            <Setter Property="Title" Value="配置管理" />
+            <Setter Property="ContentMargin" Value="0" />
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0" Color="#FF17557F" />
+                        <GradientStop Offset="1" Color="#FF124C69 " />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </prism:Dialog.WindowStyle>-->
+
     <Grid>
-        <ItemsControl ItemTemplateSelector="{StaticResource Selector}" ItemsSource="{Binding ConfigSections}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="24,0,24,24">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                <TextBlock Style="{StaticResource TextBlock1}" Text="当前配置文件：" />
+                <TextBox
+                    Width="800"
+                    Style="{StaticResource VisualWaterTextBox2}"
+                    Text="{Binding ConfigPath}" />
+                <Button
+                    Height="32"
+                    Margin="16,0,0,0"
+                    Padding="16,0"
+                    Background="#00B0B3 "
+                    BorderBrush="#17557F"
+                    BorderThickness="1"
+                    Command="{Binding LoadConfigCommand}"
+                    Content="加载配置"
+                    DockPanel.Dock="Right"
+                    FontSize="14"
+                    Foreground="#fff" />
+                <Button
+                    Height="32"
+                    Margin="8,0,0,0"
+                    Padding="16,0"
+                    Background="Transparent "
+                    BorderBrush="#17557F"
+                    BorderThickness="1"
+                    Command="{Binding SaveConfigCommand}"
+                    Content="保存配置"
+                    DockPanel.Dock="Right"
+                    FontSize="14"
+                    Foreground="#fff" />
+                <Button
+                    Height="32"
+                    Margin="8,0,0,0"
+                    Padding="16,0"
+                    Background="Transparent "
+                    BorderBrush="#17557F"
+                    BorderThickness="1"
+                    Command="{Binding CheckConfigCommand}"
+                    Content="校验配置"
+                    DockPanel.Dock="Right"
+                    FontSize="14"
+                    Foreground="#fff" />
+                <Button
+                    Height="32"
+                    Margin="8,0,0,0"
+                    Padding="16,0"
+                    Background="Transparent"
+                    BorderBrush="#17557F"
+                    BorderThickness="1"
+                    Command="{Binding NotepadCommand}"
+                    Content="记事本打开"
+                    DockPanel.Dock="Right"
+                    FontSize="14"
+                    Foreground="#fff" />
+            </StackPanel>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" Margin="24,0">
+            <ItemsControl
+                Margin="0,0"
+                ItemTemplateSelector="{StaticResource Selector}"
+                ItemsSource="{Binding ConfigSections}" />
+        </ScrollViewer>
     </Grid>
 </UserControl>

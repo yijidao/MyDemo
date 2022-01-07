@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ConfigDemo.ViewModels;
 
 namespace ConfigDemo.Views
 {
@@ -30,15 +31,15 @@ namespace ConfigDemo.Views
     {
         public DataTemplate WebDataTemplate { get; set; }
 
-        public DataTemplate CommonDataTemplate { get; set;}
+        public DataTemplate CommonDataTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             switch (item)
             {
-                case WebConfigSection:
+                case WebConfigSection webConfigSection:
                     return WebDataTemplate;
-                case CommonConfigSection:
+                case CommonConfigSection commonConfigSection:
                     return CommonDataTemplate;
             }
 

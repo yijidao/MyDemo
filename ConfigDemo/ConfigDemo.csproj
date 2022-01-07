@@ -12,6 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Config\Hjmos_Ncc2.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="demo3.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
