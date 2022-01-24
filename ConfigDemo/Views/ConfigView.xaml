@@ -55,21 +55,23 @@
                                     Margin="8,0"
                                     VerticalAlignment="Center" />
                                 <!--  水印  -->
-                                <!--
-                                <ContentControl x:Name="waterMark" Grid.Column="1"  Opacity="0.3"  Margin="{TemplateBinding common:Attacher.WaterMarkMargin}"
-                                            VerticalAlignment="{TemplateBinding common:Attacher.WaterMarkVerticalAlignment}"
-                                            Content="{TemplateBinding common:Attacher.Watermark}"
-                                            FontSize="{TemplateBinding FontSize}"
-                                            FontFamily="{TemplateBinding FontFamily}"
-                                            Foreground="{TemplateBinding Foreground}">
+                                <ContentControl
+                                    x:Name="waterMark"
+                                    Grid.Column="1"
+                                    Margin="{TemplateBinding common:Attacher.WaterMarkMargin}"
+                                    VerticalAlignment="{TemplateBinding common:Attacher.WaterMarkVerticalAlignment}"
+                                    Content="{TemplateBinding common:Attacher.Watermark}"
+                                    FontFamily="{TemplateBinding FontFamily}"
+                                    FontSize="{TemplateBinding FontSize}"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Opacity="0.3">
                                     <ContentControl.Visibility>
                                         <MultiBinding Converter="{StaticResource TextBoxWatermarkConverter}">
-                                            <Binding Path="Text" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                            <Binding Path="IsKeyboardFocused"  RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
+                                            <Binding Path="Text" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                            <Binding Path="IsKeyboardFocused" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
                                         </MultiBinding>
                                     </ContentControl.Visibility>
-                                </ContentCo-->
-                                ntrol&gt;
+                                </ContentControl>
                             </Grid>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
