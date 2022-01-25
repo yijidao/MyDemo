@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Prism.Ioc;
+using ScheduleDemo.Services;
 
 namespace ScheduleDemo
 {
@@ -23,6 +25,12 @@ namespace ScheduleDemo
         public MainWindow()
         {
             InitializeComponent();
+            var testClass = new ScheduleServiceTestClass();
+            button1.Click += (sender, args) =>
+            {
+                
+                testClass.Demo1();
+            };
         }
     }
 }
