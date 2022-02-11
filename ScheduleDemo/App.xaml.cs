@@ -19,7 +19,7 @@ namespace ScheduleDemo
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<ITestService, TestService>();
-            containerRegistry.Register<IScheduleService, ScheduleService>();
+            //containerRegistry.Register<IScheduleService, ScheduleService>();
         }
 
         protected override Window CreateShell() => new MainWindow();
