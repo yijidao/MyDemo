@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -21,7 +22,7 @@ namespace ScheduleDemo.Services
 
         IScheduleService Timer(TimeSpan dueTime, TimeSpan period);
 
-        
+
 
 
         //IScheduleService Subscribe();
@@ -60,7 +61,7 @@ namespace ScheduleDemo.Services
 
     //    public ScheduleService()
     //    {
-            
+
     //    }
 
 
@@ -119,7 +120,7 @@ namespace ScheduleDemo.Services
         private static readonly List<string> _result = new();
 
 
-        public static async Task<string[]>  MockService()
+        public static async Task<string[]> MockService()
         {
             _result.Add(_result.Count.ToString());
             return await Task.FromResult(_result.ToArray());
@@ -129,36 +130,31 @@ namespace ScheduleDemo.Services
 
     class ScheduleServiceTestClass
     {
-        public IObservable<string[]> Demo1()
-        {
-            //var service = new ScheduleService();
-            //service.Invoke<ITestService>(nameof(ITestService.T1));
-            //service.Invoke<ITestService>(x => x.T1());
-
-            //ContainerLocator.Container.Resolve<IScheduleService>()
-            //    .Invoke<ITestService>();
-
-            //ProxyUtil.CreateDelegateToMixin()
-
-            var current = Array.Empty<string>();
-
-            return Observable.Timer(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(2))
-                .SelectMany(async _ => await MockServiceClass.MockService())
-                
-                .Select(x =>
-                {
-                    var increment = x.Except(current);
-                    current = x;
-                    return increment.ToArray();
-                });
-        }
-
-
-        public static IObservable<T> Demo2<T>(Func<Task<T>> func, Func<T, T, T> func2, TimeSpan period)
+        /// <summary>
+        /// 定时轮询方法
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="getDataFunc"></param>
+        /// <param name="compareDataFunc"></param>
+        /// <param name="period"></param>
+        /// <returns></returns>
+        public static IObservable<T?> Demo2<T>(Func<Task<T>> getDataFunc, Func<T, T, T> compareDataFunc, TimeSpan period)
         {
             var current = default(T);
             return Observable.Timer(TimeSpan.FromSeconds(0), period)
-                .SelectMany(async _ => await func())
+                .SelectMany(async _ =>
+                {
+                    try
+                    {
+                        return await getDataFunc();
+                    }
+                    catch (Exception e)
+                    {
+                        // 日志处理
+                        return default(T);
+                    }
+                })
+                .Where(x => x != null)
                 .Select(x =>
                 {
                     //Debug.WriteLine("emit");
@@ -167,11 +163,47 @@ namespace ScheduleDemo.Services
                         current = x;
                         return x;
                     }
-                    var increment = func2(current, x);
+                    var increment = compareDataFunc(current, x);
                     current = x;
                     return increment;
                 });
+        }
 
+        private static ReplaySubject<string[]?>? _subject;
+
+        /// <summary>
+        /// 主题订阅，如客流等。
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<string[]?> MockSubject1()
+        {
+            if (_subject == null)
+            {
+                _subject = new ReplaySubject<string[]?>();
+                var o = Demo2(MockServiceClass.MockService,
+                   (oldValue, newValue) => newValue.Except(oldValue).ToArray(),
+                   TimeSpan.FromSeconds(2))
+                    .Subscribe(_subject);
+
+            }
+
+            return _subject.AsObservable();
+        }
+
+        private static IObservable<string[]?>? _observable = null;
+
+        /// <summary>
+        /// 主题订阅，如客流等。
+        /// 跟 <see cref="MockSubject1"/> 的不同点是使用 rx 提供的 api，并且支持了连接数为 0 时，自动取消订阅。
+        /// </summary>
+        /// <returns></returns>
+        public static IObservable<string[]?> MockSubject2()
+        {
+            return _observable ??= Demo2(MockServiceClass.MockService,
+                    (oldValue, newValue) => newValue.Except(oldValue).ToArray(),
+                    TimeSpan.FromSeconds(2))
+                    .Replay()
+                .RefCount();
         }
     }
 

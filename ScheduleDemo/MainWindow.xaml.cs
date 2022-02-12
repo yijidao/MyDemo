@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
@@ -48,6 +49,45 @@ namespace ScheduleDemo
                             TimeSpan.FromSeconds(2))
                         .ObserveOnDispatcher()
                 .Subscribe(x => textBox1.Text += $"-{string.Join("-", x)}");
+            };
+
+            IDisposable subject = null;
+
+            //button2.Click += (sender, args) =>
+            //{
+            //    subject = ScheduleServiceTestClass.MockSubject1().ObserveOnDispatcher()
+            //        .Subscribe(x => textBox2.Text += $"-{string.Join("-", x)}");
+            //};
+
+            //cancel2.Click += (sender, args) =>
+            //{
+            //    subject?.Dispose();
+            //};
+
+            button2.Click += (sender, args) =>
+            {
+                StringBuilder sb = new StringBuilder(textBox2.Text);
+                subject = ScheduleServiceTestClass.MockSubject2().ObserveOnDispatcher()
+                    .Subscribe(x =>
+                    {
+                        Debug.WriteLine($"{string.Join("-", x)}");
+                        //sb.Append($"-{string.Join("-", x)}");
+                        //textBox2.Text = sb.ToString();
+                    });
+                //subject = ScheduleServiceTestClass.MockSubject2().ObserveOnDispatcher()
+                //    .Subscribe(x => textBox2.Text += $"-{string.Join("-", x)}");
+            };
+
+            cancel2.Click += (sender, args) =>
+            {
+                subject?.Dispose();
+                GC.Collect();
+            };
+
+            button3.Click += (sender, args) =>
+            {
+                ScheduleServiceTestClass.MockSubject1().ObserveOnDispatcher()
+                    .Subscribe(x => textBox3.Text += $"-{string.Join("-", x)}");
             };
         }
     }

@@ -10,21 +10,72 @@
     Height="450"
     mc:Ignorable="d">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <TextBox
-            x:Name="textBox1"
-            IsReadOnly="True"
-            TextWrapping="Wrap" />
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBox
+                x:Name="textBox1"
+                IsReadOnly="True"
+                TextWrapping="Wrap" />
 
-        <Button
-            x:Name="button1"
-            Grid.Row="1"
-            Width="120"
-            Height="32"
-            Content="click" />
+            <Button
+                x:Name="button1"
+                Grid.Row="1"
+                Width="120"
+                Height="32"
+                Content="click" />
+
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBox
+                x:Name="textBox2"
+                IsReadOnly="True"
+                TextWrapping="Wrap" />
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Button
+                    x:Name="button2"
+                    Width="120"
+                    Height="32"
+                    Content="click" />
+
+                <Button
+                    x:Name="cancel2"
+                    Width="120"
+                    Height="32"
+                    Content="Cancel" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBox
+                x:Name="textBox3"
+                IsReadOnly="True"
+                TextWrapping="Wrap" />
+
+            <Button
+                x:Name="button3"
+                Grid.Row="1"
+                Width="120"
+                Height="32"
+                Content="click" />
+        </Grid>
+
     </Grid>
 </Window>
