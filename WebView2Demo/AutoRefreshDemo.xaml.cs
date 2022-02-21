@@ -5,15 +5,17 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Web.WebView2.Core;
+using ButtonBase = System.Windows.Controls.Primitives.ButtonBase;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace WebView2Demo
 {
@@ -36,7 +38,7 @@ namespace WebView2Demo
                     return;
                 }
 
-                if (!url.StartsWith("http://") && !url.StartsWith("https://"))
+                if (!url.StartsWith("http://") && !url.StartsWith("https://") && !url.StartsWith("file://"))
                 {
                     url = $"https://{url}";
                     input.Text = url;
@@ -60,6 +62,29 @@ namespace WebView2Demo
                 });
 
             isAuto.IsChecked = true;
+
+            printPdf.Click += async  (sender, args) =>
+            {
+
+                var saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "txt files (*.pdf)|*.pdf",
+                    RestoreDirectory = true,
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    FileName = $"test.pdf"
+                };
+                var result = saveFileDialog.ShowDialog();
+
+                if (result != DialogResult.OK)
+                    return;
+
+                var printSetting = webView2.CoreWebView2.Environment.CreatePrintSettings();
+                printSetting.ShouldPrintBackgrounds = true;
+
+                // c 盘根目录因为权限控制可能无法生成文件，但是 c 盘子目录就可以了。
+                var saveResult = await webView2.CoreWebView2.PrintToPdfAsync($"{saveFileDialog.FileName}", printSetting);
+                
+            };
 
         }
     }

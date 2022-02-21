@@ -78,6 +78,12 @@
                 x:Name="isAuto"
                 Margin="0,6"
                 DockPanel.Dock="Left" />
+            <Button
+                x:Name="printPdf"
+                Margin="16,6"
+                Content="打印"
+                DockPanel.Dock="Left"
+                Style="{StaticResource TransparentBtn}" />
         </DockPanel>
         <Border
             Grid.Row="1"
