@@ -16,6 +16,7 @@ using Prism.Ioc;
 using Prism.Modularity;
 using PrismAopModuleDemo;
 using PrismDemo.Service;
+using PrismDemo.Views;
 
 namespace PrismDemo
 {
@@ -37,7 +38,7 @@ namespace PrismDemo
                 .InterceptAsync<ITest, CacheInterceptor>()
                 .InterceptAsync<ITest, LogInterceptor>();
 
-            
+            containerRegistry.RegisterDialog<PrintPdfView>();
 
             //containerRegistry.Intercept<ITest, ExceptionInterceptor>();
             //containerRegistry.Intercept<ITest, LoggingInterceptor>();

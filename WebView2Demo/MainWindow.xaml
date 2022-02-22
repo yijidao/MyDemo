@@ -12,7 +12,7 @@
     mc:Ignorable="d">
 
     <Grid>
-        <!--<local:Demo1 />-->
-        <local:AutoRefreshDemo />
+        <local:Demo1 />
+        <!--<local:AutoRefreshDemo />-->
     </Grid>
 </Window>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.Wpf;
 using ButtonBase = System.Windows.Controls.Primitives.ButtonBase;
 using UserControl = System.Windows.Controls.UserControl;
 
@@ -27,6 +29,10 @@ namespace WebView2Demo
         public AutoRefreshDemo()
         {
             InitializeComponent();
+
+            //webView2
+
+
             input.Text = "https://www.baidu.com";
             webView2.Source = new Uri(input.Text);
             refresh.Click += (sender, args) =>
@@ -65,7 +71,6 @@ namespace WebView2Demo
 
             printPdf.Click += async  (sender, args) =>
             {
-
                 var saveFileDialog = new SaveFileDialog
                 {
                     Filter = "txt files (*.pdf)|*.pdf",
@@ -86,6 +91,28 @@ namespace WebView2Demo
                 
             };
 
+            printPdf2.Click += async (sender, args) =>
+            {
+                var saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "txt files (*.pdf)|*.pdf",
+                    RestoreDirectory = true,
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    FileName = $"test.pdf"
+                };
+                var result = saveFileDialog.ShowDialog();
+
+                if (result != DialogResult.OK)
+                    return;
+                var browser = new WebView2();
+                browser.Source = new Uri(@"C:\cache\test_pdf.html");
+
+                var printSetting = webView2.CoreWebView2.Environment.CreatePrintSettings();
+                printSetting.ShouldPrintBackgrounds = true;
+
+                var saveResult = await browser.CoreWebView2.PrintToPdfAsync($"{saveFileDialog.FileName}", printSetting);
+
+            };
         }
     }
 }

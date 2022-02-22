@@ -84,6 +84,12 @@
                 Content="打印"
                 DockPanel.Dock="Left"
                 Style="{StaticResource TransparentBtn}" />
+            <Button
+                x:Name="printPdf2"
+                Margin="16,6"
+                Content="打印2"
+                DockPanel.Dock="Left"
+                Style="{StaticResource TransparentBtn}" />
         </DockPanel>
         <Border
             Grid.Row="1"

@@ -48,6 +48,11 @@
                 Content="Command4"
                 Style="{StaticResource BtnStyle}" />
             <TextBox Style="{StaticResource BtnStyle}" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button
+                Command="{Binding PrintPdfCommand}"
+                Content="PrintPdf"
+                Style="{StaticResource BtnStyle}" />
         </StackPanel>
     </Grid>
 </UserControl>

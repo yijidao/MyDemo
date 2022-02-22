@@ -122,5 +122,9 @@
       <Name>DemoResource</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="vue.runtime.global.prod.js" />
+    <Content Include="WebView2Test.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
