@@ -89,10 +89,8 @@
     function generate(data) {
         const app = Vue.createApp({
             data() {
-                return {
-                    title: data.title,
-                    books: data.books
-                }
+                return {title, books} = data;
+                
             },
         });
         app.mount('#app');
