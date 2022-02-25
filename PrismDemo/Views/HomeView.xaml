@@ -53,6 +53,10 @@
                 Command="{Binding PrintPdfCommand}"
                 Content="PrintPdf"
                 Style="{StaticResource BtnStyle}" />
+            <Button
+                Command="{Binding PrintPdf2Command}"
+                Content="PrintPdf2"
+                Style="{StaticResource BtnStyle}" />
         </StackPanel>
     </Grid>
 </UserControl>

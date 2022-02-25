@@ -8,11 +8,15 @@
 
   <ItemGroup>
     <None Remove="ViewModels\test_print.html" />
+    <None Remove="ViewModels\test_print2.html" />
+    <None Remove="Views\controls.js" />
     <None Remove="Views\vue.global.js" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="ViewModels\test_print.html" />
+    <EmbeddedResource Include="ViewModels\test_print2.html" />
+    <EmbeddedResource Include="Views\controls.js" />
     <EmbeddedResource Include="Views\vue.global.js" />
   </ItemGroup>
 

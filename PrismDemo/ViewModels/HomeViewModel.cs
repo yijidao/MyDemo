@@ -41,6 +41,7 @@ namespace PrismDemo.ViewModels
         public ICommand Command4 { get; }
 
         public ICommand PrintPdfCommand { get; }
+        public ICommand PrintPdf2Command { get; }
 
         public HomeViewModel(ITest test, IDialogService dialogService)
         {
@@ -114,6 +115,67 @@ namespace PrismDemo.ViewModels
                 };
                 dialogService.ShowDialog(nameof(PrintPdfView), p, null);
             });
+
+            PrintPdf2Command = new DelegateCommand(() =>
+            {
+
+                var assembly = Assembly.GetExecutingAssembly();
+                var resourceName = $"PrismDemo.ViewModels.test_print2.html";
+
+                using var stream = assembly.GetManifestResourceStream(resourceName);
+                if (stream == null) return;
+                using var reader = new StreamReader(stream);
+                var t = reader.ReadToEnd();
+                dynamic d = new ExpandoObject();
+                d.title = "购书目录";
+                d.books = new List<Book>
+                {
+                    new()
+                    {
+                        Title = "JavaScript权威指南 原书第7版",
+                        Author = "巨佬1",
+                        Price = 90.3
+                    },
+                    new()
+                    {
+                        Title = "深入浅出node.js",
+                        Author = "巨佬2",
+                        Price = 57.8
+                    },
+                    new()
+                    {
+                        Title = "编码：隐匿在计算机软硬件背后的语言",
+                        Author = "巨佬3",
+                        Price = 89.00
+                    }
+                };
+                d.columns = new List<Column>
+                {
+                    new()
+                    {
+                        Header = "书名",
+                        Binding = nameof(Book.Title)
+                    },
+                    new()
+                    {
+                        Header = "作者",
+                        Binding = nameof(Book.Author)
+                    },
+                    new()
+                    {
+                        Header = "价格",
+                        Binding = nameof(Book.Price)
+                    },
+                };
+
+
+                var p = new DialogParameters
+                {
+                    {"template", t},
+                    {"data", d}
+                };
+                dialogService.ShowDialog(nameof(PrintPdf2View), p, null);
+            });
         }
     }
 
@@ -126,5 +188,12 @@ namespace PrismDemo.ViewModels
         public string Author { get; set; }
 
         public double Price { get; set; }
+    }
+
+    public class Column
+    {
+        public string Header { get; set; }
+
+        public string Binding { get; set; }
     }
 }

@@ -39,6 +39,7 @@ namespace PrismDemo
                 .InterceptAsync<ITest, LogInterceptor>();
 
             containerRegistry.RegisterDialog<PrintPdfView>();
+            containerRegistry.RegisterDialog<PrintPdf2View>();
 
             //containerRegistry.Intercept<ITest, ExceptionInterceptor>();
             //containerRegistry.Intercept<ITest, LoggingInterceptor>();

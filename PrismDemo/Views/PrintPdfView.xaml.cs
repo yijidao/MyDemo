@@ -55,9 +55,11 @@ namespace PrismDemo.Views
         private async Task Load()
         {
             await webView2.EnsureCoreWebView2Async();
+            webView2.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = $"PrismDemo.Views.vue.global.js";
-
+            
             using var stream = assembly.GetManifestResourceStream(resourceName);
             if (stream != null)
             {
