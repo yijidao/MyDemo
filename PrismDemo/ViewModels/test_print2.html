@@ -16,46 +16,17 @@
             padding: 0;
         }
 
-
-        #header {
-            width: 70%;
-            height: 100px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         #app {
             width: 80%;
             margin: 0 auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-
-        }
-
-        td {
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid black;
         }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <div id="header">
-            <h2>{{title}}</h2>
-        </div>
-        <data-grid :items-source="itemsSource" :columns="columns"></data-grid>
+        <document-header :title="title"></document-header>
+        <data-grid :items-source="books" :columns="columns"></data-grid>
     </div>
 </body>
 
@@ -63,63 +34,21 @@
     window.chrome.webview.addEventListener('message', event => generate(event.data));
 
     function generate(data) {
-        console.log(data);
-        const app = Vue.createApp({
+        
+        Vue.createApp({
             data() {
                 return {
-                    title: data.title,
-                    columns: data.columns,
-                    itemsSource: data.books,
-                } 
+                    title,columns,books
+                } = data;
 
             },
             components: {
-                DataGrid
+                DataGrid,
+                DocumentHeader
             }
-        });
-        app.mount('#app');
+        }).mount('#app');
     }
 
-    // var app = Vue.createApp({
-    //     data() {
-    //         return {
-    //             title: "购书目录",
-    //             columns: [{
-    //                     header: '标题',
-    //                     binding: 'title'
-    //                 },
-    //                 {
-    //                     header: '作者',
-    //                     binding: 'author'
-    //                 },
-    //                 {
-    //                     header: '价格',
-    //                     binding: 'price'
-    //                 }
-    //             ],
-
-    //             itemsSource: [{
-    //                 title: 'JavaScript权威指南 原书第7版',
-    //                 author: "巨佬1",
-    //                 price: 90.3
-    //             }, {
-    //                 title: '深入浅出node.js',
-    //                 author: "巨佬2",
-    //                 price: 57.8
-    //             }, {
-    //                 title: '编码：隐匿在计算机软硬件背后的语言',
-    //                 author: "巨佬3",
-    //                 price: 57.8
-    //             }],
-    //         }
-    //     },
-    //     components: {
-    //         DataGrid
-    //     }
-    // });
-
-
-    // app.mount("#app");
 </script>
 
 </html>
