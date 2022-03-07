@@ -40,6 +40,7 @@ namespace PrismDemo
 
             containerRegistry.RegisterDialog<PrintPdfView>();
             containerRegistry.RegisterDialog<PrintPdf2View>();
+            containerRegistry.RegisterDialog<ComboBoxView>();
 
             //containerRegistry.Intercept<ITest, ExceptionInterceptor>();
             //containerRegistry.Intercept<ITest, LoggingInterceptor>();

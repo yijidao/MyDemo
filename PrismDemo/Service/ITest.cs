@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PrismAopModuleDemo;
+using PrismDemo.ViewModels;
 
 namespace PrismDemo.Service
 {
@@ -18,6 +19,8 @@ namespace PrismDemo.Service
 
         [Cache]
         Task<string> AsyncT2(string id = null);
+
+        //Task<List<Book>> GetBook(string title);
     }
 
     public class Test1 : ITest
@@ -49,5 +52,16 @@ namespace PrismDemo.Service
             Debug.WriteLine("String AsyncT2...");
             return id ?? "id is  null";
         }
+
+
+
+
+        //public Task<List<Book>> GetBook(string title)
+        //{
+            
+        //}
+
+        
+
     }
 }

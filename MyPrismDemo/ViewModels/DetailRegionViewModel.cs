@@ -16,5 +16,10 @@ namespace MyPrismDemo.ViewModels
             get => _title;
             set => SetProperty(ref _title, value);
         }
+
+        public DetailRegionViewModel()
+        {
+            
+        }
     }
 }

@@ -12,6 +12,13 @@
     d:DesignWidth="800"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="BtnStyle" TargetType="Control">
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Margin" Value="8,8,0,8" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -23,14 +30,7 @@
                 VerticalAlignment="Center"
                 Text="{Binding Title}" />
         </Border>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <StackPanel.Resources>
-                <Style x:Key="BtnStyle" TargetType="Control">
-                    <Setter Property="Width" Value="120" />
-                    <Setter Property="Height" Value="28" />
-                    <Setter Property="Margin" Value="8,8,0,8" />
-                </Style>
-            </StackPanel.Resources>
+        <WrapPanel Grid.Row="1">
             <Button
                 Command="{Binding Command1}"
                 Content="Command1"
@@ -57,6 +57,10 @@
                 Command="{Binding PrintPdf2Command}"
                 Content="PrintPdf2"
                 Style="{StaticResource BtnStyle}" />
-        </StackPanel>
+            <Button
+                Command="{Binding ComboBoxViewCommand}"
+                Content="ComboBoxView"
+                Style="{StaticResource BtnStyle}" />
+        </WrapPanel>
     </Grid>
 </UserControl>
