@@ -67,6 +67,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrawlerDemo", "CrawlerDemo\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleThreadApp", "SimpleThreadApp\SimpleThreadApp.csproj", "{C2D6DABF-BFAE-4B3F-8E56-152AF5EA7C86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkupDemo", "MarkupDemo\MarkupDemo.csproj", "{970E16B5-67D3-4FA0-A68D-34C6D28230D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -461,6 +463,18 @@ Global
 		{C2D6DABF-BFAE-4B3F-8E56-152AF5EA7C86}.Release|x64.Build.0 = Release|Any CPU
 		{C2D6DABF-BFAE-4B3F-8E56-152AF5EA7C86}.Release|x86.ActiveCfg = Release|Any CPU
 		{C2D6DABF-BFAE-4B3F-8E56-152AF5EA7C86}.Release|x86.Build.0 = Release|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Debug|x64.Build.0 = Debug|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Debug|x86.Build.0 = Debug|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Release|x64.ActiveCfg = Release|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Release|x64.Build.0 = Release|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Release|x86.ActiveCfg = Release|Any CPU
+		{970E16B5-67D3-4FA0-A68D-34C6D28230D1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
