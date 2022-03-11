@@ -51,15 +51,13 @@ namespace MarkupDemo
             {
                 throw new NotSupportedException($"不是 setter 对象或者依赖属性");
             }
-
-
             TypeConverter converter;
             if (type == typeof(double))
             {
                 converter = _doubleConverter;
             }
 
-            else if(type == typeof(Thickness))
+            else if (type == typeof(Thickness))
             {
                 converter = _thickConvert;
             }
@@ -73,7 +71,9 @@ namespace MarkupDemo
                 throw new NotSupportedException($"{type} 类型不支持");
             }
 
-            return converter.ConvertFrom(Value) ?? throw new ArgumentException(nameof(Value));
+
+            var result = converter.ConvertFrom(Value) ?? throw new ArgumentException(nameof(Value));
+            return Application.Current.ConvertForScreen(result);
         }
     }
 }
