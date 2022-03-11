@@ -9,5 +9,19 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <Grid Width="{local:ValueConvert 20}" Background="LightBlue" />
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="{local:ResponsiveSize 19}" />
+        </Style>
+    </Window.Resources>
+
+    <Border
+        Margin="50"
+        BorderBrush="LightSeaGreen"
+        BorderThickness="{local:ResponsiveSize 122}">
+        <Grid Width="{local:ResponsiveSize 200}" Background="LightBlue">
+            <TextBlock Text="Test" />
+        </Grid>
+    </Border>
 </Window>
