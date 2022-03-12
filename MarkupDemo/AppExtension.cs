@@ -26,28 +26,33 @@ namespace MarkupDemo
         public static CornerRadius ConvertCornerRadiusForScreen(this Application app, CornerRadius value)
         {
             var factor = app.GetFactor();
-            return new CornerRadius(value.TopLeft / factor, value.TopRight / factor, value.BottomRight / factor, value.BottomLeft / factor);
+            return new CornerRadius(value.TopLeft / factor, value.TopRight / factor, value.BottomRight / factor,
+                value.BottomLeft / factor);
         }
 
-        public static object ConvertForScreen(this Application app, object o)
+        public static object ConvertForScreen(this Application app, object o) =>
+            o switch
+            {
+                double d => app.ConvertDoubleForScreen(d),
+                Thickness t => app.ConvertThicknessForScreen(t),
+                CornerRadius t => app.ConvertCornerRadiusForScreen(t),
+                _ => throw new NotSupportedException("不支持的转换类型")
+            };
+
+
+        /// <summary>
+        /// 获取当前窗体所在的屏幕
+        /// </summary>
+        /// <param name="window">当前窗体</param>
+        /// <returns>窗体所在的屏幕</returns>
+        public static Screen GetScreen(this Window window)
         {
-            if (o is double d)
-            {
-                return app.ConvertDoubleForScreen(d);
-            }
-            else if (o is Thickness t)
-            {
-                return app.ConvertThicknessForScreen(t);
-            }
-            else if (o is CornerRadius r)
-            {
-                return app.ConvertCornerRadiusForScreen(r);
-            }
-            else
-            {
-                throw new NotSupportedException("不支持的转换类型");
-            }
+            var intPtr = new WindowInteropHelper(window).Handle; //获取当前窗口的句柄
+
+            return Screen.FromHandle(intPtr); //获取当前屏幕
         }
+
+        private static double? _factor;
 
         /// <summary>
         /// 获取当前应用的缩放系数
@@ -57,15 +62,20 @@ namespace MarkupDemo
         /// <returns></returns>
         public static double GetFactor(this Application app)
         {
-            var factor = app.MainWindow.GetScreen().ScaleFactor;
-
-            var bounds = app.MainWindow.GetScreen().PixelBounds;
-            if (bounds.Width == 3840 && bounds.Height == 2160)
+            if (_factor is not null)
             {
-                factor /= 2;
+                return _factor.Value;
             }
 
-            return factor;
+            var screen = app.MainWindow?.GetScreen() ?? throw new ArgumentNullException(nameof(app.MainWindow));
+
+            _factor = screen.PixelBounds switch
+            {
+                { Width: >= 3840, Height: >= 2160 } => screen.ScaleFactor / 2,
+                _ => screen.ScaleFactor
+            };
+
+            return _factor.Value;
         }
     }
 }
