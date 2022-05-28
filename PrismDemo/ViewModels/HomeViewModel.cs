@@ -42,6 +42,7 @@ namespace PrismDemo.ViewModels
 
         public ICommand PrintPdfCommand { get; }
         public ICommand PrintPdf2Command { get; }
+        public ICommand ComboBoxViewCommand { get; }
 
         public HomeViewModel(ITest test, IDialogService dialogService)
         {
@@ -176,6 +177,8 @@ namespace PrismDemo.ViewModels
                 };
                 dialogService.ShowDialog(nameof(PrintPdf2View), p, null);
             });
+
+            ComboBoxViewCommand = new DelegateCommand(() => dialogService.Show(nameof(ComboBoxView)));
         }
     }
 

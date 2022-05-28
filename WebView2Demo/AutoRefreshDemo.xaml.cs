@@ -110,7 +110,7 @@ namespace WebView2Demo
                 var printSetting = webView2.CoreWebView2.Environment.CreatePrintSettings();
                 printSetting.ShouldPrintBackgrounds = true;
 
-                var saveResult = await browser.CoreWebView2.PrintToPdfAsync($"{saveFileDialog.FileName}", printSetting);2
+                var saveResult = await browser.CoreWebView2.PrintToPdfAsync($"{saveFileDialog.FileName}", printSetting);
 
             };
         }

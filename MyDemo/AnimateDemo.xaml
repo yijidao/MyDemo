@@ -1,0 +1,110 @@
+﻿<UserControl
+    x:Class="MyDemo.AnimateDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+
+        <CircleEase x:Key="EaseIn" EasingMode="EaseInOut" />
+
+        <Style x:Key="PulseEllipse" TargetType="Ellipse">
+            <Setter Property="Width" Value="368" />
+            <Setter Property="Height" Value="368" />
+            <Setter Property="Fill" Value="#00B1D7" />
+            <Setter Property="RenderTransformOrigin" Value=".5 .5" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="0" ScaleY="0" />
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever" Duration="0:0:1.5">
+                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="1" />
+                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" To="1" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To=".04" />
+                        </Storyboard>
+
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style
+            x:Key="PulseEllipse2"
+            BasedOn="{StaticResource PulseEllipse}"
+            TargetType="Ellipse">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard
+                            BeginTime="0:0:0.5"
+                            RepeatBehavior="Forever"
+                            Duration="0:0:1.5">
+                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="1" />
+                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" To="1" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To=".04" />
+                        </Storyboard>
+
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+
+        </Style>
+        <Style
+            x:Key="PulseEllipse3"
+            BasedOn="{StaticResource PulseEllipse}"
+            TargetType="Ellipse">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard
+                            BeginTime="0:0:1"
+                            RepeatBehavior="Forever"
+                            Duration="0:0:1.5">
+                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="1" />
+                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" To="1" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To=".04" />
+                        </Storyboard>
+
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+
+        </Style>
+
+        <Style
+            x:Key="PulseEllipse4"
+            BasedOn="{StaticResource PulseEllipse}"
+            TargetType="Ellipse">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard
+                            BeginTime="0:0:1.5"
+                            RepeatBehavior="Forever"
+                            Duration="0:0:2">
+                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="1" />
+                            <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" To="1" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To=".04" />
+                        </Storyboard>
+
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Ellipse Style="{StaticResource PulseEllipse}" />
+        <Ellipse Style="{StaticResource PulseEllipse2}" />
+        <Ellipse Style="{StaticResource PulseEllipse3}" />
+        <!--<Ellipse Style="{StaticResource PulseEllipse4}" />-->
+    </Grid>
+</UserControl>

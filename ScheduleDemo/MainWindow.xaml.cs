@@ -33,13 +33,13 @@ namespace ScheduleDemo
             //var testClass = new ScheduleServiceTestClass();
             //button1.Click += (sender, args) =>
             //{
-                //var observable = testClass.Demo1();
+            //var observable = testClass.Demo1();
 
-                //observable.ObserveOnDispatcher()
-                //    .Subscribe(x =>
-                //{
-                //    textBox1.Text += $"-{string.Join("-", x)}";
-                //});
+            //observable.ObserveOnDispatcher()
+            //    .Subscribe(x =>
+            //{
+            //    textBox1.Text += $"-{string.Join("-", x)}";
+            //});
             //};
 
             button1.Click += (sender, args) =>
@@ -47,7 +47,8 @@ namespace ScheduleDemo
                 var o2 = ScheduleServiceTestClass.Demo2(MockServiceClass.MockService,
                             (oldValue, newValue) => newValue.Except(oldValue).ToArray(),
                             TimeSpan.FromSeconds(2))
-                        .ObserveOnDispatcher()
+                    .ObserveOnDispatcher()
+
                 .Subscribe(x => textBox1.Text += $"-{string.Join("-", x)}");
             };
 
@@ -67,7 +68,9 @@ namespace ScheduleDemo
             button2.Click += (sender, args) =>
             {
                 StringBuilder sb = new StringBuilder(textBox2.Text);
-                subject = ScheduleServiceTestClass.MockSubject2().ObserveOnDispatcher()
+                subject = ScheduleServiceTestClass.MockSubject2()
+                    .ObserveOnDispatcher()
+
                     .Subscribe(x =>
                     {
                         Debug.WriteLine($"{string.Join("-", x)}");
@@ -86,7 +89,9 @@ namespace ScheduleDemo
 
             button3.Click += (sender, args) =>
             {
-                ScheduleServiceTestClass.MockSubject1().ObserveOnDispatcher()
+                ScheduleServiceTestClass.MockSubject1()
+                    .ObserveOnDispatcher()
+
                     .Subscribe(x => textBox3.Text += $"-{string.Join("-", x)}");
             };
         }

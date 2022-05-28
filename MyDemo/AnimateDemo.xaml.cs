@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PrismDemo2.Views
+namespace MyDemo
 {
     /// <summary>
-    /// RefitDemo1View.xaml 的交互逻辑
+    /// AnimateDemo.xaml 的交互逻辑
     /// </summary>
-    public partial class RefitDemo1View : UserControl
+    public partial class AnimateDemo : UserControl
     {
-        public RefitDemo1View()
+        public AnimateDemo()
         {
             InitializeComponent();
         }

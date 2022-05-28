@@ -78,6 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AnimateDemo.xaml.cs">
+      <DependentUpon>AnimateDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BackgroundWorkerDemo.xaml.cs">
       <DependentUpon>BackgroundWorkerDemo.xaml</DependentUpon>
     </Compile>
@@ -242,6 +245,10 @@
     <Compile Include="VlcDemo3.xaml.cs">
       <DependentUpon>VlcDemo3.xaml</DependentUpon>
     </Compile>
+    <Page Include="AnimateDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BackgroundWorkerDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
